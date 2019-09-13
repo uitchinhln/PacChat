@@ -10,6 +10,8 @@ namespace PacChatServer
     {
         static void Main(string[] args)
         {
+            new PacChatServer();
+            Console.ReadLine();
         }
     }
 }
