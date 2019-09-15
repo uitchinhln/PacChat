@@ -25,16 +25,4 @@
 - ...
 
 ## Tính năng ##
-1. Chat qua mạng
-2. Đổi theme
-3. Cung cấp kho theme có sẵn và tự tạo theme
-1. Gửi ảnh gif từ liên kết ngoài
-2. Gửi hình ảnh, đoạn phim từ liên kết ngoài
-4. Tự động quét các server có trong mạng lan
-5. Kết nối thông qua internet
-6. Tạo phòng nhiều người
-7. Thu hồi tin nhắn
-8. Tìm tin nhắn cũ
-9. Bảo mật trên server
-10. Tạo tài khoản, đăng nhập, nickname,...
-11. Mật khẩu phòng
+Đang cập nhật

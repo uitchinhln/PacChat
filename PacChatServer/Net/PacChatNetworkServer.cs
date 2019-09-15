@@ -27,7 +27,7 @@ namespace PacChatServer.Net
 
         public void OnBindSuccess()
         {
-            logger.Info("Server is listening");
+            logger.Debug("Server is listening");
             latch.Signal();
         }
 

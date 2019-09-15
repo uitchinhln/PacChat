@@ -39,14 +39,7 @@ namespace PacChatServer.Net
             try
             {
                 channel = await bootstrap.BindAsync(address.Address, address.Port);
-
-                if (channel == null || !channel.Active || !channel.IsWritable || !channel.Registered || !channel.Open)
-                {
-                    OnBindFailure(address, new Exception("Cannot bind to " + address.ToString()));
-                } else
-                {
-                    OnBindSuccess();
-                }
+                OnBindSuccess();
             } catch (Exception e)
             {
                 OnBindFailure(address, e);
@@ -57,8 +50,7 @@ namespace PacChatServer.Net
 
         public override void OnBindFailure(IPEndPoint address, Exception t)
         {
-            logger.Error("Cannot bind to " + address.ToString());
-            logger.Error(t);
+            logger.Error("Cannot bind to " + address.ToString(), t);
         }
 
         public override async Task ShutdownAsync()
