@@ -1,8 +1,10 @@
 ﻿using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using log4net;
 using PacChatServer.Net.Pipeline;
 using PacChatServer.Net.Protocol;
+using PacChatServer.Utils.ThreadUtils;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -17,7 +19,8 @@ namespace PacChatServer.Net
 
         IChannel channel;
 
-        public ChatServer(PacChatServer server, ProtocolProvider protocolProvider) : base(server, protocolProvider)
+        public ChatServer(PacChatServer server, ProtocolProvider protocolProvider, CountdownLatch latch) 
+            : base(server, protocolProvider, latch, typeof(ChatServer))
         {
             bossGroup = new MultithreadEventLoopGroup(1);
             workerGroup = new MultithreadEventLoopGroup();
@@ -37,9 +40,13 @@ namespace PacChatServer.Net
             {
                 channel = await bootstrap.BindAsync(address.Address, address.Port);
 
-                OnBindSuccess();
-
-                return channel;
+                if (channel == null || !channel.Active || !channel.IsWritable || !channel.Registered || !channel.Open)
+                {
+                    OnBindFailure(address, new Exception("Cannot bind to " + address.ToString()));
+                } else
+                {
+                    OnBindSuccess();
+                }
             } catch (Exception e)
             {
                 OnBindFailure(address, e);
@@ -50,7 +57,8 @@ namespace PacChatServer.Net
 
         public override void OnBindFailure(IPEndPoint address, Exception t)
         {
-            //Log there
+            logger.Error("Cannot bind to " + address.ToString());
+            logger.Error(t);
         }
 
         public override async Task ShutdownAsync()

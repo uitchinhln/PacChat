@@ -4,6 +4,13 @@
 
 Ứng dụng nhắn tin trực tuyến trên nền tảng windows hướng tới sự riêng tư, an toàn và trải nghiệm người dùng.
 
+## Đối tượng sử dụng ##
+Ứng dụng phù hợp cho tất cả mọi người
+
+## Lợi ích ##
+- Giao diện đơn giản dễ tiếp cận
+- Đảm bảo tính riêng tư
+- Hỗ trợ đa ngôn ngữ (có Tiếng Việt)
 
 
 ## Đội ngũ phát triển ##
@@ -13,13 +20,16 @@
 
 ## Công cụ ##
 - Bunifu framework
-- Netty
+- DotNetty
+- Log4Net
 - ...
 
 ## Tính năng ##
-1. Gửi ảnh gif
-2. Gửi hình ảnh, đoạn phim...
-3. Gửi tệp âm thanh (cho phép ghi âm trực tiếp)*
+1. Chat qua mạng
+2. Đổi theme
+3. Cung cấp kho theme có sẵn và tự tạo theme
+1. Gửi ảnh gif từ liên kết ngoài
+2. Gửi hình ảnh, đoạn phim từ liên kết ngoài
 4. Tự động quét các server có trong mạng lan
 5. Kết nối thông qua internet
 6. Tạo phòng nhiều người
