@@ -12,7 +12,6 @@
 - Đảm bảo tính riêng tư:
 	- Mã hóa đầu cuối
 	- Mã hóa truyền tải
-	- Mã hóa databse
 - Hỗ trợ đa ngôn ngữ (có Tiếng Việt)
 
 
