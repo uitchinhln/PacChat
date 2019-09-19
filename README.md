@@ -9,7 +9,10 @@
 
 ## Lợi ích ##
 - Giao diện đơn giản dễ tiếp cận
-- Đảm bảo tính riêng tư
+- Đảm bảo tính riêng tư:
+	- Mã hóa đầu cuối
+	- Mã hóa truyền tải
+	- Mã hóa databse
 - Hỗ trợ đa ngôn ngữ (có Tiếng Việt)
 
 
@@ -19,9 +22,9 @@
 - Nguyễn Nhật Long - 18520304
 
 ## Công cụ ##
-- Bunifu framework
-- DotNetty
-- Log4Net
+- Bunifu framework: Hỗ trợ xây dựng giao diện
+- DotNetty: Hỗ trợ xây dựng Network/API hiệu năng cao
+- Log4Net: Ghi log, xuất log và tracking
 - ...
 
 ## Tính năng ##
