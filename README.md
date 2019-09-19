@@ -14,9 +14,9 @@
 
 
 ## Đội ngũ phát triển ##
-- Nguyễn Lê Bách
-- Lê Ngọc Chính
-- Nguyễn Nhật Long
+- Nguyễn Lê Bách - 18520480
+- Lê Ngọc Chính - 18520257
+- Nguyễn Nhật Long - 18520304
 
 ## Công cụ ##
 - Bunifu framework
