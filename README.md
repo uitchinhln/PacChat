@@ -17,7 +17,7 @@
 
 ## Đội ngũ phát triển ##
 - Nguyễn Lê Bách - 18520480
-- Lê Ngọc Chính - 18520257
+- Lê Ngọc Chính - 18520257 - ngocchinhlqd@gmail.com
 - Nguyễn Nhật Long - 18520304
 
 ## Công cụ ##
