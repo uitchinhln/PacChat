@@ -1,5 +1,7 @@
-﻿using DotNetty.Transport.Channels;
+﻿using DotNetty.Handlers.Timeout;
+using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using PacChatServer.Net.Handler;
 
 namespace PacChatServer.Net.Pipeline
 {
@@ -17,8 +19,13 @@ namespace PacChatServer.Net.Pipeline
 
         protected override void InitChannel(ISocketChannel channel)
         {
-            
-            //channel.Pipeline.AddLast();
+            MessageHandler handler = new MessageHandler();
+            CodecHandler codec = new CodecHandler();
+
+            channel.Pipeline
+                .AddLast("timeout", new IdleStateHandler(READ_IDLE_TIMEOUT, WRITE_IDLE_TIMEOUT, 0))
+                .AddLast("codec", codec)
+                .AddLast("hanlder", handler);
         }
     }
 }
