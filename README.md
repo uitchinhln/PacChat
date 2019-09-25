@@ -1,8 +1,10 @@
-# PAC CHAT #
+# [PAC CHAT][pac_chat] - Official Messenger
 
-## Tổng quan ##
+Ứng dụng nhắn tin trực tuyến trên nền tảng windows hướng tới sự riêng tư, an toàn và trải nghiệm người dùng đơn giản, hiệu quả, dễ dùng hơn.
 
-Ứng dụng nhắn tin trực tuyến trên nền tảng windows hướng tới sự riêng tư, an toàn và trải nghiệm người dùng.
+[![Version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0&x2=0)][pac_chat]
+
+![Preview image of PacChat][preview_image_url]
 
 ## Đối tượng sử dụng ##
 Ứng dụng phù hợp cho tất cả mọi người
@@ -18,7 +20,7 @@
 ## Đội ngũ phát triển ##
 - Nguyễn Lê Bách - 18520480
 - Lê Ngọc Chính - 18520257 - ngocchinhlqd@gmail.com
-- Nguyễn Nhật Long - 18520304
+- Nguyễn Nhật Long - 18520304 - nhatlongcode@gmail.com
 
 ## Công cụ ##
 - Bunifu framework: Hỗ trợ xây dựng giao diện
@@ -40,3 +42,8 @@
 	- Đặt mật khẩu cho phòng chat
 	- Gửi tệp multimedia trong chatbox (gif, image, video, audio, document...)
 	- Kiểm tra phiên bản, cập nhật tự động
+
+[//]: # (LINKS)
+[pac_chat]: https://github.com/uitchinhln/PacChat
+
+[preview_image_url]: /UI/preview.png  "Preview image of PacChat"
