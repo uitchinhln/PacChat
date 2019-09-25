@@ -180,11 +180,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Net\ChatServer.cs" />
-    <Compile Include="Net\Codec\Codec.cs" />
-    <Compile Include="Net\Codec\CodecLookupServices.cs" />
-    <Compile Include="Net\Message\Message.cs" />
+    <Compile Include="Net\ChatSession.cs" />
+    <Compile Include="Net\Interface\Codec.cs" />
+    <Compile Include="Net\Interface\Handler.cs" />
+    <Compile Include="Net\Interface\Message.cs" />
     <Compile Include="Net\PacChatNetworkServer.cs" />
     <Compile Include="Net\Pipeline\CodecHandler.cs" />
+    <Compile Include="Net\Pipeline\MessageHandler.cs" />
     <Compile Include="Net\Pipeline\ServerChannelInitializer.cs" />
     <Compile Include="Net\Protocol\ProtocolProvider.cs" />
     <Compile Include="Net\Service\CodecLookupService.cs" />
@@ -201,7 +203,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Net\Codec\" />
     <Folder Include="Net\Handler\" />
+    <Folder Include="Net\Message\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

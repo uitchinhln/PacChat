@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PacChatServer.Net.Message
+namespace PacChatServer.Net.Interface
 {
     interface Message
     {
@@ -9,5 +9,7 @@ namespace PacChatServer.Net.Message
         bool equal(Object obj);
 
         int hashCode();
+
+        Message Clone();
     }
 }
