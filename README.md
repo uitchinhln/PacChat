@@ -4,7 +4,7 @@
 
 [![Version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0&x2=0)][pac_chat]
 
-[![Preview of PacChat][preview_image]][preview_image_url]
+![Preview image of PacChat][preview_image_url]
 
 ## Đối tượng sử dụng ##
 Ứng dụng phù hợp cho tất cả mọi người
@@ -45,5 +45,5 @@
 
 [//]: # (LINKS)
 [pac_chat]: https://github.com/uitchinhln/PacChat
-[preview_image]: https://github.com/uitchinhln/PacChat/assets/preview.png "Preview of PacChat"
-[preview_image_url]: https://raw.githubusercontent.com/uitchinhln/PacChat/assets/preview.png
+
+[preview_image_url]: /UI/preview.png  "Preview image of PacChat"
