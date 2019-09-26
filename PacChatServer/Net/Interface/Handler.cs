@@ -10,6 +10,5 @@ namespace PacChatServer.Net.Interface
     {
         void Handler(ChatSession session, T message);
 
-        Handler<T> Clone();
     }
 }

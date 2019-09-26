@@ -1,4 +1,5 @@
 ﻿using DotNetty.Buffers;
+using System;
 
 namespace PacChatServer.Net.Interface
 {
@@ -7,7 +8,5 @@ namespace PacChatServer.Net.Interface
         T Decode(IByteBuffer byteBuf);
 
         IByteBuffer Encode(IByteBuffer byteBuf, T message);
-
-        Codec<T> Clone();
     }
 }
