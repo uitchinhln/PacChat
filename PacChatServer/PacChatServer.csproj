@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DeepCloner, Version=0.10.0.0, Culture=neutral, PublicKeyToken=dc0b95cf99bf4e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeepCloner.0.10.2\lib\net40\DeepCloner.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetty.Buffers, Version=0.6.0.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetty.Buffers.0.6.0\lib\net45\DotNetty.Buffers.dll</HintPath>
     </Reference>
@@ -181,6 +184,7 @@
   <ItemGroup>
     <Compile Include="Net\ChatServer.cs" />
     <Compile Include="Net\ChatSession.cs" />
+    <Compile Include="Net\CodecRegistration.cs" />
     <Compile Include="Net\Interface\Codec.cs" />
     <Compile Include="Net\Interface\Handler.cs" />
     <Compile Include="Net\Interface\Message.cs" />
@@ -189,7 +193,7 @@
     <Compile Include="Net\Pipeline\MessageHandler.cs" />
     <Compile Include="Net\Pipeline\ServerChannelInitializer.cs" />
     <Compile Include="Net\Protocol\ProtocolProvider.cs" />
-    <Compile Include="Net\Service\CodecLookupService.cs" />
+    <Compile Include="Net\Service\CodecFactory.cs" />
     <Compile Include="PacChatServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

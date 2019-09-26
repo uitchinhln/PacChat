@@ -19,8 +19,8 @@ namespace PacChatServer.Net.Pipeline
 
         protected override void InitChannel(ISocketChannel channel)
         {
-            MessageHandler handler = new MessageHandler();
             CodecHandler codec = new CodecHandler();
+            MessageHandler handler = new MessageHandler();
 
             channel.Pipeline
                 .AddLast("timeout", new IdleStateHandler(READ_IDLE_TIMEOUT, WRITE_IDLE_TIMEOUT, 0))

@@ -2,7 +2,7 @@
 
 Ứng dụng nhắn tin trực tuyến trên nền tảng windows hướng tới sự riêng tư, an toàn và trải nghiệm người dùng đơn giản, hiệu quả, dễ dùng hơn.
 
-[![Version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0&x2=0)][pac_chat]
+[![Version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1&x2=0)][pac_chat]
 
 ![Preview image of PacChat][preview_image_url]
 

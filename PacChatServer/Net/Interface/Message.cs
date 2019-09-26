@@ -9,7 +9,5 @@ namespace PacChatServer.Net.Interface
         bool equal(Object obj);
 
         int hashCode();
-
-        Message Clone();
     }
 }
