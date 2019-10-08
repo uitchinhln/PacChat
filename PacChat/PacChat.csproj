@@ -312,5 +312,32 @@
   <ItemGroup>
     <None Include="Resources\icon_User.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Attach1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_GIF1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Micro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Send1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
