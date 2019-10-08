@@ -12,46 +12,55 @@ namespace PacChat
 {
     public partial class Form1 : Form
     {
-        bool slideActive;
+        private tabMessages _tabMessagesInstance;
+        tabGroupMessages _tabGroupMessagesInstance;
+        tabNoti _tabNotiInstance;
+        tabSetting _tabSettingInstance;
+        tabInfo _tabInfoInstance;
         public Form1()
         {
             InitializeComponent();
-            tabMessagesInstance.BringToFront();
+            init();
+            buttonBigAva.Visible = false;
+            buttonSmallAva.Visible = true;
+            panelMenu.Width = 45;
+            _tabMessagesInstance.BringToFront();
         }
 
         private void ButtonNotiTab_Click(object sender, EventArgs e)
         {
-            tabNotiInstance.BringToFront();
+            _tabNotiInstance.BringToFront();
         }
 
         private void ButtonMessagesTab_Click(object sender, EventArgs e)
         {
-            tabMessagesInstance.BringToFront();
+            _tabMessagesInstance.BringToFront();
         }
 
         private void ButtonGroupMessagesTab_Click(object sender, EventArgs e)
         {
-            tabGroupMessagesInstance.BringToFront();
+            _tabGroupMessagesInstance.BringToFront();
         }
 
         private void ButtonSettingTab_Click(object sender, EventArgs e)
         {
-            tabSettingInstance.BringToFront();
+            _tabSettingInstance.BringToFront();
         }
 
         private void ButtonInfoTab_Click(object sender, EventArgs e)
         {
-            tabInfoInstance.BringToFront();
+            _tabInfoInstance.BringToFront();
         }
 
         private void ButtonMenu_Click(object sender, EventArgs e)
         {
-            if (panelMenu.Width <= 55) // active
+            if (panelMenu.Width <= 45) // show menu
             {
                 buttonMenu.Image = new Bitmap(PacChat.Properties.Resources.icon_Back);
-                slideActive = true;
+                buttonBigAva.Visible = true;
+                buttonSmallAva.Visible = false;
                 panelMenu.Visible = false;
-                panelMenu.Width = 200;
+                panelMenu.Width = 180;
                 bunifuTransition1.ShowSync(panelMenu);
                 
 
@@ -59,9 +68,10 @@ namespace PacChat
             else
             {
                 buttonMenu.Image = new Bitmap(PacChat.Properties.Resources.icon_Menu);
-                slideActive = false;
+                buttonBigAva.Visible = false;
+                buttonSmallAva.Visible = true;
                 panelMenu.Visible = false;
-                panelMenu.Width = 55;
+                panelMenu.Width = 45;
                 bunifuTransition1.ShowSync(panelMenu);
                 
             }
@@ -77,5 +87,30 @@ namespace PacChat
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void init()
+        {
+            _tabMessagesInstance = new tabMessages();
+            _tabMessagesInstance.Dock = DockStyle.Fill;
+            panelContent.Controls.Add(_tabMessagesInstance);
+
+            _tabGroupMessagesInstance = new tabGroupMessages();
+            _tabGroupMessagesInstance.Dock = DockStyle.Fill;
+            panelContent.Controls.Add(_tabGroupMessagesInstance);
+
+
+            _tabNotiInstance = new tabNoti();
+            _tabNotiInstance.Dock = DockStyle.Fill;
+            panelContent.Controls.Add(_tabNotiInstance);
+
+            _tabSettingInstance = new tabSetting();
+            _tabSettingInstance.Dock = DockStyle.Fill;
+            panelContent.Controls.Add(_tabSettingInstance);
+
+            _tabInfoInstance = new tabInfo();
+            _tabInfoInstance.Dock = DockStyle.Fill;
+            panelContent.Controls.Add(_tabInfoInstance);
+        }
+
     }
 }

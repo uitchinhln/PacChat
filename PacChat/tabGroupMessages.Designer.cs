@@ -39,7 +39,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 548);
+            this.panel1.Size = new System.Drawing.Size(200, 595);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -48,16 +48,16 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(200, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(683, 100);
+            this.panel2.Size = new System.Drawing.Size(822, 100);
             this.panel2.TabIndex = 1;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(200, 482);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(200, 529);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(683, 66);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(822, 66);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // tabGroupMessages
@@ -68,7 +68,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "tabGroupMessages";
-            this.Size = new System.Drawing.Size(883, 548);
+            this.Size = new System.Drawing.Size(1022, 595);
             this.ResumeLayout(false);
 
         }

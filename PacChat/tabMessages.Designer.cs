@@ -55,18 +55,19 @@
             // 
             // panelUserList
             // 
+            this.panelUserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.panelUserList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelUserList.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelUserList.Location = new System.Drawing.Point(0, 0);
             this.panelUserList.Name = "panelUserList";
-            this.panelUserList.Size = new System.Drawing.Size(272, 548);
+            this.panelUserList.Size = new System.Drawing.Size(272, 595);
             this.panelUserList.TabIndex = 0;
             // 
             // txtMessageInput
             // 
             this.txtMessageInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtMessageInput.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMessageInput.Font = new System.Drawing.Font("Segoe UI Emoji", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessageInput.Font = new System.Drawing.Font("iCiel LiebeErika", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMessageInput.ForeColor = System.Drawing.Color.Black;
             this.txtMessageInput.HintForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtMessageInput.HintText = "Input text here...";
@@ -75,10 +76,10 @@
             this.txtMessageInput.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtMessageInput.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.txtMessageInput.LineThickness = 1;
-            this.txtMessageInput.Location = new System.Drawing.Point(7, 2);
+            this.txtMessageInput.Location = new System.Drawing.Point(7, -13);
             this.txtMessageInput.Margin = new System.Windows.Forms.Padding(5);
             this.txtMessageInput.Name = "txtMessageInput";
-            this.txtMessageInput.Size = new System.Drawing.Size(313, 44);
+            this.txtMessageInput.Size = new System.Drawing.Size(387, 60);
             this.txtMessageInput.TabIndex = 3;
             this.txtMessageInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -98,17 +99,18 @@
             this.panel1.Controls.Add(this.bunifuImageButton1);
             this.panel1.Controls.Add(this.txtMessageInput);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(272, 500);
+            this.panel1.Location = new System.Drawing.Point(272, 547);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(611, 48);
+            this.panel1.Size = new System.Drawing.Size(750, 48);
             this.panel1.TabIndex = 4;
             // 
             // bunifuImageButton6
             // 
+            this.bunifuImageButton6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton6.Image = global::PacChat.Properties.Resources.icon_GIF;
             this.bunifuImageButton6.ImageActive = null;
-            this.bunifuImageButton6.Location = new System.Drawing.Point(422, 5);
+            this.bunifuImageButton6.Location = new System.Drawing.Point(561, 5);
             this.bunifuImageButton6.Name = "bunifuImageButton6";
             this.bunifuImageButton6.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -118,10 +120,11 @@
             // 
             // bunifuImageButton5
             // 
+            this.bunifuImageButton5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton5.Image = global::PacChat.Properties.Resources.icon_Record;
             this.bunifuImageButton5.ImageActive = null;
-            this.bunifuImageButton5.Location = new System.Drawing.Point(460, 5);
+            this.bunifuImageButton5.Location = new System.Drawing.Point(599, 5);
             this.bunifuImageButton5.Name = "bunifuImageButton5";
             this.bunifuImageButton5.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -131,10 +134,11 @@
             // 
             // bunifuImageButton4
             // 
+            this.bunifuImageButton4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton4.Image = global::PacChat.Properties.Resources.icon_Attach;
             this.bunifuImageButton4.ImageActive = null;
-            this.bunifuImageButton4.Location = new System.Drawing.Point(498, 5);
+            this.bunifuImageButton4.Location = new System.Drawing.Point(637, 5);
             this.bunifuImageButton4.Name = "bunifuImageButton4";
             this.bunifuImageButton4.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -144,10 +148,11 @@
             // 
             // bunifuImageButton3
             // 
+            this.bunifuImageButton3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton3.Image = global::PacChat.Properties.Resources.icon_Icon;
             this.bunifuImageButton3.ImageActive = null;
-            this.bunifuImageButton3.Location = new System.Drawing.Point(536, 5);
+            this.bunifuImageButton3.Location = new System.Drawing.Point(675, 5);
             this.bunifuImageButton3.Name = "bunifuImageButton3";
             this.bunifuImageButton3.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -157,10 +162,11 @@
             // 
             // bunifuImageButton2
             // 
+            this.bunifuImageButton2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton2.Image = global::PacChat.Properties.Resources.icon_Image;
             this.bunifuImageButton2.ImageActive = null;
-            this.bunifuImageButton2.Location = new System.Drawing.Point(384, 5);
+            this.bunifuImageButton2.Location = new System.Drawing.Point(523, 5);
             this.bunifuImageButton2.Name = "bunifuImageButton2";
             this.bunifuImageButton2.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -170,10 +176,11 @@
             // 
             // bunifuImageButton1
             // 
+            this.bunifuImageButton1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.bunifuImageButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuImageButton1.Image = global::PacChat.Properties.Resources.icon_Send;
             this.bunifuImageButton1.ImageActive = null;
-            this.bunifuImageButton1.Location = new System.Drawing.Point(574, 5);
+            this.bunifuImageButton1.Location = new System.Drawing.Point(713, 5);
             this.bunifuImageButton1.Name = "bunifuImageButton1";
             this.bunifuImageButton1.Size = new System.Drawing.Size(32, 32);
             this.bunifuImageButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -183,20 +190,22 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(272, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(611, 50);
+            this.panel2.Size = new System.Drawing.Size(750, 50);
             this.panel2.TabIndex = 5;
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(272, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(611, 450);
+            this.panel3.Size = new System.Drawing.Size(750, 497);
             this.panel3.TabIndex = 6;
             // 
             // imageList1
@@ -226,7 +235,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelUserList);
             this.Name = "tabMessages";
-            this.Size = new System.Drawing.Size(883, 548);
+            this.Size = new System.Drawing.Size(1022, 595);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton5)).EndInit();
