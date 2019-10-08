@@ -12,6 +12,7 @@ namespace PacChat
 {
     public partial class Form1 : Form
     {
+        bool slideActive;
         public Form1()
         {
             InitializeComponent();
@@ -45,23 +46,25 @@ namespace PacChat
 
         private void ButtonMenu_Click(object sender, EventArgs e)
         {
-            if (panelMenu.Width == 55) // active
+            if (panelMenu.Width <= 55) // active
             {
-
-                panelMenu.Width = 200;
-                //bunifuTransition1.ShowSync(panelMenu);
                 buttonMenu.Image = new Bitmap(PacChat.Properties.Resources.icon_Back);
+                slideActive = true;
+                panelMenu.Visible = false;
+                panelMenu.Width = 200;
+                bunifuTransition1.ShowSync(panelMenu);
                 
 
             }
             else
             {
-                panelMenu.Width = 55;
-                //bunifuTransition1.ShowSync(panelMenu);
                 buttonMenu.Image = new Bitmap(PacChat.Properties.Resources.icon_Menu);
+                slideActive = false;
+                panelMenu.Visible = false;
+                panelMenu.Width = 55;
+                bunifuTransition1.ShowSync(panelMenu);
                 
             }
-            //timer1.Start();
         }
 
 
@@ -70,9 +73,9 @@ namespace PacChat
             Application.Exit();
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        private void ButtonMin_Click(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
