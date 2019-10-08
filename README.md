@@ -44,8 +44,8 @@
 	- Gửi tệp multimedia trong chatbox (gif, image, video, audio, document...)
 	- Kiểm tra phiên bản, cập nhật tự động
 ## RoadMap ##
-[VIE](https://github.com/uitchinhln/PacChat/projects/1?fullscreen=true)
-[ENG](https://github.com/uitchinhln/PacChat/projects/2?fullscreen=true)
+- [VIE](https://github.com/uitchinhln/PacChat/projects/1?fullscreen=true)
+- [ENG](https://github.com/uitchinhln/PacChat/projects/2?fullscreen=true)
 
 [//]: # (LINKS)
 [pac_chat]: https://github.com/uitchinhln/PacChat
