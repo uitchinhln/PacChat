@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation8 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panelMenu = new System.Windows.Forms.Panel();
@@ -93,7 +93,7 @@
             this.buttonSmallAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.buttonSmallAva.TabIndex = 7;
             this.buttonSmallAva.TabStop = false;
-            this.buttonSmallAva.Zoom = 10;
+            this.buttonSmallAva.Zoom = 0;
             // 
             // buttonBigAva
             // 
@@ -101,7 +101,7 @@
             this.bunifuTransition1.SetDecoration(this.buttonBigAva, BunifuAnimatorNS.DecorationType.None);
             this.buttonBigAva.Image = global::PacChat.Properties.Resources.icon_ava;
             this.buttonBigAva.ImageActive = null;
-            this.buttonBigAva.Location = new System.Drawing.Point(24, 57);
+            this.buttonBigAva.Location = new System.Drawing.Point(24, 55);
             this.buttonBigAva.Name = "buttonBigAva";
             this.buttonBigAva.Size = new System.Drawing.Size(128, 128);
             this.buttonBigAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -116,9 +116,9 @@
             this.bunifuTransition1.SetDecoration(this.buttonMenu, BunifuAnimatorNS.DecorationType.None);
             this.buttonMenu.Image = global::PacChat.Properties.Resources.icon_Menu;
             this.buttonMenu.ImageActive = null;
-            this.buttonMenu.Location = new System.Drawing.Point(6, 14);
+            this.buttonMenu.Location = new System.Drawing.Point(9, 14);
             this.buttonMenu.Name = "buttonMenu";
-            this.buttonMenu.Size = new System.Drawing.Size(30, 30);
+            this.buttonMenu.Size = new System.Drawing.Size(25, 25);
             this.buttonMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.buttonMenu.TabIndex = 5;
             this.buttonMenu.TabStop = false;
@@ -147,7 +147,7 @@
             this.buttonGroupMessagesTab.IconVisible = true;
             this.buttonGroupMessagesTab.IconZoom = 45D;
             this.buttonGroupMessagesTab.IsTab = true;
-            this.buttonGroupMessagesTab.Location = new System.Drawing.Point(0, 290);
+            this.buttonGroupMessagesTab.Location = new System.Drawing.Point(0, 224);
             this.buttonGroupMessagesTab.Name = "buttonGroupMessagesTab";
             this.buttonGroupMessagesTab.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.buttonGroupMessagesTab.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(159)))), ((int)(((byte)(217)))));
@@ -255,7 +255,7 @@
             this.buttonMessagesTab.IconVisible = true;
             this.buttonMessagesTab.IconZoom = 45D;
             this.buttonMessagesTab.IsTab = true;
-            this.buttonMessagesTab.Location = new System.Drawing.Point(0, 246);
+            this.buttonMessagesTab.Location = new System.Drawing.Point(0, 180);
             this.buttonMessagesTab.Name = "buttonMessagesTab";
             this.buttonMessagesTab.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.buttonMessagesTab.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(159)))), ((int)(((byte)(217)))));
@@ -291,7 +291,7 @@
             this.buttonNotiTab.IconVisible = true;
             this.buttonNotiTab.IconZoom = 45D;
             this.buttonNotiTab.IsTab = true;
-            this.buttonNotiTab.Location = new System.Drawing.Point(0, 202);
+            this.buttonNotiTab.Location = new System.Drawing.Point(0, 136);
             this.buttonNotiTab.Name = "buttonNotiTab";
             this.buttonNotiTab.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.buttonNotiTab.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(159)))), ((int)(((byte)(217)))));
@@ -371,22 +371,22 @@
             // 
             this.bunifuTransition1.AnimationType = BunifuAnimatorNS.AnimationType.Transparent;
             this.bunifuTransition1.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 1F;
-            this.bunifuTransition1.DefaultAnimation = animation1;
+            animation8.AnimateOnlyDifferences = true;
+            animation8.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.BlindCoeff")));
+            animation8.LeafCoeff = 0F;
+            animation8.MaxTime = 1F;
+            animation8.MinTime = 0F;
+            animation8.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicCoeff")));
+            animation8.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicShift")));
+            animation8.MosaicSize = 0;
+            animation8.Padding = new System.Windows.Forms.Padding(0);
+            animation8.RotateCoeff = 0F;
+            animation8.RotateLimit = 0F;
+            animation8.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.ScaleCoeff")));
+            animation8.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.SlideCoeff")));
+            animation8.TimeCoeff = 0F;
+            animation8.TransparencyCoeff = 1F;
+            this.bunifuTransition1.DefaultAnimation = animation8;
             // 
             // Form1
             // 

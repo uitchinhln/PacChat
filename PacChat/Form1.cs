@@ -12,7 +12,7 @@ namespace PacChat
 {
     public partial class Form1 : Form
     {
-        private tabMessages _tabMessagesInstance;
+        tabMessages _tabMessagesInstance;
         tabGroupMessages _tabGroupMessagesInstance;
         tabNoti _tabNotiInstance;
         tabSetting _tabSettingInstance;
@@ -60,6 +60,11 @@ namespace PacChat
                 buttonBigAva.Visible = true;
                 buttonSmallAva.Visible = false;
                 panelMenu.Visible = false;
+
+                buttonNotiTab.Location = new Point(0, 202);
+                buttonMessagesTab.Location = new Point(0, 246);
+                buttonGroupMessagesTab.Location = new Point(0, 290);
+
                 panelMenu.Width = 180;
                 bunifuTransition1.ShowSync(panelMenu);
                 
@@ -71,6 +76,11 @@ namespace PacChat
                 buttonBigAva.Visible = false;
                 buttonSmallAva.Visible = true;
                 panelMenu.Visible = false;
+
+                buttonNotiTab.Location = new Point(0, 137);
+                buttonMessagesTab.Location = new Point(0, 180);
+                buttonGroupMessagesTab.Location = new Point(0, 224);
+
                 panelMenu.Width = 45;
                 bunifuTransition1.ShowSync(panelMenu);
                 
