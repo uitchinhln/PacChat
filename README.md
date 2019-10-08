@@ -24,7 +24,7 @@
 
 ## Công cụ ##
 - Bunifu framework: Hỗ trợ xây dựng giao diện
-- DotNetty: Hỗ trợ xây dựng server socket hiệu năng cao
+- DotNetty: Hỗ trợ xây dựng socket server hiệu năng cao
 - Log4Net: Ghi log, xuất log và tracking
 - N9hNetworkLib by Chinh: Đơn giản hóa triển khai Network/API bằng các interface dựng sẵn
 - ...
@@ -44,7 +44,8 @@
 	- Gửi tệp multimedia trong chatbox (gif, image, video, audio, document...)
 	- Kiểm tra phiên bản, cập nhật tự động
 ## RoadMap ##
-1. Giai đoạn 1: [Link](https://github.com/uitchinhln/PacChat/projects/1?fullscreen=true)
+- [VIE](https://github.com/uitchinhln/PacChat/projects/1?fullscreen=true)
+- [ENG](https://github.com/uitchinhln/PacChat/projects/2?fullscreen=true)
 
 [//]: # (LINKS)
 [pac_chat]: https://github.com/uitchinhln/PacChat
