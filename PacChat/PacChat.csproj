@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>C:\Users\nhtlo\Downloads\Bunifu_UI_v1.5.3.dll</HintPath>
+      <HintPath>..\..\lib\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
     <Reference Include="DotNetty.Buffers, Version=0.6.0.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetty.Buffers.0.6.0\lib\net45\DotNetty.Buffers.dll</HintPath>
