@@ -344,5 +344,14 @@
   <ItemGroup>
     <None Include="Resources\icon_Send1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_ava.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_SmallAva.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_SmallAva1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
