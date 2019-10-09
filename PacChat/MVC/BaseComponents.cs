@@ -61,5 +61,10 @@ namespace PacChat.MVC
             // Automatically register itself at born time
             AppManager.Register(this);
         }
+
+        ~App()
+        {
+            AppManager.Unregister(this);
+        }
     }
 }
