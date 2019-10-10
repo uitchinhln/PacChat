@@ -93,6 +93,16 @@ namespace PacChat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_ava_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_ava_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_Back {
             get {
                 object obj = ResourceManager.GetObject("icon_Back", resourceCulture);

@@ -17,5 +17,25 @@ namespace PacChat
             InitializeComponent();
         }
 
+        private void ButtonSend_Click(object sender, EventArgs e)
+        {
+
+            Size size = new Size();
+            Point location = new Point();
+            string text = txtMessContent.Text;
+            Console.WriteLine(text);
+            tabBubbleMess bubble = new tabBubbleMess();
+            panel3.Controls.Add(bubble);
+            bubble.SetMess(text);
+            bubble.Dock = DockStyle.Bottom;
+            location = bubble.Location;
+            size = bubble.Size;
+
+            bubble.Dock = DockStyle.None;
+            bubble.Location = location;
+            bubble.Size = size;
+
+   
+        }
     }
 }

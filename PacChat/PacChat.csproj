@@ -197,6 +197,12 @@
     <Compile Include="MVC\View.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tabBubbleMess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tabBubbleMess.Designer.cs">
+      <DependentUpon>tabBubbleMess.cs</DependentUpon>
+    </Compile>
     <Compile Include="tabGroupMessages.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,6 +246,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="tabBubbleMess.resx">
+      <DependentUpon>tabBubbleMess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="tabGroupMessages.resx">
       <DependentUpon>tabGroupMessages.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +361,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_SmallAva1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_ava_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
