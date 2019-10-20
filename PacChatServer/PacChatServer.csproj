@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CNetwork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CNetwork.dll</HintPath>
+    </Reference>
     <Reference Include="DeepCloner, Version=0.10.0.0, Culture=neutral, PublicKeyToken=dc0b95cf99bf4e99, processorArchitecture=MSIL">
       <HintPath>..\packages\DeepCloner.0.10.2\lib\net40\DeepCloner.dll</HintPath>
     </Reference>
@@ -182,18 +186,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Net\ChatServer.cs" />
-    <Compile Include="Net\ChatSession.cs" />
-    <Compile Include="Net\CodecRegistration.cs" />
-    <Compile Include="Net\Interface\Codec.cs" />
-    <Compile Include="Net\Interface\Handler.cs" />
-    <Compile Include="Net\Interface\Message.cs" />
-    <Compile Include="Net\PacChatNetworkServer.cs" />
-    <Compile Include="Net\Pipeline\CodecHandler.cs" />
-    <Compile Include="Net\Pipeline\MessageHandler.cs" />
-    <Compile Include="Net\Pipeline\ServerChannelInitializer.cs" />
-    <Compile Include="Net\Protocol\ProtocolProvider.cs" />
-    <Compile Include="Net\Service\CodecFactory.cs" />
+    <Compile Include="ConsoleReader.cs" />
+    <Compile Include="Network\ChatNetworkServer.cs" />
+    <Compile Include="Network\ChatServer.cs" />
+    <Compile Include="Network\ChatSession.cs" />
+    <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\TestPacket.cs" />
+    <Compile Include="Network\Pipeline\ChannelInitializer.cs" />
+    <Compile Include="Network\Protocol\PacChatProtocol.cs" />
+    <Compile Include="Network\Protocol\ProtocolProvider.cs" />
+    <Compile Include="Network\Protocol\TestProtocol.cs" />
+    <Compile Include="Network\SessionRegistry.cs" />
     <Compile Include="PacChatServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,10 +209,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Net\Codec\" />
-    <Folder Include="Net\Handler\" />
-    <Folder Include="Net\Message\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PacChatServer.Utils.ThreadUtils
 {
-    class CountdownLatch
+    public class CountdownLatch
     {
         private int m_remain;
         private EventWaitHandle m_event;
