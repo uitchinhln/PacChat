@@ -27,7 +27,7 @@ namespace PacChatServer
             protocolProvider = new ProtocolProvider();
             SessionRegistry = new SessionRegistry();
 
-            
+            Start();
         }
 
         private void Start()
