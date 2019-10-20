@@ -196,6 +196,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MVC\AppManager.cs" />
+    <Compile Include="MVC\BaseComponents.cs" />
+    <Compile Include="MVC\Controller.cs" />
+    <Compile Include="MVC\Model.cs" />
+    <Compile Include="MVC\View.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tabGroupMessages.cs">
