@@ -194,6 +194,9 @@
     <Compile Include="Client\ClientModel.cs" />
     <Compile Include="Client\ClientPresenter.cs" />
     <Compile Include="Client\ClientView.cs" />
+    <Compile Include="Client\FeatureControllers\AccountSetting.cs" />
+    <Compile Include="Client\FeatureControllers\AccountVerifier.cs" />
+    <Compile Include="Client\FeatureControllers\Chat.cs" />
     <Compile Include="Client\FeatureControllers\FeatureController.cs" />
     <Compile Include="Client\ViewInterfaces\IAccountSetting.cs" />
     <Compile Include="Client\ViewInterfaces\IAccountVerifier.cs" />
