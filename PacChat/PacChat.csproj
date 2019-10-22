@@ -190,6 +190,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ClientApp.cs" />
+    <Compile Include="Client\ClientModel.cs" />
+    <Compile Include="Client\ClientPresenter.cs" />
+    <Compile Include="Client\ClientView.cs" />
+    <Compile Include="Client\FeatureControllers\FeatureController.cs" />
+    <Compile Include="Client\ViewInterfaces\IAccountSetting.cs" />
+    <Compile Include="Client\ViewInterfaces\IAccountVerifier.cs" />
+    <Compile Include="Client\ViewInterfaces\IClientChat.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
