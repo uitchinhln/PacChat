@@ -20,6 +20,8 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _isPanelOpened = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,20 +36,10 @@ namespace PacChat
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnNoti_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-
+            this.LeftSidePanel.Width = _isPanelOpened ? 32 : 128;
+            _isPanelOpened = !_isPanelOpened;
         }
     }
 }
