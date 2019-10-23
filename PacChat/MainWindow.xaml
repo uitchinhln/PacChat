@@ -12,21 +12,46 @@
         CaptionHeight="0"
         ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Storyboard x:Key="left-side-panel-expand">
+            <DoubleAnimation
+                Storyboard.TargetName="LeftSidePanel"
+                Storyboard.TargetProperty="Width"
+                From="32" To="128" Duration="0:0:0.25"
+                AutoReverse="False">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+        </Storyboard>
+        <Storyboard x:Key="left-side-panel-compress">
+            <DoubleAnimation
+                Storyboard.TargetName="LeftSidePanel"
+                Storyboard.TargetProperty="Width"
+                From="128" To="32" Duration="0:0:0.25"
+                AutoReverse="False">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
 
     <DockPanel>
         <!--stackPanel HEADER-->
         <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" Background="#FF4F4F4F" MouseMove="FormDrag">
             <DockPanel Height="32" HorizontalAlignment="Right" Width="96">
-                <Button
+                <Button x:Name="BtnQuit"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="{x:Null}" Margin="0" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom">
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="{x:Null}" Margin="0" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom" Click="BtnQuit_Click">
                     <materialDesign:PackIcon
                     Kind="Close"
                     Height="16"
                     Width="16" Foreground="#DDFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
 
-                <Button
+                <Button x:Name="BtnMaximize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="{x:Null}" DockPanel.Dock="Right" Height="32" VerticalAlignment="Top">
                     <materialDesign:PackIcon
@@ -35,7 +60,7 @@
                     Width="16" Foreground="#DDFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
 
-                <Button
+                <Button x:Name="BtnMinimize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="#FF4F4F4F" DockPanel.Dock="Right" Height="32" VerticalAlignment="Top">
                     <materialDesign:PackIcon
@@ -55,22 +80,28 @@
             <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" >
                 <materialDesign:PackIcon Kind="MoreHoriz" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
             </Button>
-            
-            <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" Click="BtnNoti_Click" >
-                <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-            </Button>
-            
-            <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" >
-                <materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-            </Button>
-            
-            <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" HorizontalContentAlignment="Left" >
+
+            <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" Click="BtnNoti_Click" HorizontalAlignment="Left" >
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                    <Label Content="Test Test Test "></Label>
+                    <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                    <Label Content="Notifications" Foreground="#FFF1F1F1"></Label>
                 </StackPanel>
             </Button>
-            
+
+            <Button x:Name="Btn2" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" Click="Btn2_Click" HorizontalAlignment="Left" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                    <Label Content="Online users" Foreground="#FFF1F1F1"></Label>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="Btn3" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" HorizontalContentAlignment="Left" Click="Btn3_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                    <Label Content="Contact list" Foreground="#FFF1F1F1"></Label>
+                </StackPanel>
+            </Button>
+
         </StackPanel>
         <StackPanel x:Name="spanelContent" Background="#FFF1F1F1">
             <materialDesign:DrawerHost
