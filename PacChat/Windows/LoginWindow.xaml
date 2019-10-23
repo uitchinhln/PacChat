@@ -1,0 +1,74 @@
+﻿<Window x:Class="PacChat.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:PacChat.Windows"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="516" Width="774" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Grid MouseMove="FormDrag">
+                <Button HorizontalAlignment="Right" Margin="0,10,10,0" Width="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF060606" Padding="0" Height="28" Click="CloseApp" VerticalAlignment="Top" IsTabStop="False">
+                    <materialDesign:PackIcon Kind="WindowClose" Height="24" Width="24" Cursor="Hand" />
+                </Button>
+                <Label Content="Pac Chat" Margin="0,40,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Unispace" FontSize="36" FontWeight="Bold"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="28" Margin="66,0,65,0" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="66,0" Height="23" HorizontalAlignment="Center">
+                    <Button Uid="0" Content="LOGIN" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" IsTabStop="False" Click="TabClick"/>
+                    <Button Uid="1" Content="REGISTER" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" ScrollViewer.CanContentScroll="True" IsTabStop="False" Click="TabClick"/>
+                </StackPanel>
+                <Grid x:Name="GridCursor" Width="56" Height="3" Background="#FF673AB7" HorizontalAlignment="Left" Margin="66,23,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <materialDesign:Transitioner x:Name="trnsEr" SelectedIndex="0" Grid.Row="1" Margin="0,28,0,0" IsTabStop="False">
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft}">
+                    <Grid>
+                        <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,36,71,223" Height="38" />
+                        <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,102,71,156" Height="39"/>
+                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="71,151,198,123">Remember me</CheckBox>
+                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" ToolTip="MaterialDesignFlatDarkButton" Margin="71,206,71,59">Login</Button>
+                    </Grid>
+                </materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
+                    <Grid>
+                        <TextBox materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,0,199,238" Height="37" Width="132" />
+                        <TextBox materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="196,0,54,238" Height="37" Width="132" />
+                        <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,51,54,187" Height="37" />
+                        <PasswordBox x:Name="RegPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,104,54,132" Height="37"/>
+                        <DatePicker materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="54,164,198,97" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" />
+                        <ComboBox materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="197,172,54,97" Height="28">
+                            <ComboBoxItem>Male</ComboBoxItem>
+                            <ComboBoxItem>Female</ComboBoxItem>
+                            <ComboBoxItem>Other</ComboBoxItem>
+                        </ComboBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="54,205,0,70">
+                            <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="0" Height="20">I agree to the user</CheckBox>
+                            <materialDesign:PopupBox ToggleContent="terms and conditions" StaysOpen="True" Margin="0,2,0,0" Width="127" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                                <StackPanel Width="500" Height="700">
+
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" ToolTip="MaterialDesignFlatDarkButton" Margin="54,233,54,21">Register</Button>
+                    </Grid>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </Grid>
+        <Image Margin="0" Source="/PacChat;component/Resources/Drawable/LoginSlideImage.jpg" Stretch="UniformToFill"/>
+    </Grid>
+</Window>
