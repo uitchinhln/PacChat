@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PacChat"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Pacchat" Height="499.5" Width="836.5" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="{x:Null}" WindowStyle="None" Padding="0">
+        Title="PacChat" Height="499.5" Width="836.5" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="White" Padding="0" MinWidth="640" MinHeight="480" Margin="0" WindowStyle="None">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -38,35 +38,35 @@
         </Storyboard>
     </Window.Resources>
 
-    <DockPanel>
+    <DockPanel Margin="0">
         <!--stackPanel HEADER-->
-        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" Background="#FF4F4F4F" MouseMove="FormDrag">
+        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" Background="#004F4F4F" MouseMove="FormDrag" Margin="37,0,0,0">
             <DockPanel Height="32" HorizontalAlignment="Right" Width="96">
                 <Button x:Name="BtnQuit"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="{x:Null}" Margin="0" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom" Click="BtnQuit_Click" Cursor="Arrow">
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="{x:Null}" Margin="0" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom" Click="BtnQuit_Click" Cursor="Arrow">
                     <materialDesign:PackIcon
                     Kind="Close"
                     Height="16"
-                    Width="16" Foreground="#DDFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    Width="16" Foreground="#DD000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
 
                 <Button x:Name="BtnMaximize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="{x:Null}" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom" Click="BtnMaximize_Click" Cursor="Arrow">
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="{x:Null}" DockPanel.Dock="Right" Height="32" VerticalAlignment="Bottom" Click="BtnMaximize_Click" Cursor="Arrow">
                     <materialDesign:PackIcon
                     Kind="WindowMaximize"
                     Height="16"
-                    Width="16" Foreground="#DDFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    Width="16" Foreground="#DD000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
 
                 <Button x:Name="BtnMinimize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#FF4F4F4F" BorderBrush="#FF4F4F4F" DockPanel.Dock="Right" Height="32" VerticalAlignment="Top" Click="BtnMinimize_Click" Cursor="Arrow">
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F" DockPanel.Dock="Right" Height="32" VerticalAlignment="Top" Click="BtnMinimize_Click" Cursor="Arrow">
                     <materialDesign:PackIcon
                     Kind="WindowMinimize"
                     Height="16"
-                    Width="16" Foreground="#DDFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    Width="16" Foreground="#DD000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
             </DockPanel>
 
@@ -76,7 +76,7 @@
         </StackPanel>
 
         <!--stackPanel SIDEMENU-->
-        <StackPanel x:Name="LeftSidePanel" Background="#FF878787" HorizontalAlignment="Left" Width="32">
+        <StackPanel x:Name="LeftSidePanel" Background="#FF52176C" HorizontalAlignment="Left" Width="32" Margin="0,-32,0,0">
             <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" Cursor="Arrow" >
                 <materialDesign:PackIcon Kind="MoreHoriz" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
             </Button>
@@ -101,153 +101,20 @@
                     <Label Content="Contact list" Foreground="#FFF1F1F1"></Label>
                 </StackPanel>
             </Button>
-
         </StackPanel>
-        <StackPanel x:Name="spanelContent" Background="#FFF1F1F1">
-            <materialDesign:DrawerHost
-  Margin="0"
-  BorderThickness="2"
-  BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="0,0,0,1" Width="482" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <materialDesign:DrawerHost.LeftDrawerContent>
-                    <StackPanel
-                        Margin="16,0,16,30">
-                        <TextBlock
-                            Margin="4"
-                            HorizontalAlignment="Center"><Run Text="LEFT FIELD"/></TextBlock>
-                        <Button
-                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                            CommandParameter="{x:Static Dock.Left}"
-                            Margin="4"
-                            HorizontalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignFlatButton}" Content="CLOSE THIS"/>
-                        <Button                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"                              Margin="4"                              HorizontalAlignment="Center"                              Style="{DynamicResource MaterialDesignFlatButton}" Content="CLOSE ALL"/>
-                    </StackPanel>
-                </materialDesign:DrawerHost.LeftDrawerContent>
-                <materialDesign:DrawerHost.TopDrawerContent>
-                    <StackPanel
-      Margin="16"
-      HorizontalAlignment="Center"
-      Orientation="Horizontal" Width="308">
-                        <TextBlock
-        Margin="4"
-        VerticalAlignment="Center"><Run Text="TOP BANANA"/></TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center" Content="CLOSE ALL"/>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Top}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center" Content="CLOSE THIS"/>
-                    </StackPanel>
-                </materialDesign:DrawerHost.TopDrawerContent>
-                <materialDesign:DrawerHost.RightDrawerContent>
-                    <StackPanel
-      Margin="16">
-                        <TextBlock
-        Margin="4"
-        HorizontalAlignment="Center"><Run Text="THE RIGHT STUFF"/></TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Right}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}" Content="CLOSE THIS"/>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}" Content="CLOSE ALL"/>
-                    </StackPanel>
-                </materialDesign:DrawerHost.RightDrawerContent>
-                <materialDesign:DrawerHost.BottomDrawerContent>
-                    <StackPanel
-      Margin="16"
-      HorizontalAlignment="Center"
-      Orientation="Horizontal">
-                        <TextBlock
-        Margin="4"
-        VerticalAlignment="Center"><Run Text="BOTTOM BRACKET"/></TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center" Content="CLOSE ALL"/>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Bottom}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center" Content="CLOSE THIS"/>
-                    </StackPanel>
-                </materialDesign:DrawerHost.BottomDrawerContent>
-                <Grid
-    MinWidth="480"
-    MinHeight="480">
-                    <Grid
-      VerticalAlignment="Center"
-      HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Left}"
-        Grid.Row="1"
-        Grid.Column="0"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowLeft" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Top}"
-        Grid.Row="0"
-        Grid.Column="1"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowUp" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Right}"
-        Grid.Row="1"
-        Grid.Column="2"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowRight" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Bottom}"
-        Grid.Row="2"
-        Grid.Column="1"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowDown" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        Grid.Row="1"
-        Grid.Column="1"
-        Margin="4"
-        Style="{DynamicResource MaterialDesignRaisedAccentButton}">
-                            <materialDesign:PackIcon
-          Kind="ArrowAll" />
-                        </Button>
-                    </Grid>
-                </Grid>
-            </materialDesign:DrawerHost>
+        
+        <StackPanel x:Name="MessageThread" Background="#FF52176C" HorizontalAlignment="Left" Width="0" Margin="0,-32,0,0">
+        </StackPanel>
+            
+        <StackPanel x:Name="spanelContent" Background="White">
+            <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+            <ScrollViewer Height="380"/>
+
+            <StackPanel VerticalAlignment="Bottom" Height="38">
+                <TextBox Text="Message..." Height="38" Padding="4,0,0,0" FontSize="18">
+                    
+                </TextBox>
+            </StackPanel>
         </StackPanel>
 
     </DockPanel>
