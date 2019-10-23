@@ -23,8 +23,20 @@ namespace PacChat
     {
         private bool _isPanelOpened = false;
         private List<Button> _panelButtons = new List<Button>();
-        private int _panelMaxSize, _panelMinSize;
-        private int _panelOffset;
+
+        private bool _isMaximized;
+        public bool isMaximized
+        {
+            get
+            {
+                return _isMaximized;
+            }
+            set
+            {
+                Application.Current.MainWindow.WindowState = isMaximized ? WindowState.Normal : WindowState.Maximized;
+                _isMaximized = value;
+            }
+        }
 
         public MainWindow()
         {
@@ -34,10 +46,6 @@ namespace PacChat
 
         private void MetaDataInit()
         {
-            _panelMinSize = 32;
-            _panelOffset = 32;
-
-            _panelMaxSize = 128;
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -70,9 +78,19 @@ namespace PacChat
             Environment.Exit(0);
         }
 
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            isMaximized = true;
+        }
+
         private void Btn2_Click(object sender, RoutedEventArgs e)
         {
             ToggleLeftSidePanel();
+        }
+
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
     }
 }
