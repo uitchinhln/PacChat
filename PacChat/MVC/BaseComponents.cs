@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,16 @@ namespace PacChat.MVC
         public View view { get; private set; }
 
         public Controller controller { get; private set; }
+
+        public void InitializeMVC(Model model, View view, Controller controller)
+        {
+            this.model = model;
+            this.view = view;
+            this.controller = controller;
+        }
     }
 
-    public class App<M, V, C> : App 
+    public class App<M, V, C> : App
         where M : Model
         where V : View
         where C : Controller
@@ -52,13 +60,12 @@ namespace PacChat.MVC
         new public V view { get; private set; }
         new public C controller { get; private set; }
 
-        public App(M model, V view, C controller)
+        public void InitializeMVC(M model, V view, C controller)
         {
             this.model = model;
             this.view = view;
             this.controller = controller;
 
-            // Automatically register itself at born time
             AppManager.Register(this);
         }
 
