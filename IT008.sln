@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacChatServer", "PacChatServer\PacChatServer.csproj", "{77D24E17-049C-437F-A411-DFD19B113F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacChat", "PacChat\PacChat.csproj", "{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77D24E17-049C-437F-A411-DFD19B113F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D24E17-049C-437F-A411-DFD19B113F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D24E17-049C-437F-A411-DFD19B113F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D24E17-049C-437F-A411-DFD19B113F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {850AB28C-D367-426A-B25D-BD367ECA26E3}
+	EndGlobalSection
+EndGlobal
