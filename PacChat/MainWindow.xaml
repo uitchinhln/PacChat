@@ -18,8 +18,9 @@
         <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="40" Background="#FF95ADFF" MouseMove="FormDrag">
             <DockPanel Height="40" Background="#FF94ADFF" HorizontalAlignment="Right" Width="123">
                 <Button
-                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="40" Padding="0" Background="#FF94ADFF" BorderBrush="#FF94ADFF" Margin="0" DockPanel.Dock="Right" Height="Auto">
+                    ToolTip="MaterialDesignOutlinedButton"
+                    Style="{DynamicResource MaterialDesignOutlinedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="40" Padding="0" Background="#FF94ADFF" BorderBrush="#FF94ADFF" Margin="0" DockPanel.Dock="Right" Height="Auto">
                     <materialDesign:PackIcon
                     Kind="Close"
                     Height="32"
