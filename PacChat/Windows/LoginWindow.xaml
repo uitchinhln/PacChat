@@ -37,35 +37,39 @@
             </Grid>
             <materialDesign:Transitioner x:Name="trnsEr" SelectedIndex="0" Grid.Row="1" Margin="0,28,0,0" IsTabStop="False">
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft}">
-                    <Grid>
-                        <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,36,71,223" Height="38" />
-                        <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,102,71,156" Height="39"/>
-                        <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="71,151,198,123">Remember me</CheckBox>
-                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" ToolTip="MaterialDesignFlatDarkButton" Margin="71,206,71,59">Login</Button>
-                    </Grid>
+                    <StackPanel>
+                        <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,30,71,0" Height="38" />
+                        <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,20,71,0" Height="39"/>
+                        <CheckBox Content="Remember me" Style="{StaticResource MaterialDesignCheckBox}" Margin="71,10,0,0" HorizontalAlignment="Left" />
+                        <Button Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0"/>
+                    </StackPanel>
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
-                    <Grid>
-                        <TextBox materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,0,199,238" Height="37" Width="132" />
-                        <TextBox materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="196,0,54,238" Height="37" Width="132" />
-                        <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,51,54,187" Height="37" />
-                        <PasswordBox x:Name="RegPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,104,54,132" Height="37"/>
-                        <DatePicker materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="54,164,198,97" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" />
-                        <ComboBox materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="197,172,54,97" Height="28">
-                            <ComboBoxItem>Male</ComboBoxItem>
-                            <ComboBoxItem>Female</ComboBoxItem>
-                            <ComboBoxItem>Other</ComboBoxItem>
-                        </ComboBox>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="54,205,0,70">
-                            <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="0" Height="20">I agree to the user</CheckBox>
-                            <materialDesign:PopupBox ToggleContent="terms and conditions" StaysOpen="True" Margin="0,2,0,0" Width="127" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
+                            <TextBox materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" />
+                            <TextBox materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                        <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,15,54,0" Height="37" />
+                        <PasswordBox x:Name="RegPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37"/>
+                        <StackPanel Orientation="Horizontal" Margin="54,15,54,0">
+                            <DatePicker materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" />
+                            <ComboBox materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132">
+                                <ComboBoxItem>Male</ComboBoxItem>
+                                <ComboBoxItem>Female</ComboBoxItem>
+                                <ComboBoxItem>Other</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="54,10,0,0">
+                            <CheckBox Content="I agree to " Style="{StaticResource MaterialDesignCheckBox}" Margin="0" Height="20"/>
+                            <materialDesign:PopupBox ToggleContent="the user terms and conditions" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
                                 <StackPanel Width="500" Height="700">
 
                                 </StackPanel>
                             </materialDesign:PopupBox>
                         </StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" ToolTip="MaterialDesignFlatDarkButton" Margin="54,233,54,21">Register</Button>
-                    </Grid>
+                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0">Register</Button>
+                    </StackPanel>
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
         </Grid>
