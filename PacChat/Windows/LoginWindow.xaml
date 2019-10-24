@@ -41,7 +41,7 @@
                         <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,30,71,0" Height="38" />
                         <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,20,71,0" Height="39"/>
                         <CheckBox Content="Remember me" Style="{StaticResource MaterialDesignCheckBox}" Margin="71,10,0,0" HorizontalAlignment="Left" />
-                        <Button Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0"/>
+                        <Button x:Name="btnLogin" Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0" Click="btnLogin_Click"/>
                     </StackPanel>
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
@@ -68,7 +68,7 @@
                                 </StackPanel>
                             </materialDesign:PopupBox>
                         </StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0">Register</Button>
+                        <Button x:Name="btnRegister" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0" Click="btnRegister_Click">Register</Button>
                     </StackPanel>
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>

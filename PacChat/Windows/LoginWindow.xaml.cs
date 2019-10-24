@@ -19,9 +19,20 @@ namespace PacChat.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
+        LoginModel loginModel;
+        LoginView loginView;
+        LoginController loginController;
+        LoginApp loginApp;
+
         public LoginWindow()
         {
             InitializeComponent();
+            loginModel = new LoginModel();
+            loginView = new LoginView();
+            loginController = new LoginController();
+
+            loginApp = new LoginApp();
+            loginApp.InitializeMVC(loginModel, loginView, loginController);
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -49,6 +60,16 @@ namespace PacChat.Windows
             {
                 trnsEr.SelectedIndex = index;
             }
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            loginView.Login();
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            loginView.Register();
         }
     }
 }

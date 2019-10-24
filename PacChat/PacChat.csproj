@@ -257,6 +257,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\Genders.cs" />
+    <Compile Include="Windows\LoginApp.cs" />
+    <Compile Include="Windows\LoginController.cs" />
+    <Compile Include="Windows\LoginModel.cs" />
+    <Compile Include="Windows\LoginView.cs" />
     <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
