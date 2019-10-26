@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.BubbleChat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             mc:Ignorable="d" d:DesignWidth="300">
+
+    <Border Padding="5" 
+            Background="{StaticResource BlueBrush }" >
+
+        <Grid>
+            <!--AVATAR pic -->
+            <Border VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
+                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    Width="30"
+                    Background="green"
+                    BorderThickness="1"
+                    BorderBrush="White"
+                    
+                    >
+                <TextBlock Text="NL"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="White">
+                            
+                    
+                </TextBlock>
+                
+            </Border>
+
+            <!---Messages path -->
+            <Grid Margin="40,0,0,20" 
+                >
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <!-- Bubble with round corner -->
+                <Border CornerRadius="10" 
+                    Background="White"
+                    MaxWidth="250">
+                    
+                    <TextBlock
+                    VerticalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Foreground="Black"
+                    Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
+                    Padding="10" 
+                    >
+
+                    </TextBlock>
+
+                </Border>
+                <Path Grid.Row="2" 
+                      Stroke="Black"
+                      StrokeThickness="0"
+                      Margin="8.6 0 0 0"
+                      Data="M 0,0 L 9,15 L 30,0 L 0,0"
+                      Fill="White"/>
+            </Grid>
+        </Grid>
+
+    </Border>
+
+</UserControl>
