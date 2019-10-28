@@ -187,8 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleReader.cs" />
-    <Compile Include="Entities\Properties\Gender.cs" />
-    <Compile Include="Entities\UserEnt.cs" />
     <Compile Include="Network\ChatNetworkServer.cs" />
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
