@@ -2,7 +2,6 @@
 using CNetwork.Protocols;
 using CNetwork.Sessions;
 using DotNetty.Transport.Channels;
-using PacChatServer.Entities;
 using PacChatServer.Network.Protocol;
 using System;
 using System.Collections.Generic;
@@ -20,10 +19,8 @@ namespace PacChatServer.Network
 
         IConnectionManager connectionManager;
 
-        public User Owner { get; set; }
-
         public ChatSession(PacChatServer server, IChannel channel, ProtocolProvider protocolProvider, IConnectionManager connectionManager) 
-            : base(channel, protocolProvider.HandShake)
+            : base(channel, protocolProvider.Test)
         {
             Server = server;
             this.protocolProvider = protocolProvider;
