@@ -1,4 +1,5 @@
-﻿using PacChatServer.Network;
+﻿using PacChatServer.Entities.Properties;
+using PacChatServer.Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;

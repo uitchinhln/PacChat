@@ -14,14 +14,15 @@ using System.Threading.Tasks;
 
 namespace PacChat.Network
 {
-    public class NetworkClient : IConnectionManager
+    public class ChatConnection : IConnectionManager
     {
+        static ChatConnection instance;
         protected IEventLoopGroup workerGroup;
         protected Bootstrap bootstrap;
         protected IChannel Channel;
         protected ProtocolProvider protocolProvider;
 
-        public NetworkClient(ProtocolProvider protocolProvider)
+        private ChatConnection(ProtocolProvider protocolProvider)
         {
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();
@@ -69,6 +70,18 @@ namespace PacChat.Network
 
         public void OnBindFailure(IPEndPoint address, Exception e)
         {
+        }
+
+        public static ChatConnection Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ChatConnection(new ProtocolProvider());
+                }
+                return instance;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PacChat.Windows
+namespace PacChat.Windows.SplashScreen
 {
     /// <summary>
     /// Interaction logic for SplashWindow.xaml

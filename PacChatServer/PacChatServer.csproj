@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleReader.cs" />
-    <Compile Include="Entities\Gender.cs" />
+    <Compile Include="Entities\Properties\Gender.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Network\ChatNetworkServer.cs" />
     <Compile Include="Network\ChatServer.cs" />
@@ -216,6 +216,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Network\Packets\Inbound\" />
+    <Folder Include="Network\Packets\Outbound\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

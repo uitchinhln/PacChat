@@ -1,4 +1,8 @@
-﻿using PacChat.Windows;
+﻿using PacChat.Network;
+using PacChat.Network.Protocol;
+using PacChat.Windows;
+using PacChat.Windows.Login;
+using PacChat.Windows.SplashScreen;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,8 +20,13 @@ namespace PacChat
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
+            _ = ChatConnection.Instance;
+
+            //SplashWindow splash = new SplashWindow();
+            //splash.Show();
+
+            LoginWindow login = new LoginWindow();
+            login.Show();
         }
     }
 }

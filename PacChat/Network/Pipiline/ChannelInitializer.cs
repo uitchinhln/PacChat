@@ -23,9 +23,9 @@ namespace PacChat.Network.Pipeline
          */
         private static int WRITE_IDLE_TIMEOUT = 15;
 
-        private NetworkClient connectionManager;
+        private ChatConnection connectionManager;
 
-        public ChannelInitializer(NetworkClient connectionManager) : base(connectionManager)
+        public ChannelInitializer(ChatConnection connectionManager) : base(connectionManager)
         {
             this.connectionManager = connectionManager;
         }

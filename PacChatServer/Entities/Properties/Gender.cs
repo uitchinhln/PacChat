@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Entities
+namespace PacChatServer.Entities.Properties
 {
     public enum Gender
     {
-        MALE = 0,
-        FEMALE = 1,
-        OTHER = 2
+        None = 0,
+        Male = 1,
+        Female = 2,
+        Other = 3
     }
 }
