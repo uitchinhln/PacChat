@@ -198,6 +198,8 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\Ping\PingReceive.cs" />
+    <Compile Include="Network\Packets\Ping\PingRespone.cs" />
     <Compile Include="Network\Packets\TestPacket.cs" />
     <Compile Include="Network\Pipeline\ChannelInitializer.cs" />
     <Compile Include="Network\Protocol\HandShakeProtocol.cs" />
@@ -216,9 +218,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Network\Packets\Inbound\" />
-    <Folder Include="Network\Packets\Outbound\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

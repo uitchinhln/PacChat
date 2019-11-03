@@ -1,7 +1,12 @@
-﻿using System;
+﻿using PacChat.Network;
+using PacChat.Network.Packets.Ping;
+using PacChat.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +27,19 @@ namespace PacChat.Windows.SplashScreen
         public SplashWindow()
         {
             InitializeComponent();
+            Load();
+        }
+
+        public async void Load()
+        {
+            ChatConnection connection = ChatConnection.Instance;
+            if (!connection.IsConnected())
+            {
+                await connection.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1402));
+            }
+            Ping4Send ping = new Ping4Send();
+            ping.Version = "1.0.0";
+            if (connection.Session != null) connection.Session.Send(ping);
         }
     }
 }

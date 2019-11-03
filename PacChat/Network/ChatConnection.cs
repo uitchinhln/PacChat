@@ -16,6 +16,7 @@ namespace PacChat.Network
 {
     public class ChatConnection : IConnectionManager
     {
+        public ClientSession Session { get; private set; }
         static ChatConnection instance;
         protected IEventLoopGroup workerGroup;
         protected Bootstrap bootstrap;
@@ -47,10 +48,15 @@ namespace PacChat.Network
             }
         }
 
+        public bool IsConnected()
+        {
+            return Channel != null && Channel.Active;
+        }
+
         public ISession NewSession(IChannel c)
         {
-            Session session = new Session(c, protocolProvider.Test);
-            return session;
+            Session = new ClientSession(c, protocolProvider.Test);
+            return Session;
         }
 
         public void SessionInactivated(ISession session)

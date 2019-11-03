@@ -22,11 +22,13 @@ namespace PacChat
         {
             _ = ChatConnection.Instance;
 
-            //SplashWindow splash = new SplashWindow();
-            //splash.Show();
+            //AppHolder appHolder = new AppHolder();
 
-            LoginWindow login = new LoginWindow();
-            login.Show();
+            SplashWindow splash = new SplashWindow();
+            splash.Show();
+
+            //LoginWindow login = new LoginWindow();
+            //login.Show();
         }
     }
 }

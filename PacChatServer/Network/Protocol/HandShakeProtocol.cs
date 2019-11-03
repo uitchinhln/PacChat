@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChatServer.Network.Packets.Ping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace PacChatServer.Network.Protocol
     {
         public HandShakeProtocol() : base("HandShake")
         {
-
+            Inbound(0x00, new PingReceive());
+            Outbound(0x00, new PingRespone());
         }
     }
 }

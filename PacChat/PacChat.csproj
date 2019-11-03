@@ -67,13 +67,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Network\Packets\Ping\PingRespone.cs" />
+    <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
     <Compile Include="Resources\CustomControls\BubbleChat.xaml.cs">
       <DependentUpon>BubbleChat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
+    <Compile Include="Windows\AppHolder.xaml.cs">
+      <DependentUpon>AppHolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Login\LoginApp.cs" />
     <Compile Include="Windows\Login\LoginController.cs" />
     <Compile Include="Windows\Login\LoginModel.cs" />
@@ -127,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\AppHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Login\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +158,7 @@
     <Compile Include="Network\Protocol\PacChatProtocol.cs" />
     <Compile Include="Network\Protocol\ProtocolProvider.cs" />
     <Compile Include="Network\Protocol\TestProtocol.cs" />
-    <Compile Include="Network\Session.cs" />
+    <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -175,8 +185,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Network\Packets\Inbound\" />
-    <Folder Include="Network\Packets\Outbound\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Styles\" />
     <Folder Include="Resources\Templates\" />

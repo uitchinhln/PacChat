@@ -13,7 +13,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Label Content="Đây là SplashScreen" Margin="0,150" VerticalContentAlignment="Center" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Center" FontSize="36"/>
-        <ProgressBar IsIndeterminate="True" Height="Auto" Margin="0,328,0,20" />
+        <Label Content="SplashScreen" Margin="0,150" VerticalContentAlignment="Center" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Center" FontSize="36"/>
+        <ProgressBar x:Name="pgLoading" IsIndeterminate="True" Height="Auto" Margin="0,328,0,20" />
     </Grid>
 </Window>
