@@ -9,10 +9,10 @@ namespace PacChatServer.Network.Protocol
 {
     public class ProtocolProvider
     {
-        public TestProtocol Test { get; }
+        public HandShakeProtocol HandShake { get; }
         public ProtocolProvider()
         {
-            this.Test = new TestProtocol();
+            this.HandShake = new HandShakeProtocol();
         }
     }
 }

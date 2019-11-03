@@ -1,4 +1,9 @@
-﻿using System;
+﻿using PacChat.Network;
+using PacChat.Network.Protocol;
+using PacChat.Windows;
+using PacChat.Windows.Login;
+using PacChat.Windows.SplashScreen;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +18,17 @@ namespace PacChat
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            _ = ChatConnection.Instance;
+
+            //AppHolder appHolder = new AppHolder();
+
+            SplashWindow splash = new SplashWindow();
+            splash.Show();
+
+            //LoginWindow login = new LoginWindow();
+            //login.Show();
+        }
     }
 }

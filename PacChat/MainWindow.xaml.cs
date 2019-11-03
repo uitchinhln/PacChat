@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace PacChat
 {
@@ -23,6 +24,31 @@ namespace PacChat
         public MainWindow()
         {
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaterialDesignThemes.Wpf.ShadowAssist.SetShadowDepth(this, ShadowDepth.Depth0);
+        }
+
+        private void FormDrag(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OnGotFocusHandler(object sender, RoutedEventArgs e)
+        {
+            Button tb = e.Source as Button;
+            tb.Background = Brushes.Red;
+        }
+        private void OnLostFocusHandler(object sender, RoutedEventArgs e)
+        {
+            Button tb = e.Source as Button;
+            tb.Background = Brushes.White;
         }
     }
 }

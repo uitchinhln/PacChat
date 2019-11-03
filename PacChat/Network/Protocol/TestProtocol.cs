@@ -1,6 +1,7 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
 using PacChat.Network.Packets;
+using PacChat.Network.Packets.Ping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace PacChat.Network.Protocol
     {
         public TestProtocol() : base("Test")
         {
-            Inbound(0x0, new TestPacket());
-            Outbound(0x0, new TestPacket());
+            Inbound(0x0, new PingRespone());
+            Outbound(0x0, new Ping4Send());
         }
     }
 }
