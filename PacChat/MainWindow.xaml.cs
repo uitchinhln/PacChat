@@ -65,12 +65,10 @@ namespace PacChat
 
         private void BtnNoti_Click(object sender, RoutedEventArgs e)
         {
-            ToggleLeftSidePanel();
         }
 
         private void Btn3_Click(object sender, RoutedEventArgs e)
         {
-            ToggleLeftSidePanel();
         }
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
@@ -85,12 +83,16 @@ namespace PacChat
 
         private void Btn2_Click(object sender, RoutedEventArgs e)
         {
-            ToggleLeftSidePanel();
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleLeftSidePanel();
         }
     }
 }

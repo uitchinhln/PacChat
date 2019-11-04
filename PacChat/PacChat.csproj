@@ -72,6 +72,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ChatPageContents\UserList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChatPageContents\UserMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +88,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ChatPageContents\UserList.xaml.cs">
+      <DependentUpon>UserList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatPageContents\ViewModels\BaseViewModel.cs" />
     <Compile Include="ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
@@ -89,6 +101,13 @@
     <Compile Include="ChatPageContents\MessageList.xaml.cs">
       <DependentUpon>MessageList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatPageContents\UserMessage.xaml.cs">
+      <DependentUpon>UserMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatPageContents\ViewModels\UserListDesignModel.cs" />
+    <Compile Include="ChatPageContents\ViewModels\UserMessageDesignModel.cs" />
+    <Compile Include="ChatPageContents\ViewModels\UserListViewModel.cs" />
+    <Compile Include="ChatPageContents\ViewModels\UserMessageViewModel.cs" />
     <Compile Include="Client\ClientApp.cs" />
     <Compile Include="Client\ClientModel.cs" />
     <Compile Include="Client\ClientPresenter.cs" />
@@ -172,5 +191,6 @@
       <Version>3.0.0-ci731</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
