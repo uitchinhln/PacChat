@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace PacChat.Network.Protocol
 {
-    public class TestProtocol : PacChatProtocol
+    public class PreLoginProtocol : PacChatProtocol
     {
-        public TestProtocol() : base("Test")
+        public PreLoginProtocol() : base("Test")
         {
             Inbound(0x0, new PingRespone());
             Outbound(0x0, new Ping4Send());

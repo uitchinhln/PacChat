@@ -157,7 +157,7 @@
     <Compile Include="Network\Pipiline\ChannelInitializer.cs" />
     <Compile Include="Network\Protocol\PacChatProtocol.cs" />
     <Compile Include="Network\Protocol\ProtocolProvider.cs" />
-    <Compile Include="Network\Protocol\TestProtocol.cs" />
+    <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
     <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
