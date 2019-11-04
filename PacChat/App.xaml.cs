@@ -23,7 +23,6 @@ namespace PacChat
             _ = ChatConnection.Instance;
 
             //AppHolder appHolder = new AppHolder();
-
             SplashWindow splash = new SplashWindow();
             splash.Show();
 
