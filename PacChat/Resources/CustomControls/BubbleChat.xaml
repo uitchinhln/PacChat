@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" d:DesignWidth="300">
 
-    <Border Padding="5" 
-            Background="{StaticResource BlueBrush }" >
+    <Border Padding="5" >
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource Blue}"/>
+        </Border.Background>
 
         <Grid>
             <!--AVATAR pic -->
@@ -25,45 +27,42 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Foreground="White">
-                            
-                    
+
+
                 </TextBlock>
-                
+
             </Border>
 
             <!---Messages path -->
-            <Grid Margin="40,0,0,20" 
-                >
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                
+            <StackPanel Margin="40,0,0,0">
+                <Label Content="Nick Name bla bla"/>
                 <!-- Bubble with round corner -->
                 <Border CornerRadius="10" 
                     Background="White"
                     MaxWidth="250">
-                    
+
                     <TextBlock
                     VerticalAlignment="Center"
                     TextWrapping="Wrap"
                     Foreground="Black"
                     Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
-                    Padding="10" 
-                    >
+                    Padding="10"/>
 
-                    </TextBlock>
+
 
                 </Border>
-                <Path Grid.Row="2" 
-                      Stroke="Black"
-                      StrokeThickness="0"
-                      Margin="8.6 0 0 0"
-                      Data="M 0,0 L 9,15 L 30,0 L 0,0"
-                      Fill="White"/>
-            </Grid>
+                <Border CornerRadius="10" 
+                    Background="White"
+                    MaxWidth="250" Margin="0,3,0,0">
+
+                    <TextBlock
+                    VerticalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Foreground="Black"
+                    Text="Tin nhắn thứ 2"
+                    Padding="10"/>
+                </Border>
+            </StackPanel>
         </Grid>
 
     </Border>
