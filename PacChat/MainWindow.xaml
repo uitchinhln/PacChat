@@ -102,20 +102,13 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        
+
         <StackPanel x:Name="MessageThread" Background="#FF52176C" HorizontalAlignment="Left" Width="0" Margin="0,-32,0,0">
         </StackPanel>
-            
-        <StackPanel x:Name="spanelContent" Background="White">
-            <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
-            <ScrollViewer Height="380"/>
 
-            <StackPanel VerticalAlignment="Bottom" Height="38">
-                <TextBox Text="Message..." Height="38" Padding="4,0,0,0" FontSize="18">
-                    
-                </TextBox>
-            </StackPanel>
-        </StackPanel>
+        <local:ChatPage>
+            
+        </local:ChatPage>
 
     </DockPanel>
 
