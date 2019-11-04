@@ -11,5 +11,10 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
         }
+
+        public void AddNewMess()
+        {
+
+        }
     }
 }
