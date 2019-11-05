@@ -35,7 +35,7 @@ namespace PacChatServer
             CountdownLatch latch = new CountdownLatch(1);
 
             ChatServer server = new ChatServer(this, protocolProvider, latch);
-            server.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1402));
+            _ = server.Bind(new IPEndPoint(IPAddress.Parse("10.90.104.145"), 1402));
 
             latch.Wait();
 

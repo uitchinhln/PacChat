@@ -262,9 +262,6 @@
     <Compile Include="Resources\CustomControls\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\CustomControls\Tooltip.xaml.cs">
-      <DependentUpon>Tooltip.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">
@@ -310,10 +307,6 @@
     <Page Include="Resources\CustomControls\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\CustomControls\Tooltip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
