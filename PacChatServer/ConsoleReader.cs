@@ -1,5 +1,7 @@
 ﻿using CNetwork.Sessions;
+using PacChatServer.Command;
 using PacChatServer.Network.Packets;
+using PacChatServer.Utils.ThreadUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,35 @@ namespace PacChatServer
 {
     public class ConsoleReader
     {
+        static Thread readerThread = null;
+        static bool IsStop = false;
+
         public ConsoleReader()
         {
-            Thread thread = new Thread(() =>
+            readerThread = new Thread(() =>
             {
                 String input;
-                while (true)
+                while (!IsStop)
                 {
-                    input = Console.ReadLine();
-
-
-                }                
+                    try
+                    {
+                        input = Console.ReadLine();
+                        CommandManager.Instance.ExecuteCommand(input);
+                    } catch (Exception e)
+                    {
+                        PacChatServer.GetServer().Logger.Error(e);
+                    }
+                }
             });
-            thread.Start();
+            readerThread.Start();
+        }
+
+        public static void Stop()
+        {
+            if (readerThread != null && readerThread.ThreadState != ThreadState.Stopped)
+            {
+                IsStop = true;
+            }
         }
     }
 }
