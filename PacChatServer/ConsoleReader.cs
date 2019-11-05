@@ -38,10 +38,7 @@ namespace PacChatServer
 
         public static void Stop()
         {
-            if (readerThread != null && readerThread.ThreadState != ThreadState.Stopped)
-            {
-                IsStop = true;
-            }
+            IsStop = true;
         }
     }
 }
