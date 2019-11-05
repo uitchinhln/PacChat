@@ -1,6 +1,7 @@
 ﻿using CNetwork;
 using DotNetty.Transport.Channels;
 using log4net;
+using PacChatServer.Command;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
 using PacChatServer.Utils.ThreadUtils;
@@ -13,6 +14,8 @@ namespace PacChatServer
 {
     public class PacChatServer
     {
+        static PacChatServer instance = null;
+
         public IPAddress IP { get; set; }
         public int Port { get; set; }
 
@@ -24,8 +27,12 @@ namespace PacChatServer
 
         public PacChatServer()
         {
+            instance = this;
+
             protocolProvider = new ProtocolProvider();
             SessionRegistry = new SessionRegistry();
+
+            _ = CommandManager.Instance;
 
             Start();
         }
@@ -35,11 +42,21 @@ namespace PacChatServer
             CountdownLatch latch = new CountdownLatch(1);
 
             ChatServer server = new ChatServer(this, protocolProvider, latch);
-            server.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1402));
+            _ = server.Bind(new IPEndPoint(IPAddress.Parse("10.90.104.145"), 1402));
 
             latch.Wait();
 
             new ConsoleReader();
+        }
+
+        public static CommandManager GetCommandManager()
+        {
+            return CommandManager.Instance;
+        }
+
+        public static PacChatServer GetServer()
+        {
+            return instance;
         }
     }
 }
