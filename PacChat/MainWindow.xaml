@@ -59,7 +59,8 @@
 
             <CustomControls:BubbleChat Height="145" Width="301"
                                        VerticalAlignment="Top"
-                                       HorizontalAlignment="Left" Loaded="BubbleChat_Loaded"
+                                       HorizontalAlignment="Left"
+                                       SetText="dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may"
                                        />
 
         </StackPanel>

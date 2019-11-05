@@ -18,7 +18,6 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class BubbleChat : UserControl
     {
-        TextBlock tb;
         public BubbleChat()
         {
             InitializeComponent();
@@ -43,7 +42,7 @@ namespace PacChat.Resources.CustomControls
 
         private void OnSetTextChanged(DependencyPropertyChangedEventArgs e)
         {
-            tb.Text = e.NewValue.ToString();
+            textBlock.Text = e.NewValue.ToString();
         }
     }
 }

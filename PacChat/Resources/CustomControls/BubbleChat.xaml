@@ -44,7 +44,7 @@
                     Background="White"
                     MaxWidth="250">
 
-                    <TextBlock
+                    <TextBlock x:Name="textBlock"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap"
                     Foreground="Black"
