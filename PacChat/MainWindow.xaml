@@ -59,7 +59,7 @@
 
             <CustomControls:BubbleChat Height="145" Width="301"
                                        VerticalAlignment="Top"
-                                       HorizontalAlignment="Left"
+                                       HorizontalAlignment="Left" Loaded="BubbleChat_Loaded"
                                        />
 
         </StackPanel>
