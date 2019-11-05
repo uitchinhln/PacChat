@@ -26,6 +26,7 @@ namespace PacChat
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaterialDesignThemes.Wpf.ShadowAssist.SetShadowDepth(this, ShadowDepth.Depth0);
+
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -50,5 +51,6 @@ namespace PacChat
             Button tb = e.Source as Button;
             tb.Background = Brushes.White;
         }
+
     }
 }

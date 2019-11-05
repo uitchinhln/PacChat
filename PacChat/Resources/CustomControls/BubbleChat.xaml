@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" d:DesignWidth="300">
 
-    <Border Padding="5" >
+    <Border Padding="5" 
+            MaxWidth="300"
+            >
         <Border.Background>
             <SolidColorBrush Color="{DynamicResource Blue}"/>
         </Border.Background>
