@@ -53,15 +53,17 @@
         </StackPanel>
 
         <!--stackPanel SIDEMENU-->
-        <StackPanel Background="#FFC0ABEE" HorizontalAlignment="Left" Width="68"/>
+        <StackPanel Background="#FFC0ABEE" HorizontalAlignment="Left" Width="68">
+            <Button x:Name="button" Content="Button" d:LayoutOverrides="Height" Click="button_Click_1"/>
+        </StackPanel>
 
         <StackPanel x:Name="spanelContent" Background="#FFB5E4FF">
-
-            <CustomControls:BubbleChat Height="145" Width="301"
+            <CustomControls:BubbleChat x:Name="bubble"
                                        VerticalAlignment="Top"
                                        HorizontalAlignment="Left"
-                                       SetText="dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may dit me may"
+                                       
                                        />
+
 
         </StackPanel>
 

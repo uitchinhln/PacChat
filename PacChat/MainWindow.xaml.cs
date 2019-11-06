@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using PacChat.Resources.CustomControls;
 
 namespace PacChat
 {
@@ -52,5 +53,10 @@ namespace PacChat
             tb.Background = Brushes.White;
         }
 
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Bubble b = new Bubble();
+            bubble.AddBubble(b);
+        }
     }
 }

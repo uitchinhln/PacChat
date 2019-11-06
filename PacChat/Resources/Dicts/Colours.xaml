@@ -6,7 +6,7 @@
     <Color x:Key="Blue">#0099FF</Color>
     <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
 
-    <Color x:Key="Gray">#F1F0F0</Color>
+    <Color x:Key="Gray">#72767D</Color>
     <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}" />
 
 </ResourceDictionary>

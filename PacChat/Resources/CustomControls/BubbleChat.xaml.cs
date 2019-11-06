@@ -21,6 +21,7 @@ namespace PacChat.Resources.CustomControls
         public BubbleChat()
         {
             InitializeComponent();
+            //textBlock.Text = "asdasdsad";
         }
 
         public static readonly DependencyProperty setMessTextProperty =
@@ -42,7 +43,12 @@ namespace PacChat.Resources.CustomControls
 
         private void OnSetTextChanged(DependencyPropertyChangedEventArgs e)
         {
-            textBlock.Text = e.NewValue.ToString();
+            //textBlock.Text = e.NewValue.ToString();
+        }
+
+        public void AddBubble(Bubble b)
+        {
+            spMessContainer.Children.Add(b);
         }
     }
 }

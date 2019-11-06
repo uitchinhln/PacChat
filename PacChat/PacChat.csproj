@@ -256,11 +256,11 @@
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
     <Compile Include="Network\Packets\Ping\PingRespone.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
+    <Compile Include="Resources\CustomControls\Bubble.xaml.cs">
+      <DependentUpon>Bubble.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\BubbleChat.xaml.cs">
       <DependentUpon>BubbleChat.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\CustomControls\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
@@ -300,11 +300,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\CustomControls\BubbleChat.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Resources\CustomControls\Bubble.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\CustomControls\Button.xaml">
+    <Page Include="Resources\CustomControls\BubbleChat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

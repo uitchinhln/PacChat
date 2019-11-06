@@ -36,50 +36,12 @@
             </Border>
 
             <!---Messages path -->
-            <StackPanel Margin="40,0,0,0">
+            <StackPanel x:Name="spMessContainer" Margin="40,0,0,0">
                 <!-- Nick name label -->
                 <Label Content="Nick Name bla bla"/>
-                <!-- Bubble with round corner -->
-                <Border CornerRadius="10" 
-                    Background="White"
-                    MaxWidth="250">
-
-                    <TextBlock x:Name="textBlock"
-                    VerticalAlignment="Center"
-                    TextWrapping="Wrap"
-                    Foreground="Black"
-                    Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
-                    ToolTip="11:59"
-                    Padding="10"/>
 
 
-                </Border>
-                <Border CornerRadius="10" 
-                    Background="White"
-                    MaxWidth="250" Margin="0,3,0,0">
 
-                    <TextBlock
-                    VerticalAlignment="Center"
-                    TextWrapping="Wrap"
-                    Foreground="Black"
-                    Text="Tin nhắn thứ 2"
-                    ToolTip="12:00"
-                    Padding="10"/>
-                </Border>
-                <!--Seen Annoucement-->
-                <Border>
-                    <TextBlock
-                        FontSize="9"
-                        Foreground="{StaticResource GrayBrush}"
-                        Margin="0,0,5,0"
-                        Text="seen"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Right"
-                        
-                        >
-                        
-                    </TextBlock>
-                </Border>
             </StackPanel>
 
         </Grid>
