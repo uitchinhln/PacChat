@@ -21,7 +21,12 @@ namespace PacChatServer.Entities
         public string LastName { get; set; }
         public DateTime DoB { get; set; }
         public Gender Gender { get; set; }
-        SortedList FriendIDs { get; set; }
-        SortedList BlockedIDs { get; set; }
+        public List<int> FriendIDs { get; set; }
+        public List<int> BlockedIDs { get; set; }
+
+        public User(int id)
+        {
+            this.ID = id;
+        }
     }
 }
