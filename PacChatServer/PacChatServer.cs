@@ -51,7 +51,7 @@ namespace PacChatServer
 
             latch.Wait();
 
-            new ConsoleReader();
+            new ConsoleManager();
         }
 
         public static CommandManager GetCommandManager()

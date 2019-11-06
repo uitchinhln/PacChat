@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace PacChatServer
 {
-    public class ConsoleReader
+    public class ConsoleManager
     {
-        static Thread readerThread = null;
+        static Thread consoleReader = null;
         static bool IsStop = false;
 
-        public ConsoleReader()
+        public ConsoleManager()
         {
-            readerThread = new Thread(() =>
+            consoleReader = new Thread(() =>
             {
                 String input;
                 while (!IsStop)
@@ -26,14 +26,17 @@ namespace PacChatServer
                     try
                     {
                         input = Console.ReadLine();
-                        CommandManager.Instance.ExecuteCommand(input);
+
+                        if (input == null || input.Trim().Length == 0) continue;
+
+                        CommandManager.Instance.ExecuteCommand(ConsoleSender.Instance, input);
                     } catch (Exception e)
                     {
                         PacChatServer.GetServer().Logger.Error(e);
                     }
                 }
             });
-            readerThread.Start();
+            consoleReader.Start();
         }
 
         public static void Stop()

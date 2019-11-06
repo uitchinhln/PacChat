@@ -198,8 +198,10 @@
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\Commands\SampleCommand.cs" />
     <Compile Include="Command\Commands\StopCommand.cs" />
+    <Compile Include="Command\ConsoleSender.cs" />
     <Compile Include="Command\ICommandExecutor.cs" />
-    <Compile Include="ConsoleReader.cs" />
+    <Compile Include="Command\ISender.cs" />
+    <Compile Include="ConsoleManager.cs" />
     <Compile Include="Entities\Properties\Gender.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Network\ChatNetworkServer.cs" />

@@ -8,7 +8,7 @@ namespace PacChatServer.Command.Commands
 {
     public class SampleCommand : ICommandExecutor
     {
-        public void Execute(string commandLabel, string[] args)
+        public void Execute(ISender commandSender, string commandLabel, string[] args)
         {
             int f = Convert.ToInt32(args[1]);
             int s = Convert.ToInt32(args[2]);
