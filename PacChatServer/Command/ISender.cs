@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacChatServer.Command
 {
-    public interface ICommandExecutor
+    public interface ISender
     {
-        void Execute(ISender commandSender, string commandLabel, string[] args);
     }
 }

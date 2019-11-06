@@ -2,6 +2,7 @@
 using DotNetty.Transport.Channels;
 using log4net;
 using PacChatServer.Command;
+using PacChatServer.Command.Commands;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
 using PacChatServer.Utils.ThreadUtils;
@@ -19,6 +20,8 @@ namespace PacChatServer
         public IPAddress IP { get; set; }
         public int Port { get; set; }
 
+        public ChatServer Network { get; }
+
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
         private ProtocolProvider protocolProvider;
@@ -34,6 +37,8 @@ namespace PacChatServer
 
             _ = CommandManager.Instance;
 
+            GetCommandManager().RegisterCommand("sample", new SampleCommand());
+
             Start();
         }
 
@@ -46,7 +51,7 @@ namespace PacChatServer
 
             latch.Wait();
 
-            new ConsoleReader();
+            new ConsoleManager();
         }
 
         public static CommandManager GetCommandManager()

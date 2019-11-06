@@ -59,16 +59,16 @@ namespace PacChatServer.Command
             }
         }
 
-        public void ExecuteCommand(string rawCommand)
+        public void ExecuteCommand(ISender sender, String command)
         {
             try
             {
-                if (rawCommand == null) return;
-                rawCommand = rawCommand.Trim().ToUpper();
-                if (rawCommand.Length < 1) return;
+                if (command == null) return;
+                command = command.Trim();
+                if (command.Length < 1) return;
 
-                String[] args = rawCommand.Split(' ');
-                String commandLabel = args[0];
+                String[] args = command.Split(' ');
+                String commandLabel = args[0].ToUpper();
 
                 if (!registeredCommands.ContainsKey(commandLabel) && !defaultCommands.ContainsKey(commandLabel))
                 {
@@ -78,13 +78,13 @@ namespace PacChatServer.Command
 
                 if (registeredCommands.ContainsKey(commandLabel))
                 {
-                    registeredCommands[commandLabel].Execute(commandLabel, args);
+                    registeredCommands[commandLabel].Execute(sender, commandLabel, args);
                     return;
                 }
 
                 if (defaultCommands.ContainsKey(commandLabel))
                 {
-                    defaultCommands[commandLabel].Execute(commandLabel, args);
+                    defaultCommands[commandLabel].Execute(sender, commandLabel, args);
                     return;
                 }
             } catch (Exception e)

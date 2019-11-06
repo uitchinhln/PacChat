@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PacChatServer.Command.Commands
 {
-    public class StopCommand : ICommandExecutor
+    public class SampleCommand : ICommandExecutor
     {
         public void Execute(ISender commandSender, string commandLabel, string[] args)
         {
-            PacChatServer.GetServer().Logger.Info("Stopping...");
-            ConsoleManager.Stop();
-            Environment.Exit(0);
+            int f = Convert.ToInt32(args[1]);
+            int s = Convert.ToInt32(args[2]);
+            PacChatServer.GetServer().Logger.Info(String.Format("{0} + {1} = {2}", f, s, s+f));
         }
     }
 }

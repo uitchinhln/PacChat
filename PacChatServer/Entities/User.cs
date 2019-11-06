@@ -1,4 +1,5 @@
-﻿using PacChatServer.Entities.Properties;
+﻿using PacChatServer.Command;
+using PacChatServer.Entities.Properties;
 using PacChatServer.Network;
 using System;
 using System.Collections;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PacChatServer.Entities
 {
-    public class User
+    public class User : ISender
     {
         public List<ChatSession> sessions = new List<ChatSession>();
 
@@ -21,7 +22,12 @@ namespace PacChatServer.Entities
         public string LastName { get; set; }
         public DateTime DoB { get; set; }
         public Gender Gender { get; set; }
-        SortedList FriendIDs { get; set; }
-        SortedList BlockedIDs { get; set; }
+        public List<int> FriendIDs { get; set; }
+        public List<int> BlockedIDs { get; set; }
+
+        public User(int id)
+        {
+            this.ID = id;
+        }
     }
 }
