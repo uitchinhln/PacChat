@@ -70,12 +70,14 @@ namespace PacChat
             Bubble b = new Bubble();
             _previousChat.AddBubble(b);
             _previous = false;
+            viewScroller.ScrollToEnd();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             spContent.Children.Add(new Bubble());
             _previous = true;
+            viewScroller.ScrollToEnd();
         }
     }
 }

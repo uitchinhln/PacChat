@@ -57,7 +57,7 @@
             <Button x:Name="button" Content="Button" d:LayoutOverrides="Height" Click="button_Click_1"/>
             <Button x:Name="button1" Content="Button" d:LayoutOverrides="Height" Click="button1_Click"/>
         </StackPanel>
-        <ScrollViewer>
+        <ScrollViewer x:Name="viewScroller">
             <StackPanel x:Name="spContent" Background="#FFB5E4FF">
 
 
