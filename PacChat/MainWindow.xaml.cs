@@ -22,11 +22,18 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _previous; // 0 = left, 1 = right
+        private bool _new; // 0 = false, 1 = true
+        private BubbleChat _previousChat;
+
         public MainWindow()
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaterialDesignThemes.Wpf.ShadowAssist.SetShadowDepth(this, ShadowDepth.Depth0);
+            _new = true;
+            _previous = false;
+            _previousChat = bubble;
 
         }
 
@@ -55,8 +62,21 @@ namespace PacChat
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (_previous == true)
+            {
+                _previousChat = new BubbleChat();
+                spContent.Children.Add(_previousChat);
+            }
+                
             Bubble b = new Bubble();
-            bubble.AddBubble(b);
+            _previousChat.AddBubble(b);
+            _previous = false;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Add(new Bubble());
+            _previous = true;
         }
     }
 }

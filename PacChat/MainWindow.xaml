@@ -55,9 +55,10 @@
         <!--stackPanel SIDEMENU-->
         <StackPanel Background="#FFC0ABEE" HorizontalAlignment="Left" Width="68">
             <Button x:Name="button" Content="Button" d:LayoutOverrides="Height" Click="button_Click_1"/>
+            <Button x:Name="button1" Content="Button" d:LayoutOverrides="Height" Click="button1_Click"/>
         </StackPanel>
 
-        <StackPanel x:Name="spanelContent" Background="#FFB5E4FF">
+        <StackPanel x:Name="spContent" Background="#FFB5E4FF">
             <CustomControls:BubbleChat x:Name="bubble"
                                        VerticalAlignment="Top"
                                        HorizontalAlignment="Left"

@@ -29,5 +29,10 @@ namespace PacChat.Resources.CustomControls
         {
             textBlock.Text = s;
         }
+
+        public void setBG(Color x)
+        {
+            textBlock.Background = new SolidColorBrush(x);
+        }
     }
 }

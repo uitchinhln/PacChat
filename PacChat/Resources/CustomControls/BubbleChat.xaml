@@ -8,10 +8,11 @@
 
     <Border Padding="5" 
             MaxWidth="300"
+            Background="Transparent"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
             >
-        <Border.Background>
-            <SolidColorBrush Color="{DynamicResource Blue}"/>
-        </Border.Background>
+
 
         <Grid>
             <!--AVATAR pic -->
