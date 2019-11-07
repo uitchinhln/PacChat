@@ -28,6 +28,9 @@ namespace PacChatServer.Entities
         public User(int id)
         {
             this.ID = id;
+            this.Gender = Gender.Other;
+            this.FriendIDs = new List<int>();
+            this.BlockedIDs = new List<int>();
         }
     }
 }

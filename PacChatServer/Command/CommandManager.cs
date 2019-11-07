@@ -27,7 +27,7 @@ namespace PacChatServer.Command
 
         private void RegisterAllDefaultCommands()
         {
-            defaultCommands.Add("STOP", new StopCommand());
+            defaultCommands.Add(DefaultCommands.STOP, new StopCommand());
         }
 
         public void RegisterCommand(string commandLabel, ICommandExecutor executor)

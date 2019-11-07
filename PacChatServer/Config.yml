@@ -1,0 +1,11 @@
+﻿Network:
+  Host: '127.0.0.1'
+  Port: 1402
+Storage:
+  MySQL:
+    Username: 'root'
+    Password: '!2#1@3PacChat008'
+    Host: 'localhost'
+    Port: 3306
+    Database: 'PacChat'
+Debug: false

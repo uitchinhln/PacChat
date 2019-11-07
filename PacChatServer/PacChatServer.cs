@@ -20,7 +20,7 @@ namespace PacChatServer
         public IPAddress IP { get; set; }
         public int Port { get; set; }
 
-        public ChatServer Network { get; }
+        public ChatServer Network { get; private set; }
 
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
@@ -46,8 +46,8 @@ namespace PacChatServer
         {
             CountdownLatch latch = new CountdownLatch(1);
 
-            ChatServer server = new ChatServer(this, protocolProvider, latch);
-            _ = server.Bind(new IPEndPoint(IPAddress.Parse("10.90.104.145"), 1402));
+            this.Network = new ChatServer(this, protocolProvider, latch);
+            _ = this.Network.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.SERVER_PORT));
 
             latch.Wait();
 

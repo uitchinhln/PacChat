@@ -1,0 +1,11 @@
+CREATE TABLE `pacchat`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
+  `passhash` VARCHAR(45) NOT NULL,
+  `firstname` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
+  `lastname` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
+  `dob` DATE NULL DEFAULT now(),
+  `Gender` TINYINT(10) NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+ENGINE = InnoDB;

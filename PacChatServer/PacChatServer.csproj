@@ -199,6 +199,7 @@
     <Compile Include="Command\Commands\SampleCommand.cs" />
     <Compile Include="Command\Commands\StopCommand.cs" />
     <Compile Include="Command\ConsoleSender.cs" />
+    <Compile Include="Command\DefaultCommands.cs" />
     <Compile Include="Command\ICommandExecutor.cs" />
     <Compile Include="Command\ISender.cs" />
     <Compile Include="ConsoleManager.cs" />
@@ -219,11 +220,15 @@
     <Compile Include="PacChatServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\MySQLStr.cs" />
+    <Compile Include="ServerSettings.cs" />
+    <Compile Include="Storage\MySQLSto.cs" />
     <Compile Include="Utils\ThreadUtils\CountdownLatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
