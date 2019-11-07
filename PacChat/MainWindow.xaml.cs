@@ -32,8 +32,7 @@ namespace PacChat
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             MaterialDesignThemes.Wpf.ShadowAssist.SetShadowDepth(this, ShadowDepth.Depth0);
             _new = true;
-            _previous = false;
-            _previousChat = bubble;
+            _previous = true;
 
         }
 

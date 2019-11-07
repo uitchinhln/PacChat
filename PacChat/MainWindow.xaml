@@ -14,7 +14,7 @@
         ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <DockPanel>
+    <DockPanel Background="White">
         <!--stackPanel HEADER-->
         <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="40" Background="#FF95ADFF" MouseMove="FormDrag">
             <DockPanel Height="40" Background="#FF94ADFF" HorizontalAlignment="Right" Width="123">
@@ -57,16 +57,13 @@
             <Button x:Name="button" Content="Button" d:LayoutOverrides="Height" Click="button_Click_1"/>
             <Button x:Name="button1" Content="Button" d:LayoutOverrides="Height" Click="button1_Click"/>
         </StackPanel>
-
-        <StackPanel x:Name="spContent" Background="#FFB5E4FF">
-            <CustomControls:BubbleChat x:Name="bubble"
-                                       VerticalAlignment="Top"
-                                       HorizontalAlignment="Left"
-                                       
-                                       />
+        <ScrollViewer>
+            <StackPanel x:Name="spContent" Background="#FFB5E4FF">
 
 
-        </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
 
     </DockPanel>
 
