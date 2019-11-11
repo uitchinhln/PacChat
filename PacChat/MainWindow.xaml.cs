@@ -26,6 +26,9 @@ namespace PacChat
         private bool _new; // 0 = false, 1 = true
         private BubbleChat _previousChat;
 
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -59,7 +62,7 @@ namespace PacChat
             tb.Background = Brushes.White;
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
+        private void button_Click_1(object sender, RoutedEventArgs e) // left
         {
             if (_previous == true)
             {
@@ -68,16 +71,28 @@ namespace PacChat
             }
                 
             Bubble b = new Bubble();
+            b.setSeen(false);
+            b.setAligment(true);
+            b.Messages = getText();
             _previousChat.AddBubble(b);
             _previous = false;
             viewScroller.ScrollToEnd();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e) // right   
         {
-            spContent.Children.Add(new Bubble());
+            Bubble b = new Bubble();
+            b.setSeen(false);
+            b.setAligment(false);
+            b.Messages = getText();
+            spContent.Children.Add(b);
             _previous = true;
             viewScroller.ScrollToEnd();
+        }
+
+        private string getText()
+        {
+            return textBoxMessage.Text.ToString();
         }
     }
 }

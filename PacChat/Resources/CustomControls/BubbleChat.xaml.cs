@@ -24,27 +24,6 @@ namespace PacChat.Resources.CustomControls
             //textBlock.Text = "asdasdsad";
         }
 
-        public static readonly DependencyProperty setMessTextProperty =
-            DependencyProperty.Register("Set Mess", typeof(string), typeof(BubbleChat), new
-                PropertyMetadata("", new PropertyChangedCallback(OnSetTextChanged)));
-
-        public string SetText
-        {
-            get { return (string)GetValue(setMessTextProperty); }
-            set { SetValue(setMessTextProperty, value); }
-        }
-
-        private static void OnSetTextChanged(DependencyObject d,
-           DependencyPropertyChangedEventArgs e)
-        {
-            BubbleChat UserControl1Control = d as BubbleChat;
-            UserControl1Control.OnSetTextChanged(e);
-        }
-
-        private void OnSetTextChanged(DependencyPropertyChangedEventArgs e)
-        {
-            //textBlock.Text = e.NewValue.ToString();
-        }
 
         public void AddBubble(Bubble b)
         {

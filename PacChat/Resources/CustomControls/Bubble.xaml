@@ -10,6 +10,7 @@
 
         <Border
             HorizontalAlignment="Right"
+            Margin="0,0,10,10"
             >
             <StackPanel>
                 <Border
@@ -29,6 +30,7 @@
                 </Border>
                 <Border>
                     <TextBlock
+                        x:Name="textBlockSeen"
                         Text="seen"
                         Foreground="{StaticResource GrayBrush}"
                         HorizontalAlignment="Right"

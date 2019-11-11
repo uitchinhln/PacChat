@@ -20,6 +20,13 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class Bubble : UserControl
     {
+
+        public string Messages
+        {
+            get { return textBlock.Text.ToString(); }
+            set { textBlock.Text = value.ToString(); }
+        }
+
         public Bubble()
         {
             InitializeComponent();
@@ -30,9 +37,29 @@ namespace PacChat.Resources.CustomControls
             textBlock.Text = s;
         }
 
-        public void setBG(Color x)
+
+
+        public void SetBG(Color x)
         {
             textBlock.Background = new SolidColorBrush(x);
+        }
+
+        public void setSeen(bool seened)
+        {
+            if (seened) textBlockSeen.Visibility = Visibility.Visible;
+            else textBlockSeen.Visibility = Visibility.Collapsed;
+        }
+
+        public void setAligment(bool direct)
+        {
+            if (direct) //left
+            {
+                this.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+            else
+            {
+                this.HorizontalAlignment = HorizontalAlignment.Right;
+            }
         }
     }
 }

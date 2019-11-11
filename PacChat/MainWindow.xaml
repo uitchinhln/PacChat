@@ -54,8 +54,10 @@
 
         <!--stackPanel SIDEMENU-->
         <StackPanel Background="#FFC0ABEE" HorizontalAlignment="Left" Width="68">
-            <Button x:Name="button" Content="Button" d:LayoutOverrides="Height" Click="button_Click_1"/>
-            <Button x:Name="button1" Content="Button" d:LayoutOverrides="Height" Click="button1_Click"/>
+            <Button x:Name="Left" Content="Left" Click="button_Click_1"/>
+            <Button x:Name="button1" Content="Right" d:LayoutOverrides="Height" Click="button1_Click"/>
+            <TextBox x:Name="textBoxMessage" Height="137" TextWrapping="Wrap" Text=""
+                     Background="White"/>
         </StackPanel>
         <ScrollViewer x:Name="viewScroller">
             <StackPanel x:Name="spContent" Background="#FFB5E4FF">
