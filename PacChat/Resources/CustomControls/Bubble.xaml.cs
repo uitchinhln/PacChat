@@ -41,16 +41,21 @@ namespace PacChat.Resources.CustomControls
 
         public void SetBG(Color x)
         {
-            textBlock.Background = new SolidColorBrush(x);
+            borderTextBlock.Background = new SolidColorBrush(x);
         }
 
-        public void setSeen(bool seened)
+        public void SetTextColor(Color x)
+        {
+            textBlock.Foreground = new SolidColorBrush(x);
+        }
+
+        public void SetSeen(bool seened)
         {
             if (seened) textBlockSeen.Visibility = Visibility.Visible;
             else textBlockSeen.Visibility = Visibility.Collapsed;
         }
 
-        public void setAligment(bool direct)
+        public void SetAligment(bool direct)
         {
             if (direct) //left
             {

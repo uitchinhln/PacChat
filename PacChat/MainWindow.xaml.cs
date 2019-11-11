@@ -71,8 +71,9 @@ namespace PacChat
             }
                 
             Bubble b = new Bubble();
-            b.setSeen(false);
-            b.setAligment(true);
+            b.SetSeen(false);
+            b.SetBG(Color.FromRgb(241, 240, 240));
+            b.SetAligment(true);
             b.Messages = getText();
             _previousChat.AddBubble(b);
             _previous = false;
@@ -82,9 +83,11 @@ namespace PacChat
         private void button1_Click(object sender, RoutedEventArgs e) // right   
         {
             Bubble b = new Bubble();
-            b.setSeen(false);
-            b.setAligment(false);
+            b.SetSeen(false);
+            b.SetTextColor(Color.FromRgb(255, 255, 255));
+            b.SetAligment(false);
             b.Messages = getText();
+            b.SetBG(Color.FromRgb(0, 153, 255));
             spContent.Children.Add(b);
             _previous = true;
             viewScroller.ScrollToEnd();

@@ -10,10 +10,11 @@
 
         <Border
             HorizontalAlignment="Right"
-            Margin="0,0,10,10"
+            Margin="5,0,10,3"
             >
             <StackPanel>
                 <Border
+                    x:Name="borderTextBlock"
                     CornerRadius="10" 
                     Background="White"
                     MaxWidth="250" 
