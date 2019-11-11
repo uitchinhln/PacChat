@@ -8,6 +8,6 @@ namespace PacChatServer.Command
 {
     public class DefaultCommands
     {
-        public static readonly string STOP = "stop";
+        public static readonly string STOP = "STOP";
     }
 }

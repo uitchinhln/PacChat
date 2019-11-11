@@ -18,6 +18,7 @@ namespace PacChatServer
 
         public ConsoleManager()
         {
+            Setup();
             consoleReader = new Thread(() =>
             {
                 String input;
@@ -26,6 +27,8 @@ namespace PacChatServer
                     try
                     {
                         input = Console.ReadLine();
+                        DeletePrevConsoleLine();
+                        PacChatServer.GetServer().Logger.Info(input);
 
                         if (input == null || input.Trim().Length == 0) continue;
 
@@ -37,6 +40,21 @@ namespace PacChatServer
                 }
             });
             consoleReader.Start();
+        }
+
+        private void Setup()
+        {
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.Title = "PacChat Server";
+        }
+
+        private void DeletePrevConsoleLine()
+        {
+            if (Console.CursorTop == 0) return;
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
 
         public static void Stop()

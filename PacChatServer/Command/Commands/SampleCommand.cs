@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PacChatServer.Entities;
+using PacChatServer.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +12,31 @@ namespace PacChatServer.Command.Commands
     {
         public void Execute(ISender commandSender, string commandLabel, string[] args)
         {
-            int f = Convert.ToInt32(args[1]);
-            int s = Convert.ToInt32(args[2]);
-            PacChatServer.GetServer().Logger.Info(String.Format("{0} + {1} = {2}", f, s, s+f));
+            if (args[1] == "get")
+            {
+                User user = MySQLSto.Instance.GetUser(args[2]);
+                if (user == null)
+                {
+                    Console.WriteLine("NULL");
+                } else
+                {
+                    Console.WriteLine(user.ID);
+                }
+            }
+
+            if (args[1] == "add")
+            {
+                Random r = new Random();
+                User user = new User(-1);
+                user.Email = args[2];
+                user.PassHashed = "DEMO" + r.Next() + r.Next();
+                user.FirstName = "Chính";
+                user.LastName = "Lê Ngọc";
+                user.DoB = new DateTime(1998, r.Next(11)+1, r.Next(29)+1);
+                user.Gender = Entities.Properties.Gender.Male;
+
+                Console.WriteLine(MySQLSto.Instance.AddNewUser(user).ID);
+            }
         }
     }
 }

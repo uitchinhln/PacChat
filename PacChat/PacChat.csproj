@@ -253,6 +253,8 @@
     </ApplicationDefinition>
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
+    <Compile Include="Network\Packets\Login\LoginData.cs" />
+    <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
     <Compile Include="Network\Packets\Ping\PingRespone.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
@@ -371,5 +373,6 @@
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

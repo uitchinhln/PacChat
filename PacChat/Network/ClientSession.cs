@@ -20,7 +20,6 @@ namespace PacChat.Network
         public override void Send(IPacket packet)
         {
             base.Send(packet);
-            Console.WriteLine("Sending...");
         }
     }
 }

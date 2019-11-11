@@ -17,7 +17,7 @@ namespace PacChatServer.Entities
 
         public int ID { get; }
         public string Email { get; set; }
-        public string PassHashed { get; }
+        public string PassHashed { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DoB { get; set; }

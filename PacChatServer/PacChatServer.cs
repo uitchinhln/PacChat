@@ -5,6 +5,7 @@ using PacChatServer.Command;
 using PacChatServer.Command.Commands;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
+using PacChatServer.Storage;
 using PacChatServer.Utils.ThreadUtils;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace PacChatServer
             SessionRegistry = new SessionRegistry();
 
             _ = CommandManager.Instance;
+            _ = MySQLSto.Instance;
 
             GetCommandManager().RegisterCommand("sample", new SampleCommand());
 

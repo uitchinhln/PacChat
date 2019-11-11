@@ -30,6 +30,11 @@ namespace PacChatServer.Network
             this.connectionManager = connectionManager;
         }
 
+        public void Login(String username, String passhash, bool forceLogin)
+        {
+            
+        }
+
         private void FinalizeLogin()
         {
 
