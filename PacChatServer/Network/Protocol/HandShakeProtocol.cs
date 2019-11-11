@@ -1,4 +1,5 @@
-﻿using PacChatServer.Network.Packets.Ping;
+﻿using PacChatServer.Network.Packets.Login;
+using PacChatServer.Network.Packets.Ping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace PacChatServer.Network.Protocol
         {
             Inbound(0x00, new PingReceive());
             Outbound(0x00, new PingRespone());
+
+            Inbound(0x02, new LoginRequest());
+            Outbound(0x02, new LoginResult());
         }
     }
 }

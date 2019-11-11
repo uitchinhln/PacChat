@@ -7,6 +7,7 @@ using PacChat.Network.Pipeline;
 using PacChat.Network.Protocol;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -35,6 +36,14 @@ namespace PacChat.Network
                 .Handler(new ChannelInitializer(this));
         }
 
+        public async Task Bind()
+        {
+            string ip = ConfigurationManager.AppSettings["ServerAddress"];
+            int port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+            IPAddress address = IPAddress.Parse(ip);
+            await Bind(new IPEndPoint(address, port));
+        }
+
         public async Task Bind(IPEndPoint address)
         {
             try
@@ -61,7 +70,7 @@ namespace PacChat.Network
 
         public void SessionInactivated(ISession session)
         {
-            Console.WriteLine("Server is shutdown");
+            Console.WriteLine("Server has disconnected!!!");
         }
 
         public void Shutdown()
@@ -76,6 +85,25 @@ namespace PacChat.Network
 
         public void OnBindFailure(IPEndPoint address, Exception e)
         {
+        }
+
+        public async Task Send(IPacket packet)
+        {
+            try
+            {
+                if (Session == null || !IsConnected())
+                {
+                    await Bind();
+                }
+                if (Session == null || !IsConnected())
+                {
+                    throw new ProtocolViolationException("Cannot connect to server");
+                }
+                Session.Send(packet);
+            } catch 
+            {
+                throw;
+            }
         }
 
         public static ChatConnection Instance

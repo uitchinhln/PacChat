@@ -12,9 +12,9 @@ namespace PacChat.Windows.Login
         public void OnLogin(string username, string password, bool remember)
         {
             Console.WriteLine("OnLogin in controller");
-            Console.WriteLine("Username={0} | Password={1} | Remember={2}", username, password, remember);
             // Here update login model, access to login model as following example
-            app.model.loginData = new UserLoginData("abc", "xyz", true);
+            app.model.loginData = new UserLoginData(username, password, remember);
+            app.model.DoLogin();
         }
 
         public void OnRegister()

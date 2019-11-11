@@ -2,6 +2,10 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using MaterialDesignThemes.Wpf;
+using PacChat.MVC;
+using PacChat.Resources.CustomControls.Dialogs;
+using PacChat.Windows.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +30,10 @@ namespace PacChat.Network.Packets.Login
 
         public void Handle(ISession session)
         {
-            
+            LoginApp loginApp = AppManager.GetAppOfType<LoginApp>() as LoginApp;
+            if (loginApp == null) return;
+
+            //Trả kết quả login, show dialog hay hiện main form gì đó xử lý ở đây
         }
     }
 }

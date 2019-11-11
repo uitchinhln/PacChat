@@ -7,6 +7,8 @@ using PacChat.MVC;
 using PacChat.Utils;
 using PacChat.Network.Packets;
 using PacChat.Network.Protocol;
+using PacChat.Network;
+using PacChat.Network.Packets.Login;
 
 namespace PacChat.Windows.Login
 {
@@ -64,5 +66,19 @@ namespace PacChat.Windows.Login
     {
         public UserLoginData loginData;
         public UserRegisterData registerData;
+
+        public void DoLogin()
+        {
+            try
+            {
+                LoginData data = new LoginData();
+                data.Username = loginData.name;
+                data.Passhash = loginData.password; //Hash here
+                _ = ChatConnection.Instance.Send(data);
+            } catch
+            {
+                Console.WriteLine("Có lỗi");
+            }
+        }
     }
 }

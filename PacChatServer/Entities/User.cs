@@ -24,6 +24,7 @@ namespace PacChatServer.Entities
         public Gender Gender { get; set; }
         public List<int> FriendIDs { get; set; }
         public List<int> BlockedIDs { get; set; }
+        public bool Banned { get; set; } = false;
 
         public User(int id)
         {

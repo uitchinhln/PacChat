@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 using PacChat.MVC;
+using PacChat.Resources.CustomControls.Dialogs;
 
 namespace PacChat.Windows.Login
 {
@@ -38,6 +40,14 @@ namespace PacChat.Windows.Login
 
         public bool CanLogin(LoginWindow wnd)
         {
+            if (LgUserName == null || LgUserName.Trim().Length < 1)
+            {
+                return false;
+            }
+            if (wnd.LgPassword == null || wnd.LgPassword.Password.Length < 1)
+            {
+                return false;
+            }
             return true;
         }
 

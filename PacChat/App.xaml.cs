@@ -25,10 +25,10 @@ namespace PacChat
             //AppHolder appHolder = new AppHolder();
             //SplashWindow splash = new SplashWindow();
             //splash.Show();
-            MainWindow win = new MainWindow();
-            win.Show();
-            //LoginWindow login = new LoginWindow();
-            //login.Show();
+            //MainWindow win = new MainWindow();
+            //win.Show();
+            LoginWindow login = new LoginWindow();
+            login.Show();
         }
     }
 }
