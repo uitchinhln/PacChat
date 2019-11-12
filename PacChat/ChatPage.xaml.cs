@@ -56,9 +56,15 @@ namespace PacChat
             // Add bubble chat with message here
             Bubble b = new Bubble();
             b.Messages = ChatInput.Text.ToString();
-            b.SetBG(Color.FromRgb(241, 240, 240));
+            b.SetBG(Color.FromRgb(50, 23, 108));
+            b.SetTextColor(Colors.White);
             b.SetSeen(false);
             spMessagesContainer.Children.Add(b);
+        }
+
+        public void ClearChatPage()
+        {
+            spMessagesContainer.Children.Clear();
         }
     }
 }
