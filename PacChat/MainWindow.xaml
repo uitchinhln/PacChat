@@ -41,7 +41,7 @@
 
     <DockPanel Margin="0">
         <!--stackPanel HEADER-->
-        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag">
+        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#00000000">
             <DockPanel Height="32" HorizontalAlignment="Right" Width="96">
                 <Button x:Name="BtnQuit"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
