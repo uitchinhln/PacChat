@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PacChat.ChatPageContents;
+using PacChat.Resources.CustomControls;
 
 namespace PacChat
 {
@@ -53,6 +54,11 @@ namespace PacChat
         private void SendMessage()
         {
             // Add bubble chat with message here
+            Bubble b = new Bubble();
+            b.Messages = ChatInput.Text.ToString();
+            b.SetBG(Color.FromRgb(241, 240, 240));
+            b.SetSeen(false);
+            spMessagesContainer.Children.Add(b);
         }
     }
 }
