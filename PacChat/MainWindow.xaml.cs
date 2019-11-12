@@ -79,6 +79,7 @@ namespace PacChat
 
         private void BtnNoti_Click(object sender, RoutedEventArgs e)
         {
+            TabTransitioner.SelectedIndex = 1;
         }
 
         private void Btn3_Click(object sender, RoutedEventArgs e)
@@ -97,6 +98,7 @@ namespace PacChat
 
         private void Btn2_Click(object sender, RoutedEventArgs e)
         {
+            TabTransitioner.SelectedIndex = 0;
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
@@ -107,6 +109,16 @@ namespace PacChat
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ToggleLeftSidePanel();
+        }
+
+        private void BtnAbout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

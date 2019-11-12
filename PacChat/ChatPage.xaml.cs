@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.ChatPageContents;
 
 namespace PacChat
 {
@@ -35,6 +36,24 @@ namespace PacChat
         {
             InitializeComponent();
             Instance = this;
+        }
+
+        private void ChatInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                // Send message here
+                Console.WriteLine("Send message");
+                SendMessage();
+
+                // Clear textbox
+                ChatInput.Text = "";
+            }
+        }
+
+        private void SendMessage()
+        {
+            // Add bubble chat with message here
         }
     }
 }
