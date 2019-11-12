@@ -11,9 +11,7 @@
     <Grid d:DataContext="{x:Static vm:UserMessageDesignModel.Instance}">
         <Border Padding="0,0,0,0">
             <Grid>
-                <Border CornerRadius="0" 
-                    Background="#FF52176C">
-                </Border>
+                <Border CornerRadius="0"/>
 
                 <Border CornerRadius="32" Background="White" Width="32" Height="32" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center">
                     <TextBlock Foreground="#FF52176C" Text="L" FontWeight="Bold" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>

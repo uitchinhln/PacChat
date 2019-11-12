@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="192">
     <Grid DataContext="{x:Static vm:UserListDesignModel.Instance}">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF52176C" Margin="0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF32176C" Margin="0">
             <ItemsControl ItemsSource="{Binding Users}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

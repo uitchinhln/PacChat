@@ -72,9 +72,9 @@ namespace PacChat
 
         private void ToggleLeftSidePanel()
         {
-            var sb = this.FindResource("left-side-panel-" + (_isPanelOpened ? "compress" : "expand")) as Storyboard;
-            sb.Begin();
-            _isPanelOpened = !_isPanelOpened;
+            // var sb = this.FindResource("left-side-panel-" + (_isPanelOpened ? "compress" : "expand")) as Storyboard;
+            // sb.Begin();
+            // _isPanelOpened = !_isPanelOpened;
         }
 
         private void BtnNoti_Click(object sender, RoutedEventArgs e)
@@ -107,18 +107,6 @@ namespace PacChat
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ToggleLeftSidePanel();
-        }
-
-        public static void Notify(string cmd)
-        {
-            var e = cmd.ToLower();
-
-            switch (e)
-            {
-                case "switch-chat":
-                    ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
-                    break;
-            }
         }
     }
 }

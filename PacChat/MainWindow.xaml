@@ -70,14 +70,10 @@
                     Width="16" Foreground="#DD000000" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
             </DockPanel>
-
-
-
-
         </StackPanel>
 
         <!--stackPanel SIDEMENU-->
-        <StackPanel x:Name="LeftSidePanel" Background="#FF52176C" HorizontalAlignment="Left" Width="32" Margin="0,-32,0,0">
+        <StackPanel x:Name="LeftSidePanel" Background="#FF32176C" HorizontalAlignment="Left" Width="32" Margin="0,-32,0,0">
             <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" Cursor="Arrow" Click="Button_Click" >
                 <materialDesign:PackIcon Kind="MoreHoriz" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
             </Button>
@@ -102,11 +98,25 @@
                     <Label Content="Contact list" Foreground="#FFF1F1F1"></Label>
                 </StackPanel>
             </Button>
+            
+            <Button x:Name="BtnSetting" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" HorizontalContentAlignment="Left" Cursor="Arrow" Margin="0" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Settings"  Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                    <Label Content="Contact list" Foreground="#FFF1F1F1"></Label>
+                </StackPanel>
+            </Button>
+            
+            <Button x:Name="BtnAbout" Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="4,0,0,0" HorizontalContentAlignment="Left" Cursor="Arrow" Margin="0" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="About" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                    <Label Content="Contact list" Foreground="#FFF1F1F1"></Label>
+                </StackPanel>
+            </Button>
         </StackPanel>
         
         <chatcontent:UserList x:Name="UserList"
             Width="192"
-            Background="#FF52176C" Margin="0,-32,0,0" HorizontalAlignment="Left"/>
+            Background="#FF23176C" Margin="0,-32,0,0" HorizontalAlignment="Left"/>
 
         <local:ChatPage x:Name="ChatPage"></local:ChatPage>
 
