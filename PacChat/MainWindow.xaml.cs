@@ -87,15 +87,6 @@ namespace PacChat
             TabTransitioner.SelectedIndex = 2;
         }
 
-        private void BtnQuit_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
-        {
-            isMaximized = true;
-        }
 
         private void Btn2_Click(object sender, RoutedEventArgs e)
         {
@@ -120,6 +111,15 @@ namespace PacChat
         private void BtnSetting_Click(object sender, RoutedEventArgs e)
         {
             TabTransitioner.SelectedIndex = 3;
+        }
+        private void BtnQuit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            isMaximized = true;
         }
     }
 }

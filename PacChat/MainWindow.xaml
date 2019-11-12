@@ -116,7 +116,7 @@
         </StackPanel>
 
         <!-- TABS -->
-        <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="0">
+        <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="1">
             <!-- Setting page -->
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                 <DockPanel>

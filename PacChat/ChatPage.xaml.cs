@@ -28,6 +28,7 @@ namespace PacChat
                 ChatTitle.Content = value;
             }
         }
+
         public ScrollViewer chatSpace;
 
         public static ChatPage Instance;
