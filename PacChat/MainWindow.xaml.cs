@@ -79,11 +79,12 @@ namespace PacChat
 
         private void BtnNoti_Click(object sender, RoutedEventArgs e)
         {
-            TabTransitioner.SelectedIndex = 1;
+            TabTransitioner.SelectedIndex = 0;
         }
 
         private void Btn3_Click(object sender, RoutedEventArgs e)
         {
+            TabTransitioner.SelectedIndex = 2;
         }
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
@@ -98,7 +99,7 @@ namespace PacChat
 
         private void Btn2_Click(object sender, RoutedEventArgs e)
         {
-            TabTransitioner.SelectedIndex = 0;
+            TabTransitioner.SelectedIndex = 1;
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
@@ -113,12 +114,12 @@ namespace PacChat
 
         private void BtnAbout_Click(object sender, RoutedEventArgs e)
         {
-
+            TabTransitioner.SelectedIndex = 4;
         }
 
         private void BtnSetting_Click(object sender, RoutedEventArgs e)
         {
-
+            TabTransitioner.SelectedIndex = 3;
         }
     }
 }

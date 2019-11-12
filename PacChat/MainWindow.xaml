@@ -117,11 +117,33 @@
 
         <!-- TABS -->
         <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="0">
+            <!-- Setting page -->
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                <DockPanel>
+                    <local:NotificationPage></local:NotificationPage>
+                </DockPanel>
+            </materialDesign:TransitionerSlide>
+            
             <!-- Single chat page -->
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                 <DockPanel>
                     <chatcontent:UserList x:Name="UserList" Width="192" HorizontalAlignment="Left"/>
                     <local:ChatPage x:Name="ChatPage"/>
+                </DockPanel>
+            </materialDesign:TransitionerSlide>
+            
+            <!-- Group chat page -->
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                <DockPanel>
+                    <chatcontent:UserList x:Name="GroupUserList" Width="192" HorizontalAlignment="Left"/>
+                    <local:ChatPage x:Name="GroupChatPage"/>
+                </DockPanel>
+            </materialDesign:TransitionerSlide>
+            
+            <!-- Setting page -->
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                <DockPanel>
+                    <local:SettingPage></local:SettingPage>
                 </DockPanel>
             </materialDesign:TransitionerSlide>
             
