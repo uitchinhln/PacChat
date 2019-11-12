@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace PacChatServer.Network.Packets.Login
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;
-            chatSession.Login(Username, Passhash, false);
+            chatSession.Login(Username, HashUtils.MD5(Passhash), false);
         }
     }
 }

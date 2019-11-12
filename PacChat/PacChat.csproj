@@ -70,6 +70,8 @@
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
     <Compile Include="Network\Packets\Ping\PingRespone.cs" />
+    <Compile Include="Network\Packets\Register\RegisterData.cs" />
+    <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
@@ -88,6 +90,7 @@
     </Compile>
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
+    <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">
       <DependentUpon>AppHolder.xaml</DependentUpon>
     </Compile>
@@ -277,10 +280,13 @@
       <Version>2.0.8</Version>
     </PackageReference>
     <PackageReference Include="MaterialDesignColors">
-      <Version>1.2.1-ci731</Version>
+      <Version>1.2.1-ci740</Version>
     </PackageReference>
     <PackageReference Include="MaterialDesignThemes">
       <Version>3.0.0-ci731</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
+      <Version>3.1.0-preview2.19525.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,8 @@ namespace PacChat.Windows.Login
         {
             InitializeComponent();
 
+            dpDoB.DisplayDateEnd = new DateTime(DateTime.Now.Year - 13, 12, 31);
+
             this.HideScriptErrors(this.wbBanner, true);
         }
 

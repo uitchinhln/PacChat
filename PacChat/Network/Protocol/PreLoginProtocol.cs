@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using PacChat.Network.Packets;
 using PacChat.Network.Packets.Login;
 using PacChat.Network.Packets.Ping;
+using PacChat.Network.Packets.Register;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x02, new LoginResult());
             Outbound(0x02, new LoginData());
+
+            Inbound(0x03, new RegisterResult());
+            Outbound(0x03, new RegisterData());
         }
     }
 }

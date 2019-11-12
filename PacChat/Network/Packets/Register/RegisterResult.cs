@@ -1,20 +1,15 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
-using CNetwork.Utils;
 using DotNetty.Buffers;
-using MaterialDesignThemes.Wpf;
-using PacChat.MVC;
-using PacChat.Resources.CustomControls.Dialogs;
-using PacChat.Windows.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.Login
+namespace PacChat.Network.Packets.Register
 {
-    public class LoginResult : IPacket
+    public class RegisterResult : IPacket
     {
         public int StatusCode { get; set; }
 
@@ -30,9 +25,6 @@ namespace PacChat.Network.Packets.Login
 
         public void Handle(ISession session)
         {
-            LoginApp loginApp = AppManager.GetAppOfType<LoginApp>() as LoginApp;
-            if (loginApp == null) return;
-
             Console.WriteLine(StatusCode);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using PacChatServer.Network.Packets.Login;
 using PacChatServer.Network.Packets.Ping;
+using PacChatServer.Network.Packets.Register;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace PacChatServer.Network.Protocol
 
             Inbound(0x02, new LoginRequest());
             Outbound(0x02, new LoginResult());
+
+            Inbound(0x03, new RegisterRequest());
+            Outbound(0x03, new RegisterResult());
         }
     }
 }

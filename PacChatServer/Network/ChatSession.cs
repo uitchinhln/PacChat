@@ -4,6 +4,7 @@ using CNetwork.Sessions;
 using DotNetty.Transport.Channels;
 using PacChatServer.Entities;
 using PacChatServer.Network.Packets.Login;
+using PacChatServer.Network.Packets.Register;
 using PacChatServer.Network.Protocol;
 using PacChatServer.Storage;
 using System;
@@ -51,6 +52,29 @@ namespace PacChatServer.Network
                 respone.StatusCode = 200;
             }
             Send(respone);            
+        }
+
+        public void RegisterNewAccount(User data)
+        {
+            User temp = MySQLSto.Instance.GetUser(data.Email);
+            RegisterResult responePacket = new RegisterResult();
+
+            if (temp != null)
+            {
+                responePacket.StatusCode = 409;
+            } else
+            {
+                temp = MySQLSto.Instance.AddNewUser(data);
+                if (temp == null)
+                {
+                    responePacket.StatusCode = 404;
+                } else
+                {
+                    responePacket.StatusCode = 200;
+                }
+            }
+
+            Send(responePacket);
         }
 
         private void FinalizeLogin()

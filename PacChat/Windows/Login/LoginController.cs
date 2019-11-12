@@ -17,16 +17,13 @@ namespace PacChat.Windows.Login
             app.model.DoLogin();
         }
 
-        public void OnRegister()
+        public void OnRegister(string password)
         {
             Console.WriteLine("OnRegister in controller");
             // Here update login model, access to login model as following example
-            app.model.registerData = new UserRegisterData
-                (
-                "Bach", "Nguyen", "nlebachnlb@gmail.com",
-                new DateTime(2000, 11, 11),
-                Utils.Gender.Male
-                );
+            var view = app.view;
+            app.model.registerData = new UserRegisterData(view.RegFirstName, view.RegLastName, view.RegUserName, password, view.RegDoB, view.RegGender);
+            app.model.DoRegister();
         }
     }
 }

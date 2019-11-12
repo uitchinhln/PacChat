@@ -9,6 +9,7 @@ using PacChat.Network.Packets;
 using PacChat.Network.Protocol;
 using PacChat.Network;
 using PacChat.Network.Packets.Login;
+using PacChat.Network.Packets.Register;
 
 namespace PacChat.Windows.Login
 {
@@ -49,14 +50,16 @@ namespace PacChat.Windows.Login
         public string firstName { get; private set; }
         public string lastName { get; private set; }
         public string email { get; private set; }
+        public string password { get; private set; }
         public DateTime dob { get; private set; }
         public Gender gender { get; private set; }
 
-        public UserRegisterData(string fName, string lName, string email, DateTime dob, Gender gender)
+        public UserRegisterData(string fName, string lName, string email, string password, DateTime dob, Gender gender)
         {
             this.firstName = fName;
             this.lastName = lName;
             this.email = email;
+            this.password = password;
             this.dob = dob;
             this.gender = gender;
         }
@@ -73,11 +76,29 @@ namespace PacChat.Windows.Login
             {
                 LoginData data = new LoginData();
                 data.Username = loginData.name;
-                data.Passhash = loginData.password; //Hash here
+                data.Passhash = HashUtils.MD5(loginData.password);
                 _ = ChatConnection.Instance.Send(data);
-            } catch
+            } catch (Exception e)
             {
-                Console.WriteLine("Có lỗi");
+                Console.WriteLine(e);
+            }
+        }
+        
+        public void DoRegister()
+        {
+            try
+            {
+                RegisterData packet = new RegisterData();
+                packet.Email = registerData.email;
+                packet.PassHashed = HashUtils.MD5(registerData.password);
+                packet.FirstName = registerData.firstName;
+                packet.LastName = registerData.lastName;
+                packet.DoB = registerData.dob;
+                packet.Gender = registerData.gender;
+                _ = ChatConnection.Instance.Send(packet);
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
     }

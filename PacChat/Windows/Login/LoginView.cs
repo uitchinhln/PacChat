@@ -8,18 +8,34 @@ using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PacChat.MVC;
 using PacChat.Resources.CustomControls.Dialogs;
+using PacChat.Utils;
 
 namespace PacChat.Windows.Login
 {
     public class LoginView : View<LoginApp>
     {
-        // Bind the xaml Controls from LoginWindow.xaml to C# and put them here, then process
+        // Login Data
         private string lgUsername;
         public string LgUserName { get => lgUsername; set { lgUsername = value; OnPropertyChanged(); } }
         private bool lgRemember;
         public bool LgRemember { get => lgRemember; set { lgRemember = value; OnPropertyChanged(); } }
 
         public ICommand LoginCommand { get; set; }
+
+        // Register Data
+        private string regFirstName;
+        public string RegFirstName { get => regFirstName; set { regFirstName = value; OnPropertyChanged(); } }
+        private string regLastName;
+        public string RegLastName { get => regLastName; set { regLastName = value; OnPropertyChanged(); } }
+        private string regUserName;
+        public string RegUserName { get => regUserName; set { regUserName = value; OnPropertyChanged(); } }
+        private DateTime regDoB = DateTime.Now.AddYears(-13);
+        public DateTime RegDoB { get => regDoB; set { regDoB = value; OnPropertyChanged(); } }
+        public Gender regGender;
+        public Gender RegGender { get => regGender; set { regGender = value; OnPropertyChanged(); } }
+        private bool regToUAgrement;
+        public bool RegToUAgrement { get => regToUAgrement; set { regToUAgrement = value; OnPropertyChanged(); } }
+
         public ICommand RegisterCommand { get; set; }
 
         LoginModel loginModel;
@@ -61,15 +77,19 @@ namespace PacChat.Windows.Login
 
         public bool CanRegister(LoginWindow wnd)
         {
-            return true;
+            if (RegUserName == null || RegUserName.Trim().Length < 1) return false;
+            if (wnd.RegPassword == null || wnd.RegPassword.Password.Trim().Length < 1) return false;
+            if (RegFirstName == null || RegFirstName.Trim().Length < 1) return false;
+            if (RegLastName == null || RegLastName.Trim().Length < 1) return false;
+            return !(RegGender == Gender.None || !RegToUAgrement);
         }
 
-        public void Register(Window wnd)
+        public void Register(LoginWindow wnd)
         {
             // Process UI
             Console.WriteLine("OnRegister in view");
             // Then notify to controller
-            app.controller.OnRegister();
+            app.controller.OnRegister(wnd.RegPassword.Password);
         }
     }
 }
