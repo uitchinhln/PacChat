@@ -14,7 +14,7 @@
         </Grid.DataContext>
         
         <TextBox KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Height="32" Margin="32,0,16,16" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Cursor="IBeam" FontSize="18"/>
-        <ScrollViewer Margin="0,40,0,53"/>
+        <ScrollViewer x:Name="MessagesContainer" Margin="0,40,0,53"/>
         <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="32,0,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semibold"/>
     </Grid>
 </UserControl>

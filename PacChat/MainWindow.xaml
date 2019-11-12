@@ -136,7 +136,7 @@
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                 <DockPanel>
                     <chatcontent:UserList x:Name="GroupUserList" Width="192" HorizontalAlignment="Left"/>
-                    <local:ChatPage x:Name="GroupChatPage"/>
+                    <local:GroupChatPage x:Name="GroupChatPage"/>
                 </DockPanel>
             </materialDesign:TransitionerSlide>
             

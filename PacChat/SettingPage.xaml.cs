@@ -24,5 +24,26 @@ namespace PacChat
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            StoreDataToModel();
+            app.controller.OnProfileChanged();
+        }
+
+        // This method stores data to model, then controller get data and update Database
+        // in ChatAMVC -> ChatController: OnProfileChanged()
+        private void StoreDataToModel()
+        {
+            var app = MainWindow.chatApplication;
+            var model = app.model;
+
+            model.FirstName = FirstNameInp.Text;
+            model.LastName = LastNameInp.Text;
+            model.Email = EmailInp.Text;
+            model.BirthDay = BirthdayInp.SelectedDate.Value;
+            model.Gender = GenderInp.SelectedIndex;
+        }
     }
 }

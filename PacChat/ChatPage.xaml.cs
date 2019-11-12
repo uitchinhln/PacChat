@@ -29,8 +29,6 @@ namespace PacChat
             }
         }
 
-        public ScrollViewer chatSpace;
-
         public static ChatPage Instance;
 
         public ChatPage()

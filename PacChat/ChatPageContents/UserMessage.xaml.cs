@@ -27,9 +27,20 @@ namespace PacChat.ChatPageContents
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
+            LoadDataToModel();
+            MainWindow.chatApplication.controller.OnUserChanged();
+        }
+
+        // This method load data to model and controller get it from model and update view
+        private void LoadDataToModel()
+        {
             var app = MainWindow.chatApplication;
             app.model.Title = UserName.Text;
-            app.controller.OnUserChanged();
+
+            // Load user messages from database and update model
+            app.model.CurrentUserMessages = new List<string>(); // Clear, then re-load to this list
+
+            // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
         }
     }
 }

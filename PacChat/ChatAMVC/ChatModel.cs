@@ -25,8 +25,18 @@ namespace PacChat.ChatAMVC
                 ChatViewModel.Title = _chatTitle;
             }
         }
-
         private string _chatTitle;
+
+        public List<string> CurrentUserMessages { get; set; }
+        #endregion
+
+        #region OnSettingPage
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public DateTime BirthDay { get; set; }
+        public int Gender { get; set; }
         #endregion
     }
 }

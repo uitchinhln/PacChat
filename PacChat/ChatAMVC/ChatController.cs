@@ -17,9 +17,19 @@ namespace PacChat.ChatAMVC
             ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
 
             // Clear Scrollview content
-            ChatPage.Instance.chatSpace.Content = null;
+            ChatPage.Instance.MessagesContainer.Content = null;
 
-            // Load target user messages and add to scrollview
+            // Load target user messages (from model) and add to scrollview
+        }
+
+        public void OnProfileChanged()
+        {
+            var chatApplication = MainWindow.chatApplication;
+
+            // Get data from model and update database
+            var model = chatApplication.model;
+            // Update from here
+            Console.WriteLine("Get data from model and update Database");
         }
     }
 }
