@@ -8,10 +8,13 @@ namespace PacChat.ChatPageContents.ViewModels
 {
     public class UserListDesignModel : UserListViewModel
     {
-        public static UserListDesignModel Instance => new UserListDesignModel();
+        public static UserListDesignModel Instance => _instance == null ? _instance = new UserListDesignModel() : _instance;
+        private static UserListDesignModel _instance;
 
         public UserListDesignModel()
         {
+            // Load all user from server
+
             Users = new List<UserMessageViewModel>()
             {
                 new UserMessageViewModel
@@ -30,7 +33,13 @@ namespace PacChat.ChatPageContents.ViewModels
                 {
                     Name = "Liam",
                     IncomingMsg = "Hello, in which video you show how to handling exceptions?"
-                }
+                },
+
+                new UserMessageViewModel
+                {
+                    Name = "Luke",
+                    IncomingMsg = "Hi there, this is Luke. Please send me your plan soon."
+                },
             };
         }
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.ChatAMVC;
 
 namespace PacChat
 {
@@ -23,6 +24,22 @@ namespace PacChat
     {
         private bool _isPanelOpened = false;
         private List<Button> _panelButtons = new List<Button>();
+
+        #region Chat_AMVC
+        private ChatModel _chatModel;
+        private ChatView _chatView;
+        private ChatController _chatController;
+        public static ChatApplication chatApplication;
+
+        private void InitAMVC()
+        {
+            _chatModel = new ChatModel();
+            _chatView = new ChatView();
+            _chatController = new ChatController();
+            chatApplication = new ChatApplication();
+            chatApplication.InitializeMVC(_chatModel, _chatView, _chatController);
+        }
+        #endregion
 
         private bool _isMaximized;
         public bool isMaximized
@@ -42,10 +59,7 @@ namespace PacChat
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-        }
-
-        private void MetaDataInit()
-        {
+            InitAMVC();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -93,6 +107,18 @@ namespace PacChat
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ToggleLeftSidePanel();
+        }
+
+        public static void Notify(string cmd)
+        {
+            var e = cmd.ToLower();
+
+            switch (e)
+            {
+                case "switch-chat":
+                    ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
+                    break;
+            }
         }
     }
 }

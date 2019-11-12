@@ -24,5 +24,12 @@ namespace PacChat.ChatPageContents
         {
             InitializeComponent();
         }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            app.model.Title = UserName.Text;
+            app.controller.OnUserChanged();
+        }
     }
 }

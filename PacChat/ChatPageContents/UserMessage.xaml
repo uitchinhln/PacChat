@@ -31,6 +31,8 @@
                 <TextBlock x:Name="UserMessage1" VerticalAlignment="Center" Margin="56,16,0,0" 
                            Text="{Binding IncomingMsg}"
                            TextTrimming="CharacterEllipsis" Foreground="#FFD1D1D1"/>
+
+                <Button x:Name="ClickMask" Height="65" Background="{x:Null}" BorderBrush="{x:Null}" Click="OnClick"></Button>
             </Grid>
         </Border>
     </Grid>

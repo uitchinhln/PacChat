@@ -76,7 +76,7 @@
 
         </StackPanel>
 
-        <!--stackPanel SIDEMENU
+        <!--stackPanel SIDEMENU-->
         <StackPanel x:Name="LeftSidePanel" Background="#FF52176C" HorizontalAlignment="Left" Width="32" Margin="0,-32,0,0">
             <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="48" Width="Auto" Foreground="White" Padding="0" Cursor="Arrow" Click="Button_Click" >
                 <materialDesign:PackIcon Kind="MoreHoriz" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
@@ -103,13 +103,12 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        -->
         
-        <chatcontent:UserList
+        <chatcontent:UserList x:Name="UserList"
             Width="192"
             Background="#FF52176C" Margin="0,-32,0,0" HorizontalAlignment="Left"/>
 
-        <local:ChatPage></local:ChatPage>
+        <local:ChatPage x:Name="ChatPage"></local:ChatPage>
 
         <!--
         <DockPanel x:Name="spanelContent" Background="White">

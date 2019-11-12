@@ -88,6 +88,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ChatAMVC\ChatApplication.cs" />
+    <Compile Include="ChatAMVC\ChatController.cs" />
+    <Compile Include="ChatAMVC\ChatModel.cs" />
+    <Compile Include="ChatAMVC\ChatView.cs" />
     <Compile Include="ChatPageContents\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
@@ -104,6 +108,8 @@
     <Compile Include="ChatPageContents\UserMessage.xaml.cs">
       <DependentUpon>UserMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatPageContents\ViewModels\ChatDesignModel.cs" />
+    <Compile Include="ChatPageContents\ViewModels\ChatViewModel.cs" />
     <Compile Include="ChatPageContents\ViewModels\UserListDesignModel.cs" />
     <Compile Include="ChatPageContents\ViewModels\UserMessageDesignModel.cs" />
     <Compile Include="ChatPageContents\ViewModels\UserListViewModel.cs" />

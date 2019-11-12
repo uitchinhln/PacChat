@@ -20,9 +20,21 @@ namespace PacChat
     /// </summary>
     public partial class ChatPage : UserControl
     {
+        public string chatTitle 
+        {  
+            set
+            {
+                ChatTitle.Content = value;
+            }
+        }
+        public ScrollViewer chatSpace;
+
+        public static ChatPage Instance;
+
         public ChatPage()
         {
             InitializeComponent();
+            Instance = this;
         }
     }
 }
