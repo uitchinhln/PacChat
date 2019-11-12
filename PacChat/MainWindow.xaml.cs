@@ -10,10 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using PacChat.Resources.CustomControls;
+using PacChat.ChatAMVC;
 
 namespace PacChat
 {
@@ -22,21 +22,44 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool _previous; // 0 = left, 1 = right
-        private bool _new; // 0 = false, 1 = true
-        private BubbleChat _previousChat;
+        private bool _isPanelOpened = false;
+        private List<Button> _panelButtons = new List<Button>();
 
+        #region Chat_AMVC
+        private ChatModel _chatModel;
+        private ChatView _chatView;
+        private ChatController _chatController;
+        public static ChatApplication chatApplication;
 
+        private void InitAMVC()
+        {
+            _chatModel = new ChatModel();
+            _chatView = new ChatView();
+            _chatController = new ChatController();
+            chatApplication = new ChatApplication();
+            chatApplication.InitializeMVC(_chatModel, _chatView, _chatController);
+        }
+        #endregion
 
+        private bool _isMaximized;
+        public bool isMaximized
+        {
+            get
+            {
+                return _isMaximized;
+            }
+            set
+            {
+                Application.Current.MainWindow.WindowState = isMaximized ? WindowState.Normal : WindowState.Maximized;
+                _isMaximized = value;
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            MaterialDesignThemes.Wpf.ShadowAssist.SetShadowDepth(this, ShadowDepth.Depth0);
-            _new = true;
-            _previous = true;
-
+            InitAMVC();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -47,55 +70,56 @@ namespace PacChat
             }
         }
 
+        private void ToggleLeftSidePanel()
+        {
+            // var sb = this.FindResource("left-side-panel-" + (_isPanelOpened ? "compress" : "expand")) as Storyboard;
+            // sb.Begin();
+            // _isPanelOpened = !_isPanelOpened;
+        }
+
+        private void BtnNoti_Click(object sender, RoutedEventArgs e)
+        {
+            TabTransitioner.SelectedIndex = 0;
+        }
+
+        private void Btn3_Click(object sender, RoutedEventArgs e)
+        {
+            TabTransitioner.SelectedIndex = 2;
+        }
+
+
+        private void Btn2_Click(object sender, RoutedEventArgs e)
+        {
+            TabTransitioner.SelectedIndex = 1;
+        }
+
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-        private void OnGotFocusHandler(object sender, RoutedEventArgs e)
-        {
-            Button tb = e.Source as Button;
-            tb.Background = Brushes.Red;
-        }
-        private void OnLostFocusHandler(object sender, RoutedEventArgs e)
-        {
-            Button tb = e.Source as Button;
-            tb.Background = Brushes.White;
+            ToggleLeftSidePanel();
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e) // left
+        private void BtnAbout_Click(object sender, RoutedEventArgs e)
         {
-            if (_previous == true)
-            {
-                _previousChat = new BubbleChat();
-                spContent.Children.Add(_previousChat);
-            }
-                
-            Bubble b = new Bubble();
-            b.SetSeen(false);
-            b.SetBG(Color.FromRgb(241, 240, 240));
-            b.SetAligment(true);
-            b.Messages = getText();
-            _previousChat.AddBubble(b);
-            _previous = false;
-            viewScroller.ScrollToEnd();
+            TabTransitioner.SelectedIndex = 4;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e) // right   
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
         {
-            Bubble b = new Bubble();
-            b.SetSeen(false);
-            b.SetTextColor(Color.FromRgb(255, 255, 255));
-            b.SetAligment(false);
-            b.Messages = getText();
-            b.SetBG(Color.FromRgb(0, 153, 255));
-            spContent.Children.Add(b);
-            _previous = true;
-            viewScroller.ScrollToEnd();
+            TabTransitioner.SelectedIndex = 3;
+        }
+        private void BtnQuit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
 
-        private string getText()
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            return textBoxMessage.Text.ToString();
+            isMaximized = true;
         }
     }
 }

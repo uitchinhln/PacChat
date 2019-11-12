@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="PacChat.ChatPageContents.UserList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.ChatPageContents"
+             xmlns:vm="clr-namespace:PacChat.ChatPageContents.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="192">
+    <Grid DataContext="{x:Static vm:UserListDesignModel.Instance}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+            <ItemsControl ItemsSource="{Binding Users}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:UserMessage></local:UserMessage>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

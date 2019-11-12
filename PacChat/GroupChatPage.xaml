@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="PacChat.GroupChatPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:chatpage="clr-namespace:PacChat.ChatPageContents"
+             xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" 
+             xmlns:local="clr-namespace:PacChat"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <Grid>
+        <Grid.DataContext>
+            <ChatAMVC:ChatModel/>
+        </Grid.DataContext>
+        
+        <TextBox KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Height="32" Margin="32,0,16,16" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Cursor="IBeam" FontSize="18"/>
+        <ScrollViewer x:Name="MessagesContainer" Margin="0,40,0,53"/>
+        <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="32,0,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semibold"/>
+    </Grid>
+</UserControl>
