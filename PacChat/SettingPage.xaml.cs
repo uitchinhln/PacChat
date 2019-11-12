@@ -45,5 +45,15 @@ namespace PacChat
             model.BirthDay = BirthdayInp.SelectedDate.Value;
             model.Gender = GenderInp.SelectedIndex;
         }
+
+        private void GeneralTab_Click(object sender, RoutedEventArgs e)
+        {
+            TabTrans.SelectedIndex = 0;
+        }
+
+        private void PasswordTab_Click(object sender, RoutedEventArgs e)
+        {
+            TabTrans.SelectedIndex = 1;
+        }
     }
 }

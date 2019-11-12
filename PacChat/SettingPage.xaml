@@ -4,30 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
+             xmlns:elms="clr-namespace:PacChat.UIElements"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel>
-            <Label Content="Setting" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-
-            <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
-                <TextBox x:Name="FirstNameInp" materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
-                <TextBox x:Name="LastNameInp" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
+        <DockPanel>
+            <StackPanel Width="128" Background="#FF5A3C9B">
+                <Button x:Name="GeneralTab" Uid="0" Content="General" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
+                <Button x:Name="PasswordTab" Uid="1" Content="Security" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
             </StackPanel>
-            <TextBox x:Name="EmailInp" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
-            <PasswordBox x:Name="OldPassword" materialDesign:HintAssist.Hint="Old password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
-            <PasswordBox x:Name="NewPassword" materialDesign:HintAssist.Hint="New password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
-            <StackPanel Orientation="Horizontal" Margin="54,15,54,0">
-                <DatePicker x:Name="BirthdayInp" materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" Foreground="White" BorderBrush="#89FFFFFF" />
-                <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132" Background="White">
-                    <ComboBoxItem>Male</ComboBoxItem>
-                    <ComboBoxItem>Female</ComboBoxItem>
-                    <ComboBoxItem>Other</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-        </StackPanel>
-        
-        <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="131" Height="32" Foreground="#DD000000" FontSize="18" Margin="0,0,0,28" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
+            
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+                <!-- General tab -->
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                    <StackPanel Background="#FF412978">
+                        <Label Content="General" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                        
+                        <elms:ProfileAvatar></elms:ProfileAvatar>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
+                            <TextBox x:Name="FirstNameInp" materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
+                            <TextBox x:Name="LastNameInp" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
+                        </StackPanel>
+                        <TextBox x:Name="EmailInp" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
+                        <StackPanel Orientation="Horizontal" Margin="54,15,54,0">
+                            <DatePicker x:Name="BirthdayInp" materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" Foreground="White" BorderBrush="#89FFFFFF" />
+                            <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132" Background="White">
+                                <ComboBoxItem>Male</ComboBoxItem>
+                                <ComboBoxItem>Female</ComboBoxItem>
+                                <ComboBoxItem>Other</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="131" Height="32" Foreground="#DD000000" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
+                    </StackPanel>
+                </materialDesign:TransitionerSlide>
+                
+                <!-- Password tab -->
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                    <StackPanel Background="#FF412978">
+                        <Label Content="Security" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                        <StackPanel>
+                            <Label Content="Modify password" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center" FontSize="16" FontFamily="Segoe UI Light"></Label>
+                            <PasswordBox x:Name="OldPassword" materialDesign:HintAssist.Hint="Old password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
+                            <PasswordBox x:Name="NewPassword" materialDesign:HintAssist.Hint="New password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
+                        </StackPanel>
+                        <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="128" Height="32" Foreground="#FF412978" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
+                    </StackPanel>
+                </materialDesign:TransitionerSlide>
+                
+            </materialDesign:Transitioner>
+            
+        </DockPanel>
     </Grid>
 </UserControl>
