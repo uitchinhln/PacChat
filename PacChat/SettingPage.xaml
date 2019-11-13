@@ -10,15 +10,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <StackPanel Width="128" Background="#FF5A3C9B">
+            <StackPanel Width="128" Background="#FF1E145F">
                 <Button x:Name="GeneralTab" Uid="0" Content="General" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
-                <Button x:Name="PasswordTab" Uid="1" Content="Security" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
+                <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
             </StackPanel>
             
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="1">
                 <!-- General tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <StackPanel Background="#FF412978">
+                    <StackPanel Background="#FF3A3576">
                         <Label Content="General" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                         
                         <elms:ProfileAvatar></elms:ProfileAvatar>
@@ -42,8 +42,8 @@
                 
                 <!-- Password tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <StackPanel Background="#FF412978">
-                        <Label Content="Security" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                    <StackPanel Background="#FF3A3576">
+                        <Label Content="Privacy" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                         <StackPanel>
                             <Label Content="Modify password" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center" FontSize="16" FontFamily="Segoe UI Light"></Label>
                             <PasswordBox x:Name="OldPassword" materialDesign:HintAssist.Hint="Old password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>

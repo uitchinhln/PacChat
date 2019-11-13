@@ -14,8 +14,7 @@ namespace PacChat.ChatPageContents.ViewModels
         public UserListDesignModel()
         {
             // Load all user from server
-
-            Users = new List<UserMessageViewModel>()
+            RecentUsers = new List<UserMessageViewModel>()
             {
                 new UserMessageViewModel
                 {
@@ -40,6 +39,29 @@ namespace PacChat.ChatPageContents.ViewModels
                     Name = "Luke",
                     IncomingMsg = "Hi there, this is Luke. Please send me your plan soon."
                 },
+            };
+
+            // Load all contact from server database
+
+            Contacts = new List<UserMessageViewModel>()
+            {
+                new UserMessageViewModel
+                {
+                    Name = "Lyn",
+                    IncomingMsg = "Hi there, this is Lyn. Please send me your plan soon."
+                },
+
+                new UserMessageViewModel
+                {
+                    Name = "Luck",
+                    IncomingMsg = "This video tutorial is awesome! I bet it is the best"
+                },
+
+                new UserMessageViewModel
+                {
+                    Name = "Liskov",
+                    IncomingMsg = "Hello, in which video you show how to handling exceptions?"
+                }
             };
         }
 

@@ -20,9 +20,33 @@ namespace PacChat.ChatPageContents
     /// </summary>
     public partial class UserList : UserControl
     {
+        Color lostFocusColor = Color.FromRgb(100, 90, 150);
+
         public UserList()
         {
             InitializeComponent();
+            selectTab(ContactsTab);
+            Trans.SelectedIndex = 1;
+        }
+
+        private void selectTab(Button button)
+        {
+            RecentTab.Background = ContactsTab.Background = new SolidColorBrush(lostFocusColor);
+            RecentTab.Foreground = ContactsTab.Foreground = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255));
+            button.Background = Brushes.Transparent;
+            button.Foreground = Brushes.White;
+        }
+
+        private void RecentTab_Click(object sender, RoutedEventArgs e)
+        {
+            Trans.SelectedIndex = 0;
+            selectTab(RecentTab);
+        }
+
+        private void ContactsTab_Click(object sender, RoutedEventArgs e)
+        {
+            Trans.SelectedIndex = 1;
+            selectTab(ContactsTab);
         }
     }
 }

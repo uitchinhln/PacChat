@@ -4,18 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.ChatPageContents"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:PacChat.ChatPageContents.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="192">
-    <Grid DataContext="{x:Static vm:UserListDesignModel.Instance}">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
-            <ItemsControl ItemsSource="{Binding Users}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:UserMessage></local:UserMessage>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+    <Grid DataContext="{x:Static vm:UserListDesignModel.Instance}" Background="#FF2C2368">
+        <StackPanel Margin="0,0,0,414" Orientation="Horizontal" Background="#FF2C2368" VerticalAlignment="Top">
+            <Button x:Name="RecentTab" Content="Recent" Background="#FF5C5487" BorderBrush="{x:Null}" Width="96" Click="RecentTab_Click" Height="Auto"/>
+            <Button x:Name="ContactsTab" Content="Contacts" Background="{x:Null}" BorderBrush="{x:Null}" Width="96" Click="ContactsTab_Click" Height="Auto"/>
+        </StackPanel>
+        <materialDesign:Transitioner x:Name="Trans" SelectedIndex="0" Margin="0,36,0,0">
+            <!-- Recent tab -->
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                    <ItemsControl ItemsSource="{Binding RecentUsers}" Background="#FF2C2368">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:UserMessage></local:UserMessage>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </materialDesign:TransitionerSlide>
+
+            <!-- Contacts tab -->
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                    <ItemsControl ItemsSource="{Binding Contacts}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:UserMessage></local:UserMessage>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+
     </Grid>
 </UserControl>

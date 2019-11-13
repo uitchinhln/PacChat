@@ -8,6 +8,7 @@ namespace PacChat.ChatPageContents.ViewModels
 {
     public class UserListViewModel: BaseViewModel
     {
-        public List<UserMessageViewModel> Users { get; set; }
+        public List<UserMessageViewModel> RecentUsers { get; set; }
+        public List<UserMessageViewModel> Contacts { get; set; }
     }
 }
