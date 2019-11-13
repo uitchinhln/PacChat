@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PacChat.ChatPageContents;
 using PacChat.Resources.CustomControls;
+using PacChat.Utils;
 
 namespace PacChat
 {
@@ -45,52 +46,93 @@ namespace PacChat
             {
                 // Send message here
                 Console.WriteLine("Send message");
-                SendMessage();
+                SendMessage(ChatInput.Text);
 
                 // Clear textbox
                 ChatInput.Text = "";
             }
         }
 
-        private void SendMessage() //on the Rightside
+        private void SendMessage(string msg, bool isSimulating = false) //on the Rightside
         {
-            if (ChatInput.Text.ToString().Replace(" ",string.Empty) == "") return;
+            if (msg == "") return;
             _previousBubbleChat = null;
             Bubble b = new Bubble();
-            b.Messages = ChatInput.Text.ToString();
+            b.Messages = msg;
             b.SetBG(Color.FromRgb(50, 23, 108));
             b.SetTextColor(Colors.White);
             b.SetDirect(false);// true = left false = right
             b.SetSeen(false);
             spMessagesContainer.Children.Add(b);
             MessagesContainer.ScrollToEnd();
+
+            if (isSimulating) return;
+
+            var app = MainWindow.chatApplication;
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
         }
 
-        private void sendLeftMessages()
+        private void sendLeftMessages(string msg, bool isSimulating = false)
         {
-            if (ChatInput.Text.ToString().Replace(" ", string.Empty) == "") return;
+            if (msg == "") return;
             if (_previousBubbleChat == null)
             {
                 _previousBubbleChat = new BubbleChat();
                 spMessagesContainer.Children.Add(_previousBubbleChat);
             }
             Bubble b = new Bubble();
-            b.Messages = ChatInput.Text;
+            b.Messages = msg;
             b.SetSeen(false);
             b.SetBG(Color.FromRgb(246, 246, 246));
             b.SetDirect(true); // true = left false = right
             _previousBubbleChat.AddBubble(b);
             MessagesContainer.ScrollToEnd();
+
+            if (isSimulating) return;
+
+            var app = MainWindow.chatApplication;
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
         }
 
         public void ClearChatPage()
         {
+            _previousBubbleChat = null;
             spMessagesContainer.Children.Clear();
+        }
+
+        public void LoadChatPage(string id)
+        {
+            Console.WriteLine("Load chat page on id: " + id);
+
+            var app = MainWindow.chatApplication;
+            List<BubbleInfo> msgList = app.model.ContactsMessages[id];
+
+            foreach (BubbleInfo bubbleInfo in msgList)
+            {
+                if (bubbleInfo.onLeft)
+                    sendLeftMessages(bubbleInfo.message, true);
+                else
+                    SendMessage(bubbleInfo.message, true);
+            }
+        }
+
+        public void StoreChatPage(string id)
+        {
+            var app = MainWindow.chatApplication;
+
+            Console.WriteLine("Store chat page on id: " + id + " with length: " + app.model.CurrentUserMessages.Count);
+
+            List<BubbleInfo> msgList = app.model.ContactsMessages[id];
+            msgList.AddRange(app.model.CurrentUserMessages);
+
+            Console.WriteLine("After additionally store: " + msgList.Count);
+
+            app.model.CurrentUserMessages.Clear();
         }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            sendLeftMessages();
+            sendLeftMessages(ChatInput.Text);
             ChatInput.Text = "";
         }
     }

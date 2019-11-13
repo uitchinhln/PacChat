@@ -8,6 +8,8 @@ namespace PacChat.ChatPageContents.ViewModels
 {
     public class UserMessageViewModel : BaseViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public string IncomingMsg { get; set; }

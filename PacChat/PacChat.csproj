@@ -94,6 +94,7 @@
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">
       <DependentUpon>AppHolder.xaml</DependentUpon>
     </Compile>
