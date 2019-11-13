@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -14,12 +17,13 @@ namespace PacChat
     /// </summary>
     public partial class App : Application
     {
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //LoginWindow login = new LoginWindow();
-            //login.Show();
-            MainWindow main = new MainWindow();
-            main.Show();
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            //MainWindow main = new MainWindow();
+            //main.Show();
         }
     }
 }

@@ -25,63 +25,64 @@
         CaptionHeight="0"
         ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
-            <Grid MouseMove="FormDrag">
-                <Label Content="Pac Chat" Margin="0,40,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Unispace" FontSize="36" FontWeight="Bold"/>
-                <Button HorizontalAlignment="Right" Margin="0,5,5,0" Width="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF060606" Padding="0" Height="28" Click="CloseApp" VerticalAlignment="Top" IsTabStop="False" Cursor="Hand" IsDefault="True" >
-                    <materialDesign:PackIcon Kind="WindowClose" Height="24" Width="24" Cursor="Hand"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="28" Margin="66,0,65,0" >
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="66,0" Height="23" HorizontalAlignment="Center">
-                    <Button Uid="0" Content="LOGIN" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" IsTabStop="False" Click="TabClick"/>
-                    <Button Uid="1" Content="REGISTER" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" ScrollViewer.CanContentScroll="True" IsTabStop="False" Click="TabClick"/>
-                </StackPanel>
-                <Grid x:Name="GridCursor" Width="56" Height="3" Background="#FF673AB7" HorizontalAlignment="Left" Margin="66,23,0,0" VerticalAlignment="Top"/>
-            </Grid>
-            <materialDesign:Transitioner x:Name="trnsEr" SelectedIndex="0" Grid.Row="1" Margin="0,28,0,0" IsTabStop="False">
-                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft}">
-                    <StackPanel>
-                        <TextBox x:Name="LgUsername" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,30,71,0" Height="38" Text="{Binding LgUserName}"/>
-                        <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,20,71,0" Height="39"/>
-                        <CheckBox x:Name="LgRemember" Content="Remember me" Style="{StaticResource MaterialDesignCheckBox}" Margin="71,10,0,0" HorizontalAlignment="Left" IsChecked="{Binding LgRemember}"/>
-                        <Button x:Name="btnLogin" Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=wndLogin}"/>
+    <materialDesign:DialogHost>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Grid MouseMove="FormDrag">
+                    <Label Content="Pac Chat" Margin="0,40,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Unispace" FontSize="36" FontWeight="Bold"/>
+                    <Button HorizontalAlignment="Right" Margin="0,5,5,0" Width="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF060606" Padding="0" Height="28" Click="CloseApp" VerticalAlignment="Top" IsTabStop="False" Cursor="Hand" IsDefault="True" >
+                        <materialDesign:PackIcon Kind="WindowClose" Height="24" Width="24" Cursor="Hand"/>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="28" Margin="66,0,65,0" >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="66,0" Height="23" HorizontalAlignment="Center">
+                        <Button Uid="0" Content="LOGIN" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" IsTabStop="False" Click="TabClick"/>
+                        <Button Uid="1" Content="REGISTER" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF673AB7" FontSize="11" Width="56" Padding="0" ScrollViewer.CanContentScroll="True" IsTabStop="False" Click="TabClick"/>
                     </StackPanel>
-                </materialDesign:TransitionerSlide>
-                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
-                            <TextBox materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Text="{Binding RegFirstName}" />
-                            <TextBox materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding RegLastName}" />
+                    <Grid x:Name="GridCursor" Width="56" Height="3" Background="#FF673AB7" HorizontalAlignment="Left" Margin="66,23,0,0" VerticalAlignment="Top"/>
+                </Grid>
+                <materialDesign:Transitioner x:Name="trnsEr" SelectedIndex="0" Grid.Row="1" Margin="0,28,0,0" IsTabStop="False">
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft}">
+                        <StackPanel>
+                            <TextBox x:Name="LgUsername" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,30,71,0" Height="38" Text="{Binding LgUserName}"/>
+                            <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,20,71,0" Height="39"/>
+                            <CheckBox x:Name="LgRemember" Content="Remember me" Style="{StaticResource MaterialDesignCheckBox}" Margin="71,10,0,0" HorizontalAlignment="Left" IsChecked="{Binding LgRemember}"/>
+                            <Button x:Name="btnLogin" Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=wndLogin}"/>
                         </StackPanel>
-                        <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,15,54,0" Height="37" Text="{Binding RegUserName}"/>
-                        <PasswordBox x:Name="RegPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37"/>
-                        <StackPanel Orientation="Horizontal" Margin="54,15,54,0">
-                            <DatePicker x:Name="dpDoB" materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" FirstDayOfWeek="Monday" SelectedDate="{Binding RegDoB}"/>
-                            <ComboBox materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132" ItemsSource="{Binding Source={StaticResource Genders}}" SelectedItem="{Binding RegGender}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="54,10,0,0">
-                            <CheckBox Content="I agree to " Style="{StaticResource MaterialDesignCheckBox}" Margin="0" Height="20" IsChecked="{Binding RegToUAgrement}"/>
-                            <materialDesign:PopupBox ToggleContent="the user terms and conditions" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
-                                <StackPanel Width="500" Height="700">
+                    </materialDesign:TransitionerSlide>
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
+                                <TextBox materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Text="{Binding RegFirstName}" />
+                                <TextBox materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding RegLastName}" />
+                            </StackPanel>
+                            <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="54,15,54,0" Height="37" Text="{Binding RegUserName}"/>
+                            <PasswordBox x:Name="RegPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37"/>
+                            <StackPanel Orientation="Horizontal" Margin="54,15,54,0">
+                                <DatePicker x:Name="dpDoB" materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" FirstDayOfWeek="Monday" SelectedDate="{Binding RegDoB}"/>
+                                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132" ItemsSource="{Binding Source={StaticResource Genders}}" SelectedItem="{Binding RegGender}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="54,10,0,0">
+                                <CheckBox Content="I agree to " Style="{StaticResource MaterialDesignCheckBox}" Margin="0" Height="20" IsChecked="{Binding RegToUAgrement}"/>
+                                <materialDesign:PopupBox ToggleContent="the user terms and conditions" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                                    <StackPanel Width="500" Height="700">
 
-                                </StackPanel>
-                            </materialDesign:PopupBox>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+                            </StackPanel>
+                            <Button x:Name="btnRegister" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=wndLogin}">Register</Button>
                         </StackPanel>
-                        <Button x:Name="btnRegister" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=wndLogin}">Register</Button>
-                    </StackPanel>
-                </materialDesign:TransitionerSlide>
-            </materialDesign:Transitioner>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+            </Grid>
         </Grid>
-        <WebBrowser x:Name="wbBanner" Source="https://cs15083a2f24621x4ad7x9d4.z23.web.core.windows.net/" ScrollViewer.VerticalScrollBarVisibility="Disabled" Focusable="False" Navigating="Banner_Navigating" />
-    </Grid>
+    </materialDesign:DialogHost>
 </Window>
