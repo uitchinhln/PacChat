@@ -4,19 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:chatpage="clr-namespace:PacChat.ChatPageContents"
              xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
-    <Grid>
-        <Grid.DataContext>
+    <DockPanel>
+        <DockPanel.DataContext>
             <ChatAMVC:ChatModel/>
-        </Grid.DataContext>
+        </DockPanel.DataContext>
 
-        <TextBox KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Height="32" Margin="32,0,16,16" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Cursor="IBeam" FontSize="18"/>
-        <ScrollViewer x:Name="MessagesContainer" Margin="0,40,0,53">
+        <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="32,0,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
+        <DockPanel DockPanel.Dock="Bottom" Height="41">
+            <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Top" HorizontalAlignment="Right" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
+                <materialDesign:PackIcon Kind="Send" Foreground="Purple" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"/>
+            </Button>
+
+            <TextBox KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="32,0,0,0" TextWrapping="Wrap" Text="TextBox" Cursor="IBeam" FontSize="18" HorizontalContentAlignment="Stretch"/>
+
+        </DockPanel>
+        <ScrollViewer x:Name="MessagesContainer" Margin="0">
             <StackPanel x:Name="spMessagesContainer"/>
         </ScrollViewer>
-        <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="32,0,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semibold"/>
-    </Grid>
+    </DockPanel>
 </UserControl>

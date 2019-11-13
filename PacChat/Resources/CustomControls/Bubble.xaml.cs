@@ -55,16 +55,28 @@ namespace PacChat.Resources.CustomControls
             else textBlockSeen.Visibility = Visibility.Collapsed;
         }
 
-        public void SetAligment(bool direct)
+        public void SetDirect(bool direct)
         {
             if (direct) //left
             {
                 this.HorizontalAlignment = HorizontalAlignment.Left;
+                Thickness margin = borderBubble.Margin;
+                margin.Left = 3;
+                margin.Right = 170;
+                margin.Bottom = 2;
+                borderBubble.Margin = margin;
+                
             }
             else
             {
                 this.HorizontalAlignment = HorizontalAlignment.Right;
+                Thickness margin = borderBubble.Margin;
+                margin.Left = 170;
+                margin.Right = 3;
+                margin.Bottom = 2;
+                borderBubble.Margin = margin;
             }
         }
+
     }
 }

@@ -7,7 +7,6 @@
              mc:Ignorable="d" d:DesignWidth="300">
 
     <Border Padding="5" 
-            MaxWidth="300"
             Background="Transparent"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
