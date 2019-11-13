@@ -8,7 +8,6 @@
         xmlns:local="clr-namespace:PacChat.Windows.Login"
         xmlns:utils="clr-namespace:PacChat.Utils"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         DataContext="{DynamicResource LoginVM}"
         Title="Pac Chat Login" Height="516" Width="774" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
@@ -84,7 +83,6 @@
                     </materialDesign:TransitionerSlide>
                 </materialDesign:Transitioner>
             </Grid>
-            <cefSharp:ChromiumWebBrowser x:Name="ChromiumWebBrowser" Address="https://cs15083a2f24621x4ad7x9d4.z23.web.core.windows.net/" />
         </Grid>
     </materialDesign:DialogHost>
 </Window>
