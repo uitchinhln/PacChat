@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}</ProjectGuid>
@@ -36,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CNetwork">
-      <HintPath>..\..\CNetwork.dll</HintPath>
+      <HintPath>..\..\lib\CNetwork.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -84,6 +85,9 @@
     </Compile>
     <Compile Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml.cs">
       <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml.cs">
+      <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -201,6 +205,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
