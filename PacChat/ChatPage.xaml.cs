@@ -52,7 +52,7 @@ namespace PacChat
             }
         }
 
-        private void SendMessage()
+        private void SendMessage() //on the Rightside
         {
             if (ChatInput.Text.ToString().Replace(" ",string.Empty) == "") return;
             _previousBubbleChat = null;

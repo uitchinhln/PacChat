@@ -72,7 +72,7 @@ namespace PacChat.Resources.CustomControls
                 this.HorizontalAlignment = HorizontalAlignment.Right;
                 Thickness margin = borderBubble.Margin;
                 margin.Left = 170;
-                margin.Right = 3;
+                margin.Right = 15;
                 margin.Bottom = 2;
                 borderBubble.Margin = margin;
             }
