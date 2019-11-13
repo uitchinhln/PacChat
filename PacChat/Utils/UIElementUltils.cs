@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PacChat.Utils
+{
+    public struct BubbleInfo
+    {
+        public string message;
+        public bool onLeft;
+
+        public BubbleInfo(string msg, bool lft)
+        {
+            message = msg;
+            onLeft = lft;
+        }
+    }
+
+}

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="64" d:DesignWidth="192">
     
-    <Grid d:DataContext="{x:Static vm:UserMessageDesignModel.Instance}">
+    <Grid x:Name="Grid" d:DataContext="{x:Static vm:UserMessageDesignModel.Instance}">
         <Border Padding="0,0,0,0">
             <Grid>
                 <Border CornerRadius="0"/>
@@ -30,7 +30,7 @@
                            Text="{Binding IncomingMsg}"
                            TextTrimming="CharacterEllipsis" Foreground="#FFD1D1D1"/>
 
-                <Button x:Name="ClickMask" Height="65" Background="{x:Null}" BorderBrush="{x:Null}" Click="OnClick"></Button>
+                <Button x:Name="ClickMask" Height="65" Background="{x:Null}" BorderBrush="{x:Null}" Click="OnClick" Content="{Binding Id}" Foreground="Transparent"></Button>
             </Grid>
         </Border>
     </Grid>

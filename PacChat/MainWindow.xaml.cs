@@ -60,6 +60,7 @@ namespace PacChat
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             InitAMVC();
+            _chatModel.InitContacts();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

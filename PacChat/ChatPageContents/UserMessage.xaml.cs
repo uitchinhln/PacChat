@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.Utils;
 
 namespace PacChat.ChatPageContents
 {
@@ -36,9 +37,8 @@ namespace PacChat.ChatPageContents
         {
             var app = MainWindow.chatApplication;
             app.model.Title = UserName.Text;
-
-            // Load user messages from database and update model
-            app.model.CurrentUserMessages = new List<string>(); // Clear, then re-load to this list
+            app.model.previousSelectedUser = app.model.currentSelectedUser;
+            app.model.currentSelectedUser = ClickMask.Content.ToString();
 
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
         }
