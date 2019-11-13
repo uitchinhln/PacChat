@@ -72,6 +72,7 @@ namespace PacChat.Windows.Login
             // Process UI
             Console.WriteLine("OnLogin in view");
             // Then notify to controller
+            var dialog = DialogHost.Show(new WaitingDialog());
             app.controller.OnLogin(LgUserName, wnd.LgPassword.Password, LgRemember);
         }
 

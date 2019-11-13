@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="PacChat.Resources.CustomControls.Dialogs.AnnouncementDialog"
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.Dialogs.WaitingDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Dialogs"
-             mc:Ignorable="d" Height="175" Width="235">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="85,123,0,0" VerticalAlignment="Top" Width="75"/>
-
-    </Grid>
+             mc:Ignorable="d" Height="100" Width="100">
+    <DockPanel>
+        <ProgressBar
+          Style="{StaticResource MaterialDesignCircularProgressBar}"
+          Value="0"
+          IsIndeterminate="True" Height="Auto" Margin="0,0,0,0" Width="Auto" Background="{x:Null}" /> 
+    </DockPanel>
 </UserControl>

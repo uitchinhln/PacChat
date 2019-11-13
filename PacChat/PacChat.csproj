@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+  	<CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{35BD81FF-7C67-4340-AD5D-63D3B36BBADE}</ProjectGuid>
@@ -84,6 +85,9 @@
     </Compile>
     <Compile Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml.cs">
       <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml.cs">
+      <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -203,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -269,6 +277,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CefSharp.Wpf">
+      <Version>75.1.143</Version>
+    </PackageReference>
     <PackageReference Include="DeepCloner">
       <Version>0.10.2</Version>
     </PackageReference>
@@ -307,7 +318,6 @@
     <Resource Include="Resources\Drawable\login-bg.jpg" />
     <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
     <Resource Include="Resources\icon_ava_32.png" />
-    <Resource Include="Resources\ava.jpg" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
   </ItemGroup>
