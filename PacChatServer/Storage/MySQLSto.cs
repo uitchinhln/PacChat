@@ -94,6 +94,7 @@ namespace PacChatServer.Storage
                     user.LastName = reader.GetString("lastname");
                     user.DoB = reader.GetDateTime("dob");
                     user.Gender = (Gender) reader.GetInt16("gender");
+                    user.Relations = GetUsersRelations(user.ID);
                 }
             }
             catch (MySqlException e)
@@ -156,6 +157,51 @@ namespace PacChatServer.Storage
             return check;
         }
 
+        public Dictionary<int, int> GetUsersRelations(int userId)
+        {
+            Dictionary<int, int> result = new Dictionary<int, int>();
+
+            MySqlDataReader reader = null;
+            MySqlCommand query = null;
+
+            try
+            {
+                query = new MySqlCommand(Query.GET_USER_RELA_ALL, dbConn);
+                query.Parameters.AddWithValue("userID", userId);
+
+                reader = query.ExecuteReader();
+                if (reader.Read())
+                {
+                    if (reader.GetInt32("user1") == userId)
+                    {
+                        result.Add(reader.GetInt32("user2"), reader.GetInt32("relations"));
+                    }
+                    if (reader.GetInt32("user2") == userId)
+                    {
+                        result.Add(reader.GetInt32("user1"), reader.GetInt32("relations"));
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
+                if (RETRY_COUNT >= RETRY_LIMIT)
+                {
+                    PacChatServer.GetCommandManager().ExecuteCommand(ConsoleSender.Instance, DefaultCommands.STOP);
+                    return null;
+                }
+                RETRY_COUNT++;
+                OpenConnection();
+                result = GetUsersRelations(userId);
+            }
+            finally
+            {
+                Cleanup(reader);
+            }
+            RETRY_COUNT = 0;
+            return result;
+        }
+
         private void CreateDefault()
         {
             MySqlDataReader reader = null;
@@ -166,7 +212,8 @@ namespace PacChatServer.Storage
                 query = new MySqlCommand(Query.CREATE_TBL_USER, dbConn);
                 query.ExecuteNonQuery();
 
-
+                query = new MySqlCommand(Query.CREATE_TBL_USER_RELA, dbConn);
+                query.ExecuteNonQuery();
             } catch (MySqlException e)
             {
                 PacChatServer.GetServer().Logger.Error(e);
@@ -222,17 +269,19 @@ namespace PacChatServer.Storage
         {
             /*-----------------QUERY FOR THE FIRST RUN-----------------*/
             public static readonly string CREATE_TBL_USER = "CREATE TABLE IF NOT EXISTS `users` (`id` INT NOT NULL AUTO_INCREMENT, `email` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL, `passhash` VARCHAR(45) NOT NULL, `firstname` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL, `lastname` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL, `dob` DATE NULL, `gender` TINYINT(10) NULL DEFAULT 0, PRIMARY KEY (`id`), UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE) ENGINE = InnoDB;";
-
+            public static readonly string CREATE_TBL_USER_RELA = "CREATE TABLE IF NOT EXISTS `user_realations` (`user1` INT NOT NULL, `user2` INT NOT NULL, `relations` INT NOT NULL, PRIMARY KEY (`user1`, `user2`));";
 
             /*-----------------QUERY FOR USERs TABLE-------------------*/
+            public static readonly string ADD_NEW_USER = "INSERT INTO `users` (email, passhash, firstname, lastname, dob, gender) VALUES (?email, ?passhash, ?firstname, ?lastname, ?dob, ?gender);";
             public static readonly string GET_USER_INFO_BYMAIL = "SELECT * FROM `users` WHERE email= ?email;";
             public static readonly string GET_USER_INFO_BYID = "SELECT * FROM `users` WHERE id= ?id;";
-            public static readonly string GET_USER_RELA = "SELECT * FROM `users_rla` WHERE user1= ?user1 OR user2= ?user2;";
-            public static readonly string ADD_NEW_USER = "INSERT INTO `users` (email, passhash, firstname, lastname, dob, gender) VALUES (?email, ?passhash, ?firstname, ?lastname, ?dob, ?gender);";
 
 
             /*-----------------QUERY FOR USER RELATIONSHIPs TABLE------*/
-
+            public static readonly string ADD_USER_RELA = "INSERT INTO `user_realations` (user1, user2, relations) VALUES (?user1, ?user2, ?relations);";
+            public static readonly string UPDATE_USER_RELA = "UPDATE `user_realations` SET relations=?relation WHERE (user1=?user1 AND user2=?user2) OR (user1=?user2 AND user2=?user1)";
+            public static readonly string GET_USER_RELA = "SELECT * FROM `user_realations` WHERE (user1= ?user1 AND user2= ?user2) OR (user1= ?user2 AND user2= ?user1);";
+            public static readonly string GET_USER_RELA_ALL = "SELECT * FROM `user_realations` WHERE user1= ?userID OR user2= ?userID;";
 
 
             /*-----------------QUERY FOR MESSAGEs TABLE----------------*/

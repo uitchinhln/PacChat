@@ -22,16 +22,14 @@ namespace PacChatServer.Entities
         public string LastName { get; set; }
         public DateTime DoB { get; set; }
         public Gender Gender { get; set; }
-        public List<int> FriendIDs { get; set; }
-        public List<int> BlockedIDs { get; set; }
+        public Dictionary<int, int> Relations { get; set; }
         public bool Banned { get; set; } = false;
 
         public User(int id)
         {
             this.ID = id;
             this.Gender = Gender.Other;
-            this.FriendIDs = new List<int>();
-            this.BlockedIDs = new List<int>();
+            this.Relations = new Dictionary<int, int>();
         }
     }
 }

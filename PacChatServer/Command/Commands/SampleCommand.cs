@@ -1,5 +1,6 @@
 ﻿using PacChatServer.Entities;
 using PacChatServer.Storage;
+using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace PacChatServer.Command.Commands
                 Random r = new Random();
                 User user = new User(-1);
                 user.Email = args[2];
-                user.PassHashed = "DEMO" + r.Next() + r.Next();
+                user.PassHashed = HashUtils.MD5(HashUtils.MD5(args[3]));
                 user.FirstName = "Chính";
                 user.LastName = "Lê Ngọc";
                 user.DoB = new DateTime(1998, r.Next(11)+1, r.Next(29)+1);
