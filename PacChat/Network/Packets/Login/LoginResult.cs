@@ -34,6 +34,13 @@ namespace PacChat.Network.Packets.Login
             if (loginApp == null) return;
 
             Console.WriteLine(StatusCode);
+
+            // Successfully login
+            if (StatusCode == 200)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
         }
     }
 }

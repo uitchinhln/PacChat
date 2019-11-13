@@ -22,6 +22,7 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             //textBlock.Text = "asdasdsad";
+            NickName.Content = MainWindow.chatApplication.model.Title;
         }
 
 
