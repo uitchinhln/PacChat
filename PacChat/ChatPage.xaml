@@ -23,7 +23,7 @@
             <TextBox materialDesign:HintAssist.Hint="Input message here..."  KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="32,0,0,0" TextWrapping="Wrap" Cursor="IBeam" FontSize="18" HorizontalContentAlignment="Stretch"/>
 
         </DockPanel>
-        <ScrollViewer x:Name="MessagesContainer" Margin="0">
+        <ScrollViewer x:Name="MessagesContainer" Margin="0" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="spMessagesContainer"/>
         </ScrollViewer>
     </DockPanel>
