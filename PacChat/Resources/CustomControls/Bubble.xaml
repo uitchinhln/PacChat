@@ -10,6 +10,7 @@
 
         <Border
             x:Name="borderBubble"
+            MaxWidth="900"
             HorizontalAlignment="Right"
             >
             <StackPanel>
@@ -20,6 +21,7 @@
                     >
 
                     <TextBlock x:Name="textBlock"
+                    FontSize="14"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap"
                     Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"

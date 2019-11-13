@@ -27,9 +27,15 @@ namespace PacChat.Resources.CustomControls
             set { textBlock.Text = value.ToString(); }
         }
 
+        public double MessagesFontSize
+        {
+            get { return textBlock.FontSize; }
+            set { textBlock.FontSize = (double)value; }
+        }
         public Bubble()
         {
             InitializeComponent();
+            
         }
 
         public void SetText(string s)

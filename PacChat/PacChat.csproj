@@ -307,6 +307,7 @@
     <Resource Include="Resources\Drawable\login-bg.jpg" />
     <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
     <Resource Include="Resources\icon_ava_32.png" />
+    <Resource Include="Resources\ava.jpg" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
   </ItemGroup>
