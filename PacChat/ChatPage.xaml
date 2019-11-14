@@ -14,7 +14,33 @@
             <ChatAMVC:ChatModel/>
         </DockPanel.DataContext>
 
-        <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="32,0,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
+        <DockPanel DockPanel.Dock="Top"
+                   Background="Transparent" 
+                   Height="Auto"
+                   >
+            
+            <Border Margin="5,3,0,3" Width="35" Height="35"
+                    CornerRadius="50"
+                    Background="LightBlue"
+                    >
+                <materialDesign:PackIcon Kind="User"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Width="24"
+                                         Height="24"/>
+            </Border>
+            
+            <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
+            
+            <Border>
+                <TextBlock VerticalAlignment="Center"
+                           Margin="5,0,0,0"
+                           Foreground="Gray">
+                    Active 2 minutes ago
+                </TextBlock>
+            </Border>
+ 
+        </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="41">
             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
                 <materialDesign:PackIcon Kind="Send" Foreground="#FF1E145F"  Width="24" Height="Auto"/>
@@ -30,7 +56,7 @@
             </Border>
 
         </DockPanel>
-        <ScrollViewer x:Name="MessagesContainer" Margin="0" VerticalScrollBarVisibility="Auto" Padding="0,0,0,10">
+        <ScrollViewer x:Name="MessagesContainer" Margin="0" VerticalScrollBarVisibility="Auto" Padding="0,0,0,10" >
             <StackPanel x:Name="spMessagesContainer"/>
         </ScrollViewer>
     </DockPanel>
