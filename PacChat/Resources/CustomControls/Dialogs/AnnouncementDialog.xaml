@@ -7,7 +7,9 @@
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Dialogs"
              mc:Ignorable="d">
     <DockPanel>
-        <Button Content="OK" Margin="10" Width="75" DockPanel.Dock="Bottom" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-        <TextBlock x:Name="txtContent" Margin="10" FontSize="16"></TextBlock>
+        <StackPanel DockPanel.Dock="Bottom" Background="#FFDEDEDE" >
+            <Button Content="OK" Margin="10,10" Width="75" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <TextBlock x:Name="txtContent" Margin="30,30,30,15" FontSize="16"></TextBlock>
     </DockPanel>
 </UserControl>
