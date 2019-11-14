@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PacChat.MVC;
+using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Resources.CustomControls.Dialogs;
 using PacChat.Utils;
 
@@ -79,16 +81,22 @@ namespace PacChat.Windows.Login
             app.controller.OnLogin(LgUserName, wnd.LgPassword.Password, LgRemember);
         }
 
+        public void EnterMainWindow()
+        {
+            MainWindow main = new MainWindow();
+            Application.Current.MainWindow = main;
+            main.Show();
+            CloseAction();
+        }
+
         public void LoginResponse(int code)
         {
             DialogHost.CloseDialogCommand.Execute(null, null);
             if (code == 200)
             {
-                MainWindow main = new MainWindow();
-                Application.Current.MainWindow = main;
-                main.Show();
-                CloseAction();
-            } else
+                EnterMainWindow();
+            }
+            else
             {
                 string message = "";
                 switch (code)
