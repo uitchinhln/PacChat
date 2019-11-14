@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.ChatPageContents.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,12 +22,14 @@ namespace PacChat.ChatPageContents
     public partial class UserList : UserControl
     {
         Color lostFocusColor = Color.FromRgb(100, 90, 150);
+        public static UserList Instance { get; set; }
 
         public UserList()
         {
             InitializeComponent();
             selectTab(ContactsTab);
             Trans.SelectedIndex = 1;
+            Instance = this;
         }
 
         private void selectTab(Button button)
@@ -47,6 +50,19 @@ namespace PacChat.ChatPageContents
         {
             Trans.SelectedIndex = 1;
             selectTab(ContactsTab);
+        }
+
+        public void ListViewUpdate()
+        {
+            ListView.Children.Clear();
+            foreach (var user in UserListDesignModel.Instance.Contacts)
+            {
+                UserMessage userControl = new UserMessage();
+                userControl.SetInfo(user.Id, user.Name, user.IncomingMsg);
+                ListView.Children.Add(userControl);
+            }
+
+
         }
     }
 }

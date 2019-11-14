@@ -42,5 +42,12 @@ namespace PacChat.ChatPageContents
 
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
         }
+
+        public void SetInfo(string Id, string Name, string Msg)
+        {
+            UserName.Text = Name;
+            UserMessage1.Text = Msg;
+            ClickMask.Content = Id;
+        }
     }
 }

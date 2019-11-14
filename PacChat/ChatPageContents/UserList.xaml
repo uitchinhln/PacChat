@@ -13,7 +13,7 @@
             <Button x:Name="RecentTab" Content="Recent" Background="#FF5C5487" BorderBrush="{x:Null}" Width="96" Click="RecentTab_Click" Height="Auto"/>
             <Button x:Name="ContactsTab" Content="Contacts" Background="{x:Null}" BorderBrush="{x:Null}" Width="96" Click="ContactsTab_Click" Height="Auto"/>
         </StackPanel>
-        <materialDesign:Transitioner x:Name="Trans" SelectedIndex="0" Margin="0,36,0,0">
+        <materialDesign:Transitioner x:Name="Trans" SelectedIndex="1" Margin="0,36,0,0">
             <!-- Recent tab -->
             <materialDesign:TransitionerSlide>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
@@ -30,6 +30,7 @@
             <!-- Contacts tab -->
             <materialDesign:TransitionerSlide>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                   <!-- 
                     <ItemsControl ItemsSource="{Binding Contacts}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -37,6 +38,10 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    -->
+                    <StackPanel x:Name="ListView">
+                        
+                    </StackPanel>
                 </ScrollViewer>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>

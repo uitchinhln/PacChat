@@ -1,10 +1,12 @@
-﻿using PacChat.Network;
+﻿using PacChat.ChatAMVC;
+using PacChat.Network;
 using PacChat.Network.Packets.AfterLoginRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.ChatPageContents.ViewModels
 {
@@ -13,9 +15,12 @@ namespace PacChat.ChatPageContents.ViewModels
         public static UserListDesignModel Instance => _instance == null ? _instance = new UserListDesignModel() : _instance;
         private static UserListDesignModel _instance;
 
+        public UserList userList;
+
         public UserListDesignModel()
         {
             // Load all user from server
+            
             RecentUsers = new List<UserMessageViewModel>()
             {
                 new UserMessageViewModel
@@ -46,19 +51,10 @@ namespace PacChat.ChatPageContents.ViewModels
                     IncomingMsg = "Hi there, this is Luke. Please send me your plan soon."
                 },
             };
+            
 
-            // Load all contact from server database
 
-            //Here
-            try
-            {
-                GetIDs packet = new GetIDs();
-                _ = ChatConnection.Instance.Send(packet);                
-            } catch (Exception e)
-            {
-
-            } 
-
+            /*
             Contacts = new List<UserMessageViewModel>()
             {
                 new UserMessageViewModel
@@ -82,7 +78,30 @@ namespace PacChat.ChatPageContents.ViewModels
                     IncomingMsg = "Hello, in which video you show how to handling exceptions?"
                 }
             };
+            */
 
+        }
+
+        public void LoadContacts()
+        {
+            Console.WriteLine("Load contacts");
+            // Load all contacts from server database
+            Contacts = new List<UserMessageViewModel>();
+            foreach (var user in ChatModel.onServerIDs)
+            {
+                var contact =
+                    new UserMessageViewModel
+                    {
+                        Id = "pac" + user,
+                        Name = "Test" + user,
+                        IncomingMsg = ""
+                    };
+                Contacts.Add(contact);
+                Console.WriteLine("Con: " + contact.Name);
+            }
+
+            MainWindow.chatApplication.model.InitContacts();
+            Application.Current.Dispatcher.Invoke(() => UserList.Instance.ListViewUpdate());
         }
     }
 }

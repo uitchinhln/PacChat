@@ -12,11 +12,13 @@ namespace PacChat.ChatAMVC
 {
     public class ChatModel : Model<ChatApplication>
     {
+        public static List<int> onServerIDs { get; set; } = new List<int>();
+ 
         #region OnChatPage
-        public string Title { get; set; } = UserListDesignModel.Instance.Contacts[0].Name;
+        public string Title { get; set; } = "";
 
         public string previousSelectedUser { get; set; } = "";
-        public string currentSelectedUser { get; set; } = UserListDesignModel.Instance.Contacts[0].Id;
+        public string currentSelectedUser { get; set; } = "";
         public List<BubbleInfo> CurrentUserMessages { get; set; } = new List<BubbleInfo>();
         public Dictionary<string, List<BubbleInfo>> ContactsMessages { get; set; } = new Dictionary<string, List<BubbleInfo>>();
         public void InitContacts()
