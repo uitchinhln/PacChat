@@ -68,6 +68,8 @@
     </Compile>
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetInfoResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetInfo.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetIDs.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetIDsResult.cs" />
     <Compile Include="Network\Packets\Login\LoginData.cs" />

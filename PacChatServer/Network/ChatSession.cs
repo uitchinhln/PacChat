@@ -38,6 +38,11 @@ namespace PacChatServer.Network
             LoginResult respone = new LoginResult();
 
             User user = MySQLSto.Instance.GetUser(username);
+            if (Server.OnlineUsers.ContainsKey(user.ID))
+            {
+                user = Server.OnlineUsers[user.ID];
+            }
+
             if (user == null)
             {
                 respone.StatusCode = 404;
@@ -50,13 +55,18 @@ namespace PacChatServer.Network
             } else
             {
                 respone.StatusCode = 200;
-                this.Owner = user;
-                this.Owner.sessions.Add(this);
             }
             Send(respone);            
+
             if (respone.StatusCode == 200)
             {
+                if (!Server.OnlineUsers.ContainsKey(user.ID))
+                {
+                    Server.OnlineUsers.Add(user.ID, user);    
+                }
                 Protocol = protocolProvider.MainProtocol;
+                this.Owner = user;
+                this.Owner.sessions.Add(this);
             }
         }
 

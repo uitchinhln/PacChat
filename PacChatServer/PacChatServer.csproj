@@ -225,8 +225,12 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetInfoResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetInfo.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetIDs.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetIDsResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\SendMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\SendMessageResult.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\PingReceive.cs" />

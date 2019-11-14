@@ -3,6 +3,7 @@ using DotNetty.Transport.Channels;
 using log4net;
 using PacChatServer.Command;
 using PacChatServer.Command.Commands;
+using PacChatServer.Entities;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
 using PacChatServer.Storage;
@@ -26,6 +27,8 @@ namespace PacChatServer
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
         private ProtocolProvider protocolProvider;
+
+        public Dictionary<int, User> OnlineUsers { get; } = new Dictionary<int, User>();
 
         public SessionRegistry SessionRegistry { get; }
 
