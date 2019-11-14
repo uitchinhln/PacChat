@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +48,16 @@ namespace PacChat.ChatPageContents.ViewModels
             };
 
             // Load all contact from server database
+
+            //Here
+            try
+            {
+                GetIDs packet = new GetIDs();
+                _ = ChatConnection.Instance.Send(packet);                
+            } catch (Exception e)
+            {
+
+            } 
 
             Contacts = new List<UserMessageViewModel>()
             {

@@ -64,7 +64,7 @@ namespace PacChat.Network
 
         public ISession NewSession(IChannel c)
         {
-            Session = new ClientSession(c, protocolProvider.Test);
+            Session = new ClientSession(c, protocolProvider);
             return Session;
         }
 

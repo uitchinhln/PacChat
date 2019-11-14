@@ -157,6 +157,41 @@ namespace PacChatServer.Storage
             return check;
         }
 
+        public List<int> GetAllUserIds()
+        {
+            List<int> result = new List<int>();
+            MySqlDataReader reader = null;
+            MySqlCommand query = null;
+
+            try
+            {
+                query = new MySqlCommand(Query.GET_ALL_USER_IDs, dbConn);
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(reader.GetInt32("id"));
+                }
+            }
+            catch (MySqlException e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
+                if (RETRY_COUNT >= RETRY_LIMIT)
+                {
+                    PacChatServer.GetCommandManager().ExecuteCommand(ConsoleSender.Instance, DefaultCommands.STOP);
+                    return null;
+                }
+                RETRY_COUNT++;
+                OpenConnection();
+                result = GetAllUserIds();
+            }
+            finally
+            {
+                Cleanup(reader);
+            }
+            RETRY_COUNT = 0;
+            return result;
+        }
+
         public Dictionary<int, int> GetUsersRelations(int userId)
         {
             Dictionary<int, int> result = new Dictionary<int, int>();
@@ -275,6 +310,7 @@ namespace PacChatServer.Storage
             public static readonly string ADD_NEW_USER = "INSERT INTO `users` (email, passhash, firstname, lastname, dob, gender) VALUES (?email, ?passhash, ?firstname, ?lastname, ?dob, ?gender);";
             public static readonly string GET_USER_INFO_BYMAIL = "SELECT * FROM `users` WHERE email= ?email;";
             public static readonly string GET_USER_INFO_BYID = "SELECT * FROM `users` WHERE id= ?id;";
+            public static readonly string GET_ALL_USER_IDs = "SELECT id FROM `users`;";
 
 
             /*-----------------QUERY FOR USER RELATIONSHIPs TABLE------*/

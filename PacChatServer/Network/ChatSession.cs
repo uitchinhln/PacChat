@@ -50,8 +50,14 @@ namespace PacChatServer.Network
             } else
             {
                 respone.StatusCode = 200;
+                this.Owner = user;
+                this.Owner.sessions.Add(this);
             }
             Send(respone);            
+            if (respone.StatusCode == 200)
+            {
+                Protocol = protocolProvider.MainProtocol;
+            }
         }
 
         public void RegisterNewAccount(User data)
