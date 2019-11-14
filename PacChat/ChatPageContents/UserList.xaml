@@ -15,7 +15,7 @@
         </StackPanel>
         <materialDesign:Transitioner x:Name="Trans" SelectedIndex="0" Margin="0,36,0,0">
             <!-- Recent tab -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
+            <materialDesign:TransitionerSlide>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
                     <ItemsControl ItemsSource="{Binding RecentUsers}" Background="#FF2C2368">
                         <ItemsControl.ItemTemplate>
@@ -28,7 +28,7 @@
             </materialDesign:TransitionerSlide>
 
             <!-- Contacts tab -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
+            <materialDesign:TransitionerSlide>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
                     <ItemsControl ItemsSource="{Binding Contacts}">
                         <ItemsControl.ItemTemplate>

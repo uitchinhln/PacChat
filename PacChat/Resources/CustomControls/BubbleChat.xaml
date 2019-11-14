@@ -38,7 +38,7 @@
             <!---Messages path -->
             <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
                 <!-- Nick name label -->
-                <Label Content="Nick Name bla bla"/>
+                <Label Name="NickName" Content="Nick Name bla bla"/>
 
 
 
