@@ -32,6 +32,13 @@ namespace PacChat.Windows.Login
             {
                 loginView.CloseAction = new Action(() => this.Close());
             }
+            if (loginView.MoveToTab == null)
+            {
+                loginView.MoveToTab = new Action<int>((index) =>
+                {
+                    MoveToTab(index);
+                });
+            }
 
             //this.HideScriptErrors(this.wbBanner, true);
         }
@@ -55,6 +62,11 @@ namespace PacChat.Windows.Login
         private void TabClick(object sender, RoutedEventArgs e)
         {
             int index = int.Parse(((Button)e.Source).Uid);
+            MoveToTab(index);
+        }
+
+        private void MoveToTab(int index)
+        {
             GridCursor.Margin = new Thickness(66 + (56 * index), 23, 0, 0);
 
             if (trnsEr.SelectedIndex != index)

@@ -39,6 +39,7 @@ namespace PacChat.Windows.Login
         public ICommand RegisterCommand { get; set; }
 
         public Action CloseAction { get; set; }
+        public Action<int> MoveToTab { get; set; }
 
         LoginModel loginModel;
         LoginController loginController;
@@ -124,12 +125,13 @@ namespace PacChat.Windows.Login
             app.controller.OnRegister(wnd.RegPassword.Password);
         }
 
-        public void RegisterResponse(int code)
+        public async void RegisterResponse(int code)
         {
             DialogHost.CloseDialogCommand.Execute(null, null);
             if (code == 200)
             {
-                CloseAction();
+                _ = await DialogHost.Show(new AnnouncementDialog("Your account has been activated successfully\nYou can now login."));
+                MoveToTab(0);
             }
             else
             {
@@ -137,16 +139,13 @@ namespace PacChat.Windows.Login
                 switch (code)
                 {
                     case 404:
-                        message = "Invalid username or password\nCheck your info and try again";
+                        message = "Unknow error\nPlease contact administrator for support\nError Code: #RGDBE1";
                         break;
-                    case 401:
-                        message = "Invalid username or password\nCheck your info and try again";
-                        break;
-                    case 403:
-                        message = "Your account got banned\nPlease contact to Administrator to get more information";
+                    case 409:
+                        message = "Your email early exist in PacChat system";
                         break;
                 }
-                DialogHost.Show(new AnnouncementDialog(message));
+                _ = await DialogHost.Show(new AnnouncementDialog(message));
             }
         }
     }
