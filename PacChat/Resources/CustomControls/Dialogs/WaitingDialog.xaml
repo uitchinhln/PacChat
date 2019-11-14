@@ -9,6 +9,6 @@
         <ProgressBar
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           Value="0"
-          IsIndeterminate="True" Height="Auto" Margin="0,0,0,0" Width="Auto" Background="{x:Null}" /> 
+          IsIndeterminate="True" Height="Auto" Margin="20" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}" /> 
     </DockPanel>
 </UserControl>

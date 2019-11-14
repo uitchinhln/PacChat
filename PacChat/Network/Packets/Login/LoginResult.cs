@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.Login
 {
@@ -32,8 +33,7 @@ namespace PacChat.Network.Packets.Login
         {
             LoginApp loginApp = AppManager.GetAppOfType<LoginApp>() as LoginApp;
             if (loginApp == null) return;
-
-            Console.WriteLine(StatusCode);
+            Application.Current.Dispatcher.Invoke(() => loginApp.view.LoginResponse(StatusCode));
         }
     }
 }

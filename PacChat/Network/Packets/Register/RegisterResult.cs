@@ -1,11 +1,14 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
 using DotNetty.Buffers;
+using PacChat.MVC;
+using PacChat.Windows.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.Register
 {
@@ -25,7 +28,9 @@ namespace PacChat.Network.Packets.Register
 
         public void Handle(ISession session)
         {
-            Console.WriteLine(StatusCode);
+            LoginApp loginApp = AppManager.GetAppOfType<LoginApp>() as LoginApp;
+            if (loginApp == null) return;
+            Application.Current.Dispatcher.Invoke(() => loginApp.view.RegisterResponse(StatusCode));
         }
     }
 }

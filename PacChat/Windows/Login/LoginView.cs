@@ -31,12 +31,14 @@ namespace PacChat.Windows.Login
         public string RegUserName { get => regUserName; set { regUserName = value; OnPropertyChanged(); } }
         private DateTime regDoB = DateTime.Now.AddYears(-13);
         public DateTime RegDoB { get => regDoB; set { regDoB = value; OnPropertyChanged(); } }
-        public Gender regGender;
+        private Gender regGender;
         public Gender RegGender { get => regGender; set { regGender = value; OnPropertyChanged(); } }
         private bool regToUAgrement;
         public bool RegToUAgrement { get => regToUAgrement; set { regToUAgrement = value; OnPropertyChanged(); } }
 
         public ICommand RegisterCommand { get; set; }
+
+        public Action CloseAction { get; set; }
 
         LoginModel loginModel;
         LoginController loginController;
@@ -72,8 +74,36 @@ namespace PacChat.Windows.Login
             // Process UI
             Console.WriteLine("OnLogin in view");
             // Then notify to controller
-            var dialog = DialogHost.Show(new WaitingDialog());
+            DialogHost.Show(new WaitingDialog());
             app.controller.OnLogin(LgUserName, wnd.LgPassword.Password, LgRemember);
+        }
+
+        public void LoginResponse(int code)
+        {
+            DialogHost.CloseDialogCommand.Execute(null, null);
+            if (code == 200)
+            {
+                MainWindow main = new MainWindow();
+                Application.Current.MainWindow = main;
+                main.Show();
+                CloseAction();
+            } else
+            {
+                string message = "";
+                switch (code)
+                {
+                    case 404:
+                        message = "Invalid username or password\nCheck your info and try again";
+                        break;
+                    case 401:
+                        message = "Invalid username or password\nCheck your info and try again";
+                        break;
+                    case 403:
+                        message = "Your account got banned\nPlease contact to Administrator to get more information";
+                        break;
+                }
+                DialogHost.Show(new AnnouncementDialog(message));
+            }
         }
 
         public bool CanRegister(LoginWindow wnd)
@@ -90,7 +120,34 @@ namespace PacChat.Windows.Login
             // Process UI
             Console.WriteLine("OnRegister in view");
             // Then notify to controller
+            DialogHost.Show(new WaitingDialog());
             app.controller.OnRegister(wnd.RegPassword.Password);
+        }
+
+        public void RegisterResponse(int code)
+        {
+            DialogHost.CloseDialogCommand.Execute(null, null);
+            if (code == 200)
+            {
+                CloseAction();
+            }
+            else
+            {
+                string message = "";
+                switch (code)
+                {
+                    case 404:
+                        message = "Invalid username or password\nCheck your info and try again";
+                        break;
+                    case 401:
+                        message = "Invalid username or password\nCheck your info and try again";
+                        break;
+                    case 403:
+                        message = "Your account got banned\nPlease contact to Administrator to get more information";
+                        break;
+                }
+                DialogHost.Show(new AnnouncementDialog(message));
+            }
         }
     }
 }

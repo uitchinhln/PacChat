@@ -27,6 +27,12 @@ namespace PacChat.Windows.Login
 
             dpDoB.DisplayDateEnd = new DateTime(DateTime.Now.Year - 13, 12, 31);
 
+            LoginView loginView = DataContext as LoginView;
+            if (loginView.CloseAction == null)
+            {
+                loginView.CloseAction = new Action(() => this.Close());
+            }
+
             //this.HideScriptErrors(this.wbBanner, true);
         }
 
