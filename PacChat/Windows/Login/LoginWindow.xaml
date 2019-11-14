@@ -38,7 +38,7 @@
                 </Grid.RowDefinitions>
                 <Grid MouseMove="FormDrag">
                     <Label Content="Pac Chat" Margin="0,40,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Unispace" FontSize="36" FontWeight="Bold"/>
-                    <Button HorizontalAlignment="Right" Margin="0,5,5,0" Width="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF060606" Padding="0" Height="28" Click="CloseApp" VerticalAlignment="Top" IsTabStop="False" Cursor="Hand" IsDefault="True" >
+                    <Button HorizontalAlignment="Right" Margin="0,5,5,0" Width="28" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF060606" Padding="0" Height="28" Click="CloseApp" VerticalAlignment="Top" IsTabStop="False" Cursor="Hand" >
                         <materialDesign:PackIcon Kind="WindowClose" Height="24" Width="24" Cursor="Hand"/>
                     </Button>
                 </Grid>
@@ -55,7 +55,7 @@
                             <TextBox x:Name="LgUsername" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="71,30,71,0" Height="38" Text="{Binding LgUserName}"/>
                             <PasswordBox x:Name="LgPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="71,20,71,0" Height="39"/>
                             <CheckBox x:Name="LgRemember" Content="Remember me" Style="{StaticResource MaterialDesignCheckBox}" Margin="71,10,0,0" HorizontalAlignment="Left" IsChecked="{Binding LgRemember}"/>
-                            <Button x:Name="btnLogin" Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=wndLogin}"/>
+                            <Button x:Name="btnLogin" Content="Login" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="71,30,71,0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=wndLogin}" IsDefault="True"/>
                         </StackPanel>
                     </materialDesign:TransitionerSlide>
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight}">
@@ -78,11 +78,12 @@
                                     </StackPanel>
                                 </materialDesign:PopupBox>
                             </StackPanel>
-                            <Button x:Name="btnRegister" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=wndLogin}">Register</Button>
+                            <Button x:Name="btnRegister" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Margin="54,15,54,0" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=wndLogin}" IsDefault="True">Register</Button>
                         </StackPanel>
                     </materialDesign:TransitionerSlide>
                 </materialDesign:Transitioner>
             </Grid>
+            <Image Source="/PacChat;component/Resources/Drawable/hinh3.png"></Image>
         </Grid>
     </materialDesign:DialogHost>
 </Window>
