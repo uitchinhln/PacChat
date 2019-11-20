@@ -2,8 +2,10 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
-using PacChatServer.Entities;
-using PacChatServer.Entities.Properties;
+using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
+using PacChatServer.Entity.Meta.Profile;
+using PacChatServer.IO.Entity;
 using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
@@ -40,17 +42,41 @@ namespace PacChatServer.Network.Packets.Register
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;
-            PassHashed = HashUtils.MD5(PassHashed);
 
-            User user = new User(-1);
-            user.Email = Email;
-            user.PassHashed = PassHashed;
-            user.FirstName = FirstName;
-            user.LastName = LastName;
-            user.DoB = DoB;
-            user.Gender = Gender;
+            RegisterResult responePacket = new RegisterResult();
 
-            chatSession.RegisterNewAccount(user);
+            if (ProfileCache.Instance.ParseEmailToGuid(Email) != Guid.Empty)
+            {
+                responePacket.StatusCode = 409;
+                chatSession.Send(responePacket);
+                chatSession.Disconnect();
+                return;
+            }
+
+            Guid id = Guid.NewGuid();
+
+            ChatUser user = new ChatUser()
+            {
+                ID = id,
+                Email = this.Email,
+                Password = HashUtils.MD5(PassHashed + id),
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                DateOfBirth = this.DoB,
+                Gender = this.Gender
+            };
+
+            bool added = new ChatUserStore().Save(user);
+            if (added)
+            {
+                responePacket.StatusCode = 200;
+            } else
+            {
+                responePacket.StatusCode = 404;
+            }
+
+            chatSession.Send(responePacket);
+            chatSession.Disconnect();
         }
     }
 }

@@ -31,19 +31,16 @@ namespace PacChatServer.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;  
-            if (PacChatServer.GetServer().OnlineUsers.ContainsKey(DestID))
-            {
-                SendMessageResult packet = new SendMessageResult();
-                packet.SourceID = chatSession.Owner.ID;
-                packet.Message = Message;
-                foreach (ChatSession destSession in PacChatServer.GetServer().OnlineUsers[DestID].sessions)
-                {
-                    destSession.Send(packet);
-                }               
-            }
-            // Bay gio la tao mot packet de nhan tin nhan ve dung k, uhm, qua client xu ly 2 packet nay la ok, ok 1h roi :v bay mau :)))
-            // di hoc thi commit di roi qua tui cho di cho nhanh, bay gio ha, uhm :)) :)))), ok thay do
-            
+            //if (PacChatServer.GetServer().OnlineUsers.ContainsKey(DestID))
+            //{
+            //    SendMessageResult packet = new SendMessageResult();
+            //    packet.SourceID = chatSession.Owner.ID;
+            //    packet.Message = Message;
+            //    foreach (ChatSession destSession in PacChatServer.GetServer().OnlineUsers[DestID].sessions)
+            //    {
+            //        destSession.Send(packet);
+            //    }               
+            //}                        
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using PacChatServer.Command;
-using PacChatServer.Entities;
-using PacChatServer.Entities.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,6 +153,43 @@ namespace PacChatServer.Storage
             RETRY_COUNT = 0;
             check = GetUser(user.Email);
             return check;
+        }
+
+        public void UpdateUser(User user)
+        {
+            MySqlDataReader reader = null;
+            MySqlCommand query = null;
+
+            try
+            {
+                query = new MySqlCommand(Query.UPDATE_USER, dbConn);
+
+                query.Parameters.AddWithValue("email", user.Email);
+                query.Parameters.AddWithValue("passhash", user.PassHashed);
+                query.Parameters.AddWithValue("firstname", user.FirstName);
+                query.Parameters.AddWithValue("lastname", user.LastName);
+                query.Parameters.AddWithValue("dob", user.DoB);
+                query.Parameters.AddWithValue("gender", (int)user.Gender);
+
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
+                if (RETRY_COUNT >= RETRY_LIMIT)
+                {
+                    PacChatServer.GetCommandManager().ExecuteCommand(ConsoleSender.Instance, DefaultCommands.STOP);
+                    return;
+                }
+                RETRY_COUNT++;
+                OpenConnection();
+                UpdateUser(user);
+            }
+            finally
+            {
+                Cleanup(reader);
+            }
+            RETRY_COUNT = 0;
         }
 
         public List<int> GetAllUserIds()
@@ -311,6 +346,7 @@ namespace PacChatServer.Storage
             public static readonly string GET_USER_INFO_BYMAIL = "SELECT * FROM `users` WHERE email= ?email;";
             public static readonly string GET_USER_INFO_BYID = "SELECT * FROM `users` WHERE id= ?id;";
             public static readonly string GET_ALL_USER_IDs = "SELECT id FROM `users`;";
+            public static readonly string UPDATE_USER = "UPDATE `users` SET email = ?email, passhash = ?passhash, firstname = ?firstname, lastname = ?lastname, dob = ?dob, gender = ?gender WHERE id = ?id;";
 
 
             /*-----------------QUERY FOR USER RELATIONSHIPs TABLE------*/

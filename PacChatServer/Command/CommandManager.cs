@@ -9,8 +9,6 @@ namespace PacChatServer.Command
 {
     public class CommandManager
     {
-        static CommandManager instance;
-
         SortedDictionary<String, ICommandExecutor> registeredCommands = null;
         SortedDictionary<String, ICommandExecutor> defaultCommands = null;
 
@@ -108,16 +106,14 @@ namespace PacChatServer.Command
             registeredCommands.Clear();
         }
 
-        public static CommandManager Instance
+        public static void StartService(bool forceRestart = false)
         {
-            get
+            if (Instance == null || forceRestart)
             {
-                if (instance == null)
-                {
-                    instance = new CommandManager();
-                }
-                return instance;
+                Instance = new CommandManager();
             }
         }
+
+        public static CommandManager Instance { get; private set; }
     }
 }

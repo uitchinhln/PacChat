@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Entities.Properties
+namespace PacChatServer.Entity.EntityProperty
 {
     public enum Gender
     {

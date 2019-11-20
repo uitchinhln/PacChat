@@ -3,12 +3,14 @@ using DotNetty.Transport.Channels;
 using log4net;
 using PacChatServer.Command;
 using PacChatServer.Command.Commands;
-using PacChatServer.Entities;
+using PacChatServer.Entity;
+using PacChatServer.Entity.Meta.Profile;
+using PacChatServer.IO.Storage;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
-using PacChatServer.Storage;
 using PacChatServer.Utils.ThreadUtils;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -28,8 +30,6 @@ namespace PacChatServer
 
         private ProtocolProvider protocolProvider;
 
-        public Dictionary<int, User> OnlineUsers { get; } = new Dictionary<int, User>();
-
         public SessionRegistry SessionRegistry { get; }
 
         public PacChatServer()
@@ -39,15 +39,17 @@ namespace PacChatServer
             protocolProvider = new ProtocolProvider();
             SessionRegistry = new SessionRegistry();
 
-            _ = CommandManager.Instance;
-            _ = MySQLSto.Instance;
+            Mongo.StartService();
+            ProfileCache.StartService();
+
+            CommandManager.StartService();
 
             GetCommandManager().RegisterCommand("sample", new SampleCommand());
 
-            Start();
+            StartNetworkService();
         }
 
-        private void Start()
+        private void StartNetworkService()
         {
             CountdownLatch latch = new CountdownLatch(1);
 

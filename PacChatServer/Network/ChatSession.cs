@@ -2,11 +2,11 @@
 using CNetwork.Protocols;
 using CNetwork.Sessions;
 using DotNetty.Transport.Channels;
-using PacChatServer.Entities;
+using PacChatServer.Entity;
+using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.Network.Packets.Login;
 using PacChatServer.Network.Packets.Register;
 using PacChatServer.Network.Protocol;
-using PacChatServer.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace PacChatServer.Network
 
         IConnectionManager connectionManager;
 
-        public User Owner { get; set; }
+        public ChatUser Owner { get; set; }
 
         public ChatSession(PacChatServer server, IChannel channel, ProtocolProvider protocolProvider, IConnectionManager connectionManager) 
             : base(channel, protocolProvider.HandShake)
@@ -33,69 +33,9 @@ namespace PacChatServer.Network
             this.connectionManager = connectionManager;
         }
 
-        public void Login(String username, String passhash, bool forceLogin)
+        public void FinalizeLogin(ChatUserProfile profile)
         {
-            LoginResult respone = new LoginResult();
-
-            User user = MySQLSto.Instance.GetUser(username);
-            if (Server.OnlineUsers.ContainsKey(user.ID))
-            {
-                user = Server.OnlineUsers[user.ID];
-            }
-
-            if (user == null)
-            {
-                respone.StatusCode = 404;
-            } else if (user.PassHashed != passhash)
-            {
-                respone.StatusCode = 401;
-            } else if (user.Banned)
-            {
-                respone.StatusCode = 403;
-            } else
-            {
-                respone.StatusCode = 200;
-            }
-            Send(respone);            
-
-            if (respone.StatusCode == 200)
-            {
-                if (!Server.OnlineUsers.ContainsKey(user.ID))
-                {
-                    Server.OnlineUsers.Add(user.ID, user);    
-                }
-                Protocol = protocolProvider.MainProtocol;
-                this.Owner = user;
-                this.Owner.sessions.Add(this);
-            }
-        }
-
-        public void RegisterNewAccount(User data)
-        {
-            User temp = MySQLSto.Instance.GetUser(data.Email);
-            RegisterResult responePacket = new RegisterResult();
-
-            if (temp != null)
-            {
-                responePacket.StatusCode = 409;
-            } else
-            {
-                temp = MySQLSto.Instance.AddNewUser(data);
-                if (temp == null)
-                {
-                    responePacket.StatusCode = 404;
-                } else
-                {
-                    responePacket.StatusCode = 200;
-                }
-            }
-
-            Send(responePacket);
-        }
-
-        private void FinalizeLogin()
-        {
-
+            Owner = ChatUserManager.LoadUser(profile.ID);
         }
 
         public override void Disconnect()
@@ -103,7 +43,7 @@ namespace PacChatServer.Network
             base.Disconnect();
         }
 
-        private void UpdatePipiline(String key, IChannelHandler channelHandler)
+        private void UpdatePipeline(String key, IChannelHandler channelHandler)
         {
             Channel.Pipeline.Replace(key, key, channelHandler);
         }

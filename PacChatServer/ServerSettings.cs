@@ -17,8 +17,7 @@ namespace PacChatServer
         public static String MYSQL_USER { get; private set; } = "root";
         public static String MYSQL_PASSWORD { get; private set; } = "!2#1@3PacChat008";
         public static String MYSQL_DATABASE { get; private set; } = "pacchat";
-
-
+        
         public ServerSettings()
         {
 

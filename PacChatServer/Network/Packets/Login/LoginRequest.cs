@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,41 @@ namespace PacChatServer.Network.Packets.Login
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;
-            chatSession.Login(Username, HashUtils.MD5(Passhash), false);
+
+            LoginResult respone = new LoginResult();
+
+            Guid id = ProfileCache.Instance.ParseEmailToGuid(Username);
+            
+            if (id == Guid.Empty)
+            {
+                respone.StatusCode = 404;
+                chatSession.Send(respone);
+                chatSession.Disconnect();
+                return;
+            }
+
+            ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(id);
+            Passhash = HashUtils.MD5(Passhash + id);
+
+            if (profile.PassHashed != Passhash)
+            {
+                respone.StatusCode = 401;
+                chatSession.Send(respone);
+                chatSession.Disconnect();
+                return;
+            }
+
+            if (profile.Banned)
+            {
+                respone.StatusCode = 403;
+                chatSession.Send(respone);
+                chatSession.Disconnect();
+                return;
+            }
+
+            respone.StatusCode = 200;
+            chatSession.Send(respone);
+            chatSession.FinalizeLogin(profile);
         }
     }
 }
