@@ -40,5 +40,12 @@ namespace PacChat.MVC
         {
             apps.Clear();
         }
+
+
+        // This will be called when connection to server is lost
+        public static void OnDisconnection()
+        {
+
+        }
     }
 }

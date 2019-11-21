@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using PacChat.MVC;
 using PacChat.Network.Pipeline;
 using PacChat.Network.Protocol;
 using System;
@@ -71,6 +72,7 @@ namespace PacChat.Network
         public void SessionInactivated(ISession session)
         {
             Console.WriteLine("Server has disconnected!!!");
+            AppManager.OnDisconnection();
         }
 
         public void Shutdown()

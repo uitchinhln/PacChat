@@ -52,8 +52,8 @@ namespace PacChat
             }
             set
             {
-                Application.Current.MainWindow.WindowState = isMaximized ? WindowState.Normal : WindowState.Maximized;
                 _isMaximized = value;
+                Application.Current.MainWindow.WindowState = _isMaximized == false ? WindowState.Normal : WindowState.Maximized;
             }
         }
 
@@ -129,7 +129,7 @@ namespace PacChat
 
         private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            isMaximized = true;
+            isMaximized = !isMaximized;
         }
     }
 }

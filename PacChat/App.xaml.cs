@@ -20,10 +20,10 @@ namespace PacChat
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            LoginWindow login = new LoginWindow();
-            login.Show();
-            //MainWindow main = new MainWindow();
-            //main.Show();
+            // LoginWindow login = new LoginWindow();
+            // login.Show();
+            MainWindow main = new MainWindow();
+            main.Show();
         }
     }
 }
