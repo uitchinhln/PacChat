@@ -72,7 +72,7 @@ namespace PacChat.Network
         public void SessionInactivated(ISession session)
         {
             Console.WriteLine("Server has disconnected!!!");
-            AppManager.OnDisconnection();
+            AppManager.OnDisconnection(lostConnection:true);
         }
 
         public void Shutdown()
