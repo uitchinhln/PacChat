@@ -242,6 +242,8 @@
   <ItemGroup>
     <Compile Include="ChatUserManager.cs" />
     <Compile Include="Command\CommandManager.cs" />
+    <Compile Include="Command\Commands\Ban\BanCommand.cs" />
+    <Compile Include="Command\Commands\Ban\UnbanCommand.cs" />
     <Compile Include="Command\Commands\SampleCommand.cs" />
     <Compile Include="Command\Commands\StopCommand.cs" />
     <Compile Include="Command\ConsoleSender.cs" />
@@ -260,6 +262,8 @@
     <Compile Include="IO\BaseStore.cs" />
     <Compile Include="IO\Entity\ChatUserStore.cs" />
     <Compile Include="IO\Entity\UserProfileStore.cs" />
+    <Compile Include="IO\Message\ConversationStore.cs" />
+    <Compile Include="IO\Message\MessageStore.cs" />
     <Compile Include="IO\Storage\Mongo.cs" />
     <Compile Include="IO\Storage\MySQL.cs" />
     <Compile Include="MessageCore\Conversation\AbstractConversation.cs" />
@@ -315,7 +319,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IO\Message\" />
     <Folder Include="Permission\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

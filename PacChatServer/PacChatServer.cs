@@ -3,6 +3,7 @@ using DotNetty.Transport.Channels;
 using log4net;
 using PacChatServer.Command;
 using PacChatServer.Command.Commands;
+using PacChatServer.Command.Commands.Ban;
 using PacChatServer.Entity;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Storage;
@@ -41,10 +42,9 @@ namespace PacChatServer
 
             Mongo.StartService();
             ProfileCache.StartService();
-
             CommandManager.StartService();
 
-            GetCommandManager().RegisterCommand("sample", new SampleCommand());
+            RegisterCommand();
 
             StartNetworkService();
         }
@@ -59,6 +59,13 @@ namespace PacChatServer
             latch.Wait();
 
             new ConsoleManager();
+        }
+
+        public void RegisterCommand()
+        {
+            GetCommandManager().RegisterCommand("sample", new SampleCommand());
+            GetCommandManager().RegisterCommand("ban", new BanCommand());
+            GetCommandManager().RegisterCommand("unban", new UnbanCommand());
         }
 
         public static CommandManager GetCommandManager()

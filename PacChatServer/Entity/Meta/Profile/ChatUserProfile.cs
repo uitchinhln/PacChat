@@ -25,7 +25,7 @@ namespace PacChatServer.Entity.Meta.Profile
         [BsonElement("Gender")]
         public Gender Gender { get; set; }
         [BsonElement("LastLogoff")]
-        public long LastLogoff { get; set; }
+        public DateTime LastLogoff { get; set; }
         [BsonElement("Banned")]
         public bool Banned { get; set; } = false;
     }

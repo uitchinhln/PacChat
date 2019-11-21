@@ -10,8 +10,6 @@ namespace PacChatServer.Entity.Meta.Profile
 {
     public class ProfileCache
     {
-        static ProfileCache instance;
-
         ConcurrentDictionary<Guid, ChatUserProfile> StoredProfiles { get; set; } = new ConcurrentDictionary<Guid, ChatUserProfile>();
         ConcurrentDictionary<string, Guid> MappedEmail { get; set; } = new ConcurrentDictionary<string, Guid>();
 
@@ -49,7 +47,7 @@ namespace PacChatServer.Entity.Meta.Profile
             }
 
             ChatUserProfile profile = new UserProfileStore().LoadByEmail(email);
-            
+
             if (profile == null) return Guid.Empty;
 
             MappedEmail.TryAdd(email.ToLower(), profile.ID);
@@ -60,9 +58,9 @@ namespace PacChatServer.Entity.Meta.Profile
 
         public static void StartService(bool forceStart = false)
         {
-            if (instance == null || forceStart)
+            if (Instance == null || forceStart)
             {
-                instance = new ProfileCache();
+                Instance = new ProfileCache();
             }
         }
 

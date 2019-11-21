@@ -108,7 +108,7 @@ namespace PacChat.Windows.Login
                         message = "Invalid username or password\nCheck your info and try again";
                         break;
                     case 403:
-                        message = "Your account got banned\nPlease contact to Administrator to get more information";
+                        message = "Your account got banned\nPlease contact the Administrator to get more information";
                         break;
                 }
                 DialogHost.Show(new AnnouncementDialog(message));

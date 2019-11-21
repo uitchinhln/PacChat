@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using PacChatServer.Entity;
 using PacChatServer.Entity.Meta.Profile;
@@ -27,6 +28,19 @@ namespace PacChatServer.IO.Storage
         private Mongo()
         {
             Init();
+            RegisterClassMap();
+        }
+
+        private void RegisterClassMap()
+        {
+            if (!BsonClassMap.IsClassMapRegistered(typeof(ChatUser)))
+            {
+                BsonClassMap.RegisterClassMap<ChatUser>();
+            }
+            if (!BsonClassMap.IsClassMapRegistered(typeof(ChatUserProfile)))
+            {
+                BsonClassMap.RegisterClassMap<ChatUserProfile>();
+            }
         }
 
         private void Init()
@@ -34,7 +48,7 @@ namespace PacChatServer.IO.Storage
             client = new MongoClient();
             db = client.GetDatabase(DatabaseName);
             var collection = db.GetCollection<ChatUser>(UserCollectionName);
-            collection.Indexes.CreateOneAsync(new CreateIndexModel<ChatUser>(Builders<ChatUser>.IndexKeys.Ascending(p => p.Email))).Wait();
+            collection.Indexes.CreateOneAsync(Builders<ChatUser>.IndexKeys.Ascending(p => p.Email), new CreateIndexOptions(){Unique = true}).Wait();
         }
 
         public T Get<T>(string collectionName, Query<T> executable)
@@ -54,6 +68,10 @@ namespace PacChatServer.IO.Storage
                 db = client.GetDatabase(DatabaseName);
 
                 result = Get<T>(collectionName, executable);
+            } 
+            catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
             }
             TryCount = 0;
 
@@ -76,6 +94,10 @@ namespace PacChatServer.IO.Storage
                 db = client.GetDatabase(DatabaseName);
 
                 Set<T>(collectionName, executable);
+            }
+            catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
             }
             TryCount = 0;
         }

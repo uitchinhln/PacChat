@@ -36,6 +36,16 @@ namespace PacChatServer.Network
         public void FinalizeLogin(ChatUserProfile profile)
         {
             Owner = ChatUserManager.LoadUser(profile.ID);
+
+            ChatUserManager.MakeOnline(Owner);
+
+            Owner.LastLogon = DateTime.Now;
+            Owner.sessions.Add(this);
+
+            Protocol = protocolProvider.MainProtocol;
+
+            //Notify
+            Server.Logger.Info(String.Format("User {0} has logged in at {1}", Owner.Email, getAddress()));
         }
 
         public override void Disconnect()

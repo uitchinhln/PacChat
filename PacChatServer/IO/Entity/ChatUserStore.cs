@@ -11,36 +11,51 @@ namespace PacChatServer.IO.Entity
 {
     public class ChatUserStore : Store
     {
-        ChatUser value; 
-
         public ChatUser Load(Guid id)
         {
-            throw new NotImplementedException();
+            return Mongo.Instance.Get<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, id);
+                var result = collection.Find(condition).ToList();
+                if (result.Count > 0)
+                {
+                    return result[0];
+                }
+                return null;
+            });
         }
 
-        public bool Save(ChatUser value)
+        public bool AddNew(ChatUser value)
         {
-            this.value = value;
-            bool result = true;
+            bool result = false;
             try
             {
-                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, Save);
+                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) =>
+                {
+                    collection.InsertOne(value);
+                });
+                result = true;
             } catch (MongoWriteException e)
             {
                 PacChatServer.GetServer().Logger.Error(e);
-                result = false;
             }
             return result;
         }
 
-        private void Save(IMongoCollection<ChatUser> collection)
+        public bool Update(ChatUser value)
         {
-            collection.InsertOne(value);
-        }
-
-        public ChatUser Query(IMongoCollection<ChatUser> collection)
-        {
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                    var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, value.ID);
+                    collection.ReplaceOneAsync(condition, value, new UpdateOptions() { IsUpsert = true });
+                });
+                result = true;
+            } catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
+            }
+            return result;
         }
     }
 }

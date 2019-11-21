@@ -2,7 +2,6 @@
 using CNetwork.Sessions;
 using DotNetty.Buffers;
 using PacChatServer.Network.Protocol;
-using PacChatServer.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +25,12 @@ namespace PacChatServer.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;  
-            if (chatSession.Owner != null && chatSession.Protocol is AfterLoginProtocol)
-            {
-                GetIDsResult packet = new GetIDsResult();
-                packet.ids = MySQLSto.Instance.GetAllUserIds();
-                chatSession.Send(packet);
-            }
+            //if (chatSession.Owner != null && chatSession.Protocol is AfterLoginProtocol)
+            //{
+            //    GetIDsResult packet = new GetIDsResult();
+            //    packet.ids = MySQLSto.Instance.GetAllUserIds();
+            //    chatSession.Send(packet);
+            //}
         }
     }
 }

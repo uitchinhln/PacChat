@@ -32,5 +32,22 @@ namespace PacChatServer
 
             return result;
         }
+
+        public static void MakeOnline(ChatUser user)
+        {
+            if (!OnlineUsers.ContainsKey(user.ID)) {
+                OnlineUsers.TryAdd(user.ID, user);
+                user.Online();
+            }
+        }
+
+        public static void MakeOffline(ChatUser user)
+        {
+            if (OnlineUsers.ContainsKey(user.ID))
+            {
+                OnlineUsers.TryRemove(user.ID, out user);
+                user.Offline();
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using CNetwork;
+using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
+using PacChatServer.IO.Entity;
 using PacChatServer.Network;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,11 @@ namespace PacChatServer.Entity
 {
     public class ChatUser : AbstractEntity
     {
-        List<ChatSession> sessions = new List<ChatSession>();
+        [BsonIgnore]
+        public HashSet<ChatSession> sessions { get; set; } = new HashSet<ChatSession>();
+
+        [BsonIgnore]
+        ChatUserStore saver = new ChatUserStore();
 
         [BsonElement("FirstName")]
         public String FirstName { get; set; }
@@ -49,6 +55,9 @@ namespace PacChatServer.Entity
 
         [BsonElement("Conversations")]
         public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
+        
+        [BsonElement("NearestStickers")]
+        public HashSet<int> NearestStickers { get; private set; } = new HashSet<int>();        
 
         //True if this user has been banned
         [BsonElement("Banned")]
@@ -68,11 +77,8 @@ namespace PacChatServer.Entity
             this.LastName = profile.LastName;
             this.DateOfBirth = profile.DoB;
             this.Gender = profile.Gender;
-        }
-
-        public List<ChatSession> GetSessions()
-        {
-            return sessions;
+            this.Banned = profile.Banned;
+            this.LastLogoff = profile.LastLogoff;
         }
 
         public bool IsOnline()
@@ -80,9 +86,50 @@ namespace PacChatServer.Entity
             return sessions.Count > 0;
         }
 
+        public void Send(IPacket packet, params ChatSession[] ignoreSessions)
+        {
+            foreach(ChatSession session in sessions)
+            {
+                if (!ignoreSessions.Contains<ChatSession>(session))
+                {
+                    session.Send(packet);
+                }
+            }
+        }
+
+        public void Online()
+        {
+            
+        }
+
+        public void Offline()
+        {
+            this.LastLogoff = DateTime.Now;
+            this.Save();
+            PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out!", this.Email));
+        }
+
+        public void Kick()
+        {
+            foreach(ChatSession session in sessions)
+            {
+                session.Disconnect();
+            }
+        }
+
         public override void Save()
         {
-            //Save to db
+            saver.Update(this);
+            ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
+
+            profile.Email = this.Email;
+            profile.PassHashed = this.Password;
+            profile.FirstName = this.FirstName;
+            profile.LastName = this.LastName;
+            profile.DoB = this.DateOfBirth;
+            profile.Gender = this.Gender;
+            profile.Banned = this.Banned;
+            profile.LastLogoff = this.LastLogoff;
         }
     }
 }

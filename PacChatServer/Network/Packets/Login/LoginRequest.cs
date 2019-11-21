@@ -35,7 +35,7 @@ namespace PacChatServer.Network.Packets.Login
             LoginResult respone = new LoginResult();
 
             Guid id = ProfileCache.Instance.ParseEmailToGuid(Username);
-            
+
             if (id == Guid.Empty)
             {
                 respone.StatusCode = 404;

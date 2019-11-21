@@ -66,10 +66,11 @@ namespace PacChatServer.Network.Packets.Register
                 Gender = this.Gender
             };
 
-            bool added = new ChatUserStore().Save(user);
+            bool added = new ChatUserStore().AddNew(user);
             if (added)
             {
                 responePacket.StatusCode = 200;
+                PacChatServer.GetServer().Logger.Info(String.Format("Account {0} has registered successfully.", user.Email));
             } else
             {
                 responePacket.StatusCode = 404;
