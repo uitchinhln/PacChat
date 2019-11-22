@@ -96,6 +96,7 @@ namespace PacChat.Network
                 if (Session == null || !IsConnected())
                 {
                     await Bind();
+                    AppManager.OnReconnected();
                 }
                 if (Session == null || !IsConnected())
                 {

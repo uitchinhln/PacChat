@@ -52,5 +52,10 @@ namespace PacChat.MVC
         {
             isLostConnection = lostConnection;
         }
+
+        public static void OnReconnected()
+        {
+            isLostConnection = false;
+        }
     }
 }

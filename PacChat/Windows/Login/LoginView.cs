@@ -98,20 +98,20 @@ namespace PacChat.Windows.Login
             }
             else
             {
-                string message = "";
+                AnnouncementDialog dialog = null;
                 switch (code)
                 {
                     case 404:
-                        message = "Invalid username or password\nCheck your info and try again";
+                        dialog = new AnnouncementDialog("Invalid username or password", "Check your info and try again");
                         break;
                     case 401:
-                        message = "Invalid username or password\nCheck your info and try again";
+                        dialog = new AnnouncementDialog("Invalid username or password", "Check your info and try again");
                         break;
                     case 403:
-                        message = "Your account got banned\nPlease contact the Administrator to get more information";
+                        dialog = new AnnouncementDialog("Your account got banned", "Please contact the admin to get more information");
                         break;
                 }
-                DialogHost.Show(new AnnouncementDialog(message));
+                DialogHost.Show(dialog);
             }
         }
 
@@ -138,22 +138,22 @@ namespace PacChat.Windows.Login
             DialogHost.CloseDialogCommand.Execute(null, null);
             if (code == 200)
             {
-                _ = await DialogHost.Show(new AnnouncementDialog("Your account has been activated successfully\nYou can now login."));
+                _ = await DialogHost.Show(new AnnouncementDialog("Your account has been activated successfully", "You can now login."));
                 MoveToTab(0);
             }
             else
             {
-                string message = "";
+                AnnouncementDialog dialog = null;
                 switch (code)
                 {
                     case 404:
-                        message = "Unknow error\nPlease contact administrator for support\nError Code: #RGDBE1";
+                        dialog = new AnnouncementDialog("Unknow error", "Please contact administrator for support", "Error Code: #RGDBE1");
                         break;
                     case 409:
-                        message = "Your email early exist in PacChat system";
+                        dialog = new AnnouncementDialog("Your email early exist in PacChat system");
                         break;
                 }
-                _ = await DialogHost.Show(new AnnouncementDialog(message));
+                _ = await DialogHost.Show(dialog);
             }
         }
     }

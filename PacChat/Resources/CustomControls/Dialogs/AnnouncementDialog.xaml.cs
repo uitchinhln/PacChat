@@ -20,10 +20,10 @@ namespace PacChat.Resources.CustomControls.Dialogs
     /// </summary>
     public partial class AnnouncementDialog : UserControl
     {
-        public AnnouncementDialog(string message)
+        public AnnouncementDialog(params string[] messages)
         {
             InitializeComponent();
-            txtContent.Text = message;
+            txtContent.Text = String.Join("\n", messages);
         }
     }
 }
