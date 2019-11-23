@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Animator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\Lib\Animator.dll</HintPath>
+    </Reference>
     <Reference Include="CNetwork">
       <HintPath>..\..\lib\CNetwork.dll</HintPath>
     </Reference>
@@ -95,8 +99,17 @@
     <Compile Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml.cs">
       <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\TabSticker.xaml.cs">
+      <DependentUpon>TabSticker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\TabStickerContainner.xaml.cs">
+      <DependentUpon>TabStickerContainner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestWindows.xaml.cs">
+      <DependentUpon>TestWindows.xaml</DependentUpon>
     </Compile>
     <Compile Include="UIElements\ProfileAvatar.xaml.cs">
       <DependentUpon>ProfileAvatar.xaml</DependentUpon>
@@ -218,6 +231,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\CustomControls\TabSticker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\TabStickerContainner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -227,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +348,9 @@
     <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
     <Resource Include="Resources\icon_ava_32.png" />
     <Resource Include="Resources\Drawable\hinh3.png" />
+    <Resource Include="Resources\Drawable\sprite.png" />
+    <Resource Include="Resources\Drawable\sprite %282%29.png" />
+    <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
   </ItemGroup>

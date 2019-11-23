@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using PacChat.Resources.CustomControls;
 
 namespace PacChat
 {
@@ -20,10 +21,12 @@ namespace PacChat
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            LoginWindow login = new LoginWindow();
-            login.Show();
+            //LoginWindow login = new LoginWindow();
+            //login.Show();
             //MainWindow main = new MainWindow();
-            //main.Show();
+            TestWindows main = new TestWindows();
+            main.Show();
+            
         }
     }
 }

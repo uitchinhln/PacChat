@@ -13,7 +13,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
                 <ResourceDictionary Source="Resources\Dicts\Colours.xaml"/>
                 <ResourceDictionary Source="Resources\Styles\Scroll.xaml"/>
+                
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

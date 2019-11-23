@@ -94,6 +94,12 @@ namespace PacChat
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
         }
 
+
+        private void addSticker(int id, int duration, int size)
+        {
+
+        }
+
         public void ClearChatPage()
         {
             _previousBubbleChat = null;

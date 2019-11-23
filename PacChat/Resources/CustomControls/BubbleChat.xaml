@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:animator="clr-namespace:Animator;assembly=Animator"
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" d:DesignWidth="300">
 
@@ -39,6 +40,10 @@
             <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
                 <!-- Nick name label -->
                 <Label Name="NickName" Content="Nick Name bla bla"/>
+                <animator:Animator 
+                    ImageSource="D:\PacChat\PacChat\Resources\Drawable\sprite.png" Interval="0:0:0.1"
+                        HorizontalOffset="130" Margin="20"
+                        VerticalOffset="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
 
