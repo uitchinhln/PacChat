@@ -18,7 +18,7 @@
                             HorizontalAlignment="Left">
 
                         <animator:Animator 
-                            ImageSource="D:\PacChat\PacChat\Resources\Drawable\sprite (2).png" Interval="0:0:0.05"
+                            ImageSource="/PacChat;component/Resources/Drawable/sprite (2).png" Interval="0:0:0.05"
                             HorizontalOffset="130" Margin="0"
                             VerticalOffset="130"/>
                     </Border>
