@@ -25,8 +25,6 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             addStickerTab();
-            addStickerTab();
-            addStickerTab();
         }
 
 
