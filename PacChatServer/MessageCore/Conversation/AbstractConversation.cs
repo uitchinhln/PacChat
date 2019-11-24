@@ -17,10 +17,16 @@ namespace PacChatServer.MessageCore.Conversation
     [BsonKnownTypes(typeof(SingleConversation), typeof(GroupConversation))]
     public abstract class AbstractConversation : IConversation
     {
-        protected HashSet<Guid> Members = new HashSet<Guid>();
+        [BsonId]
+        public Guid ID { get; set; }
 
-        protected List<Guid> MessagesID = new List<Guid>();
+        [BsonElement("Members")]
+        public HashSet<Guid> Members { get; set; } = new HashSet<Guid>();
 
-        protected Dictionary<Guid, IMessage> Messages = new Dictionary<Guid, IMessage>();
+        [BsonElement("MessagesID")]
+        public List<Guid> MessagesID { get; set; } = new List<Guid>();
+
+        [BsonIgnore]
+        public Dictionary<Guid, IMessage> LoadedMessages { get; set; } = new Dictionary<Guid, IMessage>();
     }
 }

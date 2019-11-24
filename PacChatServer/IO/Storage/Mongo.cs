@@ -104,9 +104,16 @@ namespace PacChatServer.IO.Storage
 
         public static void StartService(bool forceRestart = false)
         {
-            if (Instance == null || forceRestart)
+            try
             {
-                Instance = new Mongo();
+                if (Instance == null || forceRestart)
+                {
+                    Instance = new Mongo();
+                    PacChatServer.GetServer().Logger.Info("MongoDB Service started successfully");
+                }
+            } catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
             }
         }
 

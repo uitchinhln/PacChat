@@ -51,6 +51,7 @@ namespace PacChatServer.Command
                     throw e;
                 }
                 registeredCommands.Add(commandLabel, executor);
+                server.Logger.Info(String.Format("  - Command {0} registered successfully.", commandLabel));
             } catch (Exception e)
             {
                 server.Logger.Error(e);
@@ -108,9 +109,16 @@ namespace PacChatServer.Command
 
         public static void StartService(bool forceRestart = false)
         {
-            if (Instance == null || forceRestart)
+            try
             {
-                Instance = new CommandManager();
+                if (Instance == null || forceRestart)
+                {
+                    Instance = new CommandManager();
+                    PacChatServer.GetServer().Logger.Info("Command Service started successfully");
+                }
+            } catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
             }
         }
 

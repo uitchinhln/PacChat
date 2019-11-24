@@ -58,9 +58,16 @@ namespace PacChatServer.Entity.Meta.Profile
 
         public static void StartService(bool forceStart = false)
         {
-            if (Instance == null || forceStart)
+            try
             {
-                Instance = new ProfileCache();
+                if (Instance == null || forceStart)
+                {
+                    Instance = new ProfileCache(); 
+                    PacChatServer.GetServer().Logger.Info("Profile Cache Service started successfully");
+                }
+            } catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
             }
         }
 

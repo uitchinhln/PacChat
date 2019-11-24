@@ -4,6 +4,7 @@ using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Entity;
 using PacChatServer.Network;
+using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,11 +54,12 @@ namespace PacChatServer.Entity
         [BsonElement("Relationship")]
         public Dictionary<Guid, Guid> Relationship { get; private set; } = new Dictionary<Guid, Guid>();
 
+        //Key is conversation id, value is the last time it have action
         [BsonElement("Conversations")]
         public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         
         [BsonElement("NearestStickers")]
-        public HashSet<int> NearestStickers { get; private set; } = new HashSet<int>();        
+        public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();        
 
         //True if this user has been banned
         [BsonElement("Banned")]
@@ -65,7 +67,7 @@ namespace PacChatServer.Entity
 
         public ChatUser()
         {
-
+            
         }
 
         public ChatUser(ChatUserProfile profile)

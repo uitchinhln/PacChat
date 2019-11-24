@@ -14,6 +14,11 @@ namespace PacChatServer.Entity.EntityProperty
         Guid user1;
         Guid user2;
 
+        private Relation()
+        {
+
+        }
+
         public Guid User1 
         { 
             get => user1;
@@ -72,7 +77,7 @@ namespace PacChatServer.Entity.EntityProperty
                 return Cache[id];
             }
             //load from db
-            return null;
+            return new Relation();
         }
     }
 }

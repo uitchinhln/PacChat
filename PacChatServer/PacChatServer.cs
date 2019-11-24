@@ -7,8 +7,10 @@ using PacChatServer.Command.Commands.Ban;
 using PacChatServer.Entity;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Storage;
+using PacChatServer.MessageCore.Sticker;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
+using PacChatServer.Utils;
 using PacChatServer.Utils.ThreadUtils;
 using System;
 using System.Collections.Concurrent;
@@ -45,6 +47,8 @@ namespace PacChatServer
             CommandManager.StartService();
 
             RegisterCommand();
+
+            Sticker.StartService();
 
             StartNetworkService();
         }
