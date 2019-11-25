@@ -99,6 +99,9 @@
     <Compile Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml.cs">
       <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Sticker.xaml.cs">
+      <DependentUpon>Sticker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\TabSticker.xaml.cs">
       <DependentUpon>TabSticker.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\CustomControls\Sticker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\CustomControls\TabSticker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,6 +357,23 @@
     <Resource Include="Resources\Drawable\hinh3.png" />
     <Resource Include="Resources\Drawable\sprite.png" />
     <Resource Include="Resources\Drawable\sprite %282%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2810%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2811%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2812%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2813%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2814%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2815%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2816%29.png" />
+    <Resource Include="Resources\Drawable\sprite %2817%29.png" />
+    <Resource Include="Resources\Drawable\sprite %283%29.png" />
+    <Resource Include="Resources\Drawable\sprite %284%29.png" />
+    <Resource Include="Resources\Drawable\sprite %285%29.png" />
+    <Resource Include="Resources\Drawable\sprite %286%29.png" />
+    <Resource Include="Resources\Drawable\sprite %287%29.png" />
+    <Resource Include="Resources\Drawable\sprite %288%29.png" />
+    <Resource Include="Resources\Drawable\sprite %289%29.png" />
+    <Resource Include="Resources\Drawable\sprite %281%29.png" />
+    <Resource Include="Resources\Drawable\sprite_ic.png" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

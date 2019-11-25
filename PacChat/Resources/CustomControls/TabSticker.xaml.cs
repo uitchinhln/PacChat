@@ -21,17 +21,53 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class TabSticker : UserControl
     {
+        private int _cateID;
+
+        private string _iconUri;
+
+        private string _cateName;
+
+        private int _totalSticker;
+
+
         public TabSticker()
         {
             InitializeComponent();
-            Animator.Animator a = new Animator.Animator();
-            Image imgae = new Image();
-            a.countLimit = 3;
-            a.ImageSource = new BitmapImage(new Uri("D:/sprite (1).png", UriKind.Absolute));
-            a.HorizontalOffset = 130;
-            a.VerticalOffset = 130;
-            a.Interval = TimeSpan.FromSeconds(0.1);
-            wplStickerContainner.Children.Add(a);
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (1).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (2).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (3).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (4).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (5).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (6).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (7).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (8).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (9).png"));
+        }
+
+        public int CateID
+        {
+            get { return _cateID; }
+            set { _cateID = value; }
+        }
+
+        public string IconUri
+        {
+            get { return _iconUri; }
+            set { _iconUri = value; }
+        }
+
+        public string CateName
+        {
+            get { return _cateName; }
+            set { _cateName = value; }
+        }
+
+        public int TotalSticker
+        {
+            get { return _totalSticker; }
+            set { _totalSticker = value; }
+
         }
     }
 }
