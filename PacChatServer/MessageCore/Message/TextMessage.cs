@@ -9,5 +9,10 @@ namespace PacChatServer.MessageCore.Message
     public class TextMessage : AbstractMessage
     {
         public String Message { get; set; }
+
+        public override int GetPreviewCode()
+        {
+            return 4;
+        }
     }
 }

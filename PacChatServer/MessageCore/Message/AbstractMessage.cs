@@ -39,5 +39,14 @@ namespace PacChatServer.MessageCore.Message
         //IDs of user who reacted and react id;
         [BsonElement("Reacts")]
         public Dictionary<Guid, int> Reacts { get; private set; } = new Dictionary<Guid, int>();
+
+        /// <summary>
+        /// 1: Attachment
+        /// 2: Image
+        /// 3: Sticker
+        /// 4: Text
+        /// 5: Video
+        /// </summary>
+        public abstract int GetPreviewCode();
     }
 }

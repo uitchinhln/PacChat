@@ -13,6 +13,10 @@ namespace PacChatServer.Network.Protocol
         {
             Inbound(0x00, new FriendsListRequest());
             Outbound(0x00, new FriendsListResponse());
+
+
+            Inbound(0x01, new ShortProfileRequest());
+            Outbound(0x01, new ShortProfileResponse());
         }
     }
 }

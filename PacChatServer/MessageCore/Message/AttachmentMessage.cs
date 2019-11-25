@@ -8,5 +8,9 @@ namespace PacChatServer.MessageCore.Message
 {
     public class AttachmentMessage : AbstractMessage
     {
+        public override int GetPreviewCode()
+        {
+            return 1;
+        }
     }
 }
