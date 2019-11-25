@@ -21,7 +21,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, FriendOfID);
+            //ByteBufUtils.WriteUTF8(byteBuf, FriendOfID);
             return byteBuf;
         }
 

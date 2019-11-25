@@ -25,7 +25,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             {
                 ByteBufUtils.WriteUTF8(byteBuf, id);
             }
-            ByteBufferUtil.WriteUtf8(byteBuf, "~");
+            ByteBufUtils.WriteUTF8(byteBuf, "~");
             return byteBuf;
         }
 
