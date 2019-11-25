@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using PacChatServer.IO.Storage;
 using PacChatServer.MessageCore.Conversation;
 using System;
@@ -54,6 +55,33 @@ namespace PacChatServer.IO.Message
             });
         }
 
+        public long GetLastActive(Guid conversationID)
+        {
+            LastActiveTemp conversation = null;
+
+            try
+            {
+                conversation = Mongo.Instance.Get<LastActiveTemp>(conversationID.ToString(), (collection) =>
+                {
+                    var condition = Builders<LastActiveTemp>.Filter.Eq(p => p.ID, conversationID);
+                    var field = Builders<LastActiveTemp>.Projection.Include(p => p.LastActive);
+                    var result = collection.Find(condition).Project<LastActiveTemp>(field).ToList();
+
+                    if (result.Count > 0)
+                    {
+                        return result[0];
+                    }
+                    return null;
+                });
+            }
+            catch (Exception e)
+            {
+                PacChatServer.GetServer().Logger.Error(e);
+            }
+
+            return conversation != null ? conversation.LastActive : 0;
+        }
+
         public void AddNew(AbstractConversation conversation)
         {
             Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), (collection) =>
@@ -61,5 +89,14 @@ namespace PacChatServer.IO.Message
                 collection.InsertOne(conversation);
             });
         }
+    }
+
+    public class LastActiveTemp
+    {
+        [BsonId]
+        public Guid ID { get; set; }
+
+        [BsonElement("LastActive")]
+        public long LastActive { get; set; }
     }
 }

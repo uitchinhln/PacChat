@@ -20,6 +20,9 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonId]
         public Guid ID { get; set; }
 
+        [BsonElement("LastActive")]
+        public long LastActive { get; set; }
+
         [BsonElement("Members")]
         public HashSet<Guid> Members { get; set; } = new HashSet<Guid>();
 

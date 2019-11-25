@@ -1,5 +1,6 @@
 ﻿using PacChatServer.Entity;
 using PacChatServer.IO.Entity;
+using PacChatServer.IO.Message;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,6 +26,16 @@ namespace PacChatServer
             try
             {
                 result = new ChatUserStore().Load(id);
+                if (result != null)
+                {
+                    ConversationStore conversationStore = new ConversationStore();
+                    long time = 0;
+                    foreach (Guid cid in result.ConversationID)
+                    {
+                        time = conversationStore.GetLastActive(cid);
+                        result.Conversations.Add(cid, time);
+                    }
+                }
             } catch (Exception e)
             {
                 PacChatServer.GetServer().Logger.Error(e);

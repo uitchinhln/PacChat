@@ -300,6 +300,7 @@
     <Compile Include="Network\Protocol\HandShakeProtocol.cs" />
     <Compile Include="Network\Protocol\PacChatProtocol.cs" />
     <Compile Include="Network\Protocol\ProtocolProvider.cs" />
+    <Compile Include="Network\ResponeCode.cs" />
     <Compile Include="Network\SessionRegistry.cs" />
     <Compile Include="PacChatServer.cs" />
     <Compile Include="Program.cs" />
@@ -326,6 +327,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Cache\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
   </ItemGroup>

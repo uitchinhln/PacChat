@@ -47,7 +47,7 @@ namespace PacChatServer.Network.Packets.Register
 
             if (ProfileCache.Instance.ParseEmailToGuid(Email) != Guid.Empty)
             {
-                responePacket.StatusCode = 409;
+                responePacket.StatusCode = ResponeCode.Conflict;
                 chatSession.Send(responePacket);
                 chatSession.Disconnect();
                 return;
@@ -69,11 +69,11 @@ namespace PacChatServer.Network.Packets.Register
             bool added = new ChatUserStore().AddNew(user);
             if (added)
             {
-                responePacket.StatusCode = 200;
+                responePacket.StatusCode = ResponeCode.OK;
                 PacChatServer.GetServer().Logger.Info(String.Format("Account {0} has registered successfully.", user.Email));
             } else
             {
-                responePacket.StatusCode = 404;
+                responePacket.StatusCode = ResponeCode.NotFound;
             }
 
             chatSession.Send(responePacket);

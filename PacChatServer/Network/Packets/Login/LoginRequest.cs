@@ -38,7 +38,7 @@ namespace PacChatServer.Network.Packets.Login
 
             if (id == Guid.Empty)
             {
-                respone.StatusCode = 404;
+                respone.StatusCode = ResponeCode.NotFound;
                 chatSession.Send(respone);
                 chatSession.Disconnect();
                 return;
@@ -49,7 +49,7 @@ namespace PacChatServer.Network.Packets.Login
 
             if (profile.PassHashed != Passhash)
             {
-                respone.StatusCode = 401;
+                respone.StatusCode = ResponeCode.Unauthorized;
                 chatSession.Send(respone);
                 chatSession.Disconnect();
                 return;
@@ -57,13 +57,13 @@ namespace PacChatServer.Network.Packets.Login
 
             if (profile.Banned)
             {
-                respone.StatusCode = 403;
+                respone.StatusCode = ResponeCode.Forbidden;
                 chatSession.Send(respone);
                 chatSession.Disconnect();
                 return;
             }
 
-            respone.StatusCode = 200;
+            respone.StatusCode = ResponeCode.OK;
             chatSession.Send(respone);
             chatSession.FinalizeLogin(profile);
         }
