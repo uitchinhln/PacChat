@@ -25,6 +25,7 @@ namespace PacChat.MessageCore.Message
         //IDs of user who reacted and react id;
         public Dictionary<Guid, int> Reacts { get; private set; } = new Dictionary<Guid, int>();
 
+
         public void Reply()
         {
             throw new NotImplementedException();

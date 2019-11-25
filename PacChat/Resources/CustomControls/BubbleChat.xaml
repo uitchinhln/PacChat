@@ -41,7 +41,7 @@
                 <!-- Nick name label -->
                 <Label Name="NickName" Content="Nick Name bla bla"/>
                 <animator:Animator 
-                    ImageSource="D:\PacChat\PacChat\Resources\Drawable\sprite.png" Interval="0:0:0.1"
+                    ImageSource="/PacChat;component/Resources/Drawable/sprite.png" Interval="0:0:0.1"
                         HorizontalOffset="130" Margin="20"
                         VerticalOffset="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 

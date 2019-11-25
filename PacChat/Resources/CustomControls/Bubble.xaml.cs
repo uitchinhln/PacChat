@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PacChat.MessageCore.Message;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -22,23 +21,10 @@ namespace PacChat.Resources.CustomControls
     public partial class Bubble : UserControl
     {
 
-        public AbstractMessage Messages
+        public string Messages
         {
-            get 
-            { 
-                if (Messages is TextMessage)
-                    return new TextMessage() { Message = textBlock.Text.ToString() }; 
-                /* This will be completed whenever sticker tabs is completed
-                else if (Messages is StickerMessage)
-                    return new StickerMessage() { Sticker = }
-                */
-                return null;
-            }
-            set 
-            { 
-                if (Messages is TextMessage)
-                    textBlock.Text = value.ToString(); 
-            }
+            get { return textBlock.Text.ToString(); }
+            set { textBlock.Text = value.ToString(); }
         }
 
         public double MessagesFontSize

@@ -57,12 +57,12 @@ namespace PacChat
             }
         }
 
-        private void SendMessage(AbstractMessage msg, bool isSimulating = false) //on the Rightside
+        private void SendMessage(TextMessage msg, bool isSimulating = false) //on the Rightside
         {
             _previousBubbleChat = null;
 
             Bubble b = new Bubble();
-            b.Messages = msg;
+            b.Messages = msg.Message;
             b.SetBG(Color.FromRgb(50, 23, 108));
             b.SetTextColor(Colors.White);
             b.SetDirect(false);// true = left false = right
@@ -74,19 +74,19 @@ namespace PacChat
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
         }
 
-        private void sendLeftMessages(string msg, bool isSimulating = false)
+        private void sendLeftMessages(TextMessage msg, bool isSimulating = false)
         {
-            if (msg == "") return;
             if (_previousBubbleChat == null)
             {
                 _previousBubbleChat = new BubbleChat();
                 spMessagesContainer.Children.Add(_previousBubbleChat);
             }
+
             Bubble b = new Bubble();
-            b.Messages = msg;
+            b.Messages = msg.Message;
             b.SetSeen(false);
             b.SetBG(Color.FromRgb(246, 246, 246));
             b.SetDirect(true); // true = left false = right
@@ -96,7 +96,7 @@ namespace PacChat
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, true));
         }
 
 
@@ -121,9 +121,9 @@ namespace PacChat
             foreach (BubbleInfo bubbleInfo in msgList)
             {
                 if (bubbleInfo.onLeft)
-                    sendLeftMessages(bubbleInfo.message, true);
+                    sendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
                 else
-                    SendMessage(bubbleInfo.message, true);
+                    SendMessage(new TextMessage() { Message = bubbleInfo.message }, true);
             }
         }
 
@@ -143,7 +143,7 @@ namespace PacChat
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            sendLeftMessages(ChatInput.Text);
+            sendLeftMessages(new TextMessage() { Message = ChatInput.Text });
             ChatInput.Text = "";
         }
     }

@@ -9,10 +9,10 @@ namespace PacChat.Utils
 {
     public struct BubbleInfo
     {
-        public IMessage message;
+        public string message;
         public bool onLeft;
 
-        public BubbleInfo(IMessage msg, bool lft)
+        public BubbleInfo(string msg, bool lft)
         {
             message = msg;
             onLeft = lft;
