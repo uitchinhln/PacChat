@@ -12,7 +12,7 @@ namespace PacChat.ChatAMVC
 {
     public class ChatModel : Model<ChatApplication>
     {
-        public static List<int> onServerIDs { get; set; } = new List<int>();
+        public static List<string> FriendIDs { get; set; } = new List<string>();
  
         #region OnChatPage
         public string Title { get; set; } = "";
@@ -24,6 +24,7 @@ namespace PacChat.ChatAMVC
         public void InitContacts()
         {
             List<UserMessageViewModel> users = UserListDesignModel.Instance.Contacts;
+
             foreach (var user in users)
             {
                 ContactsMessages.Add(user.Id, new List<BubbleInfo>());

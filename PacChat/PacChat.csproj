@@ -70,6 +70,11 @@
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageCore\Message\AbstractMessage.cs" />
+    <Compile Include="MessageCore\Message\IMessage.cs" />
+    <Compile Include="MessageCore\Message\StickerMessage.cs" />
+    <Compile Include="MessageCore\Message\TextMessage.cs" />
+    <Compile Include="MessageCore\Sticker\Sticker.cs" />
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetInfoResult.cs" />
@@ -299,6 +304,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -339,6 +345,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
       <Version>3.1.0-preview2.19525.4</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Drawable\icons8_filled_topic_30px.png" />
@@ -353,6 +362,9 @@
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MessageCore\Conversation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

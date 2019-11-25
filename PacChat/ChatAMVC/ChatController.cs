@@ -35,5 +35,10 @@ namespace PacChat.ChatAMVC
             // Update from here
             Console.WriteLine("Get data from model and update Database");
         }
+
+        public void OnMessageSent()
+        {
+            var app = MainWindow.chatApplication;
+        }
     }
 }

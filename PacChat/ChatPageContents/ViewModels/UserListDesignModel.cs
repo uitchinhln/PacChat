@@ -57,15 +57,16 @@ namespace PacChat.ChatPageContents.ViewModels
         public void LoadContacts()
         {
             Console.WriteLine("Load contacts");
+
             // Load all contacts from server database
             Contacts = new List<UserMessageViewModel>();
-            foreach (var user in ChatModel.onServerIDs)
+
+            foreach (var user in ChatModel.FriendIDs)
             {
                 var contact =
                     new UserMessageViewModel
                     {
-                        Id = "pac" + user,
-                        Name = "Test" + user,
+                        Id = user,
                         IncomingMsg = ""
                     };
                 Contacts.Add(contact);

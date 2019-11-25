@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace PacChat.Network.Packets.AfterLoginRequest
 {
-    public class GetIDs : IPacket
+    public class GetShortInfo : IPacket
     {
+        public string ID { get; set; }
+
         public void Decode(IByteBuffer buffer)
         {
             //throw new NotImplementedException();
@@ -18,7 +20,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            //throw new NotImplementedException();
+            CNetwork.Utils.ByteBufUtils.WriteUTF8(byteBuf, ID);
             return byteBuf;
         }
 

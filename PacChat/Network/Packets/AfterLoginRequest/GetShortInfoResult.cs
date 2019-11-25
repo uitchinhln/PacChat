@@ -1,4 +1,5 @@
 ﻿using CNetwork;
+using CNetwork.Utils;
 using CNetwork.Sessions;
 using DotNetty.Buffers;
 using PacChat.ChatAMVC;
@@ -14,17 +15,19 @@ using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest
 {
-    public class GetIDsResult : IPacket
+    public class GetShortInfoResult : IPacket
     {
-        public List<int> ids { get; set; } = new List<int>();
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string LastMessage { get; set; }
+        public int IsOnline { get; set; }
+
         public void Decode(IByteBuffer buffer)
         {
-            int id = buffer.ReadInt();
-            while (id != -1402)
-            {
-                ids.Add(id);
-                id = buffer.ReadInt();
-            }    
+            FirstName = ByteBufUtils.ReadUTF8(buffer);
+            LastName = ByteBufUtils.ReadUTF8(buffer);
+            LastMessage = ByteBufUtils.ReadUTF8(buffer);
+            IsOnline = buffer.ReadInt();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -34,13 +37,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
 
         public void Handle(ISession session)
         {
-            foreach (int id in ids)
-            {
-                Console.WriteLine(id);
-            }
-
-            ChatModel.onServerIDs = ids;
-            Application.Current.Dispatcher.Invoke(() => UserListDesignModel.Instance.LoadContacts());
+            
         }
     }
 }
