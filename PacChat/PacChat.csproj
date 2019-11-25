@@ -70,17 +70,19 @@
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageCore\Conversation\AbstractConversation.cs" />
+    <Compile Include="MessageCore\IConversation.cs" />
     <Compile Include="MessageCore\Message\AbstractMessage.cs" />
-    <Compile Include="MessageCore\Message\IMessage.cs" />
+    <Compile Include="MessageCore\IMessage.cs" />
     <Compile Include="MessageCore\Message\StickerMessage.cs" />
     <Compile Include="MessageCore\Message\TextMessage.cs" />
     <Compile Include="MessageCore\Sticker\Sticker.cs" />
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\GetInfoResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\GetInfo.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\GetIDs.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\GetIDsResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfoResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfo.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDs.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDsResult.cs" />
     <Compile Include="Network\Packets\Login\LoginData.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\Packets.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">
       <DependentUpon>AppHolder.xaml</DependentUpon>
@@ -363,8 +366,6 @@
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MessageCore\Conversation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

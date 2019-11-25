@@ -13,6 +13,7 @@ namespace PacChat.ChatAMVC
     public class ChatModel : Model<ChatApplication>
     {
         public static List<string> FriendIDs { get; set; } = new List<string>();
+        public static string SelfID;
  
         #region OnChatPage
         public string Title { get; set; } = "";
