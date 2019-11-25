@@ -28,9 +28,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
             FriendsListResponse response = new FriendsListResponse();
 
+            Relation rela;
             foreach(KeyValuePair<Guid, Guid> pair in chatSession.Owner.Relationship)
             {
-                if (Relation.Get(pair.Value).RelationType == Relation.Type.Friend)
+                if ((rela = Relation.Get(pair.Value)) != null && rela.RelationType == Relation.Type.Friend)
                 {
                     response.Friends.Add(pair.Key.ToString());
                 }
