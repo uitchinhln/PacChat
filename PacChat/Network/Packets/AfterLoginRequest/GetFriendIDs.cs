@@ -1,5 +1,6 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
+using CNetwork.Utils;
 using DotNetty.Buffers;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,18 @@ using System.Threading.Tasks;
 
 namespace PacChat.Network.Packets.AfterLoginRequest
 {
-    public class GetInfo : IPacket
+    public class GetFriendIDs : IPacket
     {
-        public int Id { get; set; }
+        public string FriendOfID { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
-            //throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            byteBuf.WriteInt(Id);
-
+            ByteBufUtils.WriteUTF8(byteBuf, FriendOfID);
             return byteBuf;
         }
 

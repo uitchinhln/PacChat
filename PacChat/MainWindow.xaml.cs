@@ -62,6 +62,7 @@ namespace PacChat
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             InitAMVC();
+
             try
             {
                 GetIDs data = new GetIDs();
