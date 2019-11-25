@@ -52,14 +52,21 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
                     if (conversation is SingleConversation)
                     {
                         AbstractMessage message = new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID);
-                        if (message != null)
+                        if (message == null) break;
+
+                        if (message.Showable(chatSession.Owner.ID))
                         {
-                            response.PreviewCode = message.GetPreviewCode();
-                            if (message.GetPreviewCode() == 4)
-                            {
-                                response.LastMess = (message as TextMessage).Message;
-                            }
+                            response.PreviewCode = 0;
+                            break;
+                        } 
+
+                        response.PreviewCode = message.GetPreviewCode();
+
+                        if (message.GetPreviewCode() == 4)
+                        {
+                            response.LastMess = (message as TextMessage).Message;
                         }
+
                         break;
                     }
                 }

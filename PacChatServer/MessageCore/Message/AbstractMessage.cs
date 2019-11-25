@@ -48,5 +48,10 @@ namespace PacChatServer.MessageCore.Message
         /// 5: Video
         /// </summary>
         public abstract int GetPreviewCode();
+
+        public bool Showable(Guid id)
+        {
+            return !Revoked && !HideBy.Contains(id);
+        }
     }
 }
