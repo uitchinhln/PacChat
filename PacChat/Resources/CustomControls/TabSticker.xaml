@@ -11,17 +11,9 @@
             
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
-                <WrapPanel  Width="390" >
+                <WrapPanel  x:Name="wplStickerContainner" Width="390" >
 
-                    <Border Width="130"
-                            Height="130" 
-                            HorizontalAlignment="Left">
 
-                        <animator:Animator 
-                            ImageSource="D:\PacChat\PacChat\Resources\Drawable\sprite (2).png" Interval="0:0:0.05"
-                            HorizontalOffset="130" Margin="0"
-                            VerticalOffset="130"/>
-                    </Border>
 
 
         </WrapPanel>

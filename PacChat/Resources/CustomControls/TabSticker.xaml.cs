@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Animator;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -23,6 +24,14 @@ namespace PacChat.Resources.CustomControls
         public TabSticker()
         {
             InitializeComponent();
+            Animator.Animator a = new Animator.Animator();
+            Image imgae = new Image();
+            a.countLimit = 3;
+            a.ImageSource = new BitmapImage(new Uri("D:/sprite (1).png", UriKind.Absolute));
+            a.HorizontalOffset = 130;
+            a.VerticalOffset = 130;
+            a.Interval = TimeSpan.FromSeconds(0.1);
+            wplStickerContainner.Children.Add(a);
         }
     }
 }
