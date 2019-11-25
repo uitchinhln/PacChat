@@ -327,6 +327,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Cache\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
   </ItemGroup>

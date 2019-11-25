@@ -35,7 +35,13 @@ namespace PacChatServer.Network
 
         public void FinalizeLogin(ChatUserProfile profile)
         {
-            Owner = ChatUserManager.LoadUser(profile.ID);
+            try
+            {
+                Owner = ChatUserManager.LoadUser(profile.ID);
+            } catch
+            {
+                this.Disconnect();
+            }
 
             ChatUserManager.MakeOnline(Owner);
 

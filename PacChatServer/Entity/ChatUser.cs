@@ -56,6 +56,9 @@ namespace PacChatServer.Entity
 
         //Key is conversation id, value is the last time it have action
         [BsonElement("Conversations")]
+        public List<Guid> ConversationID { get; set; } = new List<Guid>();
+
+        [BsonIgnore]
         public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         
         [BsonElement("NearestStickers")]
@@ -67,7 +70,7 @@ namespace PacChatServer.Entity
 
         public ChatUser()
         {
-            
+
         }
 
         public ChatUser(ChatUserProfile profile)
