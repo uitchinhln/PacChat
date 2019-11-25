@@ -14,8 +14,8 @@ namespace PacChat.Network.Protocol
             Inbound(0x00, new GetFriendIDsResult());
             Outbound(0x00, new GetFriendIDs());
 
-            Inbound(0x01, new GetInfoResult());
-            Outbound(0x01, new GetInfo());
+            Inbound(0x01, new GetShortInfoResult());
+            Outbound(0x01, new GetShortInfo());
         }
     }
 }

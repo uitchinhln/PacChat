@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using PacChat.ChatAMVC;
 using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network;
+using PacChat.Utils;
 
 namespace PacChat
 {
@@ -63,14 +64,18 @@ namespace PacChat
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             InitAMVC();
 
+            Packets.SendPacket<GetFriendIDs>();
+
+            /*
             try
             {
-                GetIDs data = new GetIDs();
+                GetFriendIDs data = new GetFriendIDs();
                 _ = ChatConnection.Instance.Send(data);
             } catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+            */
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
