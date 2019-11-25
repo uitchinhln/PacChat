@@ -29,20 +29,22 @@
 
             <!-- Contacts tab -->
             <materialDesign:TransitionerSlide>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
-                   <!-- 
-                    <ItemsControl ItemsSource="{Binding Contacts}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:UserMessage></local:UserMessage>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    -->
-                    <StackPanel x:Name="ListView">
-                        
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel>
+                    <Border CornerRadius="16"
+                    Background= "White"
+                    DockPanel.Dock="Right"
+                    Height="32" Margin="10,0">
+                        <TextBox x:Name="UserSearchBox" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Search contacts..."
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                        BorderThickness="0"
+                        Margin="10,4,10,-4"/>
+                    </Border>
+                    
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                        <StackPanel x:Name="ListView">
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
 

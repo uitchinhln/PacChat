@@ -8,5 +8,9 @@ namespace PacChatServer.MessageCore.Message
 {
     public class VideoMessage : AbstractMessage
     {
+        public override int GetPreviewCode()
+        {
+            return 5;
+        }
     }
 }

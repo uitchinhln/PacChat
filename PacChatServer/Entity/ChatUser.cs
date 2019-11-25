@@ -54,10 +54,10 @@ namespace PacChatServer.Entity
         [BsonElement("Relationship")]
         public Dictionary<Guid, Guid> Relationship { get; private set; } = new Dictionary<Guid, Guid>();
 
-        //Key is conversation id, value is the last time it have action
         [BsonElement("Conversations")]
         public List<Guid> ConversationID { get; set; } = new List<Guid>();
 
+        //Key is conversation id, value is the last time it have action
         [BsonIgnore]
         public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         

@@ -61,8 +61,6 @@ namespace PacChat.ChatPageContents
                 userControl.SetInfo(user.Id, user.Name, user.IncomingMsg);
                 ListView.Children.Add(userControl);
             }
-
-
         }
     }
 }

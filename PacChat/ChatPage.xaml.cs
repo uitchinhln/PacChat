@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PacChat.ChatPageContents;
 using PacChat.Resources.CustomControls;
+using PacChat.MessageCore.Message;
 using PacChat.Utils;
 
 namespace PacChat
@@ -40,48 +41,52 @@ namespace PacChat
             Instance = this;
         }
 
+        // Chat Input KeyDown if and only if message is text message
         private void ChatInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
                 // Send message here
                 Console.WriteLine("Send message");
-                SendMessage(ChatInput.Text);
+                if (ChatInput.Text == "") return;
+
+                SendMessage(new TextMessage() { Message = ChatInput.Text });  
 
                 // Clear textbox
                 ChatInput.Text = "";
             }
         }
 
-        private void SendMessage(string msg, bool isSimulating = false) //on the Rightside
+        private void SendMessage(TextMessage msg, bool isSimulating = false) //on the Rightside
         {
-            if (msg == "") return;
             _previousBubbleChat = null;
+
             Bubble b = new Bubble();
-            b.Messages = msg;
+            b.Messages = msg.Message;
             b.SetBG(Color.FromRgb(50, 23, 108));
             b.SetTextColor(Colors.White);
             b.SetDirect(false);// true = left false = right
             b.SetSeen(false);
+
             spMessagesContainer.Children.Add(b);
             MessagesContainer.ScrollToEnd();
 
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
         }
 
-        private void sendLeftMessages(string msg, bool isSimulating = false)
+        private void sendLeftMessages(TextMessage msg, bool isSimulating = false)
         {
-            if (msg == "") return;
             if (_previousBubbleChat == null)
             {
                 _previousBubbleChat = new BubbleChat();
                 spMessagesContainer.Children.Add(_previousBubbleChat);
             }
+
             Bubble b = new Bubble();
-            b.Messages = msg;
+            b.Messages = msg.Message;
             b.SetSeen(false);
             b.SetBG(Color.FromRgb(246, 246, 246));
             b.SetDirect(true); // true = left false = right
@@ -91,7 +96,7 @@ namespace PacChat
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, true));
         }
 
 
@@ -116,9 +121,9 @@ namespace PacChat
             foreach (BubbleInfo bubbleInfo in msgList)
             {
                 if (bubbleInfo.onLeft)
-                    sendLeftMessages(bubbleInfo.message, true);
+                    sendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
                 else
-                    SendMessage(bubbleInfo.message, true);
+                    SendMessage(new TextMessage() { Message = bubbleInfo.message }, true);
             }
         }
 
@@ -138,7 +143,7 @@ namespace PacChat
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            sendLeftMessages(ChatInput.Text);
+            sendLeftMessages(new TextMessage() { Message = ChatInput.Text });
             ChatInput.Text = "";
         }
     }

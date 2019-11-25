@@ -4,15 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.MessageCore.Message
+namespace PacChat.MessageCore.Message
 {
     public class TextMessage : AbstractMessage
     {
-        public String Message { get; set; }
-
-        public override int GetPreviewCode()
-        {
-            return 4;
-        }
+        public string Message { get; set; }
     }
 }

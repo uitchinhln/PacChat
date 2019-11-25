@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PacChat.MessageCore.Sticker;
 
-namespace PacChatServer.MessageCore.Message
+namespace PacChat.MessageCore.Message
 {
     public class StickerMessage : AbstractMessage
     {
-        public override int GetPreviewCode()
-        {
-            return 3;
-        }
+        public Sticker.Sticker Sticker { get; set; }
     }
 }
