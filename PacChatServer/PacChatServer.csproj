@@ -264,6 +264,7 @@
     <Compile Include="Entity\Meta\Profile\ProfileCache.cs" />
     <Compile Include="IO\BaseStore.cs" />
     <Compile Include="IO\Entity\ChatUserStore.cs" />
+    <Compile Include="IO\Entity\Property\RelationStore.cs" />
     <Compile Include="IO\Entity\UserProfileStore.cs" />
     <Compile Include="IO\Message\ConversationStore.cs" />
     <Compile Include="IO\Message\MessageStore.cs" />
@@ -288,6 +289,10 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\PingReceive.cs" />

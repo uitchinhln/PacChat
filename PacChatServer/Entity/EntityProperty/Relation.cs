@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using PacChatServer.IO.Entity.Property;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,10 @@ namespace PacChatServer.Entity.EntityProperty
 
         }
 
+        [BsonId]
+        public Guid ID { get; set; }
+
+        [BsonElement("User1")]
         public Guid User1 
         { 
             get => user1;
@@ -30,6 +36,8 @@ namespace PacChatServer.Entity.EntityProperty
                 user1 = value;
             }
         }
+
+        [BsonElement("User2")]
         public Guid User2
         {
             get => user2;
@@ -42,7 +50,11 @@ namespace PacChatServer.Entity.EntityProperty
                 user2 = value;
             }
         }
-        public Type RelationType { get; set; }
+
+        [BsonElement("Type")]
+        public Type RelationType { get; set; } = Type.None;
+
+        [BsonElement("Source")]
         public Guid Source
         {
             get => source;
@@ -56,11 +68,12 @@ namespace PacChatServer.Entity.EntityProperty
             }
         }
 
+        [BsonElement("LastUnblock")]
         public DateTime LastUnblock { get; set; } = DateTime.MinValue;
 
         public void Save()
         {
-            //save to db
+            new RelationStore().Save(this);
         }
 
         public enum Type
@@ -76,8 +89,8 @@ namespace PacChatServer.Entity.EntityProperty
             {
                 return Cache[id];
             }
-            //load from db
-            return new Relation();
+
+            return new RelationStore().Load(id);
         }
     }
 }
