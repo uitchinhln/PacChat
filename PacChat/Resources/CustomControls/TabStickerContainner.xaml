@@ -39,7 +39,7 @@
 
             <TabItem Background="White" BorderThickness="0">
                 <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
+                    <Image Source="/PacChat;component/resources/drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
                 </TabItem.Header>
                 
                 <local:TabSticker>
@@ -48,104 +48,6 @@
             </TabItem>
 
 
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
-
-
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-
-                <local:TabSticker>
-
-                </local:TabSticker>
-            </TabItem>
 
 
 

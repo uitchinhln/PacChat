@@ -36,7 +36,7 @@ namespace PacChat.Resources.CustomControls
                 Height = 38,
                 Content = new TabSticker(),
             };
-            a.Header = new BitmapImage(new Uri("D:/PacChat/PacChat/Resources/Drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+            a.Header = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
 
             
             tabCrlSticker.Items.Add(a);
