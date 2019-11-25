@@ -264,6 +264,7 @@
     <Compile Include="Entity\Meta\Profile\ProfileCache.cs" />
     <Compile Include="IO\BaseStore.cs" />
     <Compile Include="IO\Entity\ChatUserStore.cs" />
+    <Compile Include="IO\Entity\Property\RelationStore.cs" />
     <Compile Include="IO\Entity\UserProfileStore.cs" />
     <Compile Include="IO\Message\ConversationStore.cs" />
     <Compile Include="IO\Message\MessageStore.cs" />
@@ -329,6 +330,7 @@
   <ItemGroup>
     <Folder Include="Cache\" />
     <Folder Include="Command\Commands\Tool\" />
+    <Folder Include="Network\Packets\AfterLogin\DataPreparing\" />
     <Folder Include="Permission\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
