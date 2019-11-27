@@ -29,10 +29,14 @@ namespace PacChat.Resources.CustomControls
 
         private int _totalSticker;
 
+        private List<int> _listStickerID;
 
         public TabSticker(int cateID)
         {
             InitializeComponent();
+            CateID = cateID;
+            initTabSticker();
+
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png"));
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (1).png"));
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (2).png"));
@@ -52,6 +56,25 @@ namespace PacChat.Resources.CustomControls
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (16).png"));
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (17).png"));
         }
+
+        private void initListStickerID()
+        {
+            //lay cac sticker ID tu category ID
+        }
+
+        private void initTabSticker() // khoi tao tu cateID
+        {
+
+        }
+
+        private void loadSticker()
+        {
+            foreach (var x in _listStickerID)
+            {
+                wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png" + x.ToString() )); //lay info tu stickerID
+            }
+        }
+
 
         public int CateID
         {
@@ -77,5 +100,6 @@ namespace PacChat.Resources.CustomControls
             set { _totalSticker = value; }
 
         }
+
     }
 }

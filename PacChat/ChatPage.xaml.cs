@@ -16,6 +16,7 @@ using PacChat.ChatPageContents;
 using PacChat.Resources.CustomControls;
 using PacChat.MessageCore.Message;
 using PacChat.Utils;
+using Microsoft.Win32;
 
 namespace PacChat
 {
@@ -173,6 +174,24 @@ namespace PacChat
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             sendSticker(true);
+        }
+
+        private void btnSendImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            Image image = new Image();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                image.Width = 130;
+                image.Height = 130;
+                image.Source = new BitmapImage(new Uri(op.FileName));
+            }
+
+            spMessagesContainer.Children.Add(image);
         }
     }
 }
