@@ -1,5 +1,6 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
+using CNetwork.Utils;
 using DotNetty.Buffers;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Search
 {
     public class UserSearchResponse : IPacket
     {
-
+        public List<String> UserIDs = new List<String>();
 
         public void Decode(IByteBuffer buffer)
         {
@@ -20,7 +21,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.Search
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            throw new NotImplementedException();
+            foreach (string s in UserIDs)
+            {
+                ByteBufUtils.WriteUTF8(byteBuf, s);
+            }
+            ByteBufUtils.WriteUTF8(byteBuf, "~");
+
+            return byteBuf;
         }
 
         public void Handle(ISession session)

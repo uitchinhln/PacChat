@@ -1,4 +1,5 @@
 ﻿using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Entity;
 using PacChatServer.Utils;
@@ -64,6 +65,47 @@ namespace PacChatServer.Command.Commands
                 {
                     PacChatServer.GetServer().Logger.Error("Create fail: Database error!!!");
                 }
+            }
+
+            if (args[1] == "search" && args.Length >=3)
+            {
+                List<String> ids = new ChatUserStore().SearchUserIDByEmail(args[2]);
+                foreach (string s in ids)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+
+            if (args[1] == "mkfriend" && args.Length >= 4)
+            {
+                Guid userID1 = ProfileCache.Instance.ParseEmailToGuid(args[2]);
+                Guid userID2 = ProfileCache.Instance.ParseEmailToGuid(args[3]);
+
+                if (userID1 == Guid.Empty || userID2 == Guid.Empty)
+                {
+                    PacChatServer.GetServer().Logger.Warn("One of two emails does not exist.");
+                    return;
+                }
+
+                ChatUser user1 = ChatUserManager.LoadUser(userID1);
+                ChatUser user2 = ChatUserManager.LoadUser(userID2);
+
+                if (user1.Relationship.ContainsKey(userID1)) return;
+
+                Relation relation = new Relation()
+                {
+                    User1 = userID1,
+                    User2 = userID2,
+                    Source = userID1,
+                    RelationType = Relation.Type.Friend
+                };
+
+                user1.Relationship.Add(userID2, relation.ID);
+                user2.Relationship.Add(userID1, relation.ID);
+
+                user1.Save();
+                user2.Save();
+                relation.Save();
             }
         }
     }

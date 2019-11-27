@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Conversation;
 using PacChatServer.MessageCore.Message;
@@ -76,6 +77,14 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
                         break;
                     }
                 }
+            }
+
+            if (chatSession.Owner.Relationship.ContainsKey(targetUser.ID))
+            {
+                response.RelationshipType = (int) Relation.Get(chatSession.Owner.Relationship[targetUser.ID]).RelationType;
+            } else
+            {
+                response.RelationshipType = (int) Relation.Type.None;
             }
 
             chatSession.Send(response);

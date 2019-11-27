@@ -24,7 +24,15 @@ namespace PacChatServer.IO.Entity.Property
                 }
                 return null;
             });
-        } 
+        }
+
+        public void AddNew(Relation value)
+        {
+            Mongo.Instance.Set<Relation>(Mongo.UserCollectionName, (collection) =>
+            {
+                collection.InsertOne(value);
+            });
+        }
 
         public void Save(Relation relation)
         {

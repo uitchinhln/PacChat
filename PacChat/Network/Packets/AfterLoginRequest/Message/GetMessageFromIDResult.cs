@@ -12,24 +12,28 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
     public class GetMessageFromIDResult : IPacket
     {
-        public int PreviewCode { get; set; }
-
         //List of user seen this message
         public HashSet<string> SeenBy { get; private set; } = new HashSet<string>();
         //if Revoked = true, the message will be hidden to all users.
         public bool Revoked { get; set; } = false;
-        //IDs of users who hide this message away from their conversation, the message still show to the others
-        public HashSet<string> HideBy { get; private set; } = new HashSet<string>();
         //IDs of user who reacted and react id;
         public Dictionary<string, int> Reacts { get; private set; } = new Dictionary<string, int>();
 
+        //Type of message
+        /// <summary>
+        /// 1: Attachment
+        /// 2: Image
+        /// 3: Sticker
+        /// 4: Text
+        /// 5: Video
+        /// </summary>
+        public int MessType { get; set; }
+
         // Text content is content of text message (if preview code is equal to 4)
-        public string TextContent { get; set; }
+        public string Content { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
-            PreviewCode = buffer.ReadInt();
-
             // Get ids that have seen this message
             string temp = ByteBufUtils.ReadUTF8(buffer);
             while (temp != "~")
@@ -39,15 +43,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             }
 
             Revoked = buffer.ReadInt() == 1 ? true : false;
-
-            // Get ids that have hidden this message
-            temp = ByteBufUtils.ReadUTF8(buffer);
-            while (temp != "~")
-            {
-                HideBy.Add(temp);
-                temp = ByteBufUtils.ReadUTF8(buffer);
-            }
-
+            
             // Get ids that have reacted this message & their reaction id (int)
             // Please write to buffer in this format: user_id_0-reaction_id_0-user_id_1-reaction_id_1-...
             temp = ByteBufUtils.ReadUTF8(buffer);
@@ -59,8 +55,11 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 reactionID = buffer.ReadInt();
             }
 
-            // Get text content if this is a text message
-            TextContent = ByteBufUtils.ReadUTF8(buffer);
+            // Get message type
+            this.MessType = buffer.ReadInt();
+
+            // Get message content
+            Content = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
