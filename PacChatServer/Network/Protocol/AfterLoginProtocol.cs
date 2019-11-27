@@ -1,4 +1,5 @@
 ﻿using PacChatServer.Network.Packets.AfterLogin.DataPreparing;
+using PacChatServer.Network.Packets.AfterLogin.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace PacChatServer.Network.Protocol
             Inbound(0x00, new FriendsListRequest());
             Outbound(0x00, new FriendsListResponse());
 
-
             Inbound(0x01, new ShortProfileRequest());
             Outbound(0x01, new ShortProfileResponse());
+
+            Inbound(0x03, new UserSearchRequest());
+            Outbound(0x03, new UserSearchResponse());
         }
     }
 }
