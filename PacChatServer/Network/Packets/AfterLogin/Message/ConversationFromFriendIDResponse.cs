@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
+namespace PacChatServer.Network.Packets.AfterLogin.Message
 {
-    public class FriendsListResponse : IPacket
+    public class ConversationFromFriendIDResponse : IPacket
     {
-        public List<string> Friends { get; set; } = new List<string>();
+        public string ConversationID { get; set; } = "~";
 
         public void Decode(IByteBuffer buffer)
         {
@@ -21,11 +21,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            foreach (string id in Friends)
-            {
-                ByteBufUtils.WriteUTF8(byteBuf, id);
-            }
-            ByteBufUtils.WriteUTF8(byteBuf, "~");
+            ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
             return byteBuf;
         }
 

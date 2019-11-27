@@ -30,15 +30,14 @@ namespace PacChat.Resources.CustomControls
 
         private void addStickerTab()
         {
-            PackIcon icon = new PackIcon();
-            icon.Kind = PackIconKind.Smiley;
             TabItem a = new TabItem
             {
-                Width = 50,
-                Height = 30,
-                Header = icon,
+                Width = 38,
+                Height = 38,
                 Content = new TabSticker(),
             };
+            a.Header = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+
             
             tabCrlSticker.Items.Add(a);
         }

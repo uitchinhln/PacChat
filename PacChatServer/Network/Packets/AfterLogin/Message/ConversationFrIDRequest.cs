@@ -8,26 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.AfterLoginRequest
+namespace PacChatServer.Network.Packets.AfterLogin.Message
 {
-    public class GetFriendIDs : IPacket
+    public class ConversationFrIDRequest : IPacket
     {
-        public string FriendOfID { get; set; }
+        public Guid ConversationID { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
-            // throw new NotImplementedException();
+            ConversationID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            //ByteBufUtils.WriteUTF8(byteBuf, FriendOfID);
-            return byteBuf;
+            throw new NotImplementedException();
         }
 
         public void Handle(ISession session)
         {
-            
+            ChatSession chatSession = session as ChatSession;
+
+
         }
     }
 }
