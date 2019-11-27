@@ -8,7 +8,7 @@ namespace PacChat.MessageCore
 {
     public interface IMessage
     {
-        void SendTo(Guid receiver);
+        void SendTo(string receiverID);
         void Reply();
     }
 }
