@@ -146,5 +146,10 @@ namespace PacChat
             sendLeftMessages(new TextMessage() { Message = ChatInput.Text });
             ChatInput.Text = "";
         }
+
+        private void BtnSticker_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

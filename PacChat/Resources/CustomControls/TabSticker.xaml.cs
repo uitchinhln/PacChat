@@ -30,7 +30,7 @@ namespace PacChat.Resources.CustomControls
         private int _totalSticker;
 
 
-        public TabSticker()
+        public TabSticker(int cateID)
         {
             InitializeComponent();
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png"));
