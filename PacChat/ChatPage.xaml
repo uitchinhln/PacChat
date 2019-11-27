@@ -56,18 +56,30 @@
 
         <DockPanel DockPanel.Dock="Bottom" Height="41">
             <Border>
-                <Button
-                    x:Name="btnSticker"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Padding="0,0,0,0"
-                    Margin="5,0,0,5" Height="Auto">
-                    <materialDesign:PackIcon
+                <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                    <materialDesign:PopupBox.ToggleContent>
+                        
+                        <materialDesign:PackIcon
                                     Kind="StickerEmoji" 
                                     Width="32"
                                     Height="32"
                                     Foreground="#FF1E145F"
                             />
+                    </materialDesign:PopupBox.ToggleContent>                    
+                    <StackPanel Width="390" Height="325">
+                        <CustomControls:TabStickerContainner/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </Border>
+            <Border>
+                <Button Padding="0" Margin="2,2,2,2" Click="Button_Click">
+                    <materialDesign:PackIcon Kind="ArrowLeft" Width="30" Height="30"/>
+                </Button>
+            </Border>
+
+            <Border>
+                <Button Padding="0" Margin="2,2,2,2" Click="Button_Click_1">
+                    <materialDesign:PackIcon Kind="ArrowRight" Width="30" Height="30"/>
                 </Button>
             </Border>
             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">

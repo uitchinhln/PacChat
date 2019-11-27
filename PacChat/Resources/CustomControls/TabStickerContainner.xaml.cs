@@ -21,25 +21,63 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class TabStickerContainner : UserControl
     {
+        private List<int> _idList;
+
+
         public TabStickerContainner()
         {
             InitializeComponent();
-            addStickerTab();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+            addStickerTabDemo();
+
         }
 
+       
 
-        private void addStickerTab()
+        private void addStickerTabDemo()
         {
             TabItem a = new TabItem
             {
                 Width = 38,
                 Height = 38,
-                Content = new TabSticker(),
+                Content = new TabSticker(1),
+                ToolTip = "Tiêm viêu",
             };
-            a.Header = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+            a.Header = img;
 
             
             tabCrlSticker.Items.Add(a);
+        }
+
+        private void initTabSticker(int cateID)
+        {
+            TabSticker tempTabSticker = new TabSticker(1);
+            string iconUri = tempTabSticker.IconUri;
+            string name = tempTabSticker.Name;
+
+            TabItem a = new TabItem
+            {
+                Width = 38,
+                Height = 38,
+                Content = tempTabSticker,
+            };
+            a.ToolTip = name;
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri(iconUri, UriKind.RelativeOrAbsolute));
+            a.Header = img;
         }
     }
 }

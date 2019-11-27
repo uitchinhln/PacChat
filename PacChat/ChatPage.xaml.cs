@@ -100,11 +100,6 @@ namespace PacChat
         }
 
 
-        private void addSticker(int id, int duration, int size)
-        {
-
-        }
-
         public void ClearChatPage()
         {
             _previousBubbleChat = null;
@@ -145,6 +140,39 @@ namespace PacChat
         {
             sendLeftMessages(new TextMessage() { Message = ChatInput.Text });
             ChatInput.Text = "";
+        }
+
+        private void sendSticker(bool direct)
+        {
+            Sticker sticker = new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png");
+            
+            Thickness margin = sticker.Margin;
+
+            if (direct)
+            {
+                margin.Right = 30;
+                sticker.HorizontalAlignment = HorizontalAlignment.Right;
+            }
+            else //left (false)
+            {
+                _previousBubbleChat = null;
+                margin.Left = 30;
+                sticker.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+
+            sticker.Margin = margin;
+            spMessagesContainer.Children.Add(sticker);
+            MessagesContainer.ScrollToEnd();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            sendSticker(false);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            sendSticker(true);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace PacChatServer.MessageCore.Sticker
         [JsonIgnore]
         public List<Sticker> Stickers { get; set; } = new List<Sticker>();
 
+        private string thumbImg = "";
+
         [JsonProperty("id")]
         public int ID { get; set; }
 
@@ -48,7 +50,14 @@ namespace PacChatServer.MessageCore.Sticker
         public int Version { get; set; }
 
         [JsonProperty("thumbImg")]
-        public string ThumbImg { get; set; }
+        public string ThumbImg
+        {
+            get => thumbImg;
+            set {
+                string[] args = value.Split(new string[] { "https" }, StringSplitOptions.None);
+                thumbImg = "https" + args[args.Length-1];
+            }
+        }
 
         [JsonProperty("source")]
         public string Source { get; set; }

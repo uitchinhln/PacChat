@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:animator="clr-namespace:Animator;assembly=Animator"
-             mc:Ignorable="d" Width="390" Height="241">
+             mc:Ignorable="d" Width="390" Height="325">
     <Grid>
 
         <TabControl x:Name="tabCrlSticker" Padding="0">
@@ -37,15 +37,6 @@
             </TabControl.Template>
             
 
-            <TabItem Background="White" BorderThickness="0">
-                <TabItem.Header>
-                    <Image Source="/PacChat;component/resources/drawable/sprite_ic.png" Height="32" Width="32" Margin="0,0,0,0"/>
-                </TabItem.Header>
-                
-                <local:TabSticker>
-                    
-                </local:TabSticker>
-            </TabItem>
 
 
 
