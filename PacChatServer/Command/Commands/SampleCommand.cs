@@ -1,4 +1,5 @@
 ﻿using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Entity;
 using PacChatServer.Utils;
@@ -73,6 +74,32 @@ namespace PacChatServer.Command.Commands
                 {
                     Console.WriteLine(s);
                 }
+            }
+
+            if (args[1] == "mkfriend" && args.Length >= 4)
+            {
+                Guid userID1 = ProfileCache.Instance.ParseEmailToGuid(args[2]);
+                Guid userID2 = ProfileCache.Instance.ParseEmailToGuid(args[3]);
+
+                ChatUser user1 = ChatUserManager.LoadUser(userID1);
+                ChatUser user2 = ChatUserManager.LoadUser(userID2);
+
+                if (user1.Relationship.ContainsKey(userID1)) return;
+
+                Relation relation = new Relation()
+                {
+                    Source = userID1,
+                    User1 = userID1,
+                    User2 = userID2,
+                    RelationType = Relation.Type.Friend
+                };
+
+                user1.Relationship.Add(userID2, relation.ID);
+                user2.Relationship.Add(userID1, relation.ID);
+
+                user1.Save();
+                user2.Save();
+                relation.Save();
             }
         }
     }

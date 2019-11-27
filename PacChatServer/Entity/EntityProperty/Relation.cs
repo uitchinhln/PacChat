@@ -17,11 +17,6 @@ namespace PacChatServer.Entity.EntityProperty
         Guid user1;
         Guid user2;
 
-        private Relation()
-        {
-
-        }
-
         [BsonId]
         public Guid ID { get; set; }
 
