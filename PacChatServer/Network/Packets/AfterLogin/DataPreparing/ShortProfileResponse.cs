@@ -12,6 +12,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 {
     public class ShortProfileResponse : IPacket
     {
+        public String ID { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String LastMess { get; set; } = "";
@@ -25,6 +26,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
+            ByteBufUtils.WriteUTF8(byteBuf, ID);
             ByteBufUtils.WriteUTF8(byteBuf, FirstName);
             ByteBufUtils.WriteUTF8(byteBuf, LastName);
             ByteBufUtils.WriteUTF8(byteBuf, LastMess);

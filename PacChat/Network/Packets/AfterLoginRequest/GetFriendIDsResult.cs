@@ -44,6 +44,11 @@ namespace PacChat.Network.Packets.AfterLoginRequest
             {
                 Console.WriteLine(id);
                 ChatModel.FriendIDs.Add(id);
+
+                // Get short info from ID
+                GetShortInfo packet = new GetShortInfo();
+                packet.ID = id;
+                _ = ChatConnection.Instance.Send(packet);
             }
 
             Application.Current.Dispatcher.Invoke(() => UserListDesignModel.Instance.LoadContacts());

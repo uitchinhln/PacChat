@@ -7,12 +7,14 @@ using System.Windows;
 using PacChat.MVC;
 using PacChat.Utils;
 using PacChat.ChatPageContents.ViewModels;
+using static PacChat.Utils.UserUtils;
 
 namespace PacChat.ChatAMVC
 {
     public class ChatModel : Model<ChatApplication>
     {
         public static List<string> FriendIDs { get; set; } = new List<string>();
+        public static Dictionary<string, ShortProfile> FriendShortProfiles = new Dictionary<string, ShortProfile>();
         public static string SelfID;
  
         #region OnChatPage

@@ -38,6 +38,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             
             ShortProfileResponse response = new ShortProfileResponse();
 
+            response.ID = targetUser.ID.ToString();
             response.FirstName = targetUser.FirstName;
             response.LastName = targetUser.LastName;
             response.IsOnline = targetUser.IsOnline();
