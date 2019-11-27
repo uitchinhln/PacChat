@@ -25,6 +25,19 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
+            addStickerTab();
         }
 
 
@@ -36,7 +49,9 @@ namespace PacChat.Resources.CustomControls
                 Height = 38,
                 Content = new TabSticker(),
             };
-            a.Header = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
+            a.Header = img;
 
             
             tabCrlSticker.Items.Add(a);
