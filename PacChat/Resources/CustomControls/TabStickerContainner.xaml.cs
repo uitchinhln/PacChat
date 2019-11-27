@@ -22,6 +22,11 @@ namespace PacChat.Resources.CustomControls
     public partial class TabStickerContainner : UserControl
     {
         private List<int> _idList;
+        public List<int> IDList
+        {
+            get { return _idList; }
+            set { _idList = value; }
+        }
 
 
         public TabStickerContainner()
@@ -78,6 +83,15 @@ namespace PacChat.Resources.CustomControls
             Image img = new Image();
             img.Source = new BitmapImage(new Uri(iconUri, UriKind.RelativeOrAbsolute));
             a.Header = img;
+            tabCrlSticker.Items.Add(a);
+        }
+
+        private void initTabStickerContainner()
+        {
+            foreach (var x in _idList)
+            {
+                initTabSticker(x);
+            }
         }
     }
 }

@@ -82,6 +82,13 @@
                     <materialDesign:PackIcon Kind="ArrowRight" Width="30" Height="30"/>
                 </Button>
             </Border>
+
+            <Border>
+                <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click">
+                    <materialDesign:PackIcon Kind="Image" Width="30" Height="30"/>
+                </Button>
+            </Border>
+
             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
                 <materialDesign:PackIcon Kind="Send" Foreground="#FF1E145F"  Width="24" Height="Auto"/>
             </Button>
