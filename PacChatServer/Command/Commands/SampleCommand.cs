@@ -94,9 +94,9 @@ namespace PacChatServer.Command.Commands
 
                 Relation relation = new Relation()
                 {
-                    Source = userID1,
                     User1 = userID1,
                     User2 = userID2,
+                    Source = userID1,
                     RelationType = Relation.Type.Friend
                 };
 
