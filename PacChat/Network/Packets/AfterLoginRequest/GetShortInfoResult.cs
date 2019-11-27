@@ -23,7 +23,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public string LastMessage { get; set; }
         public string ConversationID { get; set; }
         public int PreviewCode { get; set; }
-        public int IsOnline { get; set; }
+        public bool IsOnline { get; set; }
+        public int Relationship { get; set; }
 
         private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
         {
@@ -42,7 +43,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest
             LastMessage = ByteBufUtils.ReadUTF8(buffer);
             ConversationID = ByteBufUtils.ReadUTF8(buffer);
             PreviewCode = buffer.ReadInt();
-            IsOnline = buffer.ReadInt();
+            IsOnline = buffer.ReadBoolean();
+            Relationship = buffer.ReadInt();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)

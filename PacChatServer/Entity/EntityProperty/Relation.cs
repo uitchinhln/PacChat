@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.IO.Entity.Property;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace PacChatServer.Entity.EntityProperty
 {
     public class Relation
     {
-        static Dictionary<Guid, Relation> Cache = new Dictionary<Guid, Relation>();
+        static ConcurrentDictionary<Guid, Relation> Cache = new ConcurrentDictionary<Guid, Relation>();
 
         Guid source;
         Guid user1;
@@ -90,7 +91,14 @@ namespace PacChatServer.Entity.EntityProperty
                 return Cache[id];
             }
 
-            return new RelationStore().Load(id);
+            Relation relation = new RelationStore().Load(id);
+
+            if (relation != null)
+            {
+                Cache.TryAdd(id, relation);
+            }
+
+            return relation;
         }
     }
 }
