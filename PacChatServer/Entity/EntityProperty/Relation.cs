@@ -11,6 +11,7 @@ namespace PacChatServer.Entity.EntityProperty
 {
     public class Relation
     {
+        [BsonIgnore]
         static ConcurrentDictionary<Guid, Relation> Cache = new ConcurrentDictionary<Guid, Relation>();
 
         Guid source;
@@ -18,7 +19,7 @@ namespace PacChatServer.Entity.EntityProperty
         Guid user2;
 
         [BsonId]
-        public Guid ID { get; set; }
+        public Guid ID { get; set; } = Guid.NewGuid();
 
         [BsonElement("User1")]
         public Guid User1 

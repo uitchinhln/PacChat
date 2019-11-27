@@ -1,5 +1,6 @@
 ﻿using CNetwork;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
 using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Entity;
@@ -51,7 +52,7 @@ namespace PacChatServer.Entity
         public DateTime LastLogoff { get; set; } = DateTime.Now;
 
         //Key is id of user who have a reationship with this user, Value is id of relationship
-        [BsonElement("Relationship")]
+        [BsonElement("Relationship"), BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
         public Dictionary<Guid, Guid> Relationship { get; private set; } = new Dictionary<Guid, Guid>();
 
         [BsonElement("Conversations")]

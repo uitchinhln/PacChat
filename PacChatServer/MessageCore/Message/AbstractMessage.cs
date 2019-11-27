@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
 using PacChatServer.Entity;
 using PacChatServer.MessageCore.Conversation;
 using System;
@@ -37,7 +38,7 @@ namespace PacChatServer.MessageCore.Message
         public HashSet<Guid> HideBy { get; private set; } = new HashSet<Guid>();
 
         //IDs of user who reacted and react id;
-        [BsonElement("Reacts")]
+        [BsonElement("Reacts"), BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
         public Dictionary<Guid, int> Reacts { get; private set; } = new Dictionary<Guid, int>();
 
         /// <summary>
