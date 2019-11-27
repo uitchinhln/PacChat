@@ -295,8 +295,6 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\ConversationFrIDRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\ConversationFrIDResponse.cs" />
-    <Compile Include="Network\Packets\AfterLogin\Message\ConversationFromFriendIDRequest.cs" />
-    <Compile Include="Network\Packets\AfterLogin\Message\ConversationFromFriendIDResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />

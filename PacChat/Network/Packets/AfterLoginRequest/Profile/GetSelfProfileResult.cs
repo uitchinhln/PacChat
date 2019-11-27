@@ -17,7 +17,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
         public String LastName { get; set; }
         public String Town { get; set; } = "Default";
         public String Email { get; set; }
-        public String Password { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
 
@@ -28,7 +27,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
             LastName = ByteBufUtils.ReadUTF8(buffer);
             Town = ByteBufUtils.ReadUTF8(buffer);
             Email = ByteBufUtils.ReadUTF8(buffer);
-            Password = ByteBufUtils.ReadUTF8(buffer);
 
             // Please send D.O.B as 3 integers representing <year, month, day>
             DateOfBirth = new DateTime(year:buffer.ReadInt(), month:buffer.ReadInt(), day:buffer.ReadInt());

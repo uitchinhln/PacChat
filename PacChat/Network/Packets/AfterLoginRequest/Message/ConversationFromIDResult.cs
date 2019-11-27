@@ -15,7 +15,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
     {
         public long LastActive { get; set; }
         public HashSet<string> Members { get; set; } = new HashSet<string>();
-        public List<string> MessagesID { get; set; } = new List<string>();
+        public int LastMessID { get; set; }
+        public int PreviewCode { get; set; }
+        public String PreviewContent { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -29,13 +31,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 temp = ByteBufUtils.ReadUTF8(buffer);
             }
 
-            // Get the most recent messages (ID) of this conversation
-            temp = ByteBufUtils.ReadUTF8(buffer);
-            while (temp != "~")
-            {
-                MessagesID.Add(temp);
-                temp = ByteBufUtils.ReadUTF8(buffer);
-            }
+            LastMessID = buffer.ReadInt();
+            PreviewCode = buffer.ReadInt();
+            PreviewContent = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)

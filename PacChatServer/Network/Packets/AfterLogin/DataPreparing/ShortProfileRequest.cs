@@ -45,6 +45,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
             ConversationStore store = new ConversationStore();
 
+            response.PreviewCode = -1;
+            response.ConversationID = "~";
+
             foreach (Guid id in chatSession.Owner.ConversationID)
             {
                 if (targetUser.ConversationID.Contains(id))
@@ -52,6 +55,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
                     AbstractConversation conversation = store.Load(id);
                     if (conversation is SingleConversation)
                     {
+                        response.ConversationID = conversation.ID.ToString();
+
                         AbstractMessage message = new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID);
                         if (message == null) break;
 

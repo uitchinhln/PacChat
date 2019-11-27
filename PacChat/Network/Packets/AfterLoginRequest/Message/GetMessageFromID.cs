@@ -12,6 +12,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
     public class GetMessageFromID : IPacket
     {
         public string MessageID { get; set; }
+        public string ConversationID { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {

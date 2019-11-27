@@ -21,6 +21,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string LastMessage { get; set; }
+        public string ConversationID { get; set; }
         public int PreviewCode { get; set; }
         public int IsOnline { get; set; }
 
@@ -39,6 +40,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
             FirstName = ByteBufUtils.ReadUTF8(buffer);
             LastName = ByteBufUtils.ReadUTF8(buffer);
             LastMessage = ByteBufUtils.ReadUTF8(buffer);
+            ConversationID = ByteBufUtils.ReadUTF8(buffer);
             PreviewCode = buffer.ReadInt();
             IsOnline = buffer.ReadInt();
         }

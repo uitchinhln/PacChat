@@ -16,6 +16,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String LastMess { get; set; } = "";
+        public String ConversationID { get; set; }
         public int PreviewCode { get; set; }
         public bool IsOnline { get; set; }
 
@@ -30,6 +31,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             ByteBufUtils.WriteUTF8(byteBuf, FirstName);
             ByteBufUtils.WriteUTF8(byteBuf, LastName);
             ByteBufUtils.WriteUTF8(byteBuf, LastMess);
+            ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
             byteBuf.WriteInt(PreviewCode);
             byteBuf.WriteBoolean(IsOnline);
 
