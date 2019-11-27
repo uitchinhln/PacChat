@@ -43,6 +43,14 @@ namespace PacChat.Resources.CustomControls
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (7).png"));
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (8).png"));
             wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (9).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (10).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (11).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (12).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (14).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (15).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (16).png"));
+            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (17).png"));
         }
 
         public int CateID

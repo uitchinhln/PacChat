@@ -56,8 +56,9 @@
 
         <DockPanel DockPanel.Dock="Bottom" Height="41">
             <Border>
-                <materialDesign:PopupBox StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
                     <materialDesign:PopupBox.ToggleContent>
+                        
                         <materialDesign:PackIcon
                                     Kind="StickerEmoji" 
                                     Width="32"
@@ -65,7 +66,7 @@
                                     Foreground="#FF1E145F"
                             />
                     </materialDesign:PopupBox.ToggleContent>                    
-                    <StackPanel Width="390" Height="450">
+                    <StackPanel Width="390" Height="325">
                         <CustomControls:TabStickerContainner/>
                     </StackPanel>
                 </materialDesign:PopupBox>
