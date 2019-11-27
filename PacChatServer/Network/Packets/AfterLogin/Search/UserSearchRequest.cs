@@ -1,6 +1,8 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
+using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.IO.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,11 @@ namespace PacChatServer.Network.Packets.AfterLogin.Search
 {
     public class UserSearchRequest : IPacket
     {
+        public String Email { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            Email = ByteBufUtils.ReadUTF8(buffer).ToLower();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -24,7 +27,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.Search
 
         public void Handle(ISession session)
         {
-            throw new NotImplementedException();
+            UserSearchResponse response = new UserSearchResponse();
+            response.UserIDs = new ChatUserStore().SearchUserIDByEmail(Email);
+            session.Send(response);
         }
     }
 }

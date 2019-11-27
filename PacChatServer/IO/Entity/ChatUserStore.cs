@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using PacChatServer.Entity;
 using PacChatServer.IO.Storage;
 using System;
@@ -76,5 +77,37 @@ namespace PacChatServer.IO.Entity
             }
             return result;
         }
+
+        public List<String> SearchUserIDByEmail(string input)
+        {
+            List<String> result = new List<String>();
+
+            Mongo.Instance.Get<SearchIdByEmail>(Mongo.UserCollectionName, collection =>
+            {
+                var condition = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input); 
+
+                var fields = Builders<SearchIdByEmail>.Projection
+                     .Include(p => p.ID)
+                     .Include(p => p.Email);
+
+                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).ToList();
+
+                foreach (SearchIdByEmail r in objs)
+                {
+                    result.Add(r.ID.ToString());
+                }
+                return null;
+            });
+
+            return result;
+        }
+    }
+
+    public class SearchIdByEmail
+    {
+        [BsonId]
+        public Guid ID { get; set; }
+        [BsonElement("Email")]
+        public String Email { get; set; }
     }
 }

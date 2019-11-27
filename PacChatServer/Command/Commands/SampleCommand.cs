@@ -65,6 +65,15 @@ namespace PacChatServer.Command.Commands
                     PacChatServer.GetServer().Logger.Error("Create fail: Database error!!!");
                 }
             }
+
+            if (args[1] == "search" && args.Length >=3)
+            {
+                List<String> ids = new ChatUserStore().SearchUserIDByEmail(args[2]);
+                foreach (string s in ids)
+                {
+                    Console.WriteLine(s);
+                }
+            }
         }
     }
 }
