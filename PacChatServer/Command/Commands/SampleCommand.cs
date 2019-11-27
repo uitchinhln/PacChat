@@ -81,6 +81,12 @@ namespace PacChatServer.Command.Commands
                 Guid userID1 = ProfileCache.Instance.ParseEmailToGuid(args[2]);
                 Guid userID2 = ProfileCache.Instance.ParseEmailToGuid(args[3]);
 
+                if (userID1 == Guid.Empty || userID2 == Guid.Empty)
+                {
+                    PacChatServer.GetServer().Logger.Warn("One of two emails does not exist.");
+                    return;
+                }
+
                 ChatUser user1 = ChatUserManager.LoadUser(userID1);
                 ChatUser user2 = ChatUserManager.LoadUser(userID2);
 
