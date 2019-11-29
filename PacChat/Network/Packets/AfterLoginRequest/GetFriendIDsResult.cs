@@ -50,8 +50,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                 packet.ID = id;
                 _ = ChatConnection.Instance.Send(packet);
             }
-
-            Application.Current.Dispatcher.Invoke(() => UserListDesignModel.Instance.LoadContacts());
         }
     }
 }

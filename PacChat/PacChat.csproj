@@ -88,6 +88,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversations.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversationsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfile.cs" />
