@@ -243,6 +243,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\DataNode.cs" />
+    <Compile Include="Cache\FIFOCache.cs" />
+    <Compile Include="Cache\LRUCache.cs" />
     <Compile Include="ChatUserManager.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\Commands\Ban\BanCommand.cs" />
@@ -336,7 +339,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cache\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
   </ItemGroup>
