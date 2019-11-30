@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacChatServer.Cache
 {
-    /// <summary>
-    /// FIFO cache that internally uses tuples.
-    /// </summary>
-    public class FIFOCache<T1, T2>
+    public class LFUCache<T1, T2>
     {
         private int _Capacity;
         private int _EvictCount;
@@ -21,8 +18,7 @@ namespace PacChatServer.Cache
         /// </summary>
         /// <param name="capacity">Maximum number of entries.</param>
         /// <param name="evictCount">Number to evict when capacity is reached.</param>
-        /// <param name="debug">Enable or disable console debugging.</param>
-        public FIFOCache(int capacity, int evictCount)
+        public LFUCache(int capacity, int evictCount)
         {
             _Capacity = capacity;
             _EvictCount = evictCount;
@@ -56,7 +52,7 @@ namespace PacChatServer.Cache
 
             lock (_CacheLock)
             {
-                KeyValuePair<T1, DataNode<T2>> oldest = _Cache.Where(x => x.Value.Added != null).OrderBy(x => x.Value.Added).First();
+                KeyValuePair<T1, DataNode<T2>> oldest = _Cache.OrderBy(x => x.Value.UsesFrequency).First();
                 return oldest.Key;
             }
         }
@@ -71,8 +67,38 @@ namespace PacChatServer.Cache
 
             lock (_CacheLock)
             {
-                KeyValuePair<T1, DataNode<T2>> newest = _Cache.Where(x => x.Value.Added != null).OrderBy(x => x.Value.Added).Last();
+                KeyValuePair<T1, DataNode<T2>> newest = _Cache.OrderBy(x => x.Value.UsesFrequency).Last();
                 return newest.Key;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve the key of the last used entry in the cache.
+        /// </summary>
+        /// <returns>String containing the key.</returns>
+        public T1 LastUsed()
+        {
+            if (_Cache == null || _Cache.Count < 1) throw new KeyNotFoundException();
+
+            lock (_CacheLock)
+            {
+                KeyValuePair<T1, DataNode<T2>> lastUsed = _Cache.Where(x => x.Value.LastUsed != null).OrderBy(x => x.Value.LastUsed).Last();
+                return lastUsed.Key;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve the key of the first used entry in the cache.
+        /// </summary>
+        /// <returns>String containing the key.</returns>
+        public T1 FirstUsed()
+        {
+            if (_Cache == null || _Cache.Count < 1) throw new KeyNotFoundException();
+
+            lock (_CacheLock)
+            {
+                KeyValuePair<T1, DataNode<T2>> firstUsed = _Cache.Where(x => x.Value.LastUsed != null).OrderBy(x => x.Value.LastUsed).First();
+                return firstUsed.Key;
             }
         }
 
@@ -106,6 +132,7 @@ namespace PacChatServer.Cache
                     // update LastUsed
                     _Cache.Remove(key);
                     curr.Value.LastUsed = DateTime.Now;
+                    curr.Value.UsesFrequency++;
                     _Cache.Add(key, curr.Value);
 
                     // return data
@@ -137,6 +164,7 @@ namespace PacChatServer.Cache
                     // update LastUsed
                     _Cache.Remove(key);
                     curr.Value.LastUsed = DateTime.Now;
+                    curr.Value.UsesFrequency++;
                     _Cache.Add(key, curr.Value);
 
                     // return data
@@ -175,7 +203,8 @@ namespace PacChatServer.Cache
         /// Add or replace a key's value in the cache.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="val">The value associated with the key.</param> 
+        /// <param name="val">The value associated with the key.</param>
+        /// <returns>Boolean indicating success.</returns>
         public void AddReplace(T1 key, T2 val)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
@@ -189,7 +218,7 @@ namespace PacChatServer.Cache
 
                 if (_Cache.Count >= _Capacity)
                 {
-                    _Cache = _Cache.OrderBy(x => x.Value.Added).Skip(_EvictCount).ToDictionary(x => x.Key, x => x.Value);
+                    _Cache = _Cache.OrderBy(x => x.Value.UsesFrequency).Skip(_EvictCount).ToDictionary(x => x.Key, x => x.Value);
                 }
 
                 DataNode<T2> curr = new DataNode<T2>(val);
@@ -230,4 +259,5 @@ namespace PacChatServer.Cache
             }
         }
     }
+}
 }

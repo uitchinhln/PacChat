@@ -11,11 +11,6 @@ namespace PacChatServer.Cache
     /// </summary>
     public class LRUCache<T1, T2>
     {
-        /// <summary>
-        /// Enable or disable console debugging.
-        /// </summary>
-        public bool Debug;
-
         private int _Capacity;
         private int _EvictCount;
         private readonly object _CacheLock = new object();
@@ -26,12 +21,10 @@ namespace PacChatServer.Cache
         /// </summary>
         /// <param name="capacity">Maximum number of entries.</param>
         /// <param name="evictCount">Number to evict when capacity is reached.</param>
-        /// <param name="debug">Enable or disable console debugging.</param>
-        public LRUCache(int capacity, int evictCount, bool debug)
+        public LRUCache(int capacity, int evictCount)
         {
             _Capacity = capacity;
             _EvictCount = evictCount;
-            Debug = debug;
             _Cache = new Dictionary<T1, DataNode<T2>>();
             // _Cache = new List<Tuple<string, T, DateTime, DateTime>>();
 

@@ -11,6 +11,7 @@ namespace PacChatServer.Cache
         public T Data { get; set; }
         public DateTime Added { get; set; }
         public DateTime LastUsed { get; set; }
+        public int UsesFrequency { get; set; } = 0;
 
         public DataNode()
         {

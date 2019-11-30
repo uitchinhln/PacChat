@@ -245,6 +245,7 @@
   <ItemGroup>
     <Compile Include="Cache\DataNode.cs" />
     <Compile Include="Cache\FIFOCache.cs" />
+    <Compile Include="Cache\LFUCache.cs" />
     <Compile Include="Cache\LRUCache.cs" />
     <Compile Include="ChatUserManager.cs" />
     <Compile Include="Command\CommandManager.cs" />
