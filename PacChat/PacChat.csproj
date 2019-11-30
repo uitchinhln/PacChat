@@ -115,6 +115,9 @@
     <Compile Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml.cs">
       <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ImageContainner.xaml.cs">
+      <DependentUpon>ImageContainner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
     </Compile>
@@ -251,6 +254,10 @@
     <Page Include="Resources\CustomControls\Dialogs\WaitingDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\ImageContainner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\Sticker.xaml">
       <Generator>MSBuild:Compile</Generator>

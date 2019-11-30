@@ -20,10 +20,16 @@ namespace PacChat
     /// </summary>
     public partial class TestWindows : Window
     {
+
+
         public TestWindows()
         {
             InitializeComponent();
-            grid.Children.Add(new TabStickerContainner());
+            ImageContainner img = new ImageContainner(1, "D:/PacChat/PacChat/Resources/Drawable/hinh3.png");
+            test.Children.Add(img);
         }
+
+
+
     }
 }

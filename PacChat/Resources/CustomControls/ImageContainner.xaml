@@ -4,9 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              >
-    <Grid>
+    <materialDesign:DialogHost
+        DialogClosing="Sample1_DialogHost_OnDialogClosing"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <materialDesign:DialogHost.DialogContent>
             
-    </Grid>
+            <StackPanel Orientation="Vertical">
+
+                <Image  x:Name="imgFull"
+                        />
+                
+                <Button Command="materialDesign:DialogHost.CloseDialogCommand">
+                    
+                        CLOSE
+                </Button>
+            </StackPanel>
+            
+        </materialDesign:DialogHost.DialogContent>
+
+        
+
+        <Border
+            
+            BorderThickness="0"
+            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+            ClipToBounds="True">
+
+            <Image  x:Name="imgThumb"
+                    Cursor="Hand" 
+                    Height="200"
+                    >
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" />
+                </Image.InputBindings>
+            </Image>
+
+
+        </Border>
+    </materialDesign:DialogHost>
 </UserControl>

@@ -179,19 +179,27 @@ namespace PacChat
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
-            Image image = new Image();
+            ImageContainner image;
+            Image image2 = new Image();
             op.Title = "Select a picture";
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                image.Width = 130;
-                image.Height = 130;
-                image.Source = new BitmapImage(new Uri(op.FileName));
+                image2.Width = 130;
+                image2.Height = 130;
+                image2.Source = new BitmapImage(new Uri(op.FileName));
+
+                image = new ImageContainner(1, op.FileName);
+                image.HorizontalAlignment = HorizontalAlignment.Right;
+
+                Thickness margin = image.Margin;
+                margin.Right = 30;
+                image.Margin = margin;
+                spMessagesContainer.Children.Add(image);
             }
 
-            spMessagesContainer.Children.Add(image);
         }
     }
 }
