@@ -243,6 +243,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\DataNode.cs" />
+    <Compile Include="Cache\FIFOCache.cs" />
+    <Compile Include="Cache\LFUCache.cs" />
+    <Compile Include="Cache\LRUCache.cs" />
     <Compile Include="ChatUserManager.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\Commands\Ban\BanCommand.cs" />
@@ -295,6 +299,8 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\ConversationFrIDRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\ConversationFrIDResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\RecentConversationsRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\RecentConversationsResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
@@ -336,7 +342,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cache\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
   </ItemGroup>

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using PacChat.ChatPageContents;
 
 namespace PacChat.Network.Packets.AfterLoginRequest
 {
@@ -26,13 +27,23 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public bool IsOnline { get; set; }
         public int Relationship { get; set; }
 
-        private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
+        //private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
+        //{
+        //    {0, "Hidden message" },
+        //    {1, "Attachment" },
+        //    {2, "You got an image message" },
+        //    {3, "You got a sticker message" },
+        //    {5, "Video"}
+        //};
+
+        private readonly string[] TranslatedPreviewCode = new string[6]
         {
-            {0, "Hidden message" },
-            {1, "Attachment" },
-            {2, "You got an image message" },
-            {3, "You got a sticker message" },
-            {5, "Video"}
+            "Hidden message",
+            "Attachment",
+            "Image message",
+            "Sticker",
+            "-",
+            "Video"
         };
 
         public void Decode(IByteBuffer buffer)
@@ -45,6 +56,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest
             PreviewCode = buffer.ReadInt();
             IsOnline = buffer.ReadBoolean();
             Relationship = buffer.ReadInt();
+
+            Console.WriteLine(FirstName + " " + LastName);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -55,13 +68,24 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             var id = ID;
-            ChatModel.FriendShortProfiles.Add(ID, 
-                new Utils.UserUtils.ShortProfile() 
-                { 
-                    ID = id,
+            //ChatModel.FriendShortProfiles.Add(ID, 
+            //    new Utils.UserUtils.ShortProfile() 
+            //    { 
+            //        ID = id,
+            //        Name = FirstName + " " + LastName,
+            //        IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
+            //    });
+
+            Console.WriteLine(PreviewCode); 
+
+            Application.Current.Dispatcher.Invoke(() => UserList.Instance.AddUserToListView(
+                new UserMessageViewModel()
+                {
+                    Id = id,
                     Name = FirstName + " " + LastName,
-                    IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
-                });
+                    //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
+                    IncomingMsg = ""
+                }));
         }
     }
 }
