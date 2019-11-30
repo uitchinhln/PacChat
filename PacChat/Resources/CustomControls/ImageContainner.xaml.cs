@@ -17,26 +17,6 @@ namespace PacChat.Resources.CustomControls
             get; set;
         }
 
-        public double ImgHeight
-        {
-            get; private set;
-        }
-
-        public double ImgWidth
-        {
-            get; private set;
-        }
-
-        public double ThumbHeight
-        {
-            get;
-            set;
-        }
-
-        public double thumbWidth
-        {
-            get; private set;
-        }
 
         public string ImgUri
         {
@@ -57,8 +37,7 @@ namespace PacChat.Resources.CustomControls
         private void InitImageAndThumb()
         {
 
-            ThumbHeight = 130;
-            imgThumb.Height = ThumbHeight;
+            imgThumb.Height = 130;
             imgFull.Source = new BitmapImage(new Uri(ImgUri, UriKind.RelativeOrAbsolute));
             imgThumb.Source = new BitmapImage(new Uri(ImgUri, UriKind.RelativeOrAbsolute));
         }

@@ -180,17 +180,13 @@ namespace PacChat
         {
             OpenFileDialog op = new OpenFileDialog();
             ImageContainner image;
-            Image image2 = new Image();
             op.Title = "Select a picture";
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                image2.Width = 130;
-                image2.Height = 130;
-                image2.Source = new BitmapImage(new Uri(op.FileName));
-
+                _previousBubbleChat = null;
                 image = new ImageContainner(1, op.FileName);
                 image.HorizontalAlignment = HorizontalAlignment.Right;
 
@@ -198,8 +194,21 @@ namespace PacChat
                 margin.Right = 30;
                 image.Margin = margin;
                 spMessagesContainer.Children.Add(image);
+                MessagesContainer.ScrollToEnd();
             }
 
+        }
+
+        private void showLeftImage(int id, string uri)
+        {
+            ImageContainner image = new ImageContainner(1, uri);
+            image.HorizontalAlignment = HorizontalAlignment.Right;
+
+            Thickness margin = image.Margin;
+            margin.Left = 30;
+            image.Margin = margin;
+            spMessagesContainer.Children.Add(image);
+            MessagesContainer.ScrollToEnd();
         }
     }
 }

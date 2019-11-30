@@ -16,7 +16,8 @@
             <StackPanel Orientation="Vertical">
 
                 <Image  x:Name="imgFull"
-                        />
+                        Height="500" 
+                        RenderOptions.BitmapScalingMode="HighQuality"/>
                 
                 <Button Command="materialDesign:DialogHost.CloseDialogCommand">
                     
@@ -31,10 +32,11 @@
         <Border
             
             BorderThickness="0"
-            BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+            Margin="5 5 5 5"
             ClipToBounds="True">
 
             <Image  x:Name="imgThumb"
+                    RenderOptions.BitmapScalingMode="LowQuality"
                     Cursor="Hand" 
                     Height="200"
                     >
