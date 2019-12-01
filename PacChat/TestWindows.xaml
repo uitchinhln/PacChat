@@ -7,10 +7,30 @@
         xmlns:animator="clr-namespace:Animator;assembly=Animator"
         xmlns:local="clr-namespace:PacChat"
         xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
-        mc:Ignorable = "d" Background="Transparent">
+        mc:Ignorable = "d" Background="Transparent" d:DesignHeight="229" d:DesignWidth="378">
 
-    <cc:TabStickerStore>
-        
-    </cc:TabStickerStore>
+    <Grid Background="White">
+
+        <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+            <materialDesign:PopupBox.ToggleContent>
+
+                <materialDesign:PackIcon
+                                    Kind="Cart" 
+                                    Width="32"
+                                    Height="32"
+                                    Foreground="#FF1E145F"
+                            />
+            </materialDesign:PopupBox.ToggleContent>
+
+            <Grid>
+                <Button/>
+                <Button/>
+                <Button/>
+                <Button/>
+            </Grid>
+
+        </materialDesign:PopupBox>
+
+    </Grid>
 
 </Window> 

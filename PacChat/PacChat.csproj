@@ -123,6 +123,9 @@
     <Compile Include="Resources\CustomControls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\StickerStoreDialog.xaml.cs">
+      <DependentUpon>StickerStoreDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\TabSticker.xaml.cs">
       <DependentUpon>TabSticker.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
     <Page Include="Resources\CustomControls\Sticker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\StickerStoreDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\TabSticker.xaml">
       <Generator>MSBuild:Compile</Generator>

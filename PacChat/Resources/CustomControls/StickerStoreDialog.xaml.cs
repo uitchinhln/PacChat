@@ -16,28 +16,13 @@ using System.Windows.Shapes;
 namespace PacChat.Resources.CustomControls
 {
     /// <summary>
-    /// Interaction logic for TabStickerStore.xaml
+    /// Interaction logic for StickerStoreDialog.xaml
     /// </summary>
-    public partial class TabStickerStore : UserControl
+    public partial class StickerStoreDialog : UserControl
     {
-        public int ID { get; set; }
-        
-
-
-        public TabStickerStore()
+        public StickerStoreDialog()
         {
             InitializeComponent();
-
-        }
-
-        private void loadStore() //load thumbnail of sticker
-        {
-
-        }
-
-        private void downSticker()
-        {
-
         }
     }
 }
