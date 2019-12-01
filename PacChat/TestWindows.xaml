@@ -7,10 +7,10 @@
         xmlns:animator="clr-namespace:Animator;assembly=Animator"
         xmlns:local="clr-namespace:PacChat"
         xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
-        mc:Ignorable = "d" >
-    <Grid x:Name="test">
+        mc:Ignorable = "d" Background="Transparent">
+
+    <cc:TabStickerStore>
         
-        
-    </Grid>
+    </cc:TabStickerStore>
 
 </Window> 

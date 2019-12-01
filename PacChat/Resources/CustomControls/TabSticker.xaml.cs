@@ -21,40 +21,43 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class TabSticker : UserControl
     {
-        private int _cateID;
+        public int CateID { get; set; }
 
-        private string _iconUri;
+        public string IconUri { get; set; }
 
-        private string _cateName;
+        public string CateName { get; set; }
 
-        private int _totalSticker;
+        public int TotalSticker { get; set; }
+
+        public ChatPage Chatpage { get; set; }
 
         private List<int> _listStickerID;
 
-        public TabSticker(int cateID)
+        public TabSticker(int cateID, ChatPage chatpage)
         {
             InitializeComponent();
             CateID = cateID;
+            Chatpage = chatpage;
             initTabSticker();
 
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (1).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (2).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (3).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (4).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (5).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (6).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (7).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (8).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (9).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (10).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (11).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (12).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (14).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (15).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (16).png"));
-            wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (17).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (1).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (2).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (3).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (4).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (5).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (6).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (7).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (8).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (9).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (10).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (11).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (12).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (14).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (15).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (16).png"));
+            wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (17).png"));
         }
 
         private void initListStickerID()
@@ -71,35 +74,10 @@ namespace PacChat.Resources.CustomControls
         {
             foreach (var x in _listStickerID)
             {
-                wplStickerContainner.Children.Add(new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png" + x.ToString() )); //lay info tu stickerID
+                wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png" + x.ToString() )); //lay info tu stickerID
             }
         }
 
-
-        public int CateID
-        {
-            get { return _cateID; }
-            set { _cateID = value; }
-        }
-
-        public string IconUri
-        {
-            get { return _iconUri; }
-            set { _iconUri = value; }
-        }
-
-        public string CateName
-        {
-            get { return _cateName; }
-            set { _cateName = value; }
-        }
-
-        public int TotalSticker
-        {
-            get { return _totalSticker; }
-            set { _totalSticker = value; }
-
-        }
 
     }
 }

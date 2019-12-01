@@ -129,6 +129,12 @@
     <Compile Include="Resources\CustomControls\TabStickerContainner.xaml.cs">
       <DependentUpon>TabStickerContainner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\TabStickerStore.xaml.cs">
+      <DependentUpon>TabStickerStore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StickerDialog.xaml.cs">
+      <DependentUpon>StickerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
@@ -266,16 +272,24 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CustomControls\TabSticker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\TabStickerContainner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\CustomControls\TabStickerContainner.xaml">
+    <Page Include="Resources\CustomControls\TabStickerStore.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\StickerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Scroll.xaml">
       <SubType>Designer</SubType>
@@ -405,6 +419,8 @@
     <Resource Include="Resources\Drawable\sprite %288%29.png" />
     <Resource Include="Resources\Drawable\sprite %289%29.png" />
     <Resource Include="Resources\Drawable\sprite_ic.png" />
+    <Resource Include="Resources\Drawable\tieuviem_tet.png" />
+    <Resource Include="Resources\Drawable\tieuviem_thumb.png" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

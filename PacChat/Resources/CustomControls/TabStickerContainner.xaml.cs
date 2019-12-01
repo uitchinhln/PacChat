@@ -22,6 +22,14 @@ namespace PacChat.Resources.CustomControls
     public partial class TabStickerContainner : UserControl
     {
         private List<int> _idList;
+
+        private App app;
+
+        public ChatPage Chatpage
+        {
+            get; set;
+        }
+
         public List<int> IDList
         {
             get { return _idList; }
@@ -29,9 +37,11 @@ namespace PacChat.Resources.CustomControls
         }
 
 
-        public TabStickerContainner()
+        public TabStickerContainner(ChatPage _chatpage)
         {
             InitializeComponent();
+            Chatpage = _chatpage;
+
             addStickerTabDemo();
             addStickerTabDemo();
             addStickerTabDemo();
@@ -56,7 +66,7 @@ namespace PacChat.Resources.CustomControls
             {
                 Width = 38,
                 Height = 38,
-                Content = new TabSticker(1),
+                Content = new TabSticker(1, Chatpage),
                 ToolTip = "Tiêm viêu",
             };
             Image img = new Image();
@@ -69,7 +79,7 @@ namespace PacChat.Resources.CustomControls
 
         private void initTabSticker(int cateID)
         {
-            TabSticker tempTabSticker = new TabSticker(1);
+            TabSticker tempTabSticker = new TabSticker(1, Chatpage);
             string iconUri = tempTabSticker.IconUri;
             string name = tempTabSticker.Name;
 

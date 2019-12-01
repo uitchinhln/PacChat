@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PacChat.Resources.Animator
+namespace PacChat.Resources
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for StickerDialog.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class StickerDialog : UserControl
     {
-        public TestWindow()
+        public StickerDialog()
         {
             InitializeComponent();
         }

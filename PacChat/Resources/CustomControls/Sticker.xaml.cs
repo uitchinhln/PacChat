@@ -29,7 +29,10 @@ namespace PacChat.Resources.CustomControls
         private int _duration;
 
         private string _uriSheet;
-        public Sticker(int id, int cateid, int size, int duration, string urisheet)
+
+        private bool _clickable;
+
+        public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet)
         {
             InitializeComponent();
 
@@ -38,9 +41,23 @@ namespace PacChat.Resources.CustomControls
             Size = size;
             Duration = duration;
             UriSheet = urisheet;
-
+            Chatpage = chatpage;
+            Clickable = clickable;
+            
             loadSticker();
         }
+
+        public ChatPage Chatpage
+        {
+            get; set;
+        }
+        
+        public bool Clickable
+        {
+            get { return _clickable; }
+            set { _clickable = value; }
+        }
+
 
         public int ID
         {
@@ -80,7 +97,17 @@ namespace PacChat.Resources.CustomControls
             anim.ImageSource = new BitmapImage(new Uri(_uriSheet, UriKind.RelativeOrAbsolute));
             anim.VerticalOffset = _size;
             anim.HorizontalOffset = _size;
+            anim.Clickable = _clickable;
             sticker.Children.Add(anim);
+        }
+
+        private void sticker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Clickable)
+            {
+
+                Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet);
+            }
         }
     }
 }

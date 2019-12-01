@@ -10,24 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PacChat.Resources.CustomControls;
 
-namespace PacChat
+namespace PacChat.Resources.CustomControls
 {
     /// <summary>
-    /// Interaction logic for TestWindows.xaml
+    /// Interaction logic for TabStickerStore.xaml
     /// </summary>
-    public partial class TestWindows : Window
+    public partial class TabStickerStore : UserControl
     {
-
-
-        public TestWindows()
+        public List<int> IDStickerInStore;
+        
+        public TabStickerStore()
         {
             InitializeComponent();
         }
 
+        private void loadStore() //load thumbnail of sticker
+        {
 
+        }
 
+        private void downSticker()
+        {
+
+        }
     }
 }

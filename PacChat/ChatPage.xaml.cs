@@ -40,6 +40,9 @@ namespace PacChat
         {
             InitializeComponent();
             Instance = this;
+
+            spTabStickerContainner.Children.Add(new TabStickerContainner(this));
+
         }
 
         // Chat Input KeyDown if and only if message is text message
@@ -143,24 +146,13 @@ namespace PacChat
             ChatInput.Text = "";
         }
 
-        private void sendSticker(bool direct)
+        public void sendSticker(bool clickable, int id, int cateid, int size, int duration, string uriSheet)
         {
-            Sticker sticker = new Sticker(1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png");
+            Sticker sticker = new Sticker(this, clickable, id, cateid, size, duration, uriSheet);
             
             Thickness margin = sticker.Margin;
-
-            if (direct)
-            {
-                margin.Right = 30;
-                sticker.HorizontalAlignment = HorizontalAlignment.Right;
-            }
-            else //left (false)
-            {
-                _previousBubbleChat = null;
-                margin.Left = 30;
-                sticker.HorizontalAlignment = HorizontalAlignment.Left;
-            }
-
+            margin.Right = 30;
+            sticker.HorizontalAlignment = HorizontalAlignment.Right;
             sticker.Margin = margin;
             spMessagesContainer.Children.Add(sticker);
             MessagesContainer.ScrollToEnd();
@@ -168,12 +160,19 @@ namespace PacChat
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            sendSticker(false);
+            Sticker sticker = new Sticker(this, false, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png");
+            Thickness margin = sticker.Margin;
+            _previousBubbleChat = null;
+            margin.Left = 30;
+            sticker.HorizontalAlignment = HorizontalAlignment.Left;
+            sticker.Margin = margin;
+            spMessagesContainer.Children.Add(sticker);
+            MessagesContainer.ScrollToEnd();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            sendSticker(true);
+            
         }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)

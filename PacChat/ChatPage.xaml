@@ -66,8 +66,8 @@
                                     Foreground="#FF1E145F"
                             />
                     </materialDesign:PopupBox.ToggleContent>                    
-                    <StackPanel Width="390" Height="325">
-                        <CustomControls:TabStickerContainner/>
+                    <StackPanel Width="390" Height="325" x:Name="spTabStickerContainner">
+
                     </StackPanel>
                 </materialDesign:PopupBox>
             </Border>
