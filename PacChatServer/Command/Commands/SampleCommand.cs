@@ -56,7 +56,7 @@ namespace PacChatServer.Command.Commands
                     Gender = Entity.EntityProperty.Gender.Male
                 };
 
-                bool added = new ChatUserStore().AddNew(user);
+                bool added = new ChatUserStore().Save(user);
                 if (added)
                 {                
                     PacChatServer.GetServer().Logger.Info(String.Format("Account {0} has registered successfully. ID = {1}", user.Email, user.ID));
@@ -90,22 +90,7 @@ namespace PacChatServer.Command.Commands
                 ChatUser user1 = ChatUserManager.LoadUser(userID1);
                 ChatUser user2 = ChatUserManager.LoadUser(userID2);
 
-                if (user1.Relationship.ContainsKey(userID1)) return;
-
-                Relation relation = new Relation()
-                {
-                    User1 = userID1,
-                    User2 = userID2,
-                    Source = userID1,
-                    RelationType = Relation.Type.Friend
-                };
-
-                user1.Relationship.Add(userID2, relation.ID);
-                user2.Relationship.Add(userID1, relation.ID);
-
-                user1.Save();
-                user2.Save();
-                relation.Save();
+                user1.SetRelation(user2, Relation.Type.Friend, true);
             }
         }
     }

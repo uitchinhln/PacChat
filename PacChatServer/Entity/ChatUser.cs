@@ -123,9 +123,38 @@ namespace PacChatServer.Entity
             }
         }
 
+        public Relation SetRelation(ChatUser target, Relation.Type relationType, bool isSource = true)
+        {
+            if (target == null)
+            {
+                throw new ArgumentNullException("Target must not be null!");
+            }
+
+            Relation relation;
+            Guid relationID;
+
+            if (this.Relationship.ContainsKey(target.ID))
+            {
+                this.Relationship.TryGetValue(target.ID, out relationID);
+                relation = Relation.Get(relationID);
+            } else
+            {
+                relation = new Relation(this.ID, target.ID, 1);
+                this.Relationship.Add(target.ID, relation.ID);
+                target.Relationship.Add(this.ID, relation.ID);
+                this.Save();
+                target.Save();
+            }
+
+            relation.RelationType = relationType;
+            relation.Save();
+
+            return relation;
+        }
+
         public override void Save()
         {
-            saver.Update(this);
+            saver.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
 
             profile.Email = this.Email;

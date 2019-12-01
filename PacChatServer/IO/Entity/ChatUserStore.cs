@@ -25,23 +25,6 @@ namespace PacChatServer.IO.Entity
             });
         }
 
-        public bool AddNew(ChatUser value)
-        {
-            bool result = false;
-            try
-            {
-                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) =>
-                {
-                    collection.InsertOne(value);
-                });
-                result = true;
-            } catch (MongoWriteException e)
-            {
-                PacChatServer.GetServer().Logger.Error(e);
-            }
-            return result;
-        }
-
         public bool UpdateRelations(ChatUser user)
         {
             bool result = false;
@@ -61,7 +44,7 @@ namespace PacChatServer.IO.Entity
             return result;
         }
 
-        public bool Update(ChatUser user)
+        public bool Save(ChatUser user)
         {
             bool result = false;
             try

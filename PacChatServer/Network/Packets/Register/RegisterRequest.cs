@@ -66,7 +66,7 @@ namespace PacChatServer.Network.Packets.Register
                 Gender = this.Gender
             };
 
-            bool added = new ChatUserStore().AddNew(user);
+            bool added = new ChatUserStore().Save(user);
             if (added)
             {
                 responePacket.StatusCode = ResponeCode.OK;

@@ -26,14 +26,6 @@ namespace PacChatServer.IO.Entity.Property
             });
         }
 
-        public void AddNew(Relation value)
-        {
-            Mongo.Instance.Set<Relation>(Mongo.UserCollectionName, (collection) =>
-            {
-                collection.InsertOne(value);
-            });
-        }
-
         public void Save(Relation relation)
         {
             Mongo.Instance.Set<Relation>(Mongo.RelationCollectionName, collection =>

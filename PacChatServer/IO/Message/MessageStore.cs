@@ -33,13 +33,5 @@ namespace PacChatServer.IO.Message
                 collection.ReplaceOneAsync(condition, message, new UpdateOptions() { IsUpsert = true });
             });
         } 
-
-        public void AddNew(AbstractMessage message, Guid conversationID)
-        {
-            Mongo.Instance.Set<AbstractMessage>(conversationID.ToString(), collection =>
-            {
-                collection.InsertOne(message);
-            });
-        }
     }
 }
