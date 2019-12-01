@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -20,21 +12,47 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class ImageContainner : UserControl
     {
-        private int _id;
-
-        private double _height;
-
-        private double _width;
-
-        private double _thumbHeight;
-
-        private double _thumbWidth;
+        public int ID
+        {
+            get; set;
+        }
 
 
+        public string ImgUri
+        {
+            get; set;
+        }
 
-        public ImageContainner()
+
+
+        public ImageContainner(int id, string imgUri)
         {
             InitializeComponent();
+
+            ID = id;
+            ImgUri = imgUri;
+            InitImageAndThumb();
+        }
+
+        private void InitImageAndThumb()
+        {
+
+            imgThumb.Height = 130;
+            imgFull.Source = new BitmapImage(new Uri(ImgUri, UriKind.RelativeOrAbsolute));
+            imgThumb.Source = new BitmapImage(new Uri(ImgUri, UriKind.RelativeOrAbsolute));
+        }
+
+        private void Sample1_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("SAMPLE 1: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
+
+            //you can cancel the dialog close:
+            //eventArgs.Cancel();
+
+            if (!Equals(eventArgs.Parameter, true)) return;
+
+            //if (!string.IsNullOrWhiteSpace(FruitTextBox.Text))
+            //    FruitListBox.Items.Add(FruitTextBox.Text.Trim());
         }
     }
 }
