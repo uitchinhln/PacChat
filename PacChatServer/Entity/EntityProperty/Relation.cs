@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using PacChatServer.Cache.Core;
 using PacChatServer.IO.Entity.Property;
 using System;
 using System.Collections.Concurrent;
@@ -12,7 +13,7 @@ namespace PacChatServer.Entity.EntityProperty
     public class Relation
     {
         [BsonIgnore]
-        static ConcurrentDictionary<Guid, Relation> Cache = new ConcurrentDictionary<Guid, Relation>();
+        static LRUCache<Guid, Relation> Cache = new LRUCache<Guid, Relation>(1000, 50);
 
         Guid source;
         Guid user1;
@@ -20,6 +21,24 @@ namespace PacChatServer.Entity.EntityProperty
 
         [BsonId]
         public Guid ID { get; set; } = Guid.NewGuid();
+
+        public Relation()
+        {
+
+        }
+
+        public Relation(Guid user1, Guid user2, int source = 0)
+        {
+            this.User1 = user1;
+            this.User2 = user2;
+            if ((source & 1) == 1)
+            {
+                this.source = this.User1;
+            } else
+            {
+                this.source = this.User2;
+            }
+        }
 
         [BsonElement("User1")]
         public Guid User1 
@@ -82,16 +101,16 @@ namespace PacChatServer.Entity.EntityProperty
         }
 
         public static Relation Get(Guid id) {
-            if (Cache.ContainsKey(id))
+            if (Cache.Contains(id))
             {
-                return Cache[id];
+                return Cache.Get(id);
             }
 
             Relation relation = new RelationStore().Load(id);
 
             if (relation != null)
             {
-                Cache.TryAdd(id, relation);
+                Cache.AddReplace(id, relation);
             }
 
             return relation;

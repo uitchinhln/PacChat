@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using PacChatServer.Cache.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,6 @@ namespace PacChatServer.MessageCore.Conversation
         public List<Guid> MessagesID { get; set; } = new List<Guid>();
 
         [BsonIgnore]
-        public Dictionary<Guid, IMessage> LoadedMessages { get; set; } = new Dictionary<Guid, IMessage>();
+        public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
     }
 }

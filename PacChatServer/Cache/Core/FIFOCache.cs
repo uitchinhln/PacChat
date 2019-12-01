@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Cache
+namespace PacChatServer.Cache.Core
 {
     /// <summary>
     /// FIFO cache that internally uses tuples.

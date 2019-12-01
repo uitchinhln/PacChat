@@ -243,10 +243,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\DataNode.cs" />
-    <Compile Include="Cache\FIFOCache.cs" />
-    <Compile Include="Cache\LFUCache.cs" />
-    <Compile Include="Cache\LRUCache.cs" />
+    <Compile Include="Cache\Core\DataNode.cs" />
+    <Compile Include="Cache\Core\FIFOCache.cs" />
+    <Compile Include="Cache\Core\LFUCache.cs" />
+    <Compile Include="Cache\Core\LRUCache.cs" />
     <Compile Include="ChatUserManager.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\Commands\Ban\BanCommand.cs" />
@@ -342,6 +342,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Cache\Entity\" />
+    <Folder Include="Cache\Message\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
   </ItemGroup>
