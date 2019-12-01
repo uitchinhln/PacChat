@@ -22,12 +22,9 @@
                             />
             </materialDesign:PopupBox.ToggleContent>
 
-            <Grid>
-                <Button/>
-                <Button/>
-                <Button/>
-                <Button/>
-            </Grid>
+            <cc:StickerStoreDialog>
+                
+            </cc:StickerStoreDialog>
 
         </materialDesign:PopupBox>
 

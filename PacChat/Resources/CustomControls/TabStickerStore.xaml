@@ -8,7 +8,7 @@
              >
 
 
-    <Grid Width="395" Height="277" Background="White" Margin="0" >
+    <Grid Width="328" Height="224" Background="White" Margin="0" >
 
         <Border HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
             <Image x:Name="imgPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_tet.png"  Width="204" Height="204"/>
@@ -22,8 +22,8 @@
                 <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5 5 5 5">
                     Tiêu Viêm - Huân Nhi Tết
                 </TextBlock>
-                
-                <Button x:Name="btnDown" Width="90" Height="28">
+
+                <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}">
                     9000
                 </Button>
             </StackPanel>
