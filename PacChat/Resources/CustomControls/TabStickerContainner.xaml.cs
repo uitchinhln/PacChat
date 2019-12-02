@@ -103,5 +103,15 @@ namespace PacChat.Resources.CustomControls
                 initTabSticker(x);
             }
         }
+
+        private void loadStore()
+        {
+            TabItem a = new TabItem
+            {
+                Width = 38,
+                Height = 38,
+                //Content = tempTabSticker,
+            };
+        }
     }
 }
