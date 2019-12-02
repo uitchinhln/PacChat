@@ -12,6 +12,6 @@ namespace PacChatServer.Entity
         [BsonId]
         public Guid ID { get; set; }
 
-        public abstract void Save();
+        public abstract bool Save();
     }
 }

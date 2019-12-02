@@ -11,6 +11,8 @@ namespace PacChatServer.IO.Message
 {
     public class MessageStore : Store
     {
+        private object _lock;
+
         public AbstractMessage Load(Guid id, Guid conversationID)
         {
             return Mongo.Instance.Get<AbstractMessage>(conversationID.ToString(), collection =>
@@ -27,11 +29,14 @@ namespace PacChatServer.IO.Message
 
         public void Save(AbstractMessage message, Guid conversationID)
         {
-            Mongo.Instance.Set<AbstractMessage>(conversationID.ToString(), collection =>
+            lock (_lock)
             {
-                var condition = Builders<AbstractMessage>.Filter.Eq(p => p.ID, message.ID);
-                collection.ReplaceOneAsync(condition, message, new UpdateOptions() { IsUpsert = true });
-            });
+                Mongo.Instance.Set<AbstractMessage>(conversationID.ToString(), collection =>
+                {
+                    var condition = Builders<AbstractMessage>.Filter.Eq(p => p.ID, message.ID);
+                    collection.ReplaceOneAsync(condition, message, new UpdateOptions() { IsUpsert = true });
+                });
+            }
         } 
     }
 }

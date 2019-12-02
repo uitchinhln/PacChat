@@ -152,9 +152,9 @@ namespace PacChatServer.Entity
             return relation;
         }
 
-        public override void Save()
+        public override bool Save()
         {
-            saver.Save(this);
+            bool result = saver.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
 
             profile.Email = this.Email;
@@ -165,6 +165,8 @@ namespace PacChatServer.Entity
             profile.Gender = this.Gender;
             profile.Banned = this.Banned;
             profile.LastLogoff = this.LastLogoff;
+
+            return result;
         }
     }
 }
