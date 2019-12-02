@@ -36,34 +36,25 @@
                 </ControlTemplate>
             </TabControl.Template>
 
-            <TabItem Width="38" Height="38" >
+            <TabItem Width="38" Height="38" Background="LightGray" >
                 <TabItem.Header>
                     <materialDesign:PackIcon Kind="Cart" Margin="0" Width="24" Height="24"/>
 
                 </TabItem.Header>
 
-                <Border>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Background="LightGray">
+                    <StackPanel Orientation="Vertical">
 
-                    <materialDesign:PopupBox PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="121,2,0,40" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" BorderThickness="0" Width="149">
-                        <materialDesign:PopupBox.ToggleContent>
-
-                            <materialDesign:PackIcon
-                                    Kind="Coin" 
-                                    Width="83"
-                                    Height="83"
-                                    Foreground="#FF1E145F"
-                            />
-
-                        </materialDesign:PopupBox.ToggleContent>
-
-                        <local:StickerStoreDialog>
-
-                        </local:StickerStoreDialog>
-
-                    </materialDesign:PopupBox>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
 
 
-                </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
             </TabItem>
 
 
