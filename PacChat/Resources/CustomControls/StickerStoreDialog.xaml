@@ -7,11 +7,15 @@
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" >
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500" Background="Gray">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500" Background="Gray" Width="830">
 
         <WrapPanel Width="750">
 
-            
+            <Border Width="737" Height="114" Background="White" Margin="0 20 0 20">
+                <TextBlock FontSize="50" TextAlignment="Center">
+                    STICKER STORE BANNER
+                </TextBlock>
+            </Border>    
             <local:TabStickerStore />
             <local:TabStickerStore />
             <local:TabStickerStore />

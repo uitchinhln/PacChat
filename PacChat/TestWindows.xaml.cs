@@ -25,6 +25,7 @@ namespace PacChat
         public TestWindows()
         {
             InitializeComponent();
+            grid.Children.Add(new TabStickerContainner(new ChatPage()));
         }
 
 

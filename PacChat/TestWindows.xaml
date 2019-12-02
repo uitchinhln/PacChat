@@ -9,24 +9,9 @@
         xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
         mc:Ignorable = "d" Background="Transparent" d:DesignHeight="229" d:DesignWidth="378">
 
-    <Grid Background="White">
+    <Grid x:Name="grid">
 
-        <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
-            <materialDesign:PopupBox.ToggleContent>
-
-                <materialDesign:PackIcon
-                                    Kind="Cart" 
-                                    Width="32"
-                                    Height="32"
-                                    Foreground="#FF1E145F"
-                            />
-            </materialDesign:PopupBox.ToggleContent>
-
-            <cc:StickerStoreDialog>
-                
-            </cc:StickerStoreDialog>
-
-        </materialDesign:PopupBox>
+        
 
     </Grid>
 
