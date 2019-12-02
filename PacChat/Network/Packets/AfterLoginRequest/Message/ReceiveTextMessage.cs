@@ -36,7 +36,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             app.model.ContactsMessages[SenderID].Add(new Utils.BubbleInfo(Message.Message, true));
 
             if (app.model.currentSelectedUser.CompareTo(SenderID) == 0)
-                Application.Current.Dispatcher.Invoke(() => ChatPage.Instance.SendLeftMessages(Message, false));
+                Application.Current.Dispatcher.Invoke(() => ChatPage.Instance.SendLeftMessages(Message, true));
         }
     }
 }
