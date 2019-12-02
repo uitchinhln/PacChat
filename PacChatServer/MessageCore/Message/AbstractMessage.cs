@@ -22,20 +22,20 @@ namespace PacChatServer.MessageCore.Message
         public Guid ID { get; set; }
 
         //ID of sender, sender is user
-        [BsonElement("SenderID")]
-        public Guid SenderID { get; set; }
+        [BsonElement("Author")]
+        public Guid Author { get; set; }
 
         //List of user seen this message
-        [BsonElement("SeenBy")]
-        public HashSet<Guid> SeenBy { get; private set; } = new HashSet<Guid>();
+        [BsonElement("Seens")]
+        public HashSet<Guid> Seens { get; private set; } = new HashSet<Guid>();
 
         //if Revoked = true, the message will be hidden to all users.
         [BsonElement("Revoked")]
         public bool Revoked { get; set; } = false;
 
         //IDs of users who hide this message away from their conversation, the message still show to the others
-        [BsonElement("HideBy")]
-        public HashSet<Guid> HideBy { get; private set; } = new HashSet<Guid>();
+        [BsonElement("Hide")]
+        public HashSet<Guid> Hide { get; private set; } = new HashSet<Guid>();
 
         //IDs of user who reacted and react id;
         [BsonElement("Reacts"), BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
@@ -52,7 +52,7 @@ namespace PacChatServer.MessageCore.Message
 
         public bool Showable(Guid id)
         {
-            return !Revoked && !HideBy.Contains(id);
+            return !Revoked && !Hide.Contains(id);
         }
     }
 }
