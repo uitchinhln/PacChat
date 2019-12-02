@@ -8,5 +8,6 @@ namespace PacChatServer.MessageCore.Conversation
 {
     public class SingleConversation : AbstractConversation
     {
+
     }
 }
