@@ -16,7 +16,7 @@ namespace PacChatServer.IO.Message
             return Mongo.Instance.Get<AbstractMessage>(conversationID.ToString(), collection =>
             {
                 var condition = Builders<AbstractMessage>.Filter.Eq(p => p.ID, id);
-                var result = collection.Find(condition).ToList();
+                var result = collection.Find(condition).Limit(1).ToList();
                 if (result.Count > 0)
                 {
                     return result[0];

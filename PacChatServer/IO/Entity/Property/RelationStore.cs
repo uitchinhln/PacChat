@@ -17,7 +17,7 @@ namespace PacChatServer.IO.Entity.Property
             return Mongo.Instance.Get<Relation>(Mongo.RelationCollectionName, collection =>
             {
                 var condition = Builders<Relation>.Filter.Eq(p => p.ID, id);
-                var result = collection.Find(condition).ToList();
+                var result = collection.Find(condition).Limit(1).ToList();
                 if (result.Count > 0)
                 {
                     return result[0];
