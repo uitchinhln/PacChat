@@ -26,7 +26,7 @@ namespace PacChatServer.IO.Entity
                     .Include(p => p.LastLogoff)
                     .Include(p => p.Banned);
 
-                var result = collection.Find(condition).Project<ChatUserProfile>(fields).ToList();
+                var result = collection.Find(condition).Project<ChatUserProfile>(fields).Limit(1).ToList();
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -55,7 +55,7 @@ namespace PacChatServer.IO.Entity
                     .Include(p => p.LastLogoff)
                     .Include(p => p.Banned);
 
-                var result = collection.Find(condition).Project<ChatUserProfile>(fields).ToList();
+                var result = collection.Find(condition).Project<ChatUserProfile>(fields).Limit(1).ToList();
                 if (result.Count > 0)
                 {
                     return result[0];
