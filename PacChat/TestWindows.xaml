@@ -22,16 +22,9 @@
                             />
             </materialDesign:PopupBox.ToggleContent>
 
-            <Grid Width="300" Height="200">
-                <Button Background="#FF0F0606">
-                    <Button.Style>
-                        <Style>
-                            
-                        </Style>
-                    </Button.Style>
-                    <TextBlock Text="5/50 Radius" />
-                </Button>
-            </Grid>
+            <cc:StickerStoreDialog>
+
+            </cc:StickerStoreDialog>
 
         </materialDesign:PopupBox>
 
