@@ -1,4 +1,5 @@
 ﻿using PacChat.Network.Packets.AfterLoginRequest;
+using PacChat.Network.Packets.AfterLoginRequest.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x01, new GetShortInfoResult());
             Outbound(0x01, new GetShortInfo());
+
+            Inbound(0x04, new ReceiveTextMessage());
+
+            Outbound(0x05, new SendTextMessage());
         }
     }
 }

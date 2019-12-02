@@ -17,6 +17,8 @@ using PacChat.Resources.CustomControls;
 using PacChat.MessageCore.Message;
 using PacChat.Utils;
 using Microsoft.Win32;
+using PacChat.Network.Packets.AfterLoginRequest.Message;
+using PacChat.Network;
 
 namespace PacChat
 {
@@ -33,6 +35,8 @@ namespace PacChat
                 ChatTitle.Content = value;
             }
         }
+
+        public object ChatSession { get; private set; }
 
         public static ChatPage Instance;
 
@@ -61,7 +65,7 @@ namespace PacChat
             }
         }
 
-        private void SendMessage(TextMessage msg, bool isSimulating = false) //on the Rightside
+        public void SendMessage(TextMessage msg, bool isSimulating = false) //on the Rightside
         {
             _previousBubbleChat = null;
 
@@ -79,9 +83,14 @@ namespace PacChat
 
             var app = MainWindow.chatApplication;
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
+
+            SendTextMessage packet = new SendTextMessage();
+            packet.Message = msg;
+            packet.TargetID = app.model.currentSelectedUser;
+            _ = ChatConnection.Instance.Send(packet);
         }
 
-        private void sendLeftMessages(TextMessage msg, bool isSimulating = false)
+        public void SendLeftMessages(TextMessage msg, bool isSimulating = false)
         {
             if (_previousBubbleChat == null)
             {
@@ -120,7 +129,7 @@ namespace PacChat
             foreach (BubbleInfo bubbleInfo in msgList)
             {
                 if (bubbleInfo.onLeft)
-                    sendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
+                    SendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
                 else
                     SendMessage(new TextMessage() { Message = bubbleInfo.message }, true);
             }
@@ -142,7 +151,7 @@ namespace PacChat
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            sendLeftMessages(new TextMessage() { Message = ChatInput.Text });
+            SendLeftMessages(new TextMessage() { Message = ChatInput.Text });
             ChatInput.Text = "";
         }
 

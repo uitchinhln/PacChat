@@ -1,4 +1,5 @@
 ﻿using PacChatServer.Network.Packets.AfterLogin.DataPreparing;
+using PacChatServer.Network.Packets.AfterLogin.Message;
 using PacChatServer.Network.Packets.AfterLogin.Search;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ namespace PacChatServer.Network.Protocol
 
             Inbound(0x03, new UserSearchRequest());
             Outbound(0x03, new UserSearchResponse());
+
+            Inbound(0x05, new SendMessageRequest());
+
+            Outbound(0x04, new SendMessageResponse());
         }
     }
 }

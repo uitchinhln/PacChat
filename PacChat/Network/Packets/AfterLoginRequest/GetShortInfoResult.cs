@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using PacChat.ChatPageContents;
+using PacChat.Utils;
 
 namespace PacChat.Network.Packets.AfterLoginRequest
 {
@@ -68,14 +69,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             var id = ID;
-            //ChatModel.FriendShortProfiles.Add(ID, 
-            //    new Utils.UserUtils.ShortProfile() 
-            //    { 
-            //        ID = id,
-            //        Name = FirstName + " " + LastName,
-            //        IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
-            //    });
-
             Console.WriteLine(PreviewCode); 
 
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.AddUserToListView(
@@ -86,6 +79,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
                     IncomingMsg = ""
                 }));
+
+            var app = MainWindow.chatApplication;
+            app.model.ContactsMessages.Add(id, new List<BubbleInfo>());
         }
     }
 }
