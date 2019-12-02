@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
+using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
@@ -39,8 +40,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 packet.Message = Message;
                 packet.SenderID = chatSession.Owner.ID.ToString();
                 user.Send(packet);
-                // Console.WriteLine("Sent to " + ReceiverID);
             }
+
+            new MessageStore().Save(Message, Guid.Parse(ReceiverID));
         }
     }
 }

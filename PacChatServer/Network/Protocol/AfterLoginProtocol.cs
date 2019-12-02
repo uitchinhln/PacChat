@@ -25,6 +25,10 @@ namespace PacChatServer.Network.Protocol
             Inbound(0x05, new SendMessageRequest());
 
             Outbound(0x04, new SendMessageResponse());
+
+            // Conversations
+            Inbound(0x06, new ConversationFrIDRequest());
+            Outbound(0x06, new ConversationFrIDResponse());
         }
     }
 }

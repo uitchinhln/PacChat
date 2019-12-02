@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.IO.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,30 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         {
             ChatSession chatSession = session as ChatSession;
 
+            ConversationFrIDResponse packet = new ConversationFrIDResponse();
+            var conversationStore = new ConversationStore().Load(ConversationID);
 
+            if (conversationStore == null)
+            {
+                packet.StatusCode = 404;
+            }
+            else
+            {
+                packet.StatusCode = 200;
+                packet.LastActive = conversationStore.LastActive;
+
+                foreach (var member in conversationStore.Members)
+                {
+                    packet.Members.Add(member.ToString());
+                }
+
+                foreach (var message in conversationStore.MessagesID)
+                {
+                    packet.MessagesID.Add(message.ToString());
+                }
+            }
+
+            session.Send(packet);
         }
     }
 }
