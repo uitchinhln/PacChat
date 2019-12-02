@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.Cache.Core;
+using PacChatServer.Entity;
+using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +34,21 @@ namespace PacChatServer.MessageCore.Conversation
 
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
+
+        public void SendMessage(IMessage message)
+        {
+            ChatUser user;
+            foreach (Guid userID in Members)
+            {
+                if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
+                {
+                    user.Send(null); //Add message packet here
+                }
+
+                //Store
+                MessagesID.Add((message as AbstractMessage).ID);
+                LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
+            }
+        }
     }
 }
