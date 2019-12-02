@@ -9,6 +9,6 @@ namespace PacChatServer.Entity
     public interface IEntity
     {
 
-        void Save();
+        bool Save();
     }
 }
