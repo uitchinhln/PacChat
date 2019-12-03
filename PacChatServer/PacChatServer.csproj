@@ -305,6 +305,7 @@
     <Compile Include="Network\Packets\AfterLogin\Message\SendMessageRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\SingleConversationFrUserIDRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\SingleConversationFrUserIDResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Notification\UserOnline.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
@@ -349,6 +350,7 @@
     <Folder Include="Cache\Entity\" />
     <Folder Include="Cache\Message\" />
     <Folder Include="Command\Commands\Tool\" />
+    <Folder Include="Network\HttpServer\" />
     <Folder Include="Permission\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
