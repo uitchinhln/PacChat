@@ -303,6 +303,8 @@
     <Compile Include="Network\Packets\AfterLogin\Message\RecentConversationsRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\RecentConversationsResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\SendMessageRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\SingleConversationFrUserIDRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\SingleConversationFrUserIDResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
