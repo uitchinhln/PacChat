@@ -80,7 +80,7 @@ namespace PacChatServer.IO.Entity
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).ToList();
+                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).Limit(20).ToList();
 
                 foreach (SearchIdByEmail r in objs)
                 {
