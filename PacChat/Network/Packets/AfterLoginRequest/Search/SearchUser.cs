@@ -8,12 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.Packets.AfterLogin.Message
+namespace PacChat.Network.Packets.AfterLoginRequest.Search
 {
-    public class SingleConversationFrUserIDResponse : IPacket
+    public class SearchUser : IPacket
     {
-        public Guid UserID { get; set; }
-        public Guid ResponseID { get; set; }
+        public string Email { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -22,9 +21,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, UserID.ToString());
-            ByteBufUtils.WriteUTF8(byteBuf, ResponseID.ToString());
-
+            ByteBufUtils.WriteUTF8(byteBuf, Email);
             return byteBuf;
         }
 

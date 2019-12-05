@@ -74,7 +74,7 @@ namespace PacChat.ChatPageContents.ViewModels
                 Console.WriteLine("Con: " + contact.Name);
             }
 
-            MainWindow.chatApplication.model.InitContacts();
+            // MainWindow.chatApplication.model.InitContacts();
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.ListViewUpdate());
         }
     }

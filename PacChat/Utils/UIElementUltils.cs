@@ -19,4 +19,15 @@ namespace PacChat.Utils
         }
     }
 
+    public class ConversationBubble
+    {
+        public string ConversationID { get; set; }
+        public List<BubbleInfo> Bubbles = new List<BubbleInfo>();
+
+        public ConversationBubble(string convID)
+        {
+            ConversationID = convID;
+        }
+    }
+
 }

@@ -76,12 +76,17 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                 {
                     Id = id,
                     Name = FirstName + " " + LastName,
+                    IsOnline = IsOnline,
                     //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
                     IncomingMsg = ""
                 }));
 
-            var app = MainWindow.chatApplication;
-            app.model.ContactsMessages.Add(id, new List<BubbleInfo>());
+            if (Relationship == 2)
+            {
+                var app = MainWindow.chatApplication;
+                if (!app.model.ContactsMessages.ContainsKey(id))
+                    app.model.ContactsMessages.Add(id, new ConversationBubble(ConversationID));
+            }
         }
     }
 }

@@ -49,5 +49,10 @@ namespace PacChat.ChatPageContents
             UserMessage1.Text = Msg;
             ClickMask.Content = Id;
         }
+
+        public void SetOnlineStatus(bool online)
+        {
+            OnlineStatus.Visibility = online ? Visibility.Visible : Visibility.Hidden;
+        }
     }
 }

@@ -92,10 +92,16 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversations.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversationsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SendTextMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOfflineReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOnlineReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfileResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />
     <Compile Include="Network\Packets\Login\LoginData.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />

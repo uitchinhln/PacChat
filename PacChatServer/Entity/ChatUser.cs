@@ -121,6 +121,17 @@ namespace PacChatServer.Entity
         public void Offline()
         {
             this.LastLogoff = DateTime.Now;
+            UserOffline packet = new UserOffline();
+            packet.TargetID = this.ID;
+
+            foreach (var pair in Relationship.Where(q => Relation.Get(q.Value).RelationType == Relation.Type.Friend))
+            {
+                if (ChatUserManager.IsOnline(pair.Key))
+                {
+                    ChatUserManager.LoadUser(pair.Key).Send(packet);
+                }
+            }
+
             this.Save();
             PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out!", this.Email));
         }

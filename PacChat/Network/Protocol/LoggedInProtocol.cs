@@ -1,5 +1,7 @@
 ﻿using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
+using PacChat.Network.Packets.AfterLoginRequest.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,16 @@ namespace PacChat.Network.Protocol
             Inbound(0x04, new ReceiveTextMessage());
 
             Outbound(0x05, new SendTextMessage());
+
+            Inbound(0x02, new SingleConversationFrUserIDResult());
+            Outbound(0x02, new SingleConversationFrUserID());
+
+            Inbound(0x07, new UserOnlineReceive());
+            Inbound(0x08, new UserOfflineReceive());
+
+            // Search
+            Inbound(0x03, new SearchUserResult());
+            Outbound(0x03, new SearchUser());
         }
     }
 }

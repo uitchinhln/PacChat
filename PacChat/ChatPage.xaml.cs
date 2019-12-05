@@ -85,6 +85,7 @@ namespace PacChat
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
 
             SendTextMessage packet = new SendTextMessage();
+            packet.ConversationID = app.model.ContactsMessages[app.model.currentSelectedUser].ConversationID;
             packet.Message = msg;
             packet.TargetID = app.model.currentSelectedUser;
             _ = ChatConnection.Instance.Send(packet);
@@ -124,10 +125,19 @@ namespace PacChat
             Console.WriteLine("Load chat page on id: " + id);
 
             var app = MainWindow.chatApplication;
-            List<BubbleInfo> msgList = app.model.ContactsMessages[id];
+            ConversationBubble msgList = app.model.ContactsMessages[id];
 
-            foreach (BubbleInfo bubbleInfo in msgList)
+            if (msgList.ConversationID.Equals("~"))
             {
+                SingleConversationFrUserID packet = new SingleConversationFrUserID();
+                packet.UserID = id;
+                _ = ChatConnection.Instance.Send(packet);
+                return;
+            }
+
+            for (int i = 0; i < msgList.Bubbles.Count; ++i)
+            {
+                var bubbleInfo = msgList.Bubbles[i];
                 if (bubbleInfo.onLeft)
                     SendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
                 else
@@ -141,10 +151,8 @@ namespace PacChat
 
             Console.WriteLine("Store chat page on id: " + id + " with length: " + app.model.CurrentUserMessages.Count);
 
-            List<BubbleInfo> msgList = app.model.ContactsMessages[id];
-            msgList.AddRange(app.model.CurrentUserMessages);
-
-            Console.WriteLine("After additionally store: " + msgList.Count);
+            ConversationBubble msgList = app.model.ContactsMessages[id];
+            msgList.Bubbles.AddRange(app.model.CurrentUserMessages);
 
             app.model.CurrentUserMessages.Clear();
         }

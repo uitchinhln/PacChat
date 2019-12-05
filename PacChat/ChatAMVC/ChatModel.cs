@@ -8,6 +8,7 @@ using PacChat.MVC;
 using PacChat.Utils;
 using PacChat.ChatPageContents.ViewModels;
 using static PacChat.Utils.UserUtils;
+using System.Windows.Controls;
 
 namespace PacChat.ChatAMVC
 {
@@ -23,14 +24,15 @@ namespace PacChat.ChatAMVC
         public string previousSelectedUser { get; set; } = "";
         public string currentSelectedUser { get; set; } = "";
         public List<BubbleInfo> CurrentUserMessages { get; set; } = new List<BubbleInfo>();
-        public Dictionary<string, List<BubbleInfo>> ContactsMessages { get; set; } = new Dictionary<string, List<BubbleInfo>>();
+        public Dictionary<string, ConversationBubble> ContactsMessages { get; set; } = new Dictionary<string, ConversationBubble>();
+        public Dictionary<string, UserControl> UserControls { get; set; } = new Dictionary<string, UserControl>();
         public void InitContacts()
         {
             List<UserMessageViewModel> users = UserListDesignModel.Instance.Contacts;
 
             foreach (var user in users)
             {
-                ContactsMessages.Add(user.Id, new List<BubbleInfo>());
+                // ContactsMessages.Add(user.Id, new ConversationBubble());
             }
         }
         #endregion
