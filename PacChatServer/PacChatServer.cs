@@ -28,6 +28,7 @@ namespace PacChatServer
         public int Port { get; set; }
 
         public ChatServer Network { get; private set; }
+        public RestFulServer HttpServer { get; private set; }
 
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
@@ -55,10 +56,13 @@ namespace PacChatServer
 
         private void StartNetworkService()
         {
-            CountdownLatch latch = new CountdownLatch(1);
+            CountdownLatch latch = new CountdownLatch(2);
 
             this.Network = new ChatServer(this, protocolProvider, latch);
             _ = this.Network.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.SERVER_PORT));
+
+            this.HttpServer = new RestFulServer(this, protocolProvider, latch);
+            _ = this.HttpServer.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.FILESERVER_PORT));
 
             latch.Wait();
 

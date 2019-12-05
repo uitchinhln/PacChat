@@ -293,6 +293,11 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\FileServer\Alias\AliasHandler\PageNotFound.cs" />
+    <Compile Include="Network\FileServer\Alias\AliasManager.cs" />
+    <Compile Include="Network\FileServer\Alias\IAliasExecutor.cs" />
+    <Compile Include="Network\RestFulServer.cs" />
+    <Compile Include="Network\FileServer\Handler\RestFulServerHandler.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileRequest.cs" />
@@ -316,6 +321,7 @@
     <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Packets\TestPacket.cs" />
     <Compile Include="Network\Pipeline\ChannelInitializer.cs" />
+    <Compile Include="Network\Pipeline\RestFulServerChannelInitializer.cs" />
     <Compile Include="Network\Protocol\AfterLoginProtocol.cs" />
     <Compile Include="Network\Protocol\HandShakeProtocol.cs" />
     <Compile Include="Network\Protocol\PacChatProtocol.cs" />
@@ -350,7 +356,6 @@
     <Folder Include="Cache\Entity\" />
     <Folder Include="Cache\Message\" />
     <Folder Include="Command\Commands\Tool\" />
-    <Folder Include="Network\HttpServer\" />
     <Folder Include="Permission\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
