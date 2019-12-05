@@ -12,6 +12,8 @@ namespace PacChatServer
         public static IPAddress SERVER_HOST { get; private set; } = IPAddress.Parse("127.0.0.1");
         public static int SERVER_PORT { get; private set; } = 1402;
 
+        public static int FILESERVER_PORT { get; private set; } = 1403;
+
         public static String MYSQL_HOST { get; private set; } = "localhost";
         public static uint MYSQL_PORT { get; private set; } = 3306;
         public static String MYSQL_USER { get; private set; } = "root";
