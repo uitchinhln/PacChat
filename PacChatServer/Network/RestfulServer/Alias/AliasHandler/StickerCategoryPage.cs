@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DotNetty.Codecs.Http;
 
-namespace PacChatServer.Network.FileServer.Alias.AliasHandler
+namespace PacChatServer.Network.RestfulServer.Alias.AliasHandler
 {
-    public class PageNotFound : IAliasExecutor
+    public class StickerCategoryPage : IAliasExecutor
     {
         public void Execute(IFullHttpRequest request, IFullHttpResponse response)
         {
-            throw new NotImplementedException();
+            response.Content.WriteString("Hello", Encoding.UTF8);
         }
     }
 }

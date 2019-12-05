@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace PacChatServer.MessageCore.Message
 {
     public class TextMessage : AbstractMessage
     {
+        [BsonElement("Text")]
         public String Message { get; set; }
 
         public override int GetPreviewCode()

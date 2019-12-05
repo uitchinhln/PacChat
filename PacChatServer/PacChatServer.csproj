@@ -293,11 +293,13 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
-    <Compile Include="Network\FileServer\Alias\AliasHandler\PageNotFound.cs" />
-    <Compile Include="Network\FileServer\Alias\AliasManager.cs" />
-    <Compile Include="Network\FileServer\Alias\IAliasExecutor.cs" />
+    <Compile Include="Network\RestfulServer\Alias\AliasHandler\PageNotFound.cs" />
+    <Compile Include="Network\RestfulServer\Alias\AliasHandler\StickerCategoryPage.cs" />
+    <Compile Include="Network\RestfulServer\Alias\AliasInitialize.cs" />
+    <Compile Include="Network\RestfulServer\Alias\AliasManager.cs" />
+    <Compile Include="Network\RestfulServer\Alias\IAliasExecutor.cs" />
     <Compile Include="Network\RestFulServer.cs" />
-    <Compile Include="Network\FileServer\Handler\RestFulServerHandler.cs" />
+    <Compile Include="Network\RestfulServer\Handler\RestFulServerHandler.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileRequest.cs" />

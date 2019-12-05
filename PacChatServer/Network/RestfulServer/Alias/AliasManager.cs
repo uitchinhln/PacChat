@@ -1,12 +1,12 @@
 ﻿using DotNetty.Codecs.Http;
-using PacChatServer.Network.FileServer.Alias.AliasHandler;
+using PacChatServer.Network.RestfulServer.Alias.AliasHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.FileServer.Alias
+namespace PacChatServer.Network.RestfulServer.Alias
 {
     public class AliasManager
     {
@@ -20,6 +20,7 @@ namespace PacChatServer.Network.FileServer.Alias
         {
             this.server = PacChatServer.GetServer();
             registeredAlias = new SortedDictionary<string, IAliasExecutor>();
+            new AliasInitialize().Initialize(this);
         }
 
         public void RegisterAlias(string uri, IAliasExecutor executor)
@@ -57,13 +58,22 @@ namespace PacChatServer.Network.FileServer.Alias
         {
             try
             {
-                if (uri == null) return;
-                uri = uri.Trim();
-                if (uri.Length < 1) return;
+                if (uri == null)
+                {
+                    pageNotFound.Execute(request, response);
+                    return;
+                }
+                uri = uri.ToUpper().Trim();
+                if (uri.Length < 1)
+                {
+                    pageNotFound.Execute(request, response);
+                    return;
+                }
 
                 if (!registeredAlias.ContainsKey(uri))
                 {
                     server.Logger.Error(String.Format("URI \"{0}\" is not exists!!!", uri.ToLower()));
+                    pageNotFound.Execute(request, response);
                     return;
                 }
 

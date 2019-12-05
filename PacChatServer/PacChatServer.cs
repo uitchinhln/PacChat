@@ -10,6 +10,7 @@ using PacChatServer.IO.Storage;
 using PacChatServer.MessageCore.Sticker;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
+using PacChatServer.Network.RestfulServer.Alias;
 using PacChatServer.Utils;
 using PacChatServer.Utils.ThreadUtils;
 using System;
@@ -46,6 +47,7 @@ namespace PacChatServer
             Mongo.StartService();
             ProfileCache.StartService();
             CommandManager.StartService();
+            AliasManager.StartService();
 
             RegisterCommand();
 

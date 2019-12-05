@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.FileServer.Alias
+namespace PacChatServer.Network.RestfulServer.Alias
 {
     public interface IAliasExecutor
     {
