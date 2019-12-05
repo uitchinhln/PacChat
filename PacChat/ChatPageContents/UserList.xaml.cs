@@ -67,6 +67,9 @@ namespace PacChat.ChatPageContents
         {
             UserMessage userControl = new UserMessage();
             userControl.SetInfo(user.Id, user.Name, user.IncomingMsg);
+            userControl.SetOnlineStatus(user.IsOnline);
+            var app = MainWindow.chatApplication;
+            app.model.UserControls.Add(user.Id, userControl);
             ListView.Children.Add(userControl);
         }
     }

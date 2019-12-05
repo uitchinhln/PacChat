@@ -13,5 +13,6 @@ namespace PacChat.ChatPageContents.ViewModels
         public string Name { get; set; }
 
         public string IncomingMsg { get; set; }
+        public bool IsOnline { get; set; }
     }
 }
