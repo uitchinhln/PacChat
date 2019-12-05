@@ -2,36 +2,37 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
-using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.Packets.AfterLogin.Message
+namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
-    public class SendMessageResponse : IPacket
+    public class SingleConversationFrUserIDResult : IPacket
     {
+        public string UserID { get; set; }
         public string ConversationID { get; set; }
-        public string SenderID { get; set; }
-        public TextMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
+            UserID = ByteBufUtils.ReadUTF8(buffer);
+            ConversationID = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
-            ByteBufUtils.WriteUTF8(byteBuf, SenderID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message.Message);
-
+            // throw new NotImplementedException();
             return byteBuf;
         }
 
         public void Handle(ISession session)
         {
+            var app = MainWindow.chatApplication;
+            app.model.ContactsMessages[UserID].ConversationID = ConversationID;
+
+            ChatPage.Instance.LoadChatPage(UserID);
         }
     }
 }

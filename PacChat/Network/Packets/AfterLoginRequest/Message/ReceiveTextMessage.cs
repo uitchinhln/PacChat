@@ -14,11 +14,13 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
     public class ReceiveTextMessage : IPacket
     {
+        public string ConversationID { get; set; }
         public string SenderID { get; set; }
         public TextMessage Message { get; set; } = new TextMessage();
 
         public void Decode(IByteBuffer buffer)
         {
+            ConversationID = ByteBufUtils.ReadUTF8(buffer);
             SenderID = ByteBufUtils.ReadUTF8(buffer);
             Message.Message = ByteBufUtils.ReadUTF8(buffer);
         }
@@ -33,7 +35,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Console.WriteLine("Received");
 
             var app = MainWindow.chatApplication;
-            app.model.ContactsMessages[SenderID].Add(new Utils.BubbleInfo(Message.Message, true));
+            var temp = app.model.ContactsMessages[SenderID];
+
+            if (temp.ConversationID.CompareTo(ConversationID) == 0)
+            {
+                temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
+            }
 
             if (app.model.currentSelectedUser.CompareTo(SenderID) == 0)
                 Application.Current.Dispatcher.Invoke(() => ChatPage.Instance.SendLeftMessages(Message, true));

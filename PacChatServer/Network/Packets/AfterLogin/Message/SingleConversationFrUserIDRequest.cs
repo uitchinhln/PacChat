@@ -35,6 +35,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
         public void Handle(ISession session)
         {
+            Console.WriteLine("Single conv requested");
+
             if (TargetID.Equals(Guid.Empty)) return;
 
             ChatUser targetUser = ChatUserManager.LoadUser(TargetID);
@@ -59,6 +61,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             }
 
             SingleConversationFrUserIDResponse response = new SingleConversationFrUserIDResponse();
+            response.UserID = TargetID;
             response.ResponseID = resultID;
 
             chatSession.Send(response);

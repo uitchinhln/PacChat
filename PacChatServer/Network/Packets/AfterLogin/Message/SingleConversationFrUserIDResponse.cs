@@ -12,6 +12,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 {
     public class SingleConversationFrUserIDResponse : IPacket
     {
+        public Guid UserID { get; set; }
         public Guid ResponseID { get; set; }
 
         public void Decode(IByteBuffer buffer)
@@ -21,6 +22,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
+            ByteBufUtils.WriteUTF8(byteBuf, UserID.ToString());
             ByteBufUtils.WriteUTF8(byteBuf, ResponseID.ToString());
 
             return byteBuf;

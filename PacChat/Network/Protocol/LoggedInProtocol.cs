@@ -21,6 +21,9 @@ namespace PacChat.Network.Protocol
             Inbound(0x04, new ReceiveTextMessage());
 
             Outbound(0x05, new SendTextMessage());
+
+            Inbound(0x02, new SingleConversationFrUserIDResult());
+            Outbound(0x02, new SingleConversationFrUserID());
         }
     }
 }
