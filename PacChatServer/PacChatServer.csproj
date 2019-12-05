@@ -293,6 +293,8 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileRequest.cs" />

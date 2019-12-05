@@ -54,7 +54,7 @@
                         Margin="8 4 0 0">
                 </TextBox>
             </Border>-->
-            <Label x:Name="ChatTitle" Content="{Binding Title}" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
+            <Label x:Name="ChatTitle" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
 
             <Border>
                 <TextBlock VerticalAlignment="Center"
@@ -66,7 +66,7 @@
 
         </DockPanel>
 
-        <DockPanel DockPanel.Dock="Bottom" Height="41">
+        <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
             <Border>
                 <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
                     <materialDesign:PopupBox.ToggleContent>

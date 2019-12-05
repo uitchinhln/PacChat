@@ -7,7 +7,7 @@
         xmlns:chatcontent="clr-namespace:PacChat.ChatPageContents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PacChat" Height="499.5" Width="836.5" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="#FF1E145F" Padding="0" MinWidth="640" MinHeight="480" Margin="0" WindowStyle="None">
+        Title="PacChat" Height="499.5" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="#FF1E145F" Padding="0" MinWidth="900" MinHeight="480" Margin="0" WindowStyle="None">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -16,9 +16,9 @@
     <Window.Resources>
         <Storyboard x:Key="left-side-panel-expand">
             <DoubleAnimation
-                Storyboard.TargetName="LeftSidePanel"
+                Storyboard.TargetName="ProfileDisplayer"
                 Storyboard.TargetProperty="Width"
-                From="32" To="128" Duration="0:0:0.25"
+                From="0" To="256" Duration="0:0:0.25"
                 AutoReverse="False">
                 <DoubleAnimation.EasingFunction>
                     <BackEase EasingMode="EaseInOut"/>
@@ -28,9 +28,9 @@
         </Storyboard>
         <Storyboard x:Key="left-side-panel-compress">
             <DoubleAnimation
-                Storyboard.TargetName="LeftSidePanel"
+                Storyboard.TargetName="ProfileDisplayer"
                 Storyboard.TargetProperty="Width"
-                From="128" To="32" Duration="0:0:0.25"
+                From="256" To="0" Duration="0:0:0.25"
                 AutoReverse="False">
                 <DoubleAnimation.EasingFunction>
                     <BackEase EasingMode="EaseIn"/>
@@ -119,8 +119,9 @@
             <!-- Single chat page -->
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                 <DockPanel>
-                    <chatcontent:UserList x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2368"/>
-                    <local:ChatPage x:Name="ChatPage"/>
+                    <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2368"/>
+                    <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Width="0"></chatcontent:ProfileDisplayer>
+                    <local:ChatPage x:Name="ChatPage" />
                 </DockPanel>
             </materialDesign:TransitionerSlide>
             
@@ -149,6 +150,8 @@
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
 
+        <!--<chatcontent:ProfileDisplayer></chatcontent:ProfileDisplayer>
+-->
         <!--
         <DockPanel x:Name="spanelContent" Background="White">
             <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold" VerticalAlignment="Top" DockPanel.Dock="Top"/>

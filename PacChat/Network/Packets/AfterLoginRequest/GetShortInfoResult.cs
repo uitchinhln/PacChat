@@ -86,6 +86,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                 var app = MainWindow.chatApplication;
                 if (!app.model.ContactsMessages.ContainsKey(id))
                     app.model.ContactsMessages.Add(id, new ConversationBubble(ConversationID));
+
+                if (!app.model.IsOnline.ContainsKey(id))
+                    app.model.IsOnline.Add(id, IsOnline);
             }
         }
     }

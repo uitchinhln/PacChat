@@ -30,6 +30,10 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
         {
             var app = MainWindow.chatApplication;
             var friend = app.model.UserControls[UserID] as UserMessage;
+
+            if (app.model.IsOnline.ContainsKey(UserID))
+                app.model.IsOnline[UserID] = false;
+
             Application.Current.Dispatcher.Invoke(() => friend.SetOnlineStatus(true));
         }
     }

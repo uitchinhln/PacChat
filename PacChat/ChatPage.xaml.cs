@@ -28,15 +28,6 @@ namespace PacChat
     public partial class ChatPage : UserControl
     {
         private BubbleChat _previousBubbleChat;
-        public string chatTitle 
-        {  
-            set
-            {
-                ChatTitle.Content = value;
-            }
-        }
-
-        public object ChatSession { get; private set; }
 
         public static ChatPage Instance;
 
