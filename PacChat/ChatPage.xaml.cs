@@ -135,8 +135,9 @@ namespace PacChat
                 return;
             }
 
-            foreach (BubbleInfo bubbleInfo in msgList.Bubbles)
+            for (int i = 0; i < msgList.Bubbles.Count; ++i)
             {
+                var bubbleInfo = msgList.Bubbles[i];
                 if (bubbleInfo.onLeft)
                     SendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
                 else

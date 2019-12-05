@@ -27,6 +27,7 @@ namespace PacChat.Network.Protocol
             Outbound(0x02, new SingleConversationFrUserID());
 
             Inbound(0x07, new UserOnlineReceive());
+            Inbound(0x08, new UserOfflineReceive());
         }
     }
 }

@@ -36,6 +36,7 @@ namespace PacChatServer.Network.Protocol
 
             // Notifications
             Outbound(0x07, new UserOnline());
+            Outbound(0x08, new UserOffline());
         }
     }
 }

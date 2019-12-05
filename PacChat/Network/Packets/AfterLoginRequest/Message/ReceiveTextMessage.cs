@@ -32,13 +32,21 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
         public void Handle(ISession session)
         {
-            Console.WriteLine("Received");
+            Console.WriteLine("Received" + ConversationID);
 
             var app = MainWindow.chatApplication;
             var temp = app.model.ContactsMessages[SenderID];
 
-            if (temp.ConversationID.CompareTo(ConversationID) == 0)
+            if (temp.ConversationID.CompareTo(ConversationID) == 0) 
             {
+                temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
+            }
+
+            bool empty = temp.ConversationID.Equals("~");
+            if (empty)
+            {
+                Console.WriteLine("Empty");
+                temp.ConversationID = ConversationID;
                 temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
             }
 
