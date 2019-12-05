@@ -2,11 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
-using PacChat.ChatAMVC;
 using PacChat.ChatPageContents;
-using PacChat.ChatPageContents.ViewModels;
-using PacChat.MVC;
-using PacChat.Windows.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +10,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace PacChat.Network.Packets.AfterLoginRequest
+namespace PacChat.Network.Packets.AfterLoginRequest.Search
 {
-    public class GetFriendIDsResult : IPacket
+    public class SearchUserResult : IPacket
     {
-        public List<string> ids { get; set; } = new List<string>();
+        public List<String> UserIDs = new List<String>();
 
         public void Decode(IByteBuffer buffer)
         {
-            string id;
-            id = ByteBufUtils.ReadUTF8(buffer);
+            string id = ByteBufUtils.ReadUTF8(buffer);
 
             while (id != "~")
             {
-                ids.Add(id);
+                UserIDs.Add(id);
                 id = ByteBufUtils.ReadUTF8(buffer);
-            }    
+            }
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -39,15 +34,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest
 
         public void Handle(ISession session)
         {
-            ChatModel.FriendIDs.Clear();
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.ClearListView());
 
-            foreach (var id in ids)
-            {
-                Console.WriteLine(id);
-                ChatModel.FriendIDs.Add(id);
+            if (UserIDs.Count > 30) return;
 
-                // Get short info from ID
+            foreach (var id in UserIDs)
+            {
                 GetShortInfo packet = new GetShortInfo();
                 packet.ID = id;
                 _ = ChatConnection.Instance.Send(packet);

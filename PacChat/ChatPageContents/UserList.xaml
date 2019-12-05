@@ -38,7 +38,7 @@
                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         BorderThickness="0"
-                        Margin="10,4,10,-4"/>
+                        Margin="10,4,10,-4" TextChanged="UserSearchBox_TextChanged"/>
                     </Border>
                     
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">

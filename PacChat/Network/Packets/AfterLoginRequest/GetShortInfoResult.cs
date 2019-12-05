@@ -81,8 +81,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     IncomingMsg = ""
                 }));
 
-            var app = MainWindow.chatApplication;
-            app.model.ContactsMessages.Add(id, new ConversationBubble(ConversationID));
+            if (Relationship == 2)
+            {
+                var app = MainWindow.chatApplication;
+                if (!app.model.ContactsMessages.ContainsKey(id))
+                    app.model.ContactsMessages.Add(id, new ConversationBubble(ConversationID));
+            }
         }
     }
 }

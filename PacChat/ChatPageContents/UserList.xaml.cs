@@ -1,4 +1,8 @@
 ﻿using PacChat.ChatPageContents.ViewModels;
+using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest;
+using PacChat.Network.Packets.AfterLoginRequest.Search;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +27,7 @@ namespace PacChat.ChatPageContents
     {
         Color lostFocusColor = Color.FromRgb(100, 90, 150);
         public static UserList Instance { get; set; }
+        public object GetFriendID { get; private set; }
 
         public UserList()
         {
@@ -63,6 +68,14 @@ namespace PacChat.ChatPageContents
             }
         }
 
+        public void ClearListView()
+        {
+            ListView.Children.Clear();
+
+            var app = MainWindow.chatApplication;
+            app.model.UserControls.Clear();
+        }
+
         public void AddUserToListView(UserMessageViewModel user)
         {
             UserMessage userControl = new UserMessage();
@@ -71,6 +84,19 @@ namespace PacChat.ChatPageContents
             var app = MainWindow.chatApplication;
             app.model.UserControls.Add(user.Id, userControl);
             ListView.Children.Add(userControl);
+        }
+
+        private void UserSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (UserSearchBox.Text.Length == 0)
+            {
+                Packets.SendPacket<GetFriendIDs>();
+                return;
+            }
+
+            SearchUser packet = new SearchUser();
+            packet.Email = UserSearchBox.Text;
+            _ = ChatConnection.Instance.Send(packet);
         }
     }
 }
