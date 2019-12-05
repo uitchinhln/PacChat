@@ -60,5 +60,10 @@ namespace PacChatServer
                 user.Offline();
             }
         }
+
+        public static bool IsOnline(Guid id)
+        {
+            return OnlineUsers.ContainsKey(id);
+        }
     }
 }

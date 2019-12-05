@@ -8,5 +8,6 @@ namespace PacChatServer.MessageCore.Conversation
 {
     public class GroupConversation : AbstractConversation
     {
+        public String Name { get; set; }
     }
 }

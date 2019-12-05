@@ -49,33 +49,32 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             response.PreviewCode = -1;
             response.ConversationID = "~";
 
-            foreach (Guid id in chatSession.Owner.ConversationID)
+            var CommonConversation = targetUser.ConversationID.Intersect(chatSession.Owner.ConversationID);
+
+            foreach (Guid id in CommonConversation)
             {
-                if (targetUser.ConversationID.Contains(id))
+                AbstractConversation conversation = store.Load(id);
+                if (conversation is SingleConversation)
                 {
-                    AbstractConversation conversation = store.Load(id);
-                    if (conversation is SingleConversation)
+                    response.ConversationID = conversation.ID.ToString();
+
+                    AbstractMessage message = new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID);
+                    if (message == null) break;
+
+                    if (message.Showable(chatSession.Owner.ID))
                     {
-                        response.ConversationID = conversation.ID.ToString();
-
-                        AbstractMessage message = new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID);
-                        if (message == null) break;
-
-                        if (message.Showable(chatSession.Owner.ID))
-                        {
-                            response.PreviewCode = 0;
-                            break;
-                        } 
-
-                        response.PreviewCode = message.GetPreviewCode();
-
-                        if (message.GetPreviewCode() == 4)
-                        {
-                            response.LastMess = (message as TextMessage).Message;
-                        }
-
+                        response.PreviewCode = 0;
                         break;
                     }
+
+                    response.PreviewCode = message.GetPreviewCode();
+
+                    if (message.GetPreviewCode() == 4)
+                    {
+                        response.LastMess = (message as TextMessage).Message;
+                    }
+
+                    break;
                 }
             }
 

@@ -56,7 +56,7 @@ namespace PacChatServer.Command.Commands
                     Gender = Entity.EntityProperty.Gender.Male
                 };
 
-                bool added = new ChatUserStore().Save(user);
+                bool added = user.Save();
                 if (added)
                 {                
                     PacChatServer.GetServer().Logger.Info(String.Format("Account {0} has registered successfully. ID = {1}", user.Email, user.ID));

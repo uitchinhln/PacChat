@@ -5,6 +5,7 @@ using PacChatServer.Entity.EntityProperty;
 using PacChatServer.Entity.Meta.Profile;
 using PacChatServer.IO.Entity;
 using PacChatServer.Network;
+using PacChatServer.Network.Packets.AfterLogin.Notification;
 using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,16 @@ namespace PacChatServer.Entity
 
         public void Online()
         {
-            
+            UserOnline packet = new UserOnline();
+            packet.TargetID = this.ID;
+
+            foreach (var pair in Relationship.Where(q => Relation.Get(q.Value).RelationType == Relation.Type.Friend))
+            {
+                if (ChatUserManager.IsOnline(pair.Key))
+                {
+                    ChatUserManager.LoadUser(pair.Key).Send(packet);
+                }
+            }
         }
 
         public void Offline()
@@ -152,9 +162,9 @@ namespace PacChatServer.Entity
             return relation;
         }
 
-        public override void Save()
+        public override bool Save()
         {
-            saver.Save(this);
+            bool result = saver.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
 
             profile.Email = this.Email;
@@ -165,6 +175,8 @@ namespace PacChatServer.Entity
             profile.Gender = this.Gender;
             profile.Banned = this.Banned;
             profile.LastLogoff = this.LastLogoff;
+
+            return result;
         }
     }
 }

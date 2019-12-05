@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.Cache.Core;
 using PacChatServer.Entity;
+using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ namespace PacChatServer.MessageCore.Conversation
     [BsonKnownTypes(typeof(SingleConversation), typeof(GroupConversation))]
     public abstract class AbstractConversation : IConversation
     {
+        ConversationStore store = new ConversationStore();
+        MessageStore messageStore = new MessageStore();
+
         [BsonId]
         public Guid ID { get; set; }
 
@@ -48,6 +52,9 @@ namespace PacChatServer.MessageCore.Conversation
                 //Store
                 MessagesID.Add((message as AbstractMessage).ID);
                 LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
+
+                store.UpdateMessagesList(this);
+                messageStore.Save((message as AbstractMessage), this.ID);
             }
         }
     }

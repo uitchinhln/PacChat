@@ -27,38 +27,45 @@ namespace PacChatServer.IO.Entity
 
         public bool UpdateRelations(ChatUser user)
         {
-            bool result = false;
-            try
+            lock (user)
             {
-                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
-                    var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
-                    var update = Builders<ChatUser>.Update.Set(p => p.Relationship, user.Relationship);
-                    collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
-                });
-                result = true;
+                bool result = false;
+                try
+                {
+                    Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                        var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
+                        var update = Builders<ChatUser>.Update.Set(p => p.Relationship, user.Relationship);
+                        collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
+                    });
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    PacChatServer.GetServer().Logger.Error(e);
+                }
+                return result;
             }
-            catch (Exception e)
-            {
-                PacChatServer.GetServer().Logger.Error(e);
-            }
-            return result;
         }
 
         public bool Save(ChatUser user)
         {
-            bool result = false;
-            try
+            lock (user)
             {
-                Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
-                    var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
-                    collection.ReplaceOneAsync(condition, user, new UpdateOptions() { IsUpsert = true });
-                });
-                result = true;
-            } catch (Exception e)
-            {
-                PacChatServer.GetServer().Logger.Error(e);
+                bool result = false;
+                try
+                {
+                    Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                        var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
+                        collection.ReplaceOneAsync(condition, user, new UpdateOptions() { IsUpsert = true });
+                    });
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    PacChatServer.GetServer().Logger.Error(e);
+                }
+                return result;
             }
-            return result;
         }
 
         public List<String> SearchUserIDByEmail(string input)
@@ -73,7 +80,7 @@ namespace PacChatServer.IO.Entity
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).ToList();
+                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).Limit(20).ToList();
 
                 foreach (SearchIdByEmail r in objs)
                 {

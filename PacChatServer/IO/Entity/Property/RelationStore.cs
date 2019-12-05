@@ -28,11 +28,14 @@ namespace PacChatServer.IO.Entity.Property
 
         public void Save(Relation relation)
         {
-            Mongo.Instance.Set<Relation>(Mongo.RelationCollectionName, collection =>
+            lock (relation)
             {
-                var condition = Builders<Relation>.Filter.Eq(p => p.ID, relation.ID);
-                collection.ReplaceOneAsync(condition, relation, new UpdateOptions() { IsUpsert = true });
-            });
+                Mongo.Instance.Set<Relation>(Mongo.RelationCollectionName, collection =>
+                {
+                    var condition = Builders<Relation>.Filter.Eq(p => p.ID, relation.ID);
+                    collection.ReplaceOneAsync(condition, relation, new UpdateOptions() { IsUpsert = true });
+                });
+            }
         }
     }
 }

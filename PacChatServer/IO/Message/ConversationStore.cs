@@ -12,6 +12,8 @@ namespace PacChatServer.IO.Message
 {
     public class ConversationStore : Store
     {
+        private object _lock;
+
         public AbstractConversation Load(Guid id)
         {
             AbstractConversation conversation = null;
@@ -28,7 +30,8 @@ namespace PacChatServer.IO.Message
                     }
                     return null;
                 });
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 PacChatServer.GetServer().Logger.Error(e);
             }
@@ -38,21 +41,27 @@ namespace PacChatServer.IO.Message
 
         public void UpdateMessagesList(AbstractConversation conversation)
         {
-            Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), collection =>
+            lock (_lock)
             {
-                var condition = Builders<AbstractConversation>.Filter.Eq(p => p.ID, conversation.ID);
-                var update = Builders<AbstractConversation>.Update.Set(p => p.MessagesID, conversation.MessagesID);
-                collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
-            });
+                Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), collection =>
+                {
+                    var condition = Builders<AbstractConversation>.Filter.Eq(p => p.ID, conversation.ID);
+                    var update = Builders<AbstractConversation>.Update.Set(p => p.MessagesID, conversation.MessagesID);
+                    collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
+                });
+            }
         }
 
         public void Save(AbstractConversation conversation)
         {
-            Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), (collection) =>
+            lock (_lock)
             {
-                var condition = Builders<AbstractConversation>.Filter.Eq(p => p.ID, conversation.ID);
-                collection.ReplaceOneAsync(condition, conversation, new UpdateOptions() { IsUpsert = true });
-            });
+                Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), (collection) =>
+                {
+                    var condition = Builders<AbstractConversation>.Filter.Eq(p => p.ID, conversation.ID);
+                    collection.ReplaceOneAsync(condition, conversation, new UpdateOptions() { IsUpsert = true });
+                });
+            }
         }
 
         public long GetLastActive(Guid conversationID)
@@ -80,14 +89,6 @@ namespace PacChatServer.IO.Message
             }
 
             return conversation != null ? conversation.LastActive : 0;
-        }
-
-        public void AddNew(AbstractConversation conversation)
-        {
-            Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), (collection) =>
-            {
-                collection.InsertOne(conversation);
-            });
         }
     }
 
