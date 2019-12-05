@@ -9,6 +9,6 @@ namespace PacChatServer.Network.RestfulServer.Alias
 {
     public interface IAliasExecutor
     {
-        void Execute(IFullHttpRequest request, IFullHttpResponse response);
+        void Execute(IDictionary<string, List<string>> parameters, IFullHttpRequest request, IFullHttpResponse response);
     }
 }

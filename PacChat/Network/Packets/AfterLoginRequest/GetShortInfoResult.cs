@@ -26,6 +26,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public string ConversationID { get; set; }
         public int PreviewCode { get; set; }
         public bool IsOnline { get; set; }
+        public DateTime LastLogout { get; set; }
         public int Relationship { get; set; }
 
         //private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
@@ -56,6 +57,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
             ConversationID = ByteBufUtils.ReadUTF8(buffer);
             PreviewCode = buffer.ReadInt();
             IsOnline = buffer.ReadBoolean();
+            LastLogout = new DateTime(buffer.ReadLong());
             Relationship = buffer.ReadInt();
 
             Console.WriteLine(FirstName + " " + LastName);

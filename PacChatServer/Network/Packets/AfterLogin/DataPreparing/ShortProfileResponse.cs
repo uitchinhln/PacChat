@@ -19,6 +19,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
         public String ConversationID { get; set; }
         public int PreviewCode { get; set; }
         public bool IsOnline { get; set; }
+        public DateTime LastLogout { get; set; }
         public int RelationshipType { get; set; }
 
         public void Decode(IByteBuffer buffer)
@@ -35,6 +36,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
             byteBuf.WriteInt(PreviewCode);
             byteBuf.WriteBoolean(IsOnline);
+            byteBuf.WriteLong(LastLogout.Ticks);
             byteBuf.WriteInt(RelationshipType);
 
             return byteBuf;

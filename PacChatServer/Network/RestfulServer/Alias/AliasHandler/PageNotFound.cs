@@ -10,7 +10,7 @@ namespace PacChatServer.Network.RestfulServer.Alias.AliasHandler
 {
     public class PageNotFound : IAliasExecutor
     {
-        public void Execute(IFullHttpRequest request, IFullHttpResponse response)
+        public void Execute(IDictionary<string, List<string>> parameters, IFullHttpRequest request, IFullHttpResponse response)
         {
             response.SetStatus(HttpResponseStatus.NotFound);
             response.Replace(Unpooled.Empty);

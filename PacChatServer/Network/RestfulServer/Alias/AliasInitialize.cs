@@ -11,7 +11,7 @@ namespace PacChatServer.Network.RestfulServer.Alias
     {
         public void Initialize(AliasManager alias)
         {
-            alias.RegisterAlias("/api/sticker/category/", new StickerCategoryPage());
+            alias.RegisterAlias("/api/sticker/category", new StickerCategoryPage());
         }
     }
 }

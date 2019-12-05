@@ -43,6 +43,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             response.FirstName = targetUser.FirstName;
             response.LastName = targetUser.LastName;
             response.IsOnline = targetUser.IsOnline();
+            response.LastLogout = targetUser.LastLogoff;
 
             ConversationStore store = new ConversationStore();
 

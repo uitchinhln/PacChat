@@ -54,32 +54,42 @@ namespace PacChatServer.Network.RestfulServer.Alias
             }
         }
 
-        public void ExecuteAlias(String uri, IFullHttpRequest request, IFullHttpResponse response)
+        public void ExecuteAlias(String query, IFullHttpRequest request, IFullHttpResponse response)
         {
             try
             {
+
+                QueryStringDecoder decoder = new QueryStringDecoder(query);
+
+                string uri = decoder.Path;
+
+                if (uri.EndsWith("/"))
+                {
+                    uri = uri.Remove(uri.Length - 1);
+                }
+
                 if (uri == null)
                 {
-                    pageNotFound.Execute(request, response);
+                    pageNotFound.Execute(decoder.Parameters, request, response);
                     return;
                 }
                 uri = uri.ToUpper().Trim();
                 if (uri.Length < 1)
                 {
-                    pageNotFound.Execute(request, response);
+                    pageNotFound.Execute(decoder.Parameters, request, response);
                     return;
                 }
 
                 if (!registeredAlias.ContainsKey(uri))
                 {
                     server.Logger.Error(String.Format("URI \"{0}\" is not exists!!!", uri.ToLower()));
-                    pageNotFound.Execute(request, response);
+                    pageNotFound.Execute(decoder.Parameters, request, response);
                     return;
                 }
 
                 if (registeredAlias.ContainsKey(uri))
                 {
-                    registeredAlias[uri].Execute(request, response);
+                    registeredAlias[uri].Execute(decoder.Parameters, request, response);
                 }
             }
             catch (Exception e)

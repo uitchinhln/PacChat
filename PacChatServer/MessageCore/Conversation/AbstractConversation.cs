@@ -44,10 +44,7 @@ namespace PacChatServer.MessageCore.Conversation
             ChatUser user;
             foreach (Guid userID in Members)
             {
-                if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
-                {
-                    user.Send(null); //Add message packet here
-                }
+                this.LastActive = DateTime.Now.Ticks;
 
                 //Store
                 MessagesID.Add((message as AbstractMessage).ID);
@@ -55,6 +52,18 @@ namespace PacChatServer.MessageCore.Conversation
 
                 store.UpdateMessagesList(this);
                 messageStore.Save((message as AbstractMessage), this.ID);
+
+
+                if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
+                {
+                    user.Send(null); //Add message packet here
+
+                    lock (user.Conversations)
+                    {
+                        user.Conversations.Remove(ID);
+                        user.Conversations.Add(ID, LastActive);
+                    }
+                }
             }
         }
     }
