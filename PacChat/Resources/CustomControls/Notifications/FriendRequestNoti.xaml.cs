@@ -39,6 +39,7 @@ namespace PacChat.Resources.CustomControls.Notifications
             packet.TargetID = ClickMask.Content.ToString();
             packet.Accepted = true;
             _ = ChatConnection.Instance.Send(packet);
+            NotificationPage.Instance.RemoveNotiTag(this);
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,7 @@ namespace PacChat.Resources.CustomControls.Notifications
             packet.TargetID = ClickMask.Content.ToString();
             packet.Accepted = false;
             _ = ChatConnection.Instance.Send(packet);
+            NotificationPage.Instance.RemoveNotiTag(this);
         }
 
         private void ClickMask_Click(object sender, RoutedEventArgs e)

@@ -49,6 +49,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Notification
                 if (ChatUserManager.OnlineUsers.TryGetValue(TargetID, out user))
                 {
                     user.Send(packet);
+                    chatSession.Send(new FinalizeAcceptedFriendRequest());
                 }
             }
         }

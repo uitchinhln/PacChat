@@ -52,6 +52,12 @@ namespace PacChat
             MainWindow.Instance.SetNotificationDotState(true);
         }
 
+        public void RemoveNotiTag(UserControl userControl)
+        {
+            if (NotiListView.Children.Contains(userControl))
+                NotiListView.Children.Remove(userControl);
+        }
+
         public void ClearNoti()
         {
             NotiListView.Children.Clear();

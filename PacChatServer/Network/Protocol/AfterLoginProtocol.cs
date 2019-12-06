@@ -42,6 +42,7 @@ namespace PacChatServer.Network.Protocol
             Outbound(0x10, new ForwardedFriendRequest());
             Inbound(0x13, new ResponseAddFriendRequest());
             Outbound(0x12, new AcceptedFriendResponse());
+            Outbound(0x14, new FinalizeAcceptedFriendRequest());
 
             // Profile
             Inbound(0x09, new DisplayedProfileRequest());
