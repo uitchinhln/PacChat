@@ -37,7 +37,7 @@ namespace PacChat.Network.Pipeline
         {
             IChannelPipeline pipeline = channel.Pipeline;
 
-            pipeline.AddLast(new LoggingHandler());
+            //pipeline.AddLast(new LoggingHandler());
             pipeline.AddLast("framing-enc", new ProtobufVarint32LengthFieldPrepender());
             pipeline.AddLast("framing-dec", new ProtobufVarint32FrameDecoder());
 

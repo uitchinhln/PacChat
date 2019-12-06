@@ -34,6 +34,7 @@ namespace PacChat.Network
             bootstrap
                 .Group(workerGroup)
                 .Channel<TcpSocketChannel>()
+                .Option(ChannelOption.TcpNodelay, true)
                 .Handler(new ChannelInitializer(this));
         }
 
