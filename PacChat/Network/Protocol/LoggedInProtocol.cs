@@ -35,6 +35,7 @@ namespace PacChat.Network.Protocol
             Inbound(0x10, new FriendRequestReceive());
             Outbound(0x11, new FriendRequest());
             Inbound(0x12, new FriendRequestResult());
+            Outbound(0x13, new ResponseFriendRequest());
 
             // Search
             Inbound(0x03, new SearchUserResult());

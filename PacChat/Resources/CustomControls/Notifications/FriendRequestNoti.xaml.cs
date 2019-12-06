@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,12 +35,18 @@ namespace PacChat.Resources.CustomControls.Notifications
 
         private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
-
+            ResponseFriendRequest packet = new ResponseFriendRequest();
+            packet.TargetID = ClickMask.Content.ToString();
+            packet.Accepted = true;
+            _ = ChatConnection.Instance.Send(packet);
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ResponseFriendRequest packet = new ResponseFriendRequest();
+            packet.TargetID = ClickMask.Content.ToString();
+            packet.Accepted = false;
+            _ = ChatConnection.Instance.Send(packet);
         }
 
         private void ClickMask_Click(object sender, RoutedEventArgs e)

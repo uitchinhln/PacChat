@@ -29,12 +29,15 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
         public void Handle(ISession session)
         {
             var app = MainWindow.chatApplication;
-            var friend = app.model.UserControls[UserID] as UserMessage;
 
             if (app.model.IsOnline.ContainsKey(UserID))
                 app.model.IsOnline[UserID] = true;
 
-            Application.Current.Dispatcher.Invoke(() => friend.SetOnlineStatus(false));
+            if (app.model.UserControls.ContainsKey(UserID))
+            {
+                var friend = app.model.UserControls[UserID] as UserMessage;
+                Application.Current.Dispatcher.Invoke(() => friend.SetOnlineStatus(false));
+            }
         }
     }
 }

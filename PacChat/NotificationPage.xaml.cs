@@ -43,6 +43,15 @@ namespace PacChat
             MainWindow.Instance.SetNotificationDotState(true);
         }
 
+        public void AddFriendAcceptedNoti(string id, string name)
+        {
+            Console.WriteLine("Add: " + name);
+            FriendRequestAcceptedNoti friendRequestNoti = new FriendRequestAcceptedNoti();
+            friendRequestNoti.SetInfo(id, name);
+            NotiListView.Children.Add(friendRequestNoti);
+            MainWindow.Instance.SetNotificationDotState(true);
+        }
+
         public void ClearNoti()
         {
             NotiListView.Children.Clear();

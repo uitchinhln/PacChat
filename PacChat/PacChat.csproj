@@ -97,6 +97,7 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SendTextMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\ResponseFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestResult.cs" />
@@ -133,6 +134,9 @@
     </Compile>
     <Compile Include="Resources\CustomControls\ImageContainner.xaml.cs">
       <DependentUpon>ImageContainner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml.cs">
+      <DependentUpon>FriendRequestAcceptedNoti.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestNoti.xaml.cs">
       <DependentUpon>FriendRequestNoti.xaml</DependentUpon>
@@ -288,6 +292,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CustomControls\ImageContainner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
