@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
@@ -29,10 +30,15 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
         public void Handle(ISession session)
         {
-            var app = MainWindow.chatApplication;
-            app.model.ContactsMessages[UserID].ConversationID = ConversationID;
-
-            ChatPage.Instance.LoadChatPage(UserID);
+            Application.Current.Dispatcher.Invoke(
+            () =>
+            {
+                var app = MainWindow.chatApplication;
+                app.model.PrivateConversations[UserID] = ConversationID;
+                app.model.Conversations.Add(ConversationID, new Utils.ConversationBubble());
+                app.model.Conversations[ConversationID].Members.Add(UserID);
+                ChatPage.Instance.LoadChatPage(ConversationID);
+            });
         }
     }
 }

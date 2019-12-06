@@ -9,21 +9,20 @@ namespace PacChat.ChatAMVC
 {
     public class ChatController : Controller<ChatApplication>
     {
-        public void OnUserChanged()
+        public void OnUserChanged(string userID)
         {
             var chatApplication = MainWindow.chatApplication;
             ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
-            
+
             // Store chat content before switching
-            if (chatApplication.model.previousSelectedUser != "")
-                ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedUser);
+            if (chatApplication.model.previousSelectedConversation != "")
+                ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedConversation);
 
             // Clear Scrollview content
             ChatPage.Instance.ClearChatPage();
 
             // Load target user messages (from model) and add to scrollview
-            ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedUser);
-
+            ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedConversation, userID);
         }
 
         public void OnProfileChanged()

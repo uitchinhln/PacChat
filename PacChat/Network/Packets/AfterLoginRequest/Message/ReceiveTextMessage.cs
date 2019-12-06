@@ -34,24 +34,22 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         {
             Console.WriteLine("Received" + ConversationID);
 
-            var app = MainWindow.chatApplication;
-            var temp = app.model.ContactsMessages[SenderID];
-
-            if (temp.ConversationID.CompareTo(ConversationID) == 0) 
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
-            }
+                var app = MainWindow.chatApplication;
+                if (!app.model.Conversations.ContainsKey(ConversationID))
+                {
+                    app.model.Conversations.Add(ConversationID, new Utils.ConversationBubble());
 
-            bool empty = temp.ConversationID.Equals("~");
-            if (empty)
-            {
-                Console.WriteLine("Empty");
-                temp.ConversationID = ConversationID;
-                temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
-            }
+                    var temp = app.model.Conversations[ConversationID];
+                    temp.Members.Add(SenderID);
+                    temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
+                    app.model.PrivateConversations[SenderID] = ConversationID;
+                }
 
-            if (app.model.currentSelectedUser.CompareTo(SenderID) == 0)
-                Application.Current.Dispatcher.Invoke(() => ChatPage.Instance.SendLeftMessages(Message, true));
+                if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)
+                    ChatPage.Instance.SendLeftMessages(Message, true);
+            });
         }
     }
 }
