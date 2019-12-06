@@ -33,7 +33,7 @@
                            TextTrimming="CharacterEllipsis" Foreground="#FFD1D1D1"/>
 
                 <Button x:Name="ClickMask" Height="65" Background="{x:Null}" BorderBrush="{x:Null}" Click="OnClick" Content="{Binding Id}" Foreground="Transparent" MouseRightButtonDown="ClickMask_MouseRightButtonDown"></Button>
-                <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="False"  VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Foreground="White" HorizontalAlignment="Right" Width="31">
+                <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="False"  VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Foreground="White" HorizontalAlignment="Right" Width="39" Margin="0,0,8,0">
                     <StackPanel>
                         <Button x:Name="FriendRequestBtn" Content="Send friend request" FontFamily="Segoe UI Light" FontSize="14" Height="32" VerticalContentAlignment="Center" Click="FriendRequestBtn_Click"/>
                         <Button x:Name="BlockBtn" Content="Block" FontFamily="Segoe UI Light" FontSize="14" Height="32" VerticalContentAlignment="Center"/>

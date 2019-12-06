@@ -71,7 +71,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             var id = ID;
-            Console.WriteLine(PreviewCode); 
+            Console.WriteLine(Relationship); 
 
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.AddUserToListView(
                 new UserMessageViewModel()
@@ -81,7 +81,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     IsOnline = IsOnline,
                     //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
                     IncomingMsg = ""
-                }));
+                }, Relationship == 2));
 
             if (Relationship == 2)
             {

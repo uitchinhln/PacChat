@@ -24,6 +24,8 @@ namespace PacChat.ChatPageContents
     /// </summary>
     public partial class UserMessage : UserControl
     {
+        public bool IsFriend { get; set; }
+
         public UserMessage()
         {
             InitializeComponent();
@@ -46,11 +48,12 @@ namespace PacChat.ChatPageContents
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
         }
 
-        public void SetInfo(string Id, string Name, string Msg)
+        public void SetInfo(string Id, string Name, string Msg, bool Friend = false)
         {
             UserName.Text = Name;
             UserMessage1.Text = Msg;
             ClickMask.Content = Id;
+            FriendRequestBtn.IsEnabled = !Friend;
         }
 
         public void SetOnlineStatus(bool online)
