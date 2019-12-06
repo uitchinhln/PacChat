@@ -38,9 +38,8 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="CNetwork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\chinh\Downloads\CNetwork.dll</HintPath>
+    <Reference Include="CNetwork">
+      <HintPath>D:\CSharp\CNetwork\CNetwork\bin\Debug\CNetwork.dll</HintPath>
     </Reference>
     <Reference Include="Crc32C.NET, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Crc32C.NET.1.0.5.0\lib\net20\Crc32C.NET.dll</HintPath>

@@ -41,7 +41,7 @@
       <HintPath>Resources\Lib\Animator.dll</HintPath>
     </Reference>
     <Reference Include="CNetwork">
-      <HintPath>..\..\lib\CNetwork.dll</HintPath>
+      <HintPath>D:\CSharp\CNetwork\CNetwork\bin\Debug\CNetwork.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

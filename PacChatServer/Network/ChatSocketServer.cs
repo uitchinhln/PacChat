@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetty.Handlers.Logging;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
@@ -27,6 +28,8 @@ namespace PacChatServer.Network
 
             this.bootstrap
                 .Group(bossGroup, workerGroup)
+                .Option(ChannelOption.SoBacklog, 100)
+                .Handler(new LoggingHandler("SRV-LSTN"))
                 .Channel<TcpServerSocketChannel>()
                 .ChildOption(ChannelOption.TcpNodelay, true)
                 .ChildOption(ChannelOption.SoKeepalive, true);

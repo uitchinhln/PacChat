@@ -42,7 +42,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 packet.ConversationID = ConversationID;
                 packet.Message = Message;
                 packet.SenderID = chatSession.Owner.ID.ToString();
-                user.Send(packet);
+
+                string mess = packet.Message.Message;
+                for (int i = 0; i < 30; i++)
+                {
+                    packet.Message.Message = mess + " " + i;
+                    user.Send(packet);
+                }
             }
 
             new MessageStore().Save(Message, Guid.Parse(ConversationID));

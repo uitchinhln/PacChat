@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetty.Codecs;
+using DotNetty.Codecs.Protobuf;
+using DotNetty.Handlers.Logging;
 
 namespace PacChatServer.Network.Pipeline
 {
@@ -32,6 +35,12 @@ namespace PacChatServer.Network.Pipeline
 
         protected override void InitChannel(ISocketChannel channel)
         {
+            IChannelPipeline pipeline = channel.Pipeline;
+
+            pipeline.AddLast(new LoggingHandler("SRV-CONN"));
+            pipeline.AddLast("framing-enc", new ProtobufVarint32LengthFieldPrepender());
+            pipeline.AddLast("framing-dec", new ProtobufVarint32FrameDecoder());
+
             channel.Pipeline
                 .AddLast("idle_timeout", new IdleStateHandler(READ_IDLE_TIMEOUT, WRITE_IDLE_TIMEOUT, 0));
             base.InitChannel(channel);
