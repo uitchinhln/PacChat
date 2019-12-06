@@ -28,8 +28,8 @@ namespace PacChatServer.Network
 
             this.bootstrap
                 .Group(bossGroup, workerGroup)
-                .Option(ChannelOption.SoBacklog, 100)
-                .Handler(new LoggingHandler("SRV-LSTN"))
+                //.Option(ChannelOption.SoBacklog, 100)
+                //.Handler(new LoggingHandler("SRV-LSTN"))
                 .Channel<TcpServerSocketChannel>()
                 .ChildOption(ChannelOption.TcpNodelay, true)
                 .ChildOption(ChannelOption.SoKeepalive, true);
