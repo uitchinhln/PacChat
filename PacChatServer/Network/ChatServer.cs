@@ -42,7 +42,20 @@ namespace PacChatServer.Network
 
         public void SessionInactivated(ISession session)
         {
-            Server.SessionRegistry.Remove((ChatSession) session);
+            ChatSession chatSession = session as ChatSession;
+
+            Server.SessionRegistry.Remove(chatSession);
+
+            if (chatSession.Owner == null) return;
+
+            chatSession.Owner.sessions.Remove(chatSession);
+
+            Server.Logger.Info(String.Format("Session {0} of user {1} has disconnected.", chatSession.getAddress(), chatSession.Owner.Email));
+
+            if (!chatSession.Owner.IsOnline())
+            {
+                ChatUserManager.MakeOffline(chatSession.Owner);
+            }
         }
     }
 }

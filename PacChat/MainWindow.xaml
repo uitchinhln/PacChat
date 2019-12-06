@@ -4,233 +4,175 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PacChat"
+        xmlns:chatcontent="clr-namespace:PacChat.ChatPageContents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Pacchat" Height="499.5" Width="836.5" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="{x:Null}" WindowStyle="None" Padding="0">
+        Title="PacChat" Height="500" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="{x:Null}" Padding="0" Margin="0" WindowStyle="None" AllowsTransparency="True" MinWidth="900" MinHeight="500">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
         ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Storyboard x:Key="left-side-panel-expand">
+            <DoubleAnimation
+                Storyboard.TargetName="ProfileDisplayer"
+                Storyboard.TargetProperty="Width"
+                From="0" To="256" Duration="0:0:0.25"
+                AutoReverse="False">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
 
-    <DockPanel>
-        <!--stackPanel HEADER-->
-        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="40" Background="#FF95ADFF" MouseMove="FormDrag">
-            <DockPanel Height="40" Background="#FF94ADFF" HorizontalAlignment="Right" Width="123">
-                <Button
-                    ToolTip="MaterialDesignOutlinedButton"
-                    Style="{DynamicResource MaterialDesignOutlinedButton}"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="40" Padding="0" Background="#FF94ADFF" BorderBrush="#FF94ADFF" Margin="0" DockPanel.Dock="Right" Height="Auto">
-                    <materialDesign:PackIcon
-                    Kind="Close"
-                    Height="32"
-                    Width="32" Foreground="#DDFF0000" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
+        </Storyboard>
+        
+        <Storyboard x:Key="left-side-panel-compress"> <DoubleAnimation
+                Storyboard.TargetName="ProfileDisplayer"
+                Storyboard.TargetProperty="Width"
+                From="256" To="0" Duration="0:0:0.25"
+                AutoReverse="False">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    
+    <Window.ContextMenu>
+        <ContextMenu/>
+    </Window.ContextMenu>
+    
+    <Border CornerRadius="8" x:Name="WindowOutline" Background="#FF444444">
+        <Border Margin="1" CornerRadius="8" x:Name="Round" Background="#FF2C2C2C">
+            <DockPanel Margin="4">
+                <!--stackPanel HEADER-->
+                <Grid x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
+                    <DockPanel HorizontalAlignment="Right" Width="96">
+                        <Button x:Name="BtnQuit" 
+                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
+                                DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Padding="0">
+                            <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-                <Button
-                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="40" Padding="0" Background="#FF94ADFF" BorderBrush="#FF94ADFF" DockPanel.Dock="Right" Height="Auto">
-                    <materialDesign:PackIcon
-                    Kind="WindowMaximize"
-                    Height="20"
-                    Width="20" Foreground="#DDFF0000" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
+                        <Button x:Name="BtnMaximize"
+                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="{x:Null}" DockPanel.Dock="Right" Height="32" Click="BtnMaximize_Click" Cursor="Arrow">
+                            <Border CornerRadius="8" Background="#FF6AEE4D" Width="12" Height="12">
+                                <Border CornerRadius="8" Background="#FF1FCF37" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-                <Button
-                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="40" Padding="0" Background="#FF94ADFF" BorderBrush="#FF94ADFF" DockPanel.Dock="Right" Height="Auto">
-                    <materialDesign:PackIcon
-                    Kind="WindowMinimize"
-                    Height="23"
-                    Width="23" Foreground="#DDFF0000" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
-            </DockPanel>
+                        <Button x:Name="BtnMinimize"
+                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F" DockPanel.Dock="Right" Height="Auto" Click="BtnMinimize_Click" Cursor="Arrow">
+                            <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
+                                <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-
-
-
-        </StackPanel>
-
-        <!--stackPanel SIDEMENU-->
-        <StackPanel Background="#FFC0ABEE" HorizontalAlignment="Left" Width="68"/>
-
-        <StackPanel x:Name="spanelContent" Background="#FFB5E4FF">
-            <materialDesign:DrawerHost
-  Margin="64"
-  HorizontalAlignment="Center"
-  VerticalAlignment="Center"
-  BorderThickness="2"
-  BorderBrush="{DynamicResource MaterialDesignDivider}">
-                <materialDesign:DrawerHost.LeftDrawerContent>
-                    <StackPanel
-      Margin="16">
-                        <TextBlock
-        Margin="4"
-        HorizontalAlignment="Center">
-      LEFT FIELD
-                        </TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Left}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
-                            CLOSE THIS
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
-                            CLOSE ALL
-                        </Button>
-                    </StackPanel>
-                </materialDesign:DrawerHost.LeftDrawerContent>
-                <materialDesign:DrawerHost.TopDrawerContent>
-                    <StackPanel
-      Margin="16"
-      HorizontalAlignment="Center"
-      Orientation="Horizontal">
-                        <TextBlock
-        Margin="4"
-        VerticalAlignment="Center">
-      TOP BANANA
-                        </TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center">
-                            CLOSE ALL
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Top}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center">
-                            CLOSE THIS
-                        </Button>
-                    </StackPanel>
-                </materialDesign:DrawerHost.TopDrawerContent>
-                <materialDesign:DrawerHost.RightDrawerContent>
-                    <StackPanel
-      Margin="16">
-                        <TextBlock
-        Margin="4"
-        HorizontalAlignment="Center">
-      THE RIGHT STUFF
-                        </TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Right}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
-                            CLOSE THIS
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Margin="4"
-        HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
-                            CLOSE ALL
-                        </Button>
-                    </StackPanel>
-                </materialDesign:DrawerHost.RightDrawerContent>
-                <materialDesign:DrawerHost.BottomDrawerContent>
-                    <StackPanel
-      Margin="16"
-      HorizontalAlignment="Center"
-      Orientation="Horizontal">
-                        <TextBlock
-        Margin="4"
-        VerticalAlignment="Center">
-      BOTTOM BRACKET
-                        </TextBlock>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center">
-                            CLOSE ALL
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-        CommandParameter="{x:Static Dock.Bottom}"
-        Style="{DynamicResource MaterialDesignFlatButton}"
-        Margin="4"
-        VerticalAlignment="Center">
-                            CLOSE THIS
-                        </Button>
-                    </StackPanel>
-                </materialDesign:DrawerHost.BottomDrawerContent>
-                <Grid
-    MinWidth="480"
-    MinHeight="480">
-                    <Grid
-      VerticalAlignment="Center"
-      HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Left}"
-        Grid.Row="1"
-        Grid.Column="0"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowLeft" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Top}"
-        Grid.Row="0"
-        Grid.Column="1"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowUp" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Right}"
-        Grid.Row="1"
-        Grid.Column="2"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowRight" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        CommandParameter="{x:Static Dock.Bottom}"
-        Grid.Row="2"
-        Grid.Column="1"
-        Margin="4">
-                            <materialDesign:PackIcon
-          Kind="ArrowDown" />
-                        </Button>
-                        <Button
-        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-        Grid.Row="1"
-        Grid.Column="1"
-        Margin="4"
-        Style="{DynamicResource MaterialDesignRaisedAccentButton}">
-                            <materialDesign:PackIcon
-          Kind="ArrowAll" />
-                        </Button>
-                    </Grid>
+                    </DockPanel>
                 </Grid>
-            </materialDesign:DrawerHost>
-        </StackPanel>
 
-    </DockPanel>
 
+                <!--stackPanel SIDEMENU-->
+                <DockPanel x:Name="LeftSidePanel" HorizontalAlignment="Left" Width="48" Background="#FF2C2C2C">
+
+                    <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="BtnNoti_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <Grid>
+                            <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                            <Border x:Name="NotificationDot" BorderThickness="1" CornerRadius="16" Background="#FFFF1C1C" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="14,4,2,12"></Border>
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="Btn2" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="Btn2_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="Btn3" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Click="Btn3_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnSetting" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnSetting_Click" DockPanel.Dock="Bottom" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings"  Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnAbout" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnAbout_Click" DockPanel.Dock="Bottom" VerticalContentAlignment="Center" VerticalAlignment="Bottom" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="About" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+                </DockPanel>
+
+                <!-- TABS -->
+                <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="1">
+                    <!-- Notification page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:NotificationPage></local:NotificationPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Single chat page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2C2C" Loaded="UserList_Loaded"/>
+                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Width="0"></chatcontent:ProfileDisplayer>
+                            <local:ChatPage x:Name="ChatPage" />
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Group chat page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <!--
+                    <chatcontent:UserList x:Name="GroupUserList" Width="192" HorizontalAlignment="Left"/>
+                    <local:GroupChatPage x:Name="GroupChatPage"/>
+                    -->
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Setting page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:SettingPage></local:SettingPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- About page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:AboutPage></local:AboutPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+
+                <!--<chatcontent:ProfileDisplayer></chatcontent:ProfileDisplayer>
+-->
+                <!--
+        <DockPanel x:Name="spanelContent" Background="White">
+            <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            <StackPanel VerticalAlignment="Bottom" Height="38" DockPanel.Dock="Bottom">
+                <TextBox x:Name="MsgBox" Text="Message..." Height="38" Padding="4,0,0,0" FontSize="18" Margin="0,0,96,0" Width="602">
+                </TextBox>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Top"/>
+
+        </DockPanel>
+        -->
+            </DockPanel>
+        </Border>
+    </Border>
 </Window>

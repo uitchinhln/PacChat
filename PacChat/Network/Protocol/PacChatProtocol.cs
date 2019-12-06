@@ -74,11 +74,11 @@ namespace PacChat.Network.Protocol
 
                 return inboundCodecs.Find(opcode);
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 throw new UnknownPacketException("Failed to read packet data (corrupt?)", opcode, length);
             }
-            catch (IllegalOpcodeException e)
+            catch (IllegalOpcodeException)
             {
                 // go back to before opcode, so that skipping length doesn't skip too much
                 buf.ResetReaderIndex();

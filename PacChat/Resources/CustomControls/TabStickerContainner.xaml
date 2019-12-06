@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.TabStickerContainner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:animator="clr-namespace:Animator;assembly=Animator"
+             mc:Ignorable="d" Width="390" Height="325">
+    <Grid>
+
+        <TabControl x:Name="tabCrlSticker" Padding="0">
+
+            <TabControl.Template>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Hidden" >
+                            <TabPanel x:Name="HeaderPanel"
+                          Panel.ZIndex ="1" 
+                          KeyboardNavigation.TabIndex="1"
+                          Grid.Column="0"
+                          Grid.Row="0"
+                          Margin="0,0,0,8"
+                          
+                          IsItemsHost="true"/>
+                        </ScrollViewer>
+                        <ContentPresenter x:Name="PART_SelectedContentHost"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      Margin="{TemplateBinding Padding}"
+                                      ContentSource="SelectedContent" Grid.Row="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </TabControl.Template>
+
+            <TabItem Width="38" Height="38" Background="LightGray" >
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Cart" Margin="0" Width="24" Height="24"/>
+
+                </TabItem.Header>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Background="LightGray">
+                    <StackPanel Orientation="Vertical">
+
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+                        <local:TabStickerStore Padding="10"/>
+
+
+                    </StackPanel>
+                </ScrollViewer>
+
+            </TabItem>
+
+
+
+
+
+
+        </TabControl>
+    </Grid>
+</UserControl>

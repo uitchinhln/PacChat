@@ -9,10 +9,12 @@ namespace PacChat.Network.Protocol
 {
     public class ProtocolProvider
     {
-        public TestProtocol Test { get; }
+        public PreLoginProtocol Test { get; }
+        public LoggedInProtocol MainProtocol { get; }
         public ProtocolProvider()
         {
-            this.Test = new TestProtocol();
+            this.Test = new PreLoginProtocol();
+            this.MainProtocol = new LoggedInProtocol();
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using CNetwork;
 using CNetwork.Pipeline;
 using DotNetty.Handlers.Timeout;
+using DotNetty.Handlers.Logging;
+using DotNetty.Codecs;
+using DotNetty.Codecs.Protobuf;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using System;
@@ -23,15 +26,21 @@ namespace PacChat.Network.Pipeline
          */
         private static int WRITE_IDLE_TIMEOUT = 15;
 
-        private NetworkClient connectionManager;
+        private ChatConnection connectionManager;
 
-        public ChannelInitializer(NetworkClient connectionManager) : base(connectionManager)
+        public ChannelInitializer(ChatConnection connectionManager) : base(connectionManager)
         {
             this.connectionManager = connectionManager;
         }
 
         protected override void InitChannel(ISocketChannel channel)
         {
+            IChannelPipeline pipeline = channel.Pipeline;
+
+            //pipeline.AddLast(new LoggingHandler());
+            pipeline.AddLast("framing-enc", new ProtobufVarint32LengthFieldPrepender());
+            pipeline.AddLast("framing-dec", new ProtobufVarint32FrameDecoder());
+
             channel.Pipeline
                 .AddLast("idle_timeout", new IdleStateHandler(READ_IDLE_TIMEOUT, WRITE_IDLE_TIMEOUT, 0));
             base.InitChannel(channel);

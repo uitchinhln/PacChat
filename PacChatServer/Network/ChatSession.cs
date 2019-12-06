@@ -2,6 +2,10 @@
 using CNetwork.Protocols;
 using CNetwork.Sessions;
 using DotNetty.Transport.Channels;
+using PacChatServer.Entity;
+using PacChatServer.Entity.Meta.Profile;
+using PacChatServer.Network.Packets.Login;
+using PacChatServer.Network.Packets.Register;
 using PacChatServer.Network.Protocol;
 using System;
 using System.Collections.Generic;
@@ -19,17 +23,35 @@ namespace PacChatServer.Network
 
         IConnectionManager connectionManager;
 
+        public ChatUser Owner { get; set; }
+
         public ChatSession(PacChatServer server, IChannel channel, ProtocolProvider protocolProvider, IConnectionManager connectionManager) 
-            : base(channel, protocolProvider.Test)
+            : base(channel, protocolProvider.HandShake)
         {
             Server = server;
             this.protocolProvider = protocolProvider;
             this.connectionManager = connectionManager;
         }
 
-        private void FinalizeLogin()
+        public void FinalizeLogin(ChatUserProfile profile)
         {
+            try
+            {
+                Owner = ChatUserManager.LoadUser(profile.ID);
+            } catch
+            {
+                this.Disconnect();
+            }
 
+            ChatUserManager.MakeOnline(Owner);
+
+            Owner.LastLogon = DateTime.Now;
+            Owner.sessions.Add(this);
+
+            Protocol = protocolProvider.MainProtocol;
+
+            //Notify
+            Server.Logger.Info(String.Format("User {0} has logged in at {1}", Owner.Email, getAddress()));
         }
 
         public override void Disconnect()
@@ -37,7 +59,7 @@ namespace PacChatServer.Network
             base.Disconnect();
         }
 
-        private void UpdatePipiline(String key, IChannelHandler channelHandler)
+        private void UpdatePipeline(String key, IChannelHandler channelHandler)
         {
             Channel.Pipeline.Replace(key, key, channelHandler);
         }

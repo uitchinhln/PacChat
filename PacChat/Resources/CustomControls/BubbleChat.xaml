@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.BubbleChat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:animator="clr-namespace:Animator;assembly=Animator"
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             mc:Ignorable="d" d:DesignWidth="300">
+
+    <Border Padding="5" 
+            Background="Transparent"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            >
+
+
+        <Grid>
+            <!--AVATAR pic -->
+            <Border VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
+                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    Width="30"
+                    Background="green"
+                    BorderThickness="1"
+                    BorderBrush="White"
+                    
+                    >
+                <TextBlock Text="NL"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="White">
+
+
+                </TextBlock>
+
+            </Border>
+
+            <!---Messages path -->
+            <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
+                <!-- Nick name label -->
+                <Label Name="NickName" Content="Nick Name bla bla"/>
+
+
+
+
+            </StackPanel>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>
