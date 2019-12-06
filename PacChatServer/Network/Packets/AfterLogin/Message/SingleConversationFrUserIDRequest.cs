@@ -22,7 +22,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             try
             {
                 TargetID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
-            } catch
+            }
+            catch
             {
 
             }
@@ -35,8 +36,6 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
         public void Handle(ISession session)
         {
-            Console.WriteLine("Single conv requested");
-
             if (TargetID.Equals(Guid.Empty)) return;
 
             ChatUser targetUser = ChatUserManager.LoadUser(TargetID);
@@ -47,6 +46,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             ConversationStore store = new ConversationStore();
 
             Guid resultID = Guid.NewGuid();
+            bool flag = true;
 
             var CommonConversation = targetUser.ConversationID.Intersect(chatSession.Owner.ConversationID);
 
@@ -56,8 +56,24 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 if (conversation is SingleConversation)
                 {
                     resultID = conversation.ID;
+                    flag = false;
                     break;
                 }
+            }
+
+            if (flag)
+            {
+                chatSession.Owner.ConversationID.Add(resultID); 
+                targetUser.ConversationID.Add(resultID);
+
+                store.Save(new SingleConversation()
+                {
+                    ID = resultID,
+                    Members = new HashSet<Guid>() { chatSession.Owner.ID, targetUser.ID }
+                });
+
+                chatSession.Owner.Save();
+                targetUser.Save();
             }
 
             SingleConversationFrUserIDResponse response = new SingleConversationFrUserIDResponse();

@@ -77,9 +77,8 @@ namespace PacChat
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, false));
 
             SendTextMessage packet = new SendTextMessage();
-            packet.ConversationID = app.model.ContactsMessages[app.model.currentSelectedUser].ConversationID;
+            packet.ConversationID = app.model.currentSelectedConversation;
             packet.Message = msg;
-            packet.TargetID = app.model.currentSelectedUser;
             _ = ChatConnection.Instance.Send(packet);
         }
 
@@ -113,21 +112,23 @@ namespace PacChat
             spMessagesContainer.Children.Clear();
         }
 
-        public void LoadChatPage(string id)
+        public void LoadChatPage(string conversationID, string userID = "")
         {
-            Console.WriteLine("Load chat page on id: " + id);
+            Console.WriteLine("Load chat page on id: " + conversationID);
 
             var app = MainWindow.chatApplication;
-            ConversationBubble msgList = app.model.ContactsMessages[id];
-
-            if (msgList.ConversationID.Equals("~"))
+            
+            if (conversationID.Equals("~") && !string.IsNullOrEmpty(userID))
             {
                 SingleConversationFrUserID packet = new SingleConversationFrUserID();
-                packet.UserID = id;
+                packet.UserID = userID;
                 _ = ChatConnection.Instance.Send(packet);
+                Console.WriteLine("Create conversation");
                 return;
             }
 
+            app.model.currentSelectedConversation = conversationID;
+            ConversationBubble msgList = app.model.Conversations[conversationID];
             for (int i = 0; i < msgList.Bubbles.Count; ++i)
             {
                 var bubbleInfo = msgList.Bubbles[i];
@@ -138,15 +139,15 @@ namespace PacChat
             }
         }
 
-        public void StoreChatPage(string id)
+        public void StoreChatPage(string conversationID)
         {
             return;
 
             var app = MainWindow.chatApplication;
 
-            Console.WriteLine("Store chat page on id: " + id + " with length: " + app.model.CurrentUserMessages.Count);
+            Console.WriteLine("Store chat page on id: " + conversationID + " with length: " + app.model.CurrentUserMessages.Count);
 
-            ConversationBubble msgList = app.model.ContactsMessages[id];
+            ConversationBubble msgList = app.model.Conversations[conversationID];
             msgList.Bubbles.AddRange(app.model.CurrentUserMessages);
 
             app.model.CurrentUserMessages.Clear();

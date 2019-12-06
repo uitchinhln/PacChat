@@ -3,6 +3,8 @@ using PacChatServer.Cache.Core;
 using PacChatServer.Entity;
 using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
+using PacChatServer.Network;
+using PacChatServer.Network.Packets.AfterLogin.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +41,7 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
 
-        public void SendMessage(IMessage message)
+        public void SendMessage(IMessage message, string conversationID, ChatSession chatSession)
         {
             ChatUser user;
             foreach (Guid userID in Members)
@@ -56,7 +58,14 @@ namespace PacChatServer.MessageCore.Conversation
 
                 if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
                 {
-                    user.Send(null); //Add message packet here
+                    if (userID.CompareTo(chatSession.Owner.ID) == 0)
+                        continue;
+
+                    SendMessageResponse packet = new SendMessageResponse();
+                    packet.ConversationID = conversationID;
+                    packet.Message = message as TextMessage;
+                    packet.SenderID = chatSession.Owner.ID.ToString();
+                    user.Send(packet); //Add message packet here
 
                     lock (user.Conversations)
                     {
