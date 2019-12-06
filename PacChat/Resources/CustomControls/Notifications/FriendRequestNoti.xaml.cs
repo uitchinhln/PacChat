@@ -25,6 +25,12 @@ namespace PacChat.Resources.CustomControls.Notifications
             InitializeComponent();
         }
 
+        public void SetInfo(string id, string name)
+        {
+            ClickMask.Content = id;
+            FriendName.Text = name;
+        }
+
         private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
 

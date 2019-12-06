@@ -5,21 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Notifications"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Height="128" Background="White">
+             d:DesignHeight="450" d:DesignWidth="800" Height="64" Background="White">
     <Grid>
         <DockPanel>
-            <DockPanel Margin="16,8,0,0">
-                <TextBlock x:Name="FriendName" Text="Bach Nguyen" FontFamily="Segoe UI Semibold" FontSize="32" Margin="8,8,0,0" DockPanel.Dock="Top"/>
-                <TextBlock x:Name="Noti" Text="sent you a friend request." FontFamily="Segoe UI Semilight" FontSize="32" Margin="8,8,0,0" DockPanel.Dock="Bottom"/>
+            <DockPanel Margin="4,4,0,0">
+                <TextBlock x:Name="FriendName" Text="Bach Nguyen" FontFamily="Segoe UI Semibold" FontSize="20" Margin="8,0,0,0" DockPanel.Dock="Top"/>
+                <TextBlock x:Name="Noti" Text="sent you a friend request." FontFamily="Segoe UI Semilight" FontSize="18" Margin="8,0,0,0" DockPanel.Dock="Bottom"/>
             </DockPanel>
         </DockPanel>
+        
+        <Button x:Name="ClickMask" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Click="ClickMask_Click">
+        </Button>
+        
         <DockPanel VerticalAlignment="Bottom" Height="64" Margin="0">
-            <Button x:Name="RemoveBtn" Content="Remove" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Margin="16,0,16,8" Background="#FFB0B0B0" BorderBrush="{x:Null}" Foreground="#DD000000" FontSize="16" Height="48" Click="RemoveBtn_Click"></Button>
-            <Button x:Name="BtnAccept" Content="Accept" HorizontalAlignment="Right" Width="128" DockPanel.Dock="Right" Background="#FF3A3AB7" FontSize="18" Height="48" Margin="0,0,0,8" Click="BtnAccept_Click"></Button>
+            <Button x:Name="RemoveBtn" Content="Remove" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Margin="16,0,16,8" Background="#FFB0B0B0" BorderBrush="{x:Null}" Foreground="#DD000000" FontSize="14" Height="32" Click="RemoveBtn_Click"></Button>
+            <Button x:Name="BtnAccept" Content="Accept" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Background="#FF3A3AB7" FontSize="16" Height="32" Margin="0,0,0,8" Click="BtnAccept_Click" Padding="16,0,16,4"/>
         </DockPanel>
 
-        <Button x:Name="ClickMask" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Click="ClickMask_Click">
-            
-        </Button>
     </Grid>
 </UserControl>

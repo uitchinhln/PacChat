@@ -294,6 +294,8 @@
     <Compile Include="Network\ChatSocketServer.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Notification\AddFriendRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Notification\ForwardedFriendRequest.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\PageNotFound.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\StickerCategoryPage.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasInitialize.cs" />

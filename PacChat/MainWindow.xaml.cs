@@ -67,6 +67,7 @@ namespace PacChat
 
             Packets.SendPacket<GetFriendIDs>();
 
+            SetNotificationDotState(false);
             /*
             try
             {
@@ -97,6 +98,7 @@ namespace PacChat
         private void BtnNoti_Click(object sender, RoutedEventArgs e)
         {
             TabTransitioner.SelectedIndex = 0;
+            SetNotificationDotState(false);
         }
 
         private void Btn3_Click(object sender, RoutedEventArgs e)
@@ -150,6 +152,11 @@ namespace PacChat
         {
             var sb = this.FindResource("left-side-panel-compress") as Storyboard;
             sb.Begin();
+        }
+
+        public void SetNotificationDotState(bool display)
+        {
+            NotificationDot.Visibility = display ? Visibility.Visible : Visibility.Hidden;
         }
     }
 }

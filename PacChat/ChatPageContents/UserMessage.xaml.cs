@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Utils;
 
@@ -65,6 +66,13 @@ namespace PacChat.ChatPageContents
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
             GetDisplayedProfile packet = new GetDisplayedProfile();
+            packet.TargetID = ClickMask.Content.ToString();
+            _ = ChatConnection.Instance.Send(packet);
+        }
+
+        private void FriendRequestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FriendRequest packet = new FriendRequest();
             packet.TargetID = ClickMask.Content.ToString();
             _ = ChatConnection.Instance.Send(packet);
         }

@@ -77,9 +77,10 @@
         <StackPanel x:Name="LeftSidePanel" HorizontalAlignment="Left" Width="48" Background="#FF1E145F">
 
             <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="BtnNoti_Click" Cursor="Arrow" >
-                <StackPanel Orientation="Horizontal">
+                <Grid>
                     <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                </StackPanel>
+                    <Border x:Name="NotificationDot" BorderThickness="1" CornerRadius="16" Background="#FFA82323" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="14,4,2,12"></Border>
+                </Grid>
             </Button>
 
             <Button x:Name="Btn2" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="Btn2_Click" Cursor="Arrow" >
@@ -109,7 +110,7 @@
 
         <!-- TABS -->
         <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="1">
-            <!-- Setting page -->
+            <!-- Notification page -->
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                 <DockPanel>
                     <local:NotificationPage></local:NotificationPage>

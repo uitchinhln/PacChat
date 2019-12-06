@@ -28,8 +28,13 @@ namespace PacChat.Network.Protocol
             Inbound(0x02, new SingleConversationFrUserIDResult());
             Outbound(0x02, new SingleConversationFrUserID());
 
+            // Notifications
             Inbound(0x07, new UserOnlineReceive());
             Inbound(0x08, new UserOfflineReceive());
+
+            Inbound(0x10, new FriendRequestReceive());
+            Outbound(0x11, new FriendRequest());
+            Inbound(0x12, new FriendRequestResult());
 
             // Search
             Inbound(0x03, new SearchUserResult());
