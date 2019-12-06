@@ -26,15 +26,7 @@ namespace PacChat.ChatAMVC
         public List<BubbleInfo> CurrentUserMessages { get; set; } = new List<BubbleInfo>();
         public Dictionary<string, ConversationBubble> ContactsMessages { get; set; } = new Dictionary<string, ConversationBubble>();
         public Dictionary<string, UserControl> UserControls { get; set; } = new Dictionary<string, UserControl>();
-        public void InitContacts()
-        {
-            List<UserMessageViewModel> users = UserListDesignModel.Instance.Contacts;
-
-            foreach (var user in users)
-            {
-                // ContactsMessages.Add(user.Id, new ConversationBubble());
-            }
-        }
+        public Dictionary<string, bool> IsOnline { get; set; } = new Dictionary<string, bool>();
         #endregion
 
         #region OnSettingPage

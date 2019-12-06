@@ -8,29 +8,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Profile
 {
     public class GetDisplayedProfileResult : IPacket
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         public string Town { get; set; } = "Default";
+        public string DoB { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public Gender Gender { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
-            FirstName = ByteBufUtils.ReadUTF8(buffer);
-            LastName = ByteBufUtils.ReadUTF8(buffer);
-            Town = ByteBufUtils.ReadUTF8(buffer);
+            Name = ByteBufUtils.ReadUTF8(buffer);
             Email = ByteBufUtils.ReadUTF8(buffer);
-
-            // Please send D.O.B as 3 integers representing <year, month, day>
-            DateOfBirth = new DateTime(year:buffer.ReadInt(), month:buffer.ReadInt(), day:buffer.ReadInt());
-
-            Gender = (Gender)buffer.ReadInt();
+            DoB = ByteBufUtils.ReadUTF8(buffer);
+            Town = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -40,7 +34,14 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
 
         public void Handle(ISession session)
         {
+            Console.WriteLine("Got profile");
             // Display profile of user
+            Application.Current.Dispatcher.Invoke(() => 
+            MainWindow.Instance.OpenProfileDisplayer(
+                name: Name,
+                email: Email,
+                dob: DoB,
+                address: Town));
         }
     }
 }

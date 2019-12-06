@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Utils;
 
 namespace PacChat.ChatPageContents
@@ -53,6 +55,18 @@ namespace PacChat.ChatPageContents
         public void SetOnlineStatus(bool online)
         {
             OnlineStatus.Visibility = online ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void ClickMask_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GetDisplayedProfile packet = new GetDisplayedProfile();
+            packet.TargetID = ClickMask.Content.ToString();
+            _ = ChatConnection.Instance.Send(packet);
         }
     }
 }

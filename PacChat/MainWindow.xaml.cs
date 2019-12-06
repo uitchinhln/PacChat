@@ -25,8 +25,8 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool _isPanelOpened = false;
         private List<Button> _panelButtons = new List<Button>();
+        public static MainWindow Instance { get; private set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -61,6 +61,7 @@ namespace PacChat
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             InitAMVC();
 
@@ -136,6 +137,19 @@ namespace PacChat
         private void BtnMaximize_Click(object sender, RoutedEventArgs e)
         {
             isMaximized = !isMaximized;
+        }
+
+        public void OpenProfileDisplayer(string name, string email, string dob, string address)
+        {
+            ProfileDisplayer.Display(name, email, dob, address);
+            var sb = this.FindResource("left-side-panel-expand") as Storyboard;
+            sb.Begin();
+        }
+
+        public void CloseProfileDisplayer()
+        {
+            var sb = this.FindResource("left-side-panel-compress") as Storyboard;
+            sb.Begin();
         }
     }
 }

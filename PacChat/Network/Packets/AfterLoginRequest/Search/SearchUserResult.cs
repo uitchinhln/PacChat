@@ -36,7 +36,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Search
         {
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.ClearListView());
 
-            if (UserIDs.Count > 30) return;
+            if (UserIDs.Count > 20) return;
 
             foreach (var id in UserIDs)
             {

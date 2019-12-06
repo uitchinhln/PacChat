@@ -292,6 +292,8 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\PageNotFound.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\StickerCategoryPage.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasInitialize.cs" />
