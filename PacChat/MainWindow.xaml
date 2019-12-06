@@ -7,7 +7,7 @@
         xmlns:chatcontent="clr-namespace:PacChat.ChatPageContents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PacChat" Height="499.5" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="#FF1E145F" Padding="0" MinWidth="900" MinHeight="480" Margin="0" WindowStyle="None">
+        Title="PacChat" Height="499.5" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="{x:Null}" Padding="0" MinWidth="900" MinHeight="480" Margin="0" WindowStyle="None" AllowsTransparency="True">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -39,121 +39,124 @@
         </Storyboard>
     </Window.Resources>
 
-    <DockPanel Margin="0">
-        <!--stackPanel HEADER-->
-        <StackPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF3A3468">
-            <DockPanel HorizontalAlignment="Right" Width="96">
-                <Button x:Name="BtnQuit"
-                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Right"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="{x:Null}" Margin="0" DockPanel.Dock="Right" Height="32" Click="BtnQuit_Click" Cursor="Arrow">
-                    <materialDesign:PackIcon
-                    Kind="Close"
-                    Height="16"
-                    Width="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
+    <Border CornerRadius="8" x:Name="WindowOutline" Background="#FF444444">
+        <Border Margin="1" CornerRadius="8" x:Name="Round" Background="#FF2C2C2C">
+            <DockPanel Margin="4">
+                <!--stackPanel HEADER-->
+                <Grid x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
+                    <DockPanel HorizontalAlignment="Right" Width="96">
+                        <Button x:Name="BtnQuit" 
+                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
+                                DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Padding="0">
+                            <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-                <Button x:Name="BtnMaximize"
+                        <Button x:Name="BtnMaximize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="{x:Null}" DockPanel.Dock="Right" Height="32" Click="BtnMaximize_Click" Cursor="Arrow">
-                    <materialDesign:PackIcon
-                    Kind="WindowMaximize"
-                    Height="16"
-                    Width="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
+                            <Border CornerRadius="8" Background="#FF6AEE4D" Width="12" Height="12">
+                                <Border CornerRadius="8" Background="#FF1FCF37" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-                <Button x:Name="BtnMinimize"
+                        <Button x:Name="BtnMinimize"
                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F" DockPanel.Dock="Right" Height="Auto" Click="BtnMinimize_Click" Cursor="Arrow">
-                    <materialDesign:PackIcon
-                    Kind="WindowMinimize"
-                    Height="16"
-                    Width="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Button>
+                            <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
+                                <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2">
+                                </Border>
+                            </Border>
+                        </Button>
 
-            </DockPanel>
-        </StackPanel>
-
-        <!--stackPanel SIDEMENU-->
-        <StackPanel x:Name="LeftSidePanel" HorizontalAlignment="Left" Width="48" Background="#FF1E145F">
-
-            <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="BtnNoti_Click" Cursor="Arrow" >
-                <Grid>
-                    <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                    <Border x:Name="NotificationDot" BorderThickness="1" CornerRadius="16" Background="#FFA82323" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="14,4,2,12"></Border>
+                    </DockPanel>
                 </Grid>
-            </Button>
 
-            <Button x:Name="Btn2" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="Btn2_Click" Cursor="Arrow" >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                </StackPanel>
-            </Button>
 
-            <Button x:Name="Btn3" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Click="Btn3_Click" Cursor="Arrow" >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                </StackPanel>
-            </Button>
-            
-            <Button x:Name="BtnSetting" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnSetting_Click" >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Settings"  Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                </StackPanel>
-            </Button>
-            
-            <Button x:Name="BtnAbout" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnAbout_Click" >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="About" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                </StackPanel>
-            </Button>
-        </StackPanel>
+                <!--stackPanel SIDEMENU-->
+                <DockPanel x:Name="LeftSidePanel" HorizontalAlignment="Left" Width="48" Background="#FF2C2C2C">
 
-        <!-- TABS -->
-        <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="1">
-            <!-- Notification page -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                <DockPanel>
-                    <local:NotificationPage></local:NotificationPage>
+                    <Button x:Name="BtnNoti" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="BtnNoti_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <Grid>
+                            <materialDesign:PackIcon Kind="Notifications" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                            <Border x:Name="NotificationDot" BorderThickness="1" CornerRadius="16" Background="#FFFF1C1C" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="14,4,2,12"></Border>
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="Btn2" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Foreground="White" Padding="0" Click="Btn2_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="User" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="Btn3" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Click="Btn3_Click" Cursor="Arrow" DockPanel.Dock="Top" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnSetting" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnSetting_Click" DockPanel.Dock="Bottom" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings"  Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnAbout" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnAbout_Click" DockPanel.Dock="Bottom" VerticalContentAlignment="Center" VerticalAlignment="Bottom" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="About" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
+                        </StackPanel>
+                    </Button>
                 </DockPanel>
-            </materialDesign:TransitionerSlide>
-            
-            <!-- Single chat page -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                <DockPanel>
-                    <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2368"/>
-                    <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Width="0"></chatcontent:ProfileDisplayer>
-                    <local:ChatPage x:Name="ChatPage" />
-                </DockPanel>
-            </materialDesign:TransitionerSlide>
-            
-            <!-- Group chat page -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                <DockPanel>
-                    <!--
+
+                <!-- TABS -->
+                <materialDesign:Transitioner x:Name="TabTransitioner" SelectedIndex="1">
+                    <!-- Notification page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:NotificationPage></local:NotificationPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Single chat page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2C2C" Loaded="UserList_Loaded"/>
+                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Width="0"></chatcontent:ProfileDisplayer>
+                            <local:ChatPage x:Name="ChatPage" />
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Group chat page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <!--
                     <chatcontent:UserList x:Name="GroupUserList" Width="192" HorizontalAlignment="Left"/>
                     <local:GroupChatPage x:Name="GroupChatPage"/>
                     -->
-                </DockPanel>
-            </materialDesign:TransitionerSlide>
-            
-            <!-- Setting page -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                <DockPanel>
-                    <local:SettingPage></local:SettingPage>
-                </DockPanel>
-            </materialDesign:TransitionerSlide>
-            
-            <!-- About page -->
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                <DockPanel>
-                    <local:AboutPage></local:AboutPage>
-                </DockPanel>
-            </materialDesign:TransitionerSlide>
-        </materialDesign:Transitioner>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
 
-        <!--<chatcontent:ProfileDisplayer></chatcontent:ProfileDisplayer>
+                    <!-- Setting page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:SettingPage></local:SettingPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- About page -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <DockPanel>
+                            <local:AboutPage></local:AboutPage>
+                        </DockPanel>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+
+                <!--<chatcontent:ProfileDisplayer></chatcontent:ProfileDisplayer>
 -->
-        <!--
+                <!--
         <DockPanel x:Name="spanelContent" Background="White">
             <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold" VerticalAlignment="Top" DockPanel.Dock="Top"/>
             <StackPanel VerticalAlignment="Bottom" Height="38" DockPanel.Dock="Bottom">
@@ -165,6 +168,7 @@
 
         </DockPanel>
         -->
-    </DockPanel>
-
+            </DockPanel>
+        </Border>
+    </Border>
 </Window>

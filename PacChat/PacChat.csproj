@@ -97,6 +97,7 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SendTextMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\FinalizeAcceptedFriendRequestReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\ResponseFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestReceive.cs" />

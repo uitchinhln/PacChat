@@ -29,32 +29,34 @@ namespace PacChat.ChatPageContents
         public static UserList Instance { get; set; }
         public object GetFriendID { get; private set; }
 
+        private Border[] tabMarks = new Border[2];
+
         public UserList()
         {
             InitializeComponent();
-            selectTab(ContactsTab);
             Trans.SelectedIndex = 1;
+            tabMarks[0] = RecentTabSelectMark;
+            tabMarks[1] = ContactsRabSelectMark;
+            selectTab(1);
             Instance = this;
         }
 
-        private void selectTab(Button button)
+        private void selectTab(int index)
         {
-            RecentTab.Background = ContactsTab.Background = new SolidColorBrush(lostFocusColor);
-            RecentTab.Foreground = ContactsTab.Foreground = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255));
-            button.Background = Brushes.Transparent;
-            button.Foreground = Brushes.White;
+            foreach (var mark in tabMarks) mark.Visibility = Visibility.Hidden;
+            tabMarks[index].Visibility = Visibility.Visible;
         }
 
         private void RecentTab_Click(object sender, RoutedEventArgs e)
         {
             Trans.SelectedIndex = 0;
-            selectTab(RecentTab);
+            selectTab(0);
         }
 
         private void ContactsTab_Click(object sender, RoutedEventArgs e)
         {
             Trans.SelectedIndex = 1;
-            selectTab(ContactsTab);
+            selectTab(1);
         }
 
         public void ListViewUpdate()

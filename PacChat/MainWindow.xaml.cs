@@ -158,5 +158,10 @@ namespace PacChat
         {
             NotificationDot.Visibility = display ? Visibility.Visible : Visibility.Hidden;
         }
+
+        private void UserList_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

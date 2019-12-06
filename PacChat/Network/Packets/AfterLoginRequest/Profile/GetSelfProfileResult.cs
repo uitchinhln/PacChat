@@ -27,10 +27,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
             LastName = ByteBufUtils.ReadUTF8(buffer);
             Town = ByteBufUtils.ReadUTF8(buffer);
             Email = ByteBufUtils.ReadUTF8(buffer);
-
-            // Please send D.O.B as 3 integers representing <year, month, day>
-            DateOfBirth = new DateTime(year:buffer.ReadInt(), month:buffer.ReadInt(), day:buffer.ReadInt());
-
+            DateOfBirth = DateTime.Parse(ByteBufUtils.ReadUTF8(buffer));
             Gender = (Gender)buffer.ReadInt();
         }
 

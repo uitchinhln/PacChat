@@ -10,15 +10,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <StackPanel Width="128" Background="#FF1E145F">
+            <StackPanel Width="128">
                 <Button x:Name="GeneralTab" Uid="0" Content="General" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
                 <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
             </StackPanel>
             
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="1">
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
                 <!-- General tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <StackPanel Background="#FF3A3576">
+                    <StackPanel>
                         <Label Content="General" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                         
                         <elms:ProfileAvatar></elms:ProfileAvatar>

@@ -17,14 +17,14 @@
                 <Border CornerRadius="32" Background="White" Width="32" Height="32" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center">
                     <TextBlock Foreground="#FF52176C" Text="L" FontWeight="Bold" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Border>
-                <Border x:Name="OnlineStatus" CornerRadius="32" Background="#FF009900" Width="9" Height="9" HorizontalAlignment="Left" Margin="39,39,0,16" VerticalAlignment="Center">
+                <Border x:Name="OnlineStatus" CornerRadius="32" Background="#FF02B602" Width="9" Height="9" HorizontalAlignment="Left" Margin="39,39,0,16" VerticalAlignment="Center">
                 </Border>
                 <TextBlock x:Name="UserName" VerticalAlignment="Center"
                            TextTrimming="CharacterEllipsis"
                            Text="{Binding Name}"
-                           FontSize="18"
+                           FontSize="16"
                            Foreground="White" Grid.IsSharedSizeScope="True"
-                           Padding="0" Margin="56,0,0,16"
+                           Padding="0" Margin="56,0,0,16" FontFamily="Segoe UI Semibold"
                            >
 
                 </TextBlock>

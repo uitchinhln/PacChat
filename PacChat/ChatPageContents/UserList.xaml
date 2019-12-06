@@ -8,12 +8,16 @@
              xmlns:vm="clr-namespace:PacChat.ChatPageContents.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="192">
-    <Grid DataContext="{x:Static vm:UserListDesignModel.Instance}" Background="#FF2C2368">
-        <StackPanel Margin="0,0,0,414" Orientation="Horizontal" Background="#FF2C2368" VerticalAlignment="Top">
-            <Button x:Name="RecentTab" Content="Recent" Background="#FF5C5487" BorderBrush="{x:Null}" Width="96" Click="RecentTab_Click" Height="Auto"/>
+    <DockPanel DataContext="{x:Static vm:UserListDesignModel.Instance}">
+        <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Top">
+            <Button x:Name="RecentTab" Content="Recent" Background="{x:Null}" BorderBrush="{x:Null}" Width="96" Click="RecentTab_Click" Height="Auto"/>
             <Button x:Name="ContactsTab" Content="Contacts" Background="{x:Null}" BorderBrush="{x:Null}" Width="96" Click="ContactsTab_Click" Height="Auto"/>
         </StackPanel>
-        <materialDesign:Transitioner x:Name="Trans" SelectedIndex="1" Margin="0,36,0,0">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="4">
+            <Border x:Name="RecentTabSelectMark" BorderThickness="8" Width="96" BorderBrush="#FFC5C5C5"/>
+            <Border x:Name="ContactsRabSelectMark" BorderThickness="8" Width="96" BorderBrush="#FFC5C5C5"/>
+        </StackPanel>
+        <materialDesign:Transitioner x:Name="Trans" SelectedIndex="1" Margin="0" DockPanel.Dock="Bottom">
             <!-- Recent tab -->
             <materialDesign:TransitionerSlide>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
@@ -29,7 +33,7 @@
 
             <!-- Contacts tab -->
             <materialDesign:TransitionerSlide>
-                <StackPanel>
+                <StackPanel Margin="0,8,0,0">
                     <Border CornerRadius="16"
                     Background= "White"
                     DockPanel.Dock="Right"
@@ -40,7 +44,7 @@
                         BorderThickness="0"
                         Margin="10,4,10,-4" TextChanged="UserSearchBox_TextChanged"/>
                     </Border>
-                    
+
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
                         <StackPanel x:Name="ListView">
                         </StackPanel>
@@ -49,5 +53,5 @@
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
 
-    </Grid>
+    </DockPanel>
 </UserControl>
