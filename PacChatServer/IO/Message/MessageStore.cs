@@ -11,7 +11,7 @@ namespace PacChatServer.IO.Message
 {
     public class MessageStore : Store
     {
-        private object _lock;
+        private object _lock = new object();
 
         public AbstractMessage Load(Guid id, Guid conversationID)
         {

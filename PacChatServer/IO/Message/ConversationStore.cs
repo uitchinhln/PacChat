@@ -12,7 +12,7 @@ namespace PacChatServer.IO.Message
 {
     public class ConversationStore : Store
     {
-        private object _lock;
+        private object _lock = new object();
 
         public AbstractConversation Load(Guid id)
         {
