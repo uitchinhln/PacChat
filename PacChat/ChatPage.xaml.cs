@@ -74,6 +74,7 @@ namespace PacChat
 
             var app = MainWindow.chatApplication;
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
+            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, false));
 
             SendTextMessage packet = new SendTextMessage();
             packet.ConversationID = app.model.ContactsMessages[app.model.currentSelectedUser].ConversationID;
@@ -102,6 +103,7 @@ namespace PacChat
 
             var app = MainWindow.chatApplication;
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, true));
+            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, true));
         }
 
 
@@ -138,6 +140,8 @@ namespace PacChat
 
         public void StoreChatPage(string id)
         {
+            return;
+
             var app = MainWindow.chatApplication;
 
             Console.WriteLine("Store chat page on id: " + id + " with length: " + app.model.CurrentUserMessages.Count);
