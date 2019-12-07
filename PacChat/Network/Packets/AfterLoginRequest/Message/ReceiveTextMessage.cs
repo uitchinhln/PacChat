@@ -40,12 +40,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 if (!app.model.Conversations.ContainsKey(ConversationID))
                 {
                     app.model.Conversations.Add(ConversationID, new Utils.ConversationBubble());
-
                     var temp = app.model.Conversations[ConversationID];
                     temp.Members.Add(SenderID);
-                    temp.Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
-                    app.model.PrivateConversations[SenderID] = ConversationID;
                 }
+
+                app.model.Conversations[ConversationID].Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
+                app.model.PrivateConversations[SenderID] = ConversationID;
 
                 if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)
                     ChatPage.Instance.SendLeftMessages(Message, true);
