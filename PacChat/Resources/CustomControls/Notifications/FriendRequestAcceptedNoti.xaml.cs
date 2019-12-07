@@ -20,13 +20,15 @@ namespace PacChat.Resources.CustomControls.Notifications
     /// </summary>
     public partial class FriendRequestAcceptedNoti : UserControl
     {
+        public int Position { get; set; }
         public FriendRequestAcceptedNoti()
         {
             InitializeComponent();
         }
 
-        public void SetInfo(string id, string name)
+        public void SetInfo(int position, string id, string name)
         {
+            Position = position;
             ClickMask.Content = id;
             FriendName.Text = name;
         }

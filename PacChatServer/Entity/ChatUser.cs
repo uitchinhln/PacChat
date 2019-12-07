@@ -70,6 +70,9 @@ namespace PacChatServer.Entity
         [BsonElement("Banned")]
         public bool Banned { get; set; } = false;
 
+        [BsonElement("Notifications")]
+        public List<string> Notifications { get; set; } = new List<string>();
+
         public ChatUser()
         {
 

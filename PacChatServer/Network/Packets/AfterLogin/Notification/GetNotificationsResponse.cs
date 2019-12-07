@@ -8,24 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.AfterLoginRequest.Notification
+namespace PacChatServer.Network.Packets.AfterLogin.Notification
 {
-    public class ResponseFriendRequest : IPacket
+    public class GetNotificationsResponse : IPacket
     {
-        public string TargetID { get; set; }
-        public bool Accepted { get; set; }
-        public int NotiPosition { get; set; }
+        public List<string> Notifications { get; set; } = new List<string>();
 
         public void Decode(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, TargetID);
-            byteBuf.WriteBoolean(Accepted);
-            byteBuf.WriteInt(NotiPosition);
+            foreach (var noti in Notifications)
+            {
+                ByteBufUtils.WriteUTF8(byteBuf, noti);
+            }
+            ByteBufUtils.WriteUTF8(byteBuf, "~");
             return byteBuf;
         }
 

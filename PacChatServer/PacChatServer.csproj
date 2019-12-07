@@ -298,6 +298,8 @@
     <Compile Include="Network\Packets\AfterLogin\Notification\AddFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\FinalizeAcceptedFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\ForwardedFriendRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Notification\GetNotificationsRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Notification\GetNotificationsResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\ResponseAddFriendRequest.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\PageNotFound.cs" />
     <Compile Include="Network\RestfulServer\Alias\AliasHandler\StickerCategoryPage.cs" />
@@ -343,6 +345,7 @@
     <Compile Include="ServerSettings.cs" />
     <Compile Include="Utils\HashStack.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\ThreadUtils\CountdownLatch.cs" />
   </ItemGroup>
   <ItemGroup>

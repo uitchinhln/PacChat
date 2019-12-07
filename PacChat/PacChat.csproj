@@ -98,6 +98,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FinalizeAcceptedFriendRequestReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\GetNotifications.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\GetNotificationsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\ResponseFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestReceive.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Utils\UserUtils.cs" />

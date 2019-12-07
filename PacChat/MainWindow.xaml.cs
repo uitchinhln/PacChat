@@ -17,6 +17,7 @@ using PacChat.ChatAMVC;
 using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network;
 using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
 
 namespace PacChat
 {
@@ -70,6 +71,7 @@ namespace PacChat
             InitAMVC();
 
             Packets.SendPacket<GetFriendIDs>();
+            Packets.SendPacket<GetNotifications>();
 
             SetNotificationDotState(false);
 
