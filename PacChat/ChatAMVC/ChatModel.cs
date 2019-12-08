@@ -16,6 +16,8 @@ namespace PacChat.ChatAMVC
     {
         public static List<string> FriendIDs { get; set; } = new List<string>();
         public static Dictionary<string, ShortProfile> FriendShortProfiles = new Dictionary<string, ShortProfile>();
+
+        public string SelfID { get; set; }
  
         #region OnChatPage
         public string Title { get; set; } = "";

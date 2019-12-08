@@ -72,6 +72,7 @@ namespace PacChat
 
             Packets.SendPacket<GetFriendIDs>();
             Packets.SendPacket<GetNotifications>();
+            Packets.SendPacket<GetSelfID>();
 
             SetNotificationDotState(false);
 

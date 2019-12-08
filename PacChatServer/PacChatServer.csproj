@@ -294,6 +294,10 @@
     <Compile Include="Network\ChatSocketServer.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\AcceptedFriendResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\AddFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\FinalizeAcceptedFriendRequest.cs" />

@@ -15,6 +15,9 @@ namespace PacChat.Network.Protocol
     {
         public LoggedInProtocol() : base("LoggedIn Protocol")
         {
+            Inbound(0x20, new GetSelfIDResult());
+            Outbound(0x20, new GetSelfID());
+
             Inbound(0x00, new GetFriendIDsResult());
             Outbound(0x00, new GetFriendIDs());
 
@@ -27,6 +30,12 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x02, new SingleConversationFrUserIDResult());
             Outbound(0x02, new SingleConversationFrUserID());
+
+            Inbound(0x16, new GetMessageFromConversationResult());
+            Outbound(0x16, new GetMessageFromConversation());
+
+            Inbound(0x06, new ConversationFromIDResult());
+            Outbound(0x06, new ConversationFromID());
 
             // Notifications
             Inbound(0x07, new UserOnlineReceive());

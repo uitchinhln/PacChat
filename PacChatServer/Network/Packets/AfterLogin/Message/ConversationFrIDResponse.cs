@@ -12,10 +12,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 {
     public class ConversationFrIDResponse : IPacket
     {
+        public string ConversationID { get; set; }
         public int StatusCode { get; set; }
         public long LastActive { get; set; }
-        public List<string> Members { get; set; } = new List<string>();
-        public List<string> MessagesID { get; set; } = new List<string>();
+        public HashSet<string> Members { get; set; } = new HashSet<string>();
+        public int LastMessID { get; set; }
+        public int PreviewCode { get; set; }
+        public string PreviewContent { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -24,15 +27,17 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
+            ByteBufUtils.WriteUTF8(byteBuf, ConversationID); 
+            byteBuf.WriteInt(StatusCode);
             byteBuf.WriteLong(LastActive);
 
             foreach (var member in Members)
                 ByteBufUtils.WriteUTF8(byteBuf, member);
             ByteBufUtils.WriteUTF8(byteBuf, "~");
 
-            foreach (var msg in MessagesID)
-                ByteBufUtils.WriteUTF8(byteBuf, msg);
-            ByteBufUtils.WriteUTF8(byteBuf, "~");
+            byteBuf.WriteInt(LastMessID);
+            byteBuf.WriteInt(PreviewCode);
+            ByteBufUtils.WriteUTF8(byteBuf, PreviewContent);
 
             return byteBuf;
         }
