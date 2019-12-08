@@ -56,7 +56,7 @@ namespace PacChatServer.IO.Entity
                 {
                     Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
                         var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
-                        collection.ReplaceOneAsync(condition, user, new UpdateOptions() { IsUpsert = true });
+                        collection.ReplaceOne(condition, user, new UpdateOptions() { IsUpsert = true });
                     });
                     result = true;
                 }
