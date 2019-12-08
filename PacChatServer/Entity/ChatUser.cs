@@ -181,6 +181,8 @@ namespace PacChatServer.Entity
             bool result = saver.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
 
+            //if (profile == null) return result;
+
             profile.Email = this.Email;
             profile.PassHashed = this.Password;
             profile.FirstName = this.FirstName;
