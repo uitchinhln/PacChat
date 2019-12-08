@@ -112,16 +112,29 @@
                                                 <ScrollViewer x:Name="BGGalleryPanel" Width="370" Height="325">
                                                     <WrapPanel>
 
-                                                        <Button  Width="96" Height="131" Margin="10">
+                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
                                                             <Border>
-                                                                
-                                                                <Border.Background>
-                                                                    <ImageBrush Stretch="UniformToFill"/>
-                                                                </Border.Background>
+                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
                                                             </Border>
-
                                                         </Button>
 
+                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
 
                                                     </WrapPanel>
                                                 </ScrollViewer>
