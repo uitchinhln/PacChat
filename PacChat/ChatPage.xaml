@@ -116,8 +116,11 @@
                 </Border>
 
             </DockPanel>
-            <ScrollViewer x:Name="MessagesContainer" Margin="0" Padding="0,0,0,10" >
-                <StackPanel x:Name="spMessagesContainer"/>
+            <ScrollViewer x:Name="MessagesContainer" Margin="0" Padding="0,0,0,10" ScrollChanged="MessagesContainer_ScrollChanged" >
+                <StackPanel>
+                    <Button x:Name="LoadMessagesBtn" Width="128" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD000000" Click="LoadMessagesBtn_Click">See More...</Button>
+                    <StackPanel x:Name="spMessagesContainer"></StackPanel>
+                </StackPanel>
             </ScrollViewer>
         </DockPanel>
     </Border>

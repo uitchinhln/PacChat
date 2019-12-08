@@ -28,6 +28,7 @@ namespace PacChat
     public partial class ChatPage : UserControl
     {
         private BubbleChat _previousBubbleChat;
+        private BubbleChat _headBubbleChat;
 
         public static ChatPage Instance;
 
@@ -49,26 +50,34 @@ namespace PacChat
                 Console.WriteLine("Send message");
                 if (ChatInput.Text == "") return;
 
-                SendMessage(new TextMessage() { Message = ChatInput.Text });  
+                SendMessage(new TextMessage() { Message = ChatInput.Text });
 
                 // Clear textbox
                 ChatInput.Text = "";
             }
         }
 
-        public void SendMessage(TextMessage msg, bool isSimulating = false) //on the Rightside
+        public void SendMessage(TextMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
-            _previousBubbleChat = null;
+            if (reversed) _headBubbleChat = null;
+            else _previousBubbleChat = null;
 
             Bubble b = new Bubble();
             b.Messages = msg.Message;
-            b.SetBG(Color.FromRgb(50, 23, 108));
+            b.SetBG(Color.FromRgb(56, 56, 56));
             b.SetTextColor(Colors.White);
             b.SetDirect(false);// true = left false = right
             b.SetSeen(false);
 
-            spMessagesContainer.Children.Add(b);
-            MessagesContainer.ScrollToEnd();
+            if (reversed)
+            {
+                spMessagesContainer.Children.Insert(0, b);
+            }
+            else
+            {
+                spMessagesContainer.Children.Add(b);
+                MessagesContainer.ScrollToEnd();
+            }
 
             if (isSimulating) return;
 
@@ -82,12 +91,23 @@ namespace PacChat
             _ = ChatConnection.Instance.Send(packet);
         }
 
-        public void SendLeftMessages(TextMessage msg, bool isSimulating = false)
+        public void SendLeftMessages(TextMessage msg, bool isSimulating = false, bool reversed = false)
         {
-            if (_previousBubbleChat == null)
+            if (reversed)
             {
-                _previousBubbleChat = new BubbleChat();
-                spMessagesContainer.Children.Add(_previousBubbleChat);
+                if (_headBubbleChat == null)
+                {
+                    _headBubbleChat = new BubbleChat();
+                    spMessagesContainer.Children.Insert(0, _headBubbleChat);
+                }
+            }
+            else
+            {
+                if (_previousBubbleChat == null)
+                {
+                    _previousBubbleChat = new BubbleChat();
+                    spMessagesContainer.Children.Add(_previousBubbleChat);
+                }
             }
 
             Bubble b = new Bubble();
@@ -95,8 +115,17 @@ namespace PacChat
             b.SetSeen(false);
             b.SetBG(Color.FromRgb(246, 246, 246));
             b.SetDirect(true); // true = left false = right
-            _previousBubbleChat.AddBubble(b);
-            MessagesContainer.ScrollToEnd();
+
+
+            if (reversed)
+            {
+                _headBubbleChat.InsertBubble(0, b);
+            }
+            else
+            {
+                _previousBubbleChat.AddBubble(b);
+                MessagesContainer.ScrollToEnd();
+            }
 
             if (isSimulating) return;
 
@@ -117,7 +146,7 @@ namespace PacChat
             Console.WriteLine("Load chat page on id: " + conversationID);
 
             var app = MainWindow.chatApplication;
-            
+
             if (conversationID.Equals("~") && !string.IsNullOrEmpty(userID))
             {
                 SingleConversationFrUserID packet = new SingleConversationFrUserID();
@@ -128,6 +157,12 @@ namespace PacChat
             }
 
             app.model.currentSelectedConversation = conversationID;
+            ConversationFromID convPacket = new ConversationFromID();
+            convPacket.ConversationID = conversationID;
+            _ = ChatConnection.Instance.Send(convPacket);
+
+            return;
+
             ConversationBubble msgList = app.model.Conversations[conversationID];
             for (int i = 0; i < msgList.Bubbles.Count; ++i)
             {
@@ -137,6 +172,23 @@ namespace PacChat
                 else
                     SendMessage(new TextMessage() { Message = bubbleInfo.message }, true);
             }
+        }
+
+        public void LoadMessages(string conversationID)
+        {
+            var app = MainWindow.chatApplication;
+            if (app.model.Conversations[conversationID].LastMessID < 0)
+                return;
+            GetMessageFromConversation msgPacket = new GetMessageFromConversation();
+            msgPacket.ConversationID = conversationID;
+            msgPacket.MessagePosition = app.model.Conversations[conversationID].LastMessID;
+            msgPacket.Quantity = 10;
+            app.model.Conversations[conversationID].LastMessID -= 10;
+            _ = ChatConnection.Instance.Send(msgPacket);
+
+            LoadMessagesBtn.Visibility = Visibility.Visible;
+            if (app.model.Conversations[conversationID].LastMessID < 0)
+                LoadMessagesBtn.Visibility = Visibility.Collapsed;
         }
 
         public void StoreChatPage(string conversationID)
@@ -162,7 +214,7 @@ namespace PacChat
         public void sendSticker(bool clickable, int id, int cateid, int size, int duration, string uriSheet)
         {
             Sticker sticker = new Sticker(this, clickable, id, cateid, size, duration, uriSheet);
-            
+
             Thickness margin = sticker.Margin;
             margin.Right = 30;
             sticker.HorizontalAlignment = HorizontalAlignment.Right;
@@ -185,7 +237,7 @@ namespace PacChat
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
@@ -221,6 +273,16 @@ namespace PacChat
             image.Margin = margin;
             spMessagesContainer.Children.Add(image);
             MessagesContainer.ScrollToEnd();
+        }
+
+        private void MessagesContainer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+        }
+
+        private void LoadMessagesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            LoadMessages(app.model.currentSelectedConversation);
         }
     }
 }

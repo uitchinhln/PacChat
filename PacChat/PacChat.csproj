@@ -83,14 +83,16 @@
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetConversation.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetSelfID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetSelfIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfoResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfo.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDs.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromIDResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromID.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversation.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversationResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ReceiveTextMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversations.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversationsResult.cs" />
@@ -465,6 +467,7 @@
     <Resource Include="Resources\Drawable\sprite_ic.png" />
     <Resource Include="Resources\Drawable\tieuviem_tet.png" />
     <Resource Include="Resources\Drawable\tieuviem_thumb.png" />
+    <Resource Include="Resources\Drawable\BG.jpg" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

@@ -30,5 +30,10 @@ namespace PacChat.Resources.CustomControls
         {
             spMessContainer.Children.Add(b);
         }
+
+        public void InsertBubble(int index, Bubble b)
+        {
+            spMessContainer.Children.Insert(index, b);
+        }
     }
 }

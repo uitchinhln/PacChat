@@ -30,7 +30,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             ChatSession chatSession = session as ChatSession;
 
             ConversationFrIDResponse packet = new ConversationFrIDResponse();
+            packet.ConversationID = ConversationID.ToString();
             var conversationStore = new ConversationStore().Load(ConversationID);
+
+            packet.LastActive = 0;
 
             if (conversationStore == null)
             {
@@ -46,11 +49,12 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                     packet.Members.Add(member.ToString());
                 }
 
-                foreach (var message in conversationStore.MessagesID)
-                {
-                    packet.MessagesID.Add(message.ToString());
-                }
+                packet.LastMessID = conversationStore.MessagesID.Count - 1;
             }
+
+            // Update later
+            packet.PreviewCode = -1;
+            packet.PreviewContent = "";
 
             session.Send(packet);
         }

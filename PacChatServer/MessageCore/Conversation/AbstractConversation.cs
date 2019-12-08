@@ -44,17 +44,20 @@ namespace PacChatServer.MessageCore.Conversation
         public void SendMessage(IMessage message, string conversationID, ChatSession chatSession)
         {
             ChatUser user;
+            Guid messageID = Guid.NewGuid();
+            (message as AbstractMessage).ID = messageID;
+            (message as AbstractMessage).Author = chatSession.Owner.ID;
+
+            //Store
+            MessagesID.Add((message as AbstractMessage).ID);
+            LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
+
+            store.UpdateMessagesList(this);
+            messageStore.Save((message as AbstractMessage), this.ID);
+
             foreach (Guid userID in Members)
             {
                 this.LastActive = DateTime.Now.Ticks;
-
-                //Store
-                MessagesID.Add((message as AbstractMessage).ID);
-                LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
-
-                store.UpdateMessagesList(this);
-                messageStore.Save((message as AbstractMessage), this.ID);
-
 
                 if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
                 {

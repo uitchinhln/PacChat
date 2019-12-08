@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -84,5 +85,28 @@ namespace PacChat.Resources.CustomControls
             }
         }
 
+        public void AddSlideFromBottom(Storyboard storyboard, float seconds, double offset, float decelerationRatio = 0.9f, bool keepMargin = true)
+        {
+            // Create the margin animate from right 
+            var animation = new ThicknessAnimation
+            {
+                Duration = new Duration(TimeSpan.FromSeconds(seconds)),
+                From = new Thickness(0, keepMargin ? offset : 0, 0, -offset),
+                To = new Thickness(0),
+                DecelerationRatio = decelerationRatio
+            };
+
+            // Set the target property name
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Margin"));
+
+            // Add this to the storyboard
+            storyboard.Children.Add(animation);
+        }
+
+
+        public void Animation()
+        {
+
+        }
     }
 }
