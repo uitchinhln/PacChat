@@ -59,7 +59,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
                 {
                     response.ConversationID = conversation.ID.ToString();
 
-                    AbstractMessage message = new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID);
+                    AbstractMessage message = 
+                        conversation.MessagesID.Count > 0 ?
+                        new MessageStore().Load(conversation.MessagesID.Last(), conversation.ID) :
+                        null;
                     if (message == null) break;
 
                     if (message.Showable(chatSession.Owner.ID))

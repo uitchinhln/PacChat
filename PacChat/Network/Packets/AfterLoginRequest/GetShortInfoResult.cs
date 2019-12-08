@@ -71,7 +71,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             var id = ID;
-            Console.WriteLine(PreviewCode); 
+            Console.WriteLine(Relationship); 
 
             Application.Current.Dispatcher.Invoke(() => UserList.Instance.AddUserToListView(
                 new UserMessageViewModel()
@@ -81,13 +81,19 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     IsOnline = IsOnline,
                     //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
                     IncomingMsg = ""
-                }));
+                }, Relationship == 2));
 
             if (Relationship == 2)
             {
                 var app = MainWindow.chatApplication;
-                if (!app.model.ContactsMessages.ContainsKey(id))
-                    app.model.ContactsMessages.Add(id, new ConversationBubble(ConversationID));
+                if (!app.model.Conversations.ContainsKey(ConversationID))
+                    app.model.Conversations.Add(ConversationID, new ConversationBubble());
+
+                app.model.Conversations[ConversationID].Members.Clear();
+                app.model.Conversations[ConversationID].Members.Add(ID);
+
+                if (!app.model.PrivateConversations.ContainsKey(ID))
+                    app.model.PrivateConversations.Add(ID, ConversationID);
 
                 if (!app.model.IsOnline.ContainsKey(id))
                     app.model.IsOnline.Add(id, IsOnline);

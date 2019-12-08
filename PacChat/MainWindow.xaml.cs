@@ -17,6 +17,7 @@ using PacChat.ChatAMVC;
 using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network;
 using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
 
 namespace PacChat
 {
@@ -27,6 +28,10 @@ namespace PacChat
     {
         private List<Button> _panelButtons = new List<Button>();
         public static MainWindow Instance { get; private set; }
+        public static int CurrentWindowWidth { get; set; }
+        public static int CurrentWindowHeight { get; set; }
+        public static int ScreenWidth { get; set; }
+        public static int ScreenHeight{ get; set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -66,8 +71,11 @@ namespace PacChat
             InitAMVC();
 
             Packets.SendPacket<GetFriendIDs>();
+            Packets.SendPacket<GetNotifications>();
+            Packets.SendPacket<GetSelfID>();
 
             SetNotificationDotState(false);
+
             /*
             try
             {

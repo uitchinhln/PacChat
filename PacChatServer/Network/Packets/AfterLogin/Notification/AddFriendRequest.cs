@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
+using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,21 @@ namespace PacChatServer.Network.Packets.AfterLogin.Notification
                 Console.WriteLine("Friend request " + packet.Name);
                 user.Send(packet);
             }
+
+            string name = chatSession.Owner.FirstName + " " + chatSession.Owner.LastName;
+
+            //string encNoti = "mkfriend:" + chatSession.Owner.ID + ":" +
+            //    chatSession.Owner.FirstName + " " + chatSession.Owner.LastName;
+
+            string encNoti = NotificationEncoder.Assemble(
+                NotificationPrefixes.AddFriend,
+                chatSession.Owner.ID.ToString(),
+                name, name, "sent you a friend request.",
+                false);
+
+            user = ChatUserManager.LoadUser(Guid.Parse(TargetID));
+            user.Notifications.Add(encNoti);
+            user.Save();
         }
     }
 }

@@ -27,7 +27,6 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
         public void Handle(ISession session)
         {
-            Console.WriteLine("Request profile");
             ChatSession chatSession = session as ChatSession;
             ChatUser targetUser = ChatUserManager.LoadUser(TargetID);
 

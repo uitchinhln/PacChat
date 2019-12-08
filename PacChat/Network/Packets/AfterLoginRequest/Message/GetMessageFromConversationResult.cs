@@ -2,15 +2,17 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChat.MessageCore.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
-    public class GetMessageFromIDResult : IPacket
+    public class GetMessageFromConversationResult : IPacket
     {
         //List of user seen this message
         public HashSet<string> SeenBy { get; private set; } = new HashSet<string>();
@@ -27,13 +29,15 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         /// 4: Text
         /// 5: Video
         /// </summary>
-        public int MessType { get; set; }
+        public List<int> MessType { get; set; } = new List<int>();
+        public List<string> SenderID { get; set; } = new List<string>();
 
         // Text content is content of text message (if preview code is equal to 4)
-        public string Content { get; set; }
+        public List<string> Content { get; set; } = new List<string>();
 
         public void Decode(IByteBuffer buffer)
         {
+            /*
             // Get ids that have seen this message
             string temp = ByteBufUtils.ReadUTF8(buffer);
             while (temp != "~")
@@ -54,12 +58,17 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 temp = ByteBufUtils.ReadUTF8(buffer);
                 reactionID = buffer.ReadInt();
             }
+            */
 
-            // Get message type
-            this.MessType = buffer.ReadInt();
+            string temp = ByteBufUtils.ReadUTF8(buffer);
 
-            // Get message content
-            Content = ByteBufUtils.ReadUTF8(buffer);
+            while (!temp.Equals("~"))
+            {
+                SenderID.Add(temp);
+                MessType.Add(buffer.ReadInt());
+                Content.Add(ByteBufUtils.ReadUTF8(buffer));
+                temp = ByteBufUtils.ReadUTF8(buffer);
+            }
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -70,6 +79,21 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public void Handle(ISession session)
         {
             // Create a message instance and put information into it
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var app = MainWindow.chatApplication;
+                for (int i = 0; i < SenderID.Count; ++i)
+                {
+                    if (app.model.SelfID.CompareTo(SenderID[i]) == 0)
+                        ChatPage.Instance.SendMessage(
+                            new TextMessage() { Message = Content[i] },
+                            true, true);
+                    else
+                        ChatPage.Instance.SendLeftMessages(
+                            new TextMessage() { Message = Content[i] },
+                            true, true);
+                }
+            });
         }
     }
 }

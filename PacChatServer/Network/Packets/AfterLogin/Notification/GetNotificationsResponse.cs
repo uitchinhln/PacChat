@@ -2,36 +2,35 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
-using PacChat.MessageCore.Message;
-using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.AfterLoginRequest.Message
+namespace PacChatServer.Network.Packets.AfterLogin.Notification
 {
-    public class SendTextMessage : IPacket
+    public class GetNotificationsResponse : IPacket
     {
-        public string ConversationID { get; set; }
-        public TextMessage Message { get; set; }
+        public List<string> Notifications { get; set; } = new List<string>();
 
         public void Decode(IByteBuffer buffer)
         {
-            // throw new NotImplementedException();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message.Message);
-
+            foreach (var noti in Notifications)
+            {
+                ByteBufUtils.WriteUTF8(byteBuf, noti);
+            }
+            ByteBufUtils.WriteUTF8(byteBuf, "~");
             return byteBuf;
         }
 
         public void Handle(ISession session)
         {
+            throw new NotImplementedException();
         }
     }
 }

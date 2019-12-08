@@ -33,10 +33,10 @@
 
             <!-- Contacts tab -->
             <materialDesign:TransitionerSlide>
-                <StackPanel Margin="0,8,0,0">
+                <DockPanel Margin="0,8,0,0">
                     <Border CornerRadius="16"
                     Background= "White"
-                    DockPanel.Dock="Right"
+                    DockPanel.Dock="Top"
                     Height="32" Margin="10,0">
                         <TextBox x:Name="UserSearchBox" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Search contacts..."
                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
@@ -45,11 +45,11 @@
                         Margin="10,4,10,-4" TextChanged="UserSearchBox_TextChanged"/>
                     </Border>
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                    <ScrollViewer Margin="0" DockPanel.Dock="Top">
                         <StackPanel x:Name="ListView">
                         </StackPanel>
                     </ScrollViewer>
-                </StackPanel>
+                </DockPanel>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
 

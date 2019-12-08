@@ -1,6 +1,5 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
-using CNetwork.Utils;
 using DotNetty.Buffers;
 using System;
 using System.Collections.Generic;
@@ -8,14 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.AfterLoginRequest.Notification
+namespace PacChat.Network.Packets.AfterLoginRequest
 {
-    public class ResponseFriendRequest : IPacket
+    public class GetSelfID : IPacket
     {
-        public string TargetID { get; set; }
-        public bool Accepted { get; set; }
-        public int NotiPosition { get; set; }
-
         public void Decode(IByteBuffer buffer)
         {
             throw new NotImplementedException();
@@ -23,9 +18,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, TargetID);
-            byteBuf.WriteBoolean(Accepted);
-            byteBuf.WriteInt(NotiPosition);
             return byteBuf;
         }
 

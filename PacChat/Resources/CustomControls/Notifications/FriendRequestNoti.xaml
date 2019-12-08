@@ -19,7 +19,7 @@
         
         <DockPanel VerticalAlignment="Bottom" Height="64" Margin="0">
             <Button x:Name="RemoveBtn" Content="Remove" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Margin="16,0,16,8" Background="#FFB0B0B0" BorderBrush="{x:Null}" Foreground="#DD000000" FontSize="14" Height="32" Click="RemoveBtn_Click"></Button>
-            <Button x:Name="BtnAccept" Content="Accept" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Background="#FF3A3AB7" FontSize="16" Height="32" Margin="0,0,0,8" Click="BtnAccept_Click" Padding="16,0,16,4"/>
+            <Button x:Name="BtnAccept" Content="Accept" HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right" Background="#FF383838" FontSize="16" Height="32" Margin="0,0,0,8" Click="BtnAccept_Click" Padding="16,0,16,4" BorderBrush="#FF878787"/>
         </DockPanel>
 
     </Grid>

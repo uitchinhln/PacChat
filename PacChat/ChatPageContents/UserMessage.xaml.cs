@@ -24,6 +24,8 @@ namespace PacChat.ChatPageContents
     /// </summary>
     public partial class UserMessage : UserControl
     {
+        public bool IsFriend { get; set; }
+
         public UserMessage()
         {
             InitializeComponent();
@@ -31,8 +33,9 @@ namespace PacChat.ChatPageContents
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
+            if (!IsFriend) return;
             LoadDataToModel();
-            MainWindow.chatApplication.controller.OnUserChanged();
+            MainWindow.chatApplication.controller.OnUserChanged(ClickMask.Content.ToString());
         }
 
         // This method load data to model and controller get it from model and update view
@@ -40,17 +43,23 @@ namespace PacChat.ChatPageContents
         {
             var app = MainWindow.chatApplication;
             app.model.Title = UserName.Text;
-            app.model.previousSelectedUser = app.model.currentSelectedUser;
-            app.model.currentSelectedUser = ClickMask.Content.ToString();
+            app.model.previousSelectedConversation = app.model.currentSelectedConversation;
+
+            if (app.model.PrivateConversations.ContainsKey(ClickMask.Content.ToString()))
+            {
+                app.model.currentSelectedConversation = app.model.PrivateConversations[ClickMask.Content.ToString()];
+            }
 
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
         }
 
-        public void SetInfo(string Id, string Name, string Msg)
+        public void SetInfo(string Id, string Name, string Msg, bool Friend = false)
         {
             UserName.Text = Name;
             UserMessage1.Text = Msg;
             ClickMask.Content = Id;
+            FriendRequestBtn.IsEnabled = !Friend;
+            IsFriend = Friend;
         }
 
         public void SetOnlineStatus(bool online)

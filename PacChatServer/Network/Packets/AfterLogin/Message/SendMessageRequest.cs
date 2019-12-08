@@ -4,6 +4,7 @@ using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
 using PacChatServer.IO.Message;
+using PacChatServer.MessageCore.Conversation;
 using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,12 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 {
     public class SendMessageRequest : IPacket
     {
-        public string ConversationID { get; set; }
-        public string ReceiverID { get; set; }
+        public Guid ConversationID { get; set; }
         public TextMessage Message { get; set; } = new TextMessage();
 
         public void Decode(IByteBuffer buffer)
         {
-            ConversationID = ByteBufUtils.ReadUTF8(buffer);
-            ReceiverID = ByteBufUtils.ReadUTF8(buffer);
+            ConversationID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
             Message.Message = ByteBufUtils.ReadUTF8(buffer);
         }
 
@@ -34,8 +33,14 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         public void Handle(ISession session)
         {
             ChatSession chatSession = session as ChatSession;
-            ChatUser user;
 
+            AbstractConversation conversation = new ConversationStore().Load(ConversationID);
+
+            if (conversation == null) return;
+
+            conversation.SendMessage(Message, ConversationID.ToString(), chatSession);
+
+            /*
             if (ChatUserManager.OnlineUsers.TryGetValue(Guid.Parse(ReceiverID), out user))
             {
                 SendMessageResponse packet = new SendMessageResponse();
@@ -44,8 +49,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 packet.SenderID = chatSession.Owner.ID.ToString();
                 user.Send(packet);
             }
-
-            new MessageStore().Save(Message, Guid.Parse(ConversationID));
+            */
         }
     }
 }

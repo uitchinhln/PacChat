@@ -3,6 +3,8 @@ using PacChatServer.Cache.Core;
 using PacChatServer.Entity;
 using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
+using PacChatServer.Network;
+using PacChatServer.Network.Packets.AfterLogin.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,24 +41,34 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
 
-        public void SendMessage(IMessage message)
+        public void SendMessage(IMessage message, string conversationID, ChatSession chatSession)
         {
             ChatUser user;
+            Guid messageID = Guid.NewGuid();
+            (message as AbstractMessage).ID = messageID;
+            (message as AbstractMessage).Author = chatSession.Owner.ID;
+
+            //Store
+            MessagesID.Add((message as AbstractMessage).ID);
+            LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
+
+            store.UpdateMessagesList(this);
+            messageStore.Save((message as AbstractMessage), this.ID);
+
             foreach (Guid userID in Members)
             {
                 this.LastActive = DateTime.Now.Ticks;
 
-                //Store
-                MessagesID.Add((message as AbstractMessage).ID);
-                LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
-
-                store.UpdateMessagesList(this);
-                messageStore.Save((message as AbstractMessage), this.ID);
-
-
                 if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
                 {
-                    user.Send(null); //Add message packet here
+                    if (userID.CompareTo(chatSession.Owner.ID) == 0)
+                        continue;
+
+                    SendMessageResponse packet = new SendMessageResponse();
+                    packet.ConversationID = conversationID;
+                    packet.Message = message as TextMessage;
+                    packet.SenderID = chatSession.Owner.ID.ToString();
+                    user.Send(packet); //Add message packet here
 
                     lock (user.Conversations)
                     {

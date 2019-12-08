@@ -14,6 +14,9 @@ namespace PacChatServer.Network.Protocol
     {
         public AfterLoginProtocol() : base("After Login")
         {
+            Inbound(0x20, new GetSelfIDRequest());
+            Outbound(0x20, new GetSelfIDResponse());
+
             Inbound(0x00, new FriendsListRequest());
             Outbound(0x00, new FriendsListResponse());
 
@@ -34,6 +37,9 @@ namespace PacChatServer.Network.Protocol
             Inbound(0x02, new SingleConversationFrUserIDRequest());
             Outbound(0x02, new SingleConversationFrUserIDResponse());
 
+            Inbound(0x16, new MessageFromConversationRequest());
+            Outbound(0x16, new MessageFromConversationResponse());
+
             // Notifications
             Outbound(0x07, new UserOnline());
             Outbound(0x08, new UserOffline());
@@ -43,6 +49,9 @@ namespace PacChatServer.Network.Protocol
             Inbound(0x13, new ResponseAddFriendRequest());
             Outbound(0x12, new AcceptedFriendResponse());
             Outbound(0x14, new FinalizeAcceptedFriendRequest());
+
+            Inbound(0x15, new GetNotificationsRequest());
+            Outbound(0x15, new GetNotificationsResponse());
 
             // Profile
             Inbound(0x09, new DisplayedProfileRequest());

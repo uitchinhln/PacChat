@@ -78,10 +78,10 @@ namespace PacChat.ChatPageContents
             app.model.UserControls.Clear();
         }
 
-        public void AddUserToListView(UserMessageViewModel user)
+        public void AddUserToListView(UserMessageViewModel user, bool friend = false)
         {
             UserMessage userControl = new UserMessage();
-            userControl.SetInfo(user.Id, user.Name, user.IncomingMsg);
+            userControl.SetInfo(user.Id, user.Name, user.IncomingMsg, friend);
             userControl.SetOnlineStatus(user.IsOnline);
             var app = MainWindow.chatApplication;
             if (!app.model.UserControls.ContainsKey(user.Id))

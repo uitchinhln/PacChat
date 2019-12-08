@@ -7,16 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChat.Network.Packets.AfterLoginRequest.Message
+namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 {
-    public class GetMessageFromID : IPacket
+    public class GetSelfIDRequest : IPacket
     {
-        public string MessageID { get; set; }
-        public string ConversationID { get; set; }
-
         public void Decode(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -26,7 +22,10 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
         public void Handle(ISession session)
         {
-            throw new NotImplementedException();
+            ChatSession chatSession = session as ChatSession;
+            GetSelfIDResponse packet = new GetSelfIDResponse();
+            packet.ID = chatSession.Owner.ID.ToString();
+            chatSession.Send(packet);
         }
     }
 }

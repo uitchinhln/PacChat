@@ -34,15 +34,12 @@
             </Border>
 
             <!---Messages path -->
-            <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
-                <!-- Nick name label -->
+            <StackPanel>
                 <Label Name="NickName" Content="Nick Name bla bla"/>
-
-
-
-
+                <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
+                    <!-- Nick name label -->
+                </StackPanel>
             </StackPanel>
-
         </Grid>
 
     </Border>

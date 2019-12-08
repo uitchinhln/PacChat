@@ -5,6 +5,7 @@ using DotNetty.Buffers;
 using PacChatServer.Command;
 using PacChatServer.Entity;
 using PacChatServer.IO.Entity;
+using PacChatServer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.Notification
     {
         public Guid TargetID { get; set; }
         public bool Accepted { get; set; }
+        public int NotiPosition { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             TargetID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
             Accepted = buffer.ReadBoolean();
+            NotiPosition = buffer.ReadInt();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -51,6 +54,23 @@ namespace PacChatServer.Network.Packets.AfterLogin.Notification
                     user.Send(packet);
                     chatSession.Send(new FinalizeAcceptedFriendRequest());
                 }
+
+                // string encNoti = "acfriend:" + chatSession.Owner.ID + ":" +
+                //    chatSession.Owner.FirstName + " " + chatSession.Owner.LastName;
+
+                string name = chatSession.Owner.FirstName + " " + chatSession.Owner.LastName;
+                string encNoti = NotificationEncoder.Assemble(
+                    NotificationPrefixes.AcceptedFriend,
+                    chatSession.Owner.ID.ToString(),
+                    name, name, "accepted your friend request.",
+                    false);
+
+                user = new ChatUserStore().Load(TargetID);
+                user.Notifications.Add(encNoti);
+                user.Save();
+
+                chatSession.Owner.Notifications.RemoveAt(NotiPosition);
+                chatSession.Owner.Save();
             }
         }
     }

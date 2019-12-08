@@ -38,7 +38,7 @@ namespace PacChat
         {
             Console.WriteLine("Add: " + name);
             FriendRequestNoti friendRequestNoti = new FriendRequestNoti();
-            friendRequestNoti.SetInfo(id, name);
+            friendRequestNoti.SetInfo(NotiListView.Children.Count, id, name);
             NotiListView.Children.Add(friendRequestNoti);
             MainWindow.Instance.SetNotificationDotState(true);
         }
@@ -47,7 +47,7 @@ namespace PacChat
         {
             Console.WriteLine("Add: " + name);
             FriendRequestAcceptedNoti friendRequestNoti = new FriendRequestAcceptedNoti();
-            friendRequestNoti.SetInfo(id, name);
+            friendRequestNoti.SetInfo(NotiListView.Children.Count, id, name);
             NotiListView.Children.Add(friendRequestNoti);
             MainWindow.Instance.SetNotificationDotState(true);
         }
