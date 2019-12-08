@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -29,6 +30,7 @@ namespace PacChat
     {
         private BubbleChat _previousBubbleChat;
         private BubbleChat _headBubbleChat;
+        private bool _button1Clicked;
 
         public static ChatPage Instance;
 
@@ -36,7 +38,7 @@ namespace PacChat
         {
             InitializeComponent();
             Instance = this;
-
+            _button1Clicked = false;
             spTabStickerContainner.Children.Add(new TabStickerContainner(this));
 
         }
@@ -237,7 +239,16 @@ namespace PacChat
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            if (!_button1Clicked)
+            {
+                _button1Clicked = true;
+                ChatBorder.Background = null;
+                addBackgroundImage("/PacChat/PacChat/Resources/Drawable/BG.jpg", 0);
+                return;
+            }
+            ChatBorder.Background = null;
+            ChatBorder.Background = new SolidColorBrush(Colors.White);
+            _button1Clicked = false;
         }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
@@ -284,5 +295,23 @@ namespace PacChat
             var app = MainWindow.chatApplication;
             LoadMessages(app.model.currentSelectedConversation);
         }
+
+        private void addBackgroundImage(string path, int blur)
+        {
+            VisualBrush vb = new VisualBrush();
+            Image im = new Image();
+            BlurEffect ef = new BlurEffect();
+            ef.Radius = blur;
+            im.Source = new BitmapImage( new Uri(path, UriKind.RelativeOrAbsolute));
+            im.Effect = ef;
+
+            vb.Visual = im;
+            vb.Stretch = Stretch.UniformToFill;
+            vb.Viewbox = new Rect(0.05, 0.05, 0.9, 0.9);
+            ChatBorder.Background = vb;
+
+        }
+
+        
     }
 }

@@ -4,12 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:chatpage="clr-namespace:PacChat.ChatPageContents"
-             xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
-             mc:Ignorable="d" 
+             xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" 
+             xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" 
+             xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border CornerRadius="8" Background="White">
+    <Border x:Name="ChatBorder" CornerRadius="8" Background="White">
+        
+
+
         <DockPanel Margin="8">
             <DockPanel.DataContext>
                 <ChatAMVC:ChatModel/>
@@ -68,7 +73,7 @@
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
-                <Border>
+                <Border Background="#673AB7" CornerRadius="4" Margin="3 3 3 4">
                     <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
                         <materialDesign:PopupBox.ToggleContent>
 
@@ -76,7 +81,7 @@
                                     Kind="StickerEmoji" 
                                     Width="32"
                                     Height="32"
-                                    Foreground="#FF1E145F"
+                                    Foreground="White"
                             />
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel Width="390" Height="325" x:Name="spTabStickerContainner">

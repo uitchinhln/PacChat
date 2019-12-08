@@ -39,7 +39,7 @@
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="CNetwork">
-      <HintPath>D:\CSharp\CNetwork\CNetwork\bin\Debug\CNetwork.dll</HintPath>
+      <HintPath>..\..\CNetwork.dll</HintPath>
     </Reference>
     <Reference Include="Crc32C.NET, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Crc32C.NET.1.0.5.0\lib\net20\Crc32C.NET.dll</HintPath>
