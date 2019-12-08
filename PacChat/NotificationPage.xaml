@@ -12,6 +12,7 @@
             <Label Content="Notification" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
             <ScrollViewer>
                 <StackPanel x:Name="NotiListView">
+
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

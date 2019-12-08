@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System;
-
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,6 +22,7 @@ namespace PacChat.Resources.CustomControls
             InitializeComponent();
             //textBlock.Text = "asdasdsad";
             NickName.Content = MainWindow.chatApplication.model.Title;
+
         }
 
 
@@ -30,5 +30,6 @@ namespace PacChat.Resources.CustomControls
         {
             spMessContainer.Children.Add(b);
         }
+
     }
 }

@@ -16,23 +16,20 @@
 
         <Grid>
             <!--AVATAR pic -->
-            <Border VerticalAlignment="Bottom"
+            <Border x:Name="AvaBorder"
+                    VerticalAlignment="Bottom"
                     HorizontalAlignment="Left"
                     CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                     Width="30"
-                    Background="green"
                     BorderThickness="1"
                     BorderBrush="White"
                     
                     >
-                <TextBlock Text="NL"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Foreground="White">
+                <Border.Background>
+                    <ImageBrush x:Name="Ava" ImageSource="D:\hinh.jpg"/>
+                </Border.Background>
 
-
-                </TextBlock>
 
             </Border>
 

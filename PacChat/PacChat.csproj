@@ -462,6 +462,7 @@
     <Resource Include="Resources\Drawable\sprite_ic.png" />
     <Resource Include="Resources\Drawable\tieuviem_tet.png" />
     <Resource Include="Resources\Drawable\tieuviem_thumb.png" />
+    <Resource Include="Resources\Drawable\BG.jpg" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

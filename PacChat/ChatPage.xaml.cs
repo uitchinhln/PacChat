@@ -28,6 +28,7 @@ namespace PacChat
     public partial class ChatPage : UserControl
     {
         private BubbleChat _previousBubbleChat;
+        private bool _check;
 
         public static ChatPage Instance;
 
@@ -35,7 +36,7 @@ namespace PacChat
         {
             InitializeComponent();
             Instance = this;
-
+            _check = false;
             spTabStickerContainner.Children.Add(new TabStickerContainner(this));
 
         }
@@ -180,7 +181,17 @@ namespace PacChat
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            if (!_check)
+            {
+                addBG();
+                _check = true;
+            }
+            else
+            {
+                _check = false;
+                borderChatPage.Background = null;
+                borderChatPage.Background = new SolidColorBrush(Colors.LightBlue);
+            }
         }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
@@ -217,5 +228,22 @@ namespace PacChat
             spMessagesContainer.Children.Add(image);
             MessagesContainer.ScrollToEnd();
         }
+
+        private void addBG(string bgPath = "", bool isBlured = false)
+        {
+            borderChatPage.Background = null;
+            VisualBrush vb = new VisualBrush();
+            Image im = new Image();
+            System.Windows.Media.Effects.BlurEffect blur = new System.Windows.Media.Effects.BlurEffect();
+            blur.Radius = 0; //blur level
+            vb.Viewbox = new Rect(0.05, 0.05, 0.9, 0.9);
+            vb.Stretch = Stretch.UniformToFill;
+
+            im.Source = new BitmapImage(new Uri("/PacChat/PacChat/Resources/Drawable/BG.jpg", UriKind.RelativeOrAbsolute));
+            im.Effect = blur;
+            vb.Visual = im;
+            borderChatPage.Background = vb;
+        }
+
     }
 }

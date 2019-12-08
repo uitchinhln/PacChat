@@ -13,16 +13,17 @@
             <StackPanel Width="128">
                 <Button x:Name="GeneralTab" Uid="0" Content="General" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
                 <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
+                <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
             </StackPanel>
-            
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
                 <!-- General tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                     <StackPanel>
                         <Label Content="General" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-                        
+
                         <elms:ProfileAvatar></elms:ProfileAvatar>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="54,5,54,0">
                             <TextBox x:Name="FirstNameInp" materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
                             <TextBox x:Name="LastNameInp" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
@@ -39,7 +40,7 @@
                         <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="131" Height="32" Foreground="#DD000000" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
                     </StackPanel>
                 </materialDesign:TransitionerSlide>
-                
+
                 <!-- Password tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                     <StackPanel Background="#FF3A3576">
@@ -52,9 +53,104 @@
                         <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="128" Height="32" Foreground="#FF412978" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
                     </StackPanel>
                 </materialDesign:TransitionerSlide>
-                
+
+                <!-- Custom tab -->
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <Label Content="Custom" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                            <!-- THEME -->
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Themes" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                <Border>
+                                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
+
+                                        <Border Width="96" Height="131" Margin="10" Background="#9BD494" CornerRadius="10">
+                                            <RadioButton Margin="39,103,39,10"/>
+                                        </Border>
+
+                                        <Border Width="96" Height="131" Margin="10" Background="#7EC4EA" CornerRadius="10">
+                                            <RadioButton Margin="39,103,39,10"/>
+                                        </Border>
+
+
+                                        <Border Width="96" Height="131" Margin="10" Background="#41464B" CornerRadius="10">
+                                            <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
+                                        </Border>
+
+
+                                        <Border Width="96" Height="131" Margin="10" Background="#485761" CornerRadius="10">
+                                            <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
+                                        </Border>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                                <Border Height="10" Background="#4BE1C3" Margin="10"/>
+                                
+                                <!-- CHAT BACKGOUND -->
+                                <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="260" Height="260" Margin="10" CornerRadius="20">
+                                        <Border.Background>
+                                            <ImageBrush x:Name="BG_Preview"/>
+
+                                        </Border.Background>
+
+                                    </Border>
+
+                                    <StackPanel Orientation="Vertical" Margin="10 30 10 30">
+
+                                        <Border Background="#673AB7" CornerRadius="3" Margin="10">
+                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
+                                                <materialDesign:PopupBox.ToggleContent>
+
+                                                    <Label Content="Choose from gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                </materialDesign:PopupBox.ToggleContent>
+                                                <ScrollViewer x:Name="BGGalleryPanel" Width="370" Height="325">
+                                                    <WrapPanel>
+
+                                                        <Button  Width="96" Height="131" Margin="10">
+                                                            <Border>
+                                                                
+                                                                <Border.Background>
+                                                                    <ImageBrush Stretch="UniformToFill"/>
+                                                                </Border.Background>
+                                                            </Border>
+
+                                                        </Button>
+
+
+                                                    </WrapPanel>
+                                                </ScrollViewer>
+                                            </materialDesign:PopupBox>
+                                        </Border>
+
+                                        <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
+                                        <Slider
+                                          Minimum="0"
+                                          Maximum="10"
+                                          Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                          ToolTip="Blur level"
+                                          Value="50"
+                                          Width="280" />
+                                    </StackPanel>
+
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </materialDesign:TransitionerSlide>
+
+
             </materialDesign:Transitioner>
-            
+
         </DockPanel>
     </Grid>
 </UserControl>
