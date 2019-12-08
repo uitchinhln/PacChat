@@ -301,13 +301,6 @@
     <Compile Include="Network\Packets\AfterLogin\Notification\GetNotificationsRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\GetNotificationsResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\ResponseAddFriendRequest.cs" />
-    <Compile Include="Network\RestfulServer\Alias\AliasHandler\PageNotFound.cs" />
-    <Compile Include="Network\RestfulServer\Alias\AliasHandler\StickerCategoryPage.cs" />
-    <Compile Include="Network\RestfulServer\Alias\AliasInitialize.cs" />
-    <Compile Include="Network\RestfulServer\Alias\AliasManager.cs" />
-    <Compile Include="Network\RestfulServer\Alias\IAliasExecutor.cs" />
-    <Compile Include="Network\RestFulServer.cs" />
-    <Compile Include="Network\RestfulServer\Handler\RestFulServerHandler.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\FriendsListResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ShortProfileRequest.cs" />
@@ -332,7 +325,6 @@
     <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Packets\TestPacket.cs" />
     <Compile Include="Network\Pipeline\ChannelInitializer.cs" />
-    <Compile Include="Network\Pipeline\RestFulServerChannelInitializer.cs" />
     <Compile Include="Network\Protocol\AfterLoginProtocol.cs" />
     <Compile Include="Network\Protocol\HandShakeProtocol.cs" />
     <Compile Include="Network\Protocol\PacChatProtocol.cs" />

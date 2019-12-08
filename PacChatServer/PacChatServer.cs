@@ -10,7 +10,6 @@ using PacChatServer.IO.Storage;
 using PacChatServer.MessageCore.Sticker;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
-using PacChatServer.Network.RestfulServer.Alias;
 using PacChatServer.Utils;
 using PacChatServer.Utils.ThreadUtils;
 using System;
@@ -29,7 +28,6 @@ namespace PacChatServer
         public int Port { get; set; }
 
         public ChatServer Network { get; private set; }
-        public RestFulServer HttpServer { get; private set; }
 
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
@@ -47,7 +45,6 @@ namespace PacChatServer
             Mongo.StartService();
             ProfileCache.StartService();
             CommandManager.StartService();
-            AliasManager.StartService();
 
             RegisterCommand();
 
@@ -58,13 +55,10 @@ namespace PacChatServer
 
         private void StartNetworkService()
         {
-            CountdownLatch latch = new CountdownLatch(2);
+            CountdownLatch latch = new CountdownLatch(1);
 
             this.Network = new ChatServer(this, protocolProvider, latch);
             _ = this.Network.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.SERVER_PORT));
-
-            this.HttpServer = new RestFulServer(this, protocolProvider, latch);
-            _ = this.HttpServer.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.FILESERVER_PORT));
 
             latch.Wait();
 
