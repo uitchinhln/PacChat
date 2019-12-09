@@ -10,6 +10,7 @@ using PacChatServer.IO.Storage;
 using PacChatServer.MessageCore.Sticker;
 using PacChatServer.Network;
 using PacChatServer.Network.Protocol;
+using PacChatServer.Network.RestAPI;
 using PacChatServer.Utils;
 using PacChatServer.Utils.ThreadUtils;
 using System;
@@ -28,6 +29,7 @@ namespace PacChatServer
         public int Port { get; set; }
 
         public ChatServer Network { get; private set; }
+        public RestServer RestAPI { get; private set; }
 
         public ILog Logger { get; } = LogManager.GetLogger("Main");
 
@@ -59,6 +61,9 @@ namespace PacChatServer
 
             this.Network = new ChatServer(this, protocolProvider, latch);
             _ = this.Network.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.SERVER_PORT));
+
+            RestAPI = new RestServer();
+            RestAPI.Start(ServerSettings.SERVER_HOST.ToString(), ServerSettings.FILESERVER_PORT, latch);
 
             latch.Wait();
 

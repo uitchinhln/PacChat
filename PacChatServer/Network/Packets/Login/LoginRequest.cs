@@ -33,6 +33,7 @@ namespace PacChatServer.Network.Packets.Login
             ChatSession chatSession = session as ChatSession;
 
             LoginResult respone = new LoginResult();
+            respone.Token = "~";
 
             Guid id = ProfileCache.Instance.ParseEmailToGuid(Username);
 
@@ -64,6 +65,7 @@ namespace PacChatServer.Network.Packets.Login
             }
 
             respone.StatusCode = ResponeCode.OK;
+            respone.Token = chatSession.SessionID.ToString();
             chatSession.Send(respone);
             chatSession.FinalizeLogin(profile);
         }

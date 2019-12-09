@@ -25,6 +25,8 @@ namespace PacChatServer.Network
 
         public ChatUser Owner { get; set; }
 
+        public Guid SessionID { get; set; } = Guid.NewGuid();
+
         public ChatSession(PacChatServer server, IChannel channel, ProtocolProvider protocolProvider, IConnectionManager connectionManager) 
             : base(channel, protocolProvider.HandShake)
         {
