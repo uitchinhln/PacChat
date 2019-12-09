@@ -425,7 +425,6 @@
     <Compile Include="Utils\HashStack.cs" />
     <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Utils\NotificationUtils.cs" />
-    <Compile Include="Utils\RestFileUtil.cs" />
     <Compile Include="Utils\ThreadUtils\CountdownLatch.cs" />
   </ItemGroup>
   <ItemGroup>
