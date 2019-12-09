@@ -4,6 +4,7 @@ using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
 using PacChatServer.IO.Message;
+using PacChatServer.MessageCore;
 using PacChatServer.MessageCore.Conversation;
 using PacChatServer.MessageCore.Message;
 using System;
@@ -34,11 +35,11 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         {
             ChatSession chatSession = session as ChatSession;
 
-            AbstractConversation conversation = new ConversationStore().Load(ConversationID);
+            AbstractConversation conversation = ConversationManager.GetConversation(ConversationID);
 
             if (conversation == null) return;
 
-            conversation.SendMessage(Message, ConversationID.ToString(), chatSession);
+            conversation.SendMessage(Message, chatSession);
 
             /*
             if (ChatUserManager.OnlineUsers.TryGetValue(Guid.Parse(ReceiverID), out user))
