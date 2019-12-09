@@ -17,6 +17,7 @@ namespace PacChatServer.Network.RestAPI
             try
             {
                 _webapp = WebApp.Start<Startup>(String.Format("http://{0}:{1}", ip, port));
+                PacChatServer.GetServer().Logger.Info("Bind success. REST Server is listening on " + ip + ":" + port);
                 latch.Signal();
             } catch (Exception e)
             {
