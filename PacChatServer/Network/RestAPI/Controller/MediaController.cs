@@ -18,7 +18,7 @@ namespace PacChatServer.Network.RestAPI.Controller
         public static String SavePath { get; } = "Uploaded/Media/{0}";
 
         [HttpPost, Route("api/message/media/{conversationID}")]
-        public Dictionary<String, String> ConversationFileUpload(string conversationID)
+        public Dictionary<String, String> ConversationMediaUpload(string conversationID)
         {
             ChatSession session = Verifier.SessionFromToken(Request);
             if (session == null)
@@ -36,10 +36,10 @@ namespace PacChatServer.Network.RestAPI.Controller
             return result;
         }
 
-        [HttpGet, Route("api/message/media/{fileID}/{conversationID}")]
-        public HttpResponseMessage GetConversationFile(string conversationID, string fileID)
+        [HttpGet, Route("api/message/media/{fileID}/{conversationID}/{token}")]
+        public HttpResponseMessage GetConversationMedia(string conversationID, string fileID, string token)
         {
-            ChatSession session = Verifier.SessionFromToken(Request);
+            ChatSession session = Verifier.SessionFromToken(token);
             if (session == null)
                 throw new UnauthorizedAccessException();
 
