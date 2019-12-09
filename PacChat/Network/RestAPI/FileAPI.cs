@@ -55,7 +55,7 @@ namespace PacChat.Network.RestAPI
         }
 
         public static void DownloadAttachment(String conversationID, String fileID, String savePath, 
-            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete)
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
         {
             try
             {
@@ -73,11 +73,12 @@ namespace PacChat.Network.RestAPI
             } catch (Exception e)
             {
                 Console.WriteLine(e);
+                if (errorHandler != null) errorHandler(e);
             }
         }
 
         public static void DownloadMedia(String conversationID, String fileID, String savePath,
-            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete)
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
         {
             try
             {
@@ -96,6 +97,7 @@ namespace PacChat.Network.RestAPI
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                if (errorHandler != null) errorHandler(e);
             }
         }
     }
