@@ -25,6 +25,7 @@ namespace PacChatServer.IO.Storage
         public static readonly string DatabaseName = "PacChat";
         public static readonly string UserCollectionName = "Users";
         public static readonly string RelationCollectionName = "Relations";
+        public static readonly string FileMapName = "FileMap";
 
         private Mongo()
         {

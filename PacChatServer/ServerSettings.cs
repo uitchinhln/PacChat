@@ -13,6 +13,7 @@ namespace PacChatServer
         public static int SERVER_PORT { get; private set; } = 1402;
 
         public static int FILESERVER_PORT { get; private set; } = 1403;
+        public static long MAX_SIZE_UPLOAD { get; private set; } = 1024 * 1024 * 25;
 
         public static String MYSQL_HOST { get; private set; } = "localhost";
         public static uint MYSQL_PORT { get; private set; } = 3306;

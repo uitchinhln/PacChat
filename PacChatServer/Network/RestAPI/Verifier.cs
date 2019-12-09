@@ -45,5 +45,37 @@ namespace PacChatServer.Network.RestAPI
             }
             return false;
         }
+
+        public static ChatSession SessionFromToken(HttpRequestMessage requestMessage)
+        {
+            requestMessage.Headers.TryGetValues(HeaderToken, out var values);
+
+            if (values == null)
+            {
+                return null;
+            }
+
+            String token = values.FirstOrDefault();
+
+            if (token == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                Guid id = Guid.Parse(token);
+                ChatSession session;
+                if ((session = PacChatServer.GetServer().SessionRegistry.Get(id)) != null && session.IsActive())
+                {
+                    return session;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return null;
+        } 
     }
 }

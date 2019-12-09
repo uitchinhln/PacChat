@@ -11,7 +11,12 @@ namespace PacChatServer.Network.RestAPI
     {
         public CustomContentTypeProvider()
         {
-            Mappings.Add(".json", "application/json");
+            try
+            {
+                Mappings.Add(".json", "application/json");
+            }
+            catch (Exception)
+            { }
         }
     }
 }

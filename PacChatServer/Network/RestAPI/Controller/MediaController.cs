@@ -13,11 +13,11 @@ using System.Web.Http;
 
 namespace PacChatServer.Network.RestAPI.Controller
 {
-    public class AttachmentController : ApiController
+    public class MediaController : ApiController
     {
-        public static String SavePath { get; } = "Uploaded/Attachment/{0}";
+        public static String SavePath { get; } = "Uploaded/Media/{0}";
 
-        [HttpPost, Route("api/message/attachment/{conversationID}")]
+        [HttpPost, Route("api/message/media/{conversationID}")]
         public Dictionary<String, String> ConversationFileUpload(string conversationID)
         {
             ChatSession session = Verifier.SessionFromToken(Request);
@@ -36,7 +36,7 @@ namespace PacChatServer.Network.RestAPI.Controller
             return result;
         }
 
-        [HttpGet, Route("api/message/attachment/{fileID}/{conversationID}")]
+        [HttpGet, Route("api/message/media/{fileID}/{conversationID}")]
         public HttpResponseMessage GetConversationFile(string conversationID, string fileID)
         {
             ChatSession session = Verifier.SessionFromToken(Request);
@@ -57,7 +57,7 @@ namespace PacChatServer.Network.RestAPI.Controller
 
             new CustomContentTypeProvider().TryGetContentType(fileName, out var contentType);
 
-            if (contentType == null || contentType.Length <1)
+            if (contentType == null || contentType.Length < 1)
             {
                 contentType = "application/octet-stream";
             }
@@ -66,10 +66,6 @@ namespace PacChatServer.Network.RestAPI.Controller
             {
                 HttpResponseMessage partialResponse = Request.CreateResponse(HttpStatusCode.PartialContent);
                 partialResponse.Content = new ByteRangeStreamContent(stream, Request.Headers.Range, contentType);
-                partialResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
                 return partialResponse;
             }
             else
@@ -77,12 +73,8 @@ namespace PacChatServer.Network.RestAPI.Controller
                 HttpResponseMessage fullResponse = Request.CreateResponse(HttpStatusCode.OK);
                 fullResponse.Content = new StreamContent(stream);
                 fullResponse.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-                fullResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
                 return fullResponse;
             }
-        }      
+        }
     }
 }

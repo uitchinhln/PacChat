@@ -341,6 +341,7 @@
     <Compile Include="IO\Entity\ChatUserStore.cs" />
     <Compile Include="IO\Entity\Property\RelationStore.cs" />
     <Compile Include="IO\Entity\UserProfileStore.cs" />
+    <Compile Include="IO\Message\AttachmentStore.cs" />
     <Compile Include="IO\Message\ConversationStore.cs" />
     <Compile Include="IO\Message\MessageStore.cs" />
     <Compile Include="IO\Message\StickerLoader.cs" />
@@ -407,11 +408,12 @@
     <Compile Include="Network\Protocol\ProtocolProvider.cs" />
     <Compile Include="Network\ResponeCode.cs" />
     <Compile Include="Network\RestAPI\Controller\AttachmentController.cs" />
-    <Compile Include="Network\RestAPI\Controller\ImageController.cs" />
+    <Compile Include="Network\RestAPI\Controller\MediaController.cs" />
+    <Compile Include="Network\RestAPI\Controller\ProfileController.cs" />
     <Compile Include="Network\RestAPI\Controller\StickerController.cs" />
-    <Compile Include="Network\RestAPI\Controller\VideoController.cs" />
     <Compile Include="Network\RestAPI\CustomContentTypeProvider.cs" />
     <Compile Include="Network\RestAPI\ExceptionHandling.cs" />
+    <Compile Include="Network\RestAPI\Handler\FileHandler.cs" />
     <Compile Include="Network\RestAPI\RestServer.cs" />
     <Compile Include="Network\RestAPI\Startup.cs" />
     <Compile Include="Network\RestAPI\Verifier.cs" />
@@ -423,6 +425,7 @@
     <Compile Include="Utils\HashStack.cs" />
     <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Utils\NotificationUtils.cs" />
+    <Compile Include="Utils\RestFileUtil.cs" />
     <Compile Include="Utils\ThreadUtils\CountdownLatch.cs" />
   </ItemGroup>
   <ItemGroup>
