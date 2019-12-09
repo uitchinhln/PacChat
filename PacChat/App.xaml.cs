@@ -21,9 +21,9 @@ namespace PacChat
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //LoginWindow login = new LoginWindow();
+            LoginWindow main = new LoginWindow();
             //login.Show();
-            MainWindow main = new MainWindow();
+            //MainWindow main = new MainWindow();
             //TestWindows main = new TestWindows();
             main.Show();
 

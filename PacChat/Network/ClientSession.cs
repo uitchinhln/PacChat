@@ -17,6 +17,8 @@ namespace PacChat.Network
 
         public String SessionID { get; private set; } = "~";
 
+        public static string HeaderToken { get; private set; } = "ChatVerifier";
+
         public ClientSession(IChannel channel, ProtocolProvider protocolProvider) : base(channel, protocolProvider.Test)
         {
             this.protocolProvider = protocolProvider;

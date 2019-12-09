@@ -122,6 +122,7 @@
     <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Protocol\LoggedInProtocol.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
+    <Compile Include="Network\RestAPI\StickerAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
