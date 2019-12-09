@@ -6,13 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:animator="clr-namespace:Animator;assembly=Animator"
         xmlns:local="clr-namespace:PacChat"
+        xmlns:cp ="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
         xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
-        mc:Ignorable = "d" Background="Transparent" d:DesignHeight="229" d:DesignWidth="378">
+        mc:Ignorable = "d" Background="Transparent" >
 
-    <Grid x:Name="grid">
 
-        
-
-    </Grid>
-
+    <cp:ColourPicker/>
 </Window> 

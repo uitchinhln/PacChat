@@ -247,7 +247,8 @@ namespace PacChat
                 return;
             }
             ChatBorder.Background = null;
-            ChatBorder.Background = new SolidColorBrush(Colors.White);
+            Random rd = new Random();
+            ChatBorder.Background = new SolidColorBrush(Color.FromRgb((byte)rd.Next(0, 255),(byte)rd.Next(0, 255), (byte)rd.Next(0, 255)));
             _button1Clicked = false;
         }
 

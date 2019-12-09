@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
+             xmlns:cc ="clr-namespace:PacChat.Resources.CustomControls"
              xmlns:elms="clr-namespace:PacChat.UIElements"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -43,7 +44,7 @@
 
                 <!-- Password tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <StackPanel Background="#FF3A3576">
+                    <StackPanel >
                         <Label Content="Privacy" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                         <StackPanel>
                             <Label Content="Modify password" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center" FontSize="16" FontFamily="Segoe UI Light"></Label>
@@ -83,12 +84,24 @@
                                             <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
                                         </Border>
 
+                                        <Border Width="96" Height="131" Margin="10" CornerRadius="10" Background="#FF32ACFD">
+                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
+                                                <materialDesign:PopupBox.ToggleContent>
+
+                                                    <Label Content="RGB" FontSize="20" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                </materialDesign:PopupBox.ToggleContent>
+                                                <Border Width="500" Height="500">
+                                                </Border>
+                                            </materialDesign:PopupBox>
+                                        </Border>
+
+
                                     </StackPanel>
 
                                 </Border>
 
                                 <Border Height="10" Background="#4BE1C3" Margin="10"/>
-                                
+
                                 <!-- CHAT BACKGOUND -->
                                 <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
 
