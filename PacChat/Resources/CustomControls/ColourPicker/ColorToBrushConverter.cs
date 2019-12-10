@@ -11,7 +11,7 @@ namespace PacChat.Resources.CustomControls.ColourPicker
         {
             if (value is Color color)
             {
-                return new SolidColorBrush(color);
+                return new SolidColorBrush(color); //color => brush
             }
             return Binding.DoNothing;
         }

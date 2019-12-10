@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:PacChat"
              xmlns:cc ="clr-namespace:PacChat.Resources.CustomControls"
              xmlns:elms="clr-namespace:PacChat.UIElements"
+             xmlns:cp ="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -85,12 +86,13 @@
                                         </Border>
 
                                         <Border Width="96" Height="131" Margin="10" CornerRadius="10" Background="#FF32ACFD">
-                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
+                                            <materialDesign:PopupBox Padding="0" materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
                                                 <materialDesign:PopupBox.ToggleContent>
-
+                                                    
                                                     <Label Content="RGB" FontSize="20" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
                                                 </materialDesign:PopupBox.ToggleContent>
-                                                <Border Width="500" Height="500">
+                                                <Border Width="377" Height="269" Margin="0" Padding="0">
+                                                    <cp:ColourPicker/>
                                                 </Border>
                                             </materialDesign:PopupBox>
                                         </Border>

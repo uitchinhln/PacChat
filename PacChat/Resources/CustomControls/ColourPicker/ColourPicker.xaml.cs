@@ -27,27 +27,6 @@ namespace PacChat.Resources.CustomControls.ColourPicker
             InitializeComponent();
         }
 
-        private Color? _selectedColor;
-        public Color? SelectedColor
-        {
-            get => _selectedColor;
-            set
-            {
-                if (_selectedColor != value)
-                {
-                    _selectedColor = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
     }
 }
 

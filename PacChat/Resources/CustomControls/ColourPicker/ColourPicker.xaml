@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
              mc:Ignorable="d" >
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,28 +16,17 @@
         <StackPanel Orientation="Vertical" Width="377">
             <StackPanel Orientation="Horizontal">
 
-                <materialDesign:ColorPicker x:Name="ColorPicker" Height="217" Width="250" Margin="5" Color="{Binding SelectedColor, Delay=25}" />
+                <materialDesign:ColorPicker x:Name="ColorPicker" Height="259" Width="250" Margin="5" Color="{Binding SelectedColor, Delay=25}" />
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="117">
-                    <Border x:Name="borColorPreview" Height="58" Margin="10">
+                    <Border x:Name="borColorPreview" Height="70" Margin="10">
                         <Rectangle Fill="{Binding Color, ElementName=ColorPicker, Converter={StaticResource ColorToBrushConverter}}" />
                     </Border>
 
-                    <TextBox Width="105" Foreground="White" BorderBrush="Red" FontSize="20" Margin="5 0 5 0" Text="{Binding Color.R, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}">
-                        
-                    </TextBox>
-                    <TextBox Width="105" Foreground="White" BorderBrush="Green" FontSize="20" Margin="5 0 5 0" Text="{Binding Color.G, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}">
-                        
-                    </TextBox>
-                    <TextBox Width="105" Foreground="White" BorderBrush="Blue" FontSize="20" Margin="5 0 5 0" Text="{Binding Color.B, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}">
-                        
-                    </TextBox>
-                    
-                    
-                    <TextBox Width="105" Foreground="White" BorderBrush="White" FontSize="20" Margin="5 0 5 0" Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Width="105" Foreground="White" BorderBrush="White" FontSize="20" Margin="5 0 5 5" Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button Content="Accept" Margin="10"/>
-                    <Button Content="Cancel" Margin="10"/>
+                    <Button Content="Accept" Margin="10" Style="{StaticResource MaterialDesignRaisedButton}"/>
+                    <Button Content="Cancel" Margin="10" Style="{StaticResource MaterialDesignRaisedButton}"/>
                 </StackPanel>
             </StackPanel>
 

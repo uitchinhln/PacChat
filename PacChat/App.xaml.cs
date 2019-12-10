@@ -23,7 +23,7 @@ namespace PacChat
         {
             LoginWindow main = new LoginWindow();
             //MainWindow main = new MainWindow();
-            // TestWindows main = new TestWindows();
+            //TestWindows main = new TestWindows();
             main.Show();
 
         }
