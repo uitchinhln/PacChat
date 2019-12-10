@@ -46,6 +46,7 @@ namespace PacChat.Network.RestAPI
 
                 string sd = response.Content.ReadAsStringAsync().Result;
 
+                //Dic<FileName, FileID>
                 Dictionary<String, String> result = JsonConvert.DeserializeObject<Dictionary<String, String>>(sd);
                 handler(result);
             } catch (Exception e)

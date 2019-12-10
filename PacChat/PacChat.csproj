@@ -124,6 +124,7 @@
     <Compile Include="Network\Protocol\LoggedInProtocol.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
     <Compile Include="Network\RestAPI\FileAPI.cs" />
+    <Compile Include="Network\RestAPI\ProfileAPI.cs" />
     <Compile Include="Network\RestAPI\StickerAPI.cs" />
     <Compile Include="Network\RestAPI\StreamAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">

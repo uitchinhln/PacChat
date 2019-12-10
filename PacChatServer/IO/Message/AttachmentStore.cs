@@ -17,7 +17,8 @@ namespace PacChatServer.IO.Message
             FileMap map = new FileMap(hash, fileName);
             Mongo.Instance.Set<FileMap>(Mongo.FileMapName, collection =>
             {
-                collection.InsertOneAsync(map);
+                var condition = Builders<FileMap>.Filter.Eq(p => p.Hash, hash);
+                collection.ReplaceOne(condition, map, new UpdateOptions() { IsUpsert = true });
             });
         }
 
