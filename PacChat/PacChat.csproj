@@ -150,6 +150,12 @@
     <Compile Include="Resources\CustomControls\ImageContainner.xaml.cs">
       <DependentUpon>ImageContainner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Media\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Media\ThumbnailButton.xaml.cs">
+      <DependentUpon>ThumbnailButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml.cs">
       <DependentUpon>FriendRequestAcceptedNoti.xaml</DependentUpon>
     </Compile>
@@ -314,6 +320,14 @@
     <Page Include="Resources\CustomControls\ImageContainner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\Media\MediaPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\Media\ThumbnailButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml">
       <SubType>Designer</SubType>
