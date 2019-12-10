@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.Cache.Core;
 using PacChatServer.Entity;
+using PacChatServer.IO.Entity;
 using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
 using PacChatServer.Network;
@@ -28,6 +29,9 @@ namespace PacChatServer.MessageCore.Conversation
 
         [BsonId]
         public Guid ID { get; set; }
+
+        [BsonElement("ConversationName")]
+        public string ConversationName { get; set; }
 
         [BsonElement("LastActive")]
         public long LastActive { get; set; }
@@ -76,6 +80,19 @@ namespace PacChatServer.MessageCore.Conversation
                         user.Conversations.Add(ID, LastActive);
                     }
                 }
+            }
+        }
+
+        public void UpdateLastActive()
+        {
+            LastActive = 0;
+
+            foreach (var member in Members)
+            {
+                if (ChatUserManager.OnlineUsers.ContainsKey(member))
+                    break;
+
+                LastActive = Math.Min(LastActive, new ChatUserStore().Load(member).LastLogoff.Minute);
             }
         }
     }

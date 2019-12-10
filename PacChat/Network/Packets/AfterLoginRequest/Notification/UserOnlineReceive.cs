@@ -28,6 +28,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
 
         public void Handle(ISession session)
         {
+            PacChat.Utils.Packets.SendPacket<GetFriendIDs>();
+            return;
+
             var app = MainWindow.chatApplication;
             var friend = app.model.UserControls[UserID] as UserMessage;
 

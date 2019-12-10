@@ -23,6 +23,7 @@ namespace PacChat.Utils
     {
         public List<string> Members { get; set; } = new List<string>();
         public int LastMessID { get; set; }
+        public string ConversationName { get; set; }
         public List<BubbleInfo> Bubbles = new List<BubbleInfo>();
     }
 }

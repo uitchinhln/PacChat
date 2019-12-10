@@ -79,8 +79,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     Id = id,
                     Name = FirstName + " " + LastName,
                     IsOnline = IsOnline,
-                    //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
-                    IncomingMsg = ""
+                    IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
                 }, Relationship == 2));
 
             if (Relationship == 2)
