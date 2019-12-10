@@ -40,7 +40,7 @@ namespace PacChat
             Instance = this;
             _button1Clicked = false;
             spTabStickerContainner.Children.Add(new TabStickerContainner(this));
-
+            Transitioner.SelectedIndex = 0;
         }
 
         // Chat Input KeyDown if and only if message is text message
@@ -136,6 +136,10 @@ namespace PacChat
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, true));
         }
 
+        public void SetActive(bool enabled)
+        {
+            Transitioner.SelectedIndex = enabled ? 1 : 0;
+        }
 
         public void ClearChatPage()
         {
@@ -146,6 +150,7 @@ namespace PacChat
         public void LoadChatPage(string conversationID, string userID = "")
         {
             Console.WriteLine("Load chat page on id: " + conversationID);
+            SetActive(true);
 
             var app = MainWindow.chatApplication;
 

@@ -14,7 +14,7 @@
             >
 
 
-        <Grid>
+        <DockPanel>
             <!--AVATAR pic -->
             <Border x:Name="AvaBorder"
                     VerticalAlignment="Bottom"
@@ -27,7 +27,7 @@
                     
                     >
                 <Border.Background>
-                    <ImageBrush x:Name="Ava" ImageSource="D:\hinh.jpg"/>
+                    <ImageBrush x:Name="Ava" />
                 </Border.Background>
 
 
@@ -40,7 +40,7 @@
                     <!-- Nick name label -->
                 </StackPanel>
             </StackPanel>
-        </Grid>
+        </DockPanel>
 
     </Border>
 
