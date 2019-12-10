@@ -19,7 +19,7 @@ namespace PacChat.Network.RestAPI
         private static readonly String UploadAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetSelfAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetUserAvatarURL = "http://{0}:1403/api/profile/avatar/{1}";
-        private static readonly String AvatarSavePath = "";
+        private static readonly String AvatarSavePath = Path.Combine(Path.GetTempPath(), "PacChat/Profile/Avatar/");
 
         public static async void AvatarUpload(String filePath, ResultHandler handler, ErrorHandler errorHandler)
         {
