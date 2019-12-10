@@ -132,6 +132,8 @@
     <Compile Include="Resources\CustomControls\BubbleChat.xaml.cs">
       <DependentUpon>BubbleChat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ColourPicker\BrushToHexConverter.cs" />
+    <Compile Include="Resources\CustomControls\ColourPicker\BrushToRGBConverter.cs" />
     <Compile Include="Resources\CustomControls\ColourPicker\ColorToBrushConverter.cs" />
     <Compile Include="Resources\CustomControls\ColourPicker\ColourPicker.xaml.cs">
       <DependentUpon>ColourPicker.xaml</DependentUpon>

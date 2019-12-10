@@ -19,13 +19,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace PacChat.Resources.CustomControls.ColourPicker
 {
-    public enum ColorScheme
-    {
-        Primary,
-        Secondary,
-        PrimaryForeground,
-        SecondaryForeground
-    }
+
     public partial class ColourPicker : UserControl
     {
         public ColourPicker()
@@ -43,42 +37,17 @@ namespace PacChat.Resources.CustomControls.ColourPicker
                 {
                     _selectedColor = value;
                     OnPropertyChanged();
-
-                    if (value is Color color)
-                    {
-                        //ChangeCustomColor(color);
-                    }
                 }
             }
         }
 
-        private ColorScheme _activeScheme;
-        public ColorScheme ActiveScheme
-        {
-            get => _activeScheme;
-            set
-            {
-                if (_activeScheme != value)
-                {
-                    _activeScheme = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-
-        private void showColor(Color color)
-        {
-            //borColorPreview.Background = new SolidColorBrush(color);
-            Console.WriteLine("funct");
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }
 
