@@ -347,6 +347,7 @@
     <Compile Include="IO\Message\StickerLoader.cs" />
     <Compile Include="IO\Storage\Mongo.cs" />
     <Compile Include="IO\Storage\MySQL.cs" />
+    <Compile Include="MessageCore\ConversationManager.cs" />
     <Compile Include="MessageCore\Conversation\AbstractConversation.cs" />
     <Compile Include="MessageCore\Conversation\ConversationProperty\Role.cs" />
     <Compile Include="MessageCore\IConversation.cs" />

@@ -59,6 +59,12 @@ namespace PacChat.Network
             }
         }
 
+        public IPAddress GetIPAddress()
+        {
+            if (Channel == null) return null;
+            return (Channel.RemoteAddress as IPEndPoint).Address;
+        }
+
         public bool IsConnected()
         {
             return Channel != null && Channel.Active;

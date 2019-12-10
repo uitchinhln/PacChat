@@ -61,7 +61,12 @@ namespace PacChatServer.Network.RestAPI
             {
                 return null;
             }
+            
+            return SessionFromToken(token);
+        } 
 
+        public static ChatSession SessionFromToken(String token)
+        {
             try
             {
                 Guid id = Guid.Parse(token);

@@ -54,6 +54,10 @@ namespace PacChatServer.Network.RestAPI.Controller
                     AttachmentStore.Map(id, fileName);
 
                     Directory.CreateDirectory(AvatarPath);
+                    if (File.Exists(Path.Combine(AvatarPath, id.ToString())))
+                    {
+                        File.Delete(Path.Combine(AvatarPath, id.ToString()));
+                    }
                     File.Move(fileData.LocalFileName, Path.Combine(AvatarPath, id.ToString()));
                 }
             }).Wait();

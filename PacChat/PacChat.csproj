@@ -80,6 +80,7 @@
     <Compile Include="MessageCore\Message\StickerMessage.cs" />
     <Compile Include="MessageCore\Message\TextMessage.cs" />
     <Compile Include="MessageCore\Sticker\Sticker.cs" />
+    <Compile Include="MessageCore\Sticker\StickerCategory.cs" />
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetConversation.cs" />
@@ -122,7 +123,10 @@
     <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Protocol\LoggedInProtocol.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
+    <Compile Include="Network\RestAPI\FileAPI.cs" />
+    <Compile Include="Network\RestAPI\ProfileAPI.cs" />
     <Compile Include="Network\RestAPI\StickerAPI.cs" />
+    <Compile Include="Network\RestAPI\StreamAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
