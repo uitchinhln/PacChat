@@ -166,6 +166,7 @@ namespace PacChat
         public void ClearChatPage()
         {
             _previousBubbleChat = null;
+            _headBubbleChat = null;
             spMessagesContainer.Children.Clear();
         }
 
