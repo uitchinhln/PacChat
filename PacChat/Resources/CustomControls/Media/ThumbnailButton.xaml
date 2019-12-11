@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Media"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="100" Width="90">
-    
-        <Image x:Name="ImgThumbnail" 
+             d:DesignHeight="90" d:DesignWidth="100" Cursor="Hand" >
+
+
+    <Image x:Name="ImgThumbnail" 
+           MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
+            MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
             MinWidth="90" MinHeight="90" Stretch="UniformToFill"
             RenderOptions.BitmapScalingMode="HighQuality" />
-
 </UserControl>

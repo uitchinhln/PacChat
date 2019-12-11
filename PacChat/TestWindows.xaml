@@ -9,8 +9,11 @@
         xmlns:cp ="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
         xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
         xmlns:ccMedia="clr-namespace:PacChat.Resources.CustomControls.Media"
-        mc:Ignorable = "d" Background="Transparent" Height="727" Width="869" >
+        mc:Ignorable = "d" Background="Transparent" Height="957" Width="879" >
 
+    <StackPanel>
+        <ccMedia:MediaPlayer Width="Auto"/>
 
-    <ccMedia:MediaPlayer Width="Auto"/>
+    </StackPanel>
+
 </Window> 

@@ -34,6 +34,20 @@ namespace PacChat.Resources.CustomControls.Media
 
             });
             task.Start();
+
+            for (int i = 0; i < 100; i++)
+            {
+                Gallery.Children.Add(new ThumbnailButton() {
+                    ThumbnailUrl = "https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg",
+                    Margin = new Thickness()
+                    {
+                        Left = 5,
+                        Right = 5
+                    }
+                });
+            }
         }
+
+
     }
 }

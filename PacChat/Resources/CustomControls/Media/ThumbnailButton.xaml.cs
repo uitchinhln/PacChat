@@ -27,38 +27,7 @@ namespace PacChat.Resources.CustomControls.Media
             InitializeComponent();
 
         }
-
-        #region Add Click Event
-        static ThumbnailButton()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ThumbnailButton), new FrameworkPropertyMetadata(typeof(ThumbnailButton)));
-
-        }
-        public static RoutedEvent ClickEvent =
-        EventManager.RegisterRoutedEvent("Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ThumbnailButton));
-
-        public event RoutedEventHandler Click
-        {
-            add { AddHandler(ClickEvent, value); }
-            remove { RemoveHandler(ClickEvent, value); }
-        }
-
-        protected virtual void OnClick()
-        {
-            RoutedEventArgs args = new RoutedEventArgs(ClickEvent, this);
-
-            RaiseEvent(args);
-
-        }
-
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonUp(e);
-
-            OnClick();
-        }
-        #endregion
-
+        
         public String FileName { get; private set; }
 
         public String StreamURL { get; private set; }
@@ -77,9 +46,14 @@ namespace PacChat.Resources.CustomControls.Media
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
-                WebClient wc = new WebClient();
-                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(ThumbnailUrl)));
-                ImgThumbnail.Source = bitmap;
+                String url = ThumbnailUrl;
+                Task task = new Task(() =>
+                {
+                    WebClient wc = new WebClient();
+                    BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                    Application.Current.Dispatcher.Invoke(() => ImgThumbnail.Source = bitmap);
+                });
+                task.Start();
             }
 
             base.OnPropertyChanged(e);

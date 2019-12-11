@@ -24,10 +24,7 @@
             </Button>
         </Grid>
         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,0">
-            <StackPanel x:Name="Galary" Orientation="Horizontal">
-                <Border >
-                    <local:ThumbnailButton ThumbnailUrl="https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg" MinWidth="100" MinHeight="90"/>
-                </Border>
+            <StackPanel x:Name="Gallery" Orientation="Horizontal" MaxHeight="90">
             </StackPanel>
         </ScrollViewer>
     </StackPanel>
