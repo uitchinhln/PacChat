@@ -15,7 +15,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
     {
         public string ConversationID { get; set; }
         public string SenderID { get; set; }
-        public TextMessage Message { get; set; }
+        public int PreviewCode { get; set; }
+        public AbstractMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -25,7 +26,18 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         {
             ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
             ByteBufUtils.WriteUTF8(byteBuf, SenderID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message.Message);
+            byteBuf.WriteInt(PreviewCode);
+
+            if (PreviewCode == 4)
+            {
+                ByteBufUtils.WriteUTF8(byteBuf, (Message as TextMessage).Message);
+            }
+
+            if (PreviewCode == 3)
+            {
+                byteBuf.WriteInt((Message as StickerMessage).StickerID);
+                byteBuf.WriteInt((Message as StickerMessage).CategoryID);
+            }
 
             return byteBuf;
         }

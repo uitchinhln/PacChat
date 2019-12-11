@@ -7,12 +7,28 @@ using PacChat.MessageCore.Message;
 
 namespace PacChat.Utils
 {
+    //{
+    //    {0, "Hidden message" },
+    //    {1, "Attachment" },
+    //    {2, "You got an image message" },
+    //    {3, "You got a sticker message" },
+    //    {5, "Video"}
+    public enum MessageType
+    {
+        Hidden = 0,
+        Attachment = 1,
+        Image = 2,
+        StickerMsg = 3,
+        Text = 4,
+        Video = 5
+    }
+
     public struct BubbleInfo
     {
-        public string message;
+        public AbstractMessage message;
         public bool onLeft;
 
-        public BubbleInfo(string msg, bool lft)
+        public BubbleInfo(AbstractMessage msg, bool lft)
         {
             message = msg;
             onLeft = lft;

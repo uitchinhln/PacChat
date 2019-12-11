@@ -66,7 +66,19 @@ namespace PacChatServer.MessageCore.Conversation
 
                     SendMessageResponse packet = new SendMessageResponse();
                     packet.ConversationID = this.ID.ToString();
-                    packet.Message = message as TextMessage;
+
+                    if (message is TextMessage)
+                    {
+                        packet.PreviewCode = 4;
+                        packet.Message = message as TextMessage;
+                    }
+
+                    if (message is StickerMessage)
+                    {
+                        packet.PreviewCode = 3;
+                        packet.Message = message as StickerMessage;
+                    }
+
                     packet.SenderID = chatSession.Owner.ID.ToString();
                     user.Send(packet); //Add message packet here
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PacChat.MessageCore.Message
 {
-    public abstract class AbstractMessage : IMessage, IPacket
+    public abstract class AbstractMessage : IMessage
     {
         public string ID { get; set; }
 
@@ -30,10 +30,6 @@ namespace PacChat.MessageCore.Message
 
         // IDs of user who reacted and react id;
         public Dictionary<string, int> Reacts { get; private set; } = new Dictionary<string, int>();
-        public abstract void Decode(IByteBuffer buffer);
-        public abstract IByteBuffer Encode(IByteBuffer byteBuf);
-        public abstract void Handle(ISession session);
-        public abstract void Reply();
-        public abstract void SendTo(string receiverID);
+
     }
 }

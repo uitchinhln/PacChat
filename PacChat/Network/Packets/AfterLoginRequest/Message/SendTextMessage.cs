@@ -15,7 +15,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
     public class SendTextMessage : IPacket
     {
         public string ConversationID { get; set; }
-        public TextMessage Message { get; set; }
+        public AbstractMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -25,7 +25,19 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
             ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message.Message);
+
+            if (Message is TextMessage)
+            {
+                byteBuf.WriteInt(4);
+                ByteBufUtils.WriteUTF8(byteBuf, (Message as TextMessage).Message);
+            }
+
+            if (Message is StickerMessage)
+            {
+                byteBuf.WriteInt(3);
+                byteBuf.WriteInt((Message as StickerMessage).Sticker.ID);
+                byteBuf.WriteInt((Message as StickerMessage).Sticker.CategoryID);
+            }
 
             return byteBuf;
         }
