@@ -59,13 +59,20 @@ namespace PacChat
             }
         }
 
-        public void SendMessage(TextMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
+        public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
             if (reversed) _headBubbleChat = null;
             else _previousBubbleChat = null;
 
             Bubble b = new Bubble();
-            b.Messages = msg.Message;
+            
+            if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
+                b.Messages = (msg as TextMessage).Message;
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
+                b.Messages = (msg as AttachmentMessage).FileName;
+            b.Type = BubbleTypeParser.Parse(msg);
+            b.ControlUpdate();
+
             b.SetBG(Color.FromRgb(56, 56, 56));
             b.SetTextColor(Colors.White);
             b.SetDirect(false);// true = left false = right
@@ -84,16 +91,16 @@ namespace PacChat
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, false));
-            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, false));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
+            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, false));
 
-            SendTextMessage packet = new SendTextMessage();
+            SendMessage packet = new SendMessage();
             packet.ConversationID = app.model.currentSelectedConversation;
             packet.Message = msg;
             _ = ChatConnection.Instance.Send(packet);
         }
 
-        public void SendLeftMessages(TextMessage msg, bool isSimulating = false, bool reversed = false)
+        public void SendLeftMessages(AbstractMessage msg, bool isSimulating = false, bool reversed = false)
         {
             if (reversed)
             {
@@ -113,7 +120,14 @@ namespace PacChat
             }
 
             Bubble b = new Bubble();
-            b.Messages = msg.Message;
+
+            if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
+                b.Messages = (msg as TextMessage).Message;
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
+                b.Messages = (msg as AttachmentMessage).FileName;
+            b.Type = BubbleTypeParser.Parse(msg);
+            b.ControlUpdate();
+
             b.SetSeen(false);
             b.SetBG(Color.FromRgb(246, 246, 246));
             b.SetDirect(true); // true = left false = right
@@ -132,8 +146,8 @@ namespace PacChat
             if (isSimulating) return;
 
             var app = MainWindow.chatApplication;
-            app.model.CurrentUserMessages.Add(new BubbleInfo(msg.Message, true));
-            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg.Message, true));
+            app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
+            app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, true));
         }
 
         public void SetActive(bool enabled)
@@ -169,16 +183,6 @@ namespace PacChat
             _ = ChatConnection.Instance.Send(convPacket);
 
             return;
-
-            ConversationBubble msgList = app.model.Conversations[conversationID];
-            for (int i = 0; i < msgList.Bubbles.Count; ++i)
-            {
-                var bubbleInfo = msgList.Bubbles[i];
-                if (bubbleInfo.onLeft)
-                    SendLeftMessages(new TextMessage() { Message = bubbleInfo.message }, true);
-                else
-                    SendMessage(new TextMessage() { Message = bubbleInfo.message }, true);
-            }
         }
 
         public void LoadMessages(string conversationID)

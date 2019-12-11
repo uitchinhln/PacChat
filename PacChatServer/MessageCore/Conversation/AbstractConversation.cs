@@ -45,7 +45,7 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
 
-        public void SendMessage(IMessage message, ChatSession chatSession)
+        public void SendMessage(AbstractMessage message, ChatSession chatSession)
         {
             ChatUser user;
             Guid messageID = Guid.NewGuid();
@@ -70,7 +70,7 @@ namespace PacChatServer.MessageCore.Conversation
 
                     SendMessageResponse packet = new SendMessageResponse();
                     packet.ConversationID = this.ID.ToString();
-                    packet.Message = message as TextMessage;
+                    packet.Message = message;
                     packet.SenderID = chatSession.Owner.ID.ToString();
                     user.Send(packet); //Add message packet here
 

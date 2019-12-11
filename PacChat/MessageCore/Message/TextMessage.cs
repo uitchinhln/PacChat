@@ -13,34 +13,21 @@ namespace PacChat.MessageCore.Message
     {
         public string Message { get; set; }
 
-        public override void Decode(IByteBuffer buffer)
+        public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            Message = ByteBufUtils.ReadUTF8(buffer);
         }
 
-        public override IByteBuffer Encode(IByteBuffer byteBuf)
+        public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, ReceiverID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message);
-
-            return byteBuf;
+            buffer.WriteInt(GetPreviewCode());
+            ByteBufUtils.WriteUTF8(buffer, Message);
+            return buffer;
         }
 
-        public override void Handle(ISession session)
+        public override int GetPreviewCode()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Reply()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SendTo(string receiverID)
-        {
-            ReceiverID = receiverID;
-
-
+            return 4;
         }
     }
 }

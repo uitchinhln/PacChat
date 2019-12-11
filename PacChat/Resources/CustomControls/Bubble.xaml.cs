@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,15 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class Bubble : UserControl
     {
+        public BubbleType Type { get; set; }
 
         public string Messages
         {
             get { return textBlock.Text.ToString(); }
-            set { textBlock.Text = value.ToString(); }
+            set 
+            {
+                textBlock.Text = value.ToString(); 
+            }
         }
 
         public double MessagesFontSize
@@ -37,6 +42,7 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             
+            AttachmentLink.Visibility = Visibility.Hidden;
         }
 
         public void SetText(string s)
@@ -44,7 +50,15 @@ namespace PacChat.Resources.CustomControls
             textBlock.Text = s;
         }
 
-
+        public void ControlUpdate()
+        {
+            if (Type == BubbleType.Attachment)
+            {
+                textBlock.FontWeight = FontWeights.Bold;
+                textBlock.TextDecorations = TextDecorations.Underline;
+                AttachmentLink.Visibility = Visibility.Visible;
+            }
+        }
 
         public void SetBG(Color x)
         {

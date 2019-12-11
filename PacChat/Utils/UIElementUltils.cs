@@ -7,15 +7,15 @@ using PacChat.MessageCore.Message;
 
 namespace PacChat.Utils
 {
-    public struct BubbleInfo
+    public class BubbleInfo
     {
-        public string message;
-        public bool onLeft;
+        public AbstractMessage Message;
+        public bool OnLeft;
 
-        public BubbleInfo(string msg, bool lft)
+        public BubbleInfo(AbstractMessage msg, bool lft)
         {
-            message = msg;
-            onLeft = lft;
+            Message = msg;
+            OnLeft = lft;
         }
     }
 
@@ -25,5 +25,20 @@ namespace PacChat.Utils
         public int LastMessID { get; set; }
         public string ConversationName { get; set; }
         public List<BubbleInfo> Bubbles = new List<BubbleInfo>();
+    }
+
+    public enum BubbleType
+    {
+        Attachment = 1,
+        Sticker = 3, 
+        Text = 4
+    }
+
+    public class BubbleTypeParser
+    {
+        public static BubbleType Parse(AbstractMessage message)
+        {
+            return (BubbleType)message.GetPreviewCode();
+        }
     }
 }

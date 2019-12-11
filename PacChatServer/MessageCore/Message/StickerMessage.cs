@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using DotNetty.Buffers;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,20 @@ namespace PacChatServer.MessageCore.Message
         public int CategoryID { get; set; }
         [BsonElement("StickerID")]
         public int StickerID { get; set; }
+
+        public override void DecodeFromBuffer(IByteBuffer buffer)
+        {
+            StickerID = buffer.ReadInt();
+            CategoryID = buffer.ReadInt();
+        }
+
+        public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
+        {
+            buffer.WriteInt(GetPreviewCode());
+            buffer.WriteInt(StickerID);
+            buffer.WriteInt(CategoryID);
+            return buffer;
+        }
 
         public override int GetPreviewCode()
         {

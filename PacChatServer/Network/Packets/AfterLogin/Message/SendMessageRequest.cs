@@ -18,12 +18,29 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
     public class SendMessageRequest : IPacket
     {
         public Guid ConversationID { get; set; }
-        public TextMessage Message { get; set; } = new TextMessage();
+        public int PreviewCode { get; set; }
+        public AbstractMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             ConversationID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
-            Message.Message = ByteBufUtils.ReadUTF8(buffer);
+            PreviewCode = buffer.ReadInt();
+
+            switch (PreviewCode)
+            {
+                case 1:
+                    Message = new AttachmentMessage();
+                    (Message as AttachmentMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 3:
+                    Message = new StickerMessage();
+                    (Message as StickerMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 4:
+                    Message = new TextMessage();
+                    (Message as TextMessage).DecodeFromBuffer(buffer);
+                    break;
+            }
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
