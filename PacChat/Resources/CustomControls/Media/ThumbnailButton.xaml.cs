@@ -25,7 +25,6 @@ namespace PacChat.Resources.CustomControls.Media
         public ThumbnailButton()
         {
             InitializeComponent();
-
         }
         
         public String FileName { get; private set; }
@@ -42,6 +41,18 @@ namespace PacChat.Resources.CustomControls.Media
         public static readonly DependencyProperty ThumbnailURLProperty =
             DependencyProperty.Register("ThumbnailUrl", typeof(String), typeof(ThumbnailButton), new PropertyMetadata(String.Empty));
 
+
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(ThumbnailButton), new PropertyMetadata(false));
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
@@ -49,11 +60,37 @@ namespace PacChat.Resources.CustomControls.Media
                 String url = ThumbnailUrl;
                 Task task = new Task(() =>
                 {
-                    WebClient wc = new WebClient();
-                    BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
-                    Application.Current.Dispatcher.Invoke(() => ImgThumbnail.Source = bitmap);
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                        Application.Current.Dispatcher.Invoke(() => {
+                            ImgThumbnail.Source = bitmap;
+                            ImgThumbnail.IsEnabled = true;
+                            Gat.Children.Remove(LoadingAhihi);
+                            });
+                    }
+                    catch (WebException)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 });
                 task.Start();
+            }
+
+            if (e.Property == IsActiveProperty)
+            {
+                if (IsActive)
+                {
+                    this.OpacityMask.Opacity = 1;
+                } else
+                {
+                    this.OpacityMask.Opacity = 0.7;
+                }
             }
 
             base.OnPropertyChanged(e);

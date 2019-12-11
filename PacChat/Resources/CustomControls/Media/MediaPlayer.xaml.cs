@@ -29,16 +29,18 @@ namespace PacChat.Resources.CustomControls.Media
             Task task = new Task(() =>
             {
                 WebClient wc = new WebClient();
-                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData("https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg")));
+                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData("https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg")));
                 Application.Current.Dispatcher.Invoke(() => ImgFull.Source = bitmap);
 
             });
             task.Start();
 
-            for (int i = 0; i < 100; i++)
+            //ImgFull.Source = new BitmapImage(new Uri("https://i.imgur.com/i5xTVVY.jpg"));
+
+            for (int i = 0; i < 10; i++)
             {
                 Gallery.Children.Add(new ThumbnailButton() {
-                    ThumbnailUrl = "https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg",
+                    ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
                     Margin = new Thickness()
                     {
                         Left = 5,
@@ -49,5 +51,15 @@ namespace PacChat.Resources.CustomControls.Media
         }
 
 
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scrollviewer = sender as ScrollViewer;
+            if (e.Delta > 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
+            e.Handled = true;
+        }
     }
 }
