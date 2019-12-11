@@ -33,15 +33,12 @@
                    Height="Auto"
                    >
                             <Grid>
-                                <Border Margin="5,3,0,3" Width="35" Height="35"
-                    CornerRadius="50"
-                    Background="LightBlue"
-                    >
-                                    <materialDesign:PackIcon Kind="User"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Width="24"
-                                         Height="24"/>
+                                <Border Margin="5,3,0,3" Width="35" Height="35" CornerRadius="50">
+
+                                    <Border.Background>
+                                        <ImageBrush x:Name="imageAva"/>
+                                    </Border.Background>
+
                                 </Border>
                                 <Border x:Name="OnlineDot" CornerRadius="8" Margin="24,24,0,0" Width="10" Height="10" Background="#FF13831D"/>
                             </Grid>
