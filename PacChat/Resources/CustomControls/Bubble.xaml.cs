@@ -47,7 +47,7 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
 
-            AttachmentLink.Visibility = Visibility.Collapsed;
+            AttachmentLink.Visibility = Visibility.Hidden;
         }
 
         public void SetText(string s)
@@ -61,7 +61,7 @@ namespace PacChat.Resources.CustomControls
             {
                 textBlock.FontWeight = FontWeights.Bold;
                 textBlock.TextDecorations = TextDecorations.Underline;
-                //AttachmentLink.Visibility = Visibility.Visible;
+                AttachmentLink.Visibility = Visibility.Visible;
             }
         }
 
