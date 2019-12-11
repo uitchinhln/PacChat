@@ -83,16 +83,22 @@ namespace PacChatServer.MessageCore.Conversation
             }
         }
 
-        public void UpdateLastActive()
+        public void UpdateLastActive(ChatSession chatSession)
         {
-            LastActive = 0;
+            LastActive = long.MaxValue;
 
             foreach (var member in Members)
             {
-                if (ChatUserManager.OnlineUsers.ContainsKey(member))
-                    break;
+                if (member.Equals(chatSession.Owner.ID)) continue;
 
-                LastActive = Math.Min(LastActive, new ChatUserStore().Load(member).LastLogoff.Minute);
+                if (ChatUserManager.OnlineUsers.ContainsKey(member))
+                {
+                    LastActive = 0;
+                    break;
+                }
+
+                ChatUser user = new ChatUserStore().Load(member);
+                LastActive = Math.Min(LastActive, (long)Math.Ceiling((DateTime.UtcNow - user.LastLogoff).TotalMinutes));
             }
         }
     }

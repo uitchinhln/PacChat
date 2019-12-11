@@ -123,7 +123,7 @@ namespace PacChatServer.Entity
 
         public void Offline()
         {
-            this.LastLogoff = DateTime.Now;
+            this.LastLogoff = DateTime.UtcNow;
             UserOffline packet = new UserOffline();
             packet.TargetID = this.ID;
 
@@ -136,7 +136,7 @@ namespace PacChatServer.Entity
             }
 
             this.Save();
-            PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out!", this.Email));
+            PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out at {1}!", this.Email, this.LastLogoff.ToString()));
         }
 
         public void Kick()

@@ -44,6 +44,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             else
             {
                 packet.StatusCode = 200;
+                conversationStore.UpdateLastActive(chatSession);
                 packet.LastActive = conversationStore.LastActive;
 
                 if (conversationStore is SingleConversation)

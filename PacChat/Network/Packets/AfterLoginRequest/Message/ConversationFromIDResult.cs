@@ -59,6 +59,31 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
                 ChatPage.Instance.LoadMessages(ConversationID);
+
+                if (LastActive > 0)
+                {
+                    string active = "Active ";
+                    string timeUnit = "minute";
+
+                    if (LastActive > 1) timeUnit += "s";
+                    
+                    if (LastActive > 59)
+                    {
+                        timeUnit = "hour";
+                        LastActive /= 60;
+
+                        if (LastActive > 1) timeUnit += "s";
+                    }
+
+                    active += LastActive + " " + timeUnit + " ago";
+                    ChatPage.Instance.LastActive.Text = active;
+                    ChatPage.Instance.OnlineDot.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    ChatPage.Instance.LastActive.Text = "Active Now";
+                    ChatPage.Instance.OnlineDot.Visibility = Visibility.Visible;
+                }
             });
         }
     }

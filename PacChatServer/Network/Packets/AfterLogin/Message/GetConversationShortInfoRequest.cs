@@ -56,6 +56,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                     packet.ConversationName = packet.ConversationName.Replace(", ", "");
             }
 
+            conversation.UpdateLastActive(chatSession);
             packet.LastActive = conversation.LastActive;
             chatSession.Send(packet);
         }

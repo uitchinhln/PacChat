@@ -43,7 +43,6 @@ namespace PacChat
 
             model.FirstName = FirstNameInp.Text;
             model.LastName = LastNameInp.Text;
-            model.Email = EmailInp.Text;
             model.BirthDay = BirthdayInp.SelectedDate.Value;
             model.Gender = GenderInp.SelectedIndex;
         }
