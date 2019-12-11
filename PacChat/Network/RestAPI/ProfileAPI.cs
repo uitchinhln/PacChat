@@ -36,7 +36,7 @@ namespace PacChat.Network.RestAPI
                 FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 form.Add(new StreamContent(stream));
 
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 String url = String.Format(UploadAvatarURL, address);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
@@ -55,7 +55,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetSelfAvatarURL, address));
 
                 WebClient webClient = new WebClient();
@@ -79,7 +79,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetUserAvatarURL, address, userID));
 
                 WebClient webClient = new WebClient();

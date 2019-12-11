@@ -15,8 +15,8 @@ namespace PacChat.Network.RestAPI
         private static readonly String MediaThumbnailUrl = "http://{0}:1403/api/message/media/thumbnail/{1}/{2}/{3}";
 
         public static String GetMediaURL(String fileID, String conversationID)
-        {            
-            IPAddress address = ChatConnection.Instance.GetIPAddress();
+        {
+            String address = ChatConnection.Instance.Host;
             String token = ChatConnection.Instance.Session.SessionID;
 
             return String.Format(MediaStreamUrl, address, fileID, conversationID, token);
@@ -24,16 +24,10 @@ namespace PacChat.Network.RestAPI
 
         public static String GetMediaThumbnailURL(String fileID, String conversationID)
         {
-            IPAddress address = ChatConnection.Instance.GetIPAddress();
+            String address = ChatConnection.Instance.Host;
             String token = ChatConnection.Instance.Session.SessionID;
 
             return String.Format(MediaThumbnailUrl, address, fileID, conversationID, token);
-        }
-
-        public static Stream GetMediaThumbnailStream(String fileID, String conversationID)
-        {
-            WebClient webClient = new WebClient();
-            return webClient.OpenRead(GetMediaThumbnailURL(fileID, conversationID));
         }
     }
 }

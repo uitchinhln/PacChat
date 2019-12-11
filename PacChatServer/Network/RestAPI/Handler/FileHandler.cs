@@ -18,6 +18,7 @@ namespace PacChatServer.Network.RestAPI.Handler
             String fileName;
             Guid id;
 
+            Directory.CreateDirectory(SavePath);
             var streamProvider = new MultipartFormDataStreamProvider(SavePath);
 
             Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith(p =>
@@ -50,7 +51,6 @@ namespace PacChatServer.Network.RestAPI.Handler
 
                     result.Add(fileName, id.ToString());
 
-                    Directory.CreateDirectory(SavePath);
                     File.Move(fileData.LocalFileName, Path.Combine(SavePath, id.ToString()));
                 }
             }).Wait();

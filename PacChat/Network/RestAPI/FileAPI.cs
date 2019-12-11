@@ -18,7 +18,6 @@ namespace PacChat.Network.RestAPI
 
         private static readonly String AttachmentUploadUrl = "http://{0}:1403/api/message/attachment/{1}";
         private static readonly String AttachmentDownloadUrl = "http://{0}:1403/api/message/attachment/{1}/{2}";
-        private static readonly String MediaDownloadUrl = "http://{0}:1403/api/message/media/{1}/{2}/{3}";
 
         public static async void UploadAttachment(String conversationID, List<String> filePaths, 
             ResultHandler handler, ErrorHandler errorHandler)
@@ -34,11 +33,13 @@ namespace PacChat.Network.RestAPI
                 {
                     if (!File.Exists(filePath)) continue;
                     FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                    form.Add(new StreamContent(stream));
+                    form.Add(new StreamContent(stream), "file", Path.GetFileName(filePath));
                 }
 
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 String url = String.Format(AttachmentUploadUrl, address, conversationID);
+
+                Console.WriteLine(url);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
@@ -60,7 +61,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, fileID, conversationID));
 
                 WebClient webClient = new WebClient();
@@ -81,11 +82,18 @@ namespace PacChat.Network.RestAPI
         public static void DownloadMedia(String conversationID, String fileID, String savePath,
             DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
         {
+            String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
+            DownloadMedia(streamUrl, savePath, onProgressChange, onDownloadComplete, errorHandler);
+        }
+
+        public static void DownloadMedia(String streamURL, String savePath,
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+        {
             try
             {
-                IPAddress address = ChatConnection.Instance.GetIPAddress();
+                String address = ChatConnection.Instance.Host;
                 String token = ChatConnection.Instance.Session.SessionID;
-                Uri uri = new Uri(String.Format(MediaDownloadUrl, address, fileID, conversationID, token));
+                Uri uri = new Uri(streamURL);
 
                 WebClient webClient = new WebClient();
 
