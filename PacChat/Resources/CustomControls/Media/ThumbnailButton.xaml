@@ -3,11 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Media"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="100">
-    <Image x:Name="Thumbnail" 
-            Width="90" Height="90" 
-            Stretch="UniformToFill" 
-            RenderOptions.BitmapScalingMode="HighQuality" Source="/PacChat;component/Resources/Drawable/hinh3.png"/>
+             d:DesignHeight="90" d:DesignWidth="100" Cursor="Hand" OpacityMask="#BF000000" >
+
+
+    <Grid x:Name="Gat">
+        <ProgressBar x:Name="LoadingAhihi"
+          Style="{StaticResource MaterialDesignCircularProgressBar}"
+          Value="0"
+          IsIndeterminate="True" Height="Auto" Margin="20" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}"
+          Foreground="#FFFFFFFF" />
+        <Image x:Name="ImgThumbnail" 
+           MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
+            MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+            MinWidth="90" MinHeight="90"
+            RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="UniformToFill" />
+    </Grid>
 </UserControl>

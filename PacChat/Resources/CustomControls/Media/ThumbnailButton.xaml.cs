@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,62 +26,71 @@ namespace PacChat.Resources.CustomControls.Media
         {
             InitializeComponent();
         }
-
-        #region Add Click Event
-        static ThumbnailButton()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ThumbnailButton), new FrameworkPropertyMetadata(typeof(ThumbnailButton)));
-
-        }
-        public static RoutedEvent ClickEvent =
-        EventManager.RegisterRoutedEvent("Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ThumbnailButton));
-
-        public event RoutedEventHandler Click
-        {
-            add { AddHandler(ClickEvent, value); }
-            remove { RemoveHandler(ClickEvent, value); }
-        }
-
-        protected virtual void OnClick()
-        {
-            RoutedEventArgs args = new RoutedEventArgs(ClickEvent, this);
-
-            RaiseEvent(args);
-
-        }
-
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonUp(e);
-
-            OnClick();
-        }
-        #endregion
-
+        
         public String FileName { get; private set; }
 
-        public String FileID { get; private set; }
+        public String StreamURL { get; private set; }
 
-        public String SourceUrl
+        public String ThumbnailUrl
         {
-            get { return (String)GetValue(SourceUrlProperty); }
-            set { SetValue(SourceUrlProperty, value); }
+            get { return (String)GetValue(ThumbnailURLProperty); }
+            set { SetValue(ThumbnailURLProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SourceUrlProperty =
-            DependencyProperty.Register("SourceUrl", typeof(String), typeof(ThumbnailButton), new PropertyMetadata(String.Empty));
+        public static readonly DependencyProperty ThumbnailURLProperty =
+            DependencyProperty.Register("ThumbnailUrl", typeof(String), typeof(ThumbnailButton), new PropertyMetadata(String.Empty));
+
+
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(ThumbnailButton), new PropertyMetadata(false));
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (e.Property == SourceUrlProperty && !String.IsNullOrEmpty(SourceUrl))
+            if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(SourceUrl, UriKind.Absolute);
-                bitmap.EndInit();
+                String url = ThumbnailUrl;
+                Task task = new Task(() =>
+                {
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                        Application.Current.Dispatcher.Invoke(() => {
+                            ImgThumbnail.Source = bitmap;
+                            ImgThumbnail.IsEnabled = true;
+                            Gat.Children.Remove(LoadingAhihi);
+                            });
+                    }
+                    catch (WebException)
+                    {
 
-                Thumbnail.Source = bitmap;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                });
+                task.Start();
+            }
+
+            if (e.Property == IsActiveProperty)
+            {
+                if (IsActive)
+                {
+                    this.OpacityMask.Opacity = 1;
+                } else
+                {
+                    this.OpacityMask.Opacity = 0.7;
+                }
             }
 
             base.OnPropertyChanged(e);
