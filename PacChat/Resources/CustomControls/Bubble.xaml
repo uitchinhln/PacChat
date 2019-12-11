@@ -40,6 +40,6 @@
                 </Border>
             </StackPanel>
         </Border>
-        <Button x:Name="AttachmentLink" Margin="94,0,0,10" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}"></Button>
+        <Button x:Name="AttachmentLink" Margin="94,0,0,10" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
     </Grid>
 </UserControl>

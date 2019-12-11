@@ -71,15 +71,15 @@
                     </DockPanel>
 
                     <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
-                        <Border Background="#673AB7" CornerRadius="4" Margin="3 3 3 4">
-                            <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
+                        <Border CornerRadius="4" Margin="3 3 3 4">
+                            <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
                                 <materialDesign:PopupBox.ToggleContent>
 
                                     <materialDesign:PackIcon
-                                    Kind="StickerEmoji" 
-                                    Width="32"
-                                    Height="32"
-                                    Foreground="White"
+                                    Kind="Emoticon" 
+                                    Width="24"
+                                    Height="24"
+                                    Foreground="#FF2C2C2C"
                             />
                                 </materialDesign:PopupBox.ToggleContent>
                                 <StackPanel Width="390" Height="325" x:Name="spTabStickerContainner">
@@ -88,25 +88,25 @@
                             </materialDesign:PopupBox>
                         </Border>
                         <Border>
-                            <Button Padding="0" Margin="2,2,2,2" Click="Button_Click">
-                                <materialDesign:PackIcon Kind="ArrowLeft" Width="30" Height="30"/>
+                            <Button Padding="0" Margin="2,2,2,2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                                <materialDesign:PackIcon Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                             </Button>
                         </Border>
 
                         <Border>
-                            <Button Padding="0" Margin="2,2,2,2" Click="Button_Click_1">
-                                <materialDesign:PackIcon Kind="ArrowRight" Width="30" Height="30"/>
+                            <Button x:Name="btnAttachment" Padding="0" Margin="2,2,2,2" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
+                                <materialDesign:PackIcon Kind="Attachment" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF2C2C2C"/>
                             </Button>
                         </Border>
 
                         <Border>
-                            <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click">
-                                <materialDesign:PackIcon Kind="Image" Width="30" Height="30"/>
+                            <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                                <materialDesign:PackIcon Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                             </Button>
                         </Border>
 
                         <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
-                            <materialDesign:PackIcon Kind="Send" Foreground="#FF1E145F"  Width="24" Height="Auto"/>
+                            <materialDesign:PackIcon Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
                         </Button>
                         <Border CornerRadius="16"
                     Background= "LightGray"

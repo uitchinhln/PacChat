@@ -1,7 +1,10 @@
-﻿using PacChat.Utils;
+﻿using PacChat.Network.RestAPI;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,6 +41,7 @@ namespace PacChat.Resources.CustomControls
             get { return textBlock.FontSize; }
             set { textBlock.FontSize = (double)value; }
         }
+
         public Bubble()
         {
             InitializeComponent();
@@ -117,10 +121,30 @@ namespace PacChat.Resources.CustomControls
             storyboard.Children.Add(animation);
         }
 
-
-        public void Animation()
+        public void SetLink(string fileID)
         {
+            AttachmentLink.Content = fileID;
+        }
 
+        private void AttachmentLink_Click(object sender, RoutedEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
+                AttachmentLink.Content.ToString(), KnownFolders.GetPath(KnownFolder.Downloads),
+                DownloadProgress, OnDownloadFileCompleted, OnDownloadFileError);
+        }
+
+        private void OnDownloadFileError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+        }
+
+        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
         }
     }
 }
