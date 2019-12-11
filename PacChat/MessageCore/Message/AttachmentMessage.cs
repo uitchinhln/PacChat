@@ -3,34 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
-using PacChat.MessageCore.Sticker;
 
 namespace PacChat.MessageCore.Message
 {
-    public class StickerMessage : AbstractMessage
+    public class AttachmentMessage : AbstractMessage
     {
-        public Sticker.Sticker Sticker { get; set; }
+        public string FileID { get; set; }
+        public string FileName { get; set; }
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            Sticker.ID = buffer.ReadInt();
-            Sticker.CategoryID = buffer.ReadInt();
+            FileID = ByteBufUtils.ReadUTF8(buffer);
+            FileName = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
             buffer.WriteInt(GetPreviewCode());
-            buffer.WriteInt(Sticker.ID);
-            buffer.WriteInt(Sticker.CategoryID);
+            ByteBufUtils.WriteUTF8(buffer, FileID);
+            ByteBufUtils.WriteUTF8(buffer, FileName);
             return buffer;
         }
 
         public override int GetPreviewCode()
         {
-            return 3;
+            return 1;
         }
     }
 }

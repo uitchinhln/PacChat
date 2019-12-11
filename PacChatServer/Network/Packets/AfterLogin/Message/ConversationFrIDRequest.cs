@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.IO.Message;
+using PacChatServer.MessageCore.Conversation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             var conversationStore = new ConversationStore().Load(ConversationID);
 
             packet.LastActive = 0;
+            packet.ConversationName = "";
 
             if (conversationStore == null)
             {
@@ -42,7 +44,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             else
             {
                 packet.StatusCode = 200;
+                conversationStore.UpdateLastActive(chatSession);
                 packet.LastActive = conversationStore.LastActive;
+
+                if (conversationStore is SingleConversation)
+                    packet.ConversationName = "~";
+                else
+                    packet.ConversationName = conversationStore.ConversationName;
 
                 foreach (var member in conversationStore.Members)
                 {

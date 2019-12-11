@@ -12,7 +12,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Border x:Name="ChatBorder" CornerRadius="8" Background="White">
-        <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="0">
+        <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="1">
             <materialDesign:TransitionerSlide>
                 <DockPanel>
                     <TextBlock Text="Join in Conversation" FontSize="48" FontFamily="Segoe UI Semibold" Foreground="#59000000" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -31,17 +31,20 @@
                    Background="Transparent" 
                    Height="Auto"
                    >
-                        <Border Margin="5,3,0,3" Width="35" Height="35"
+                        <Grid>
+                            <Border Margin="5,3,0,3" Width="35" Height="35"
                     CornerRadius="50"
                     Background="LightBlue"
                     >
-                            <materialDesign:PackIcon Kind="User"
+                                <materialDesign:PackIcon Kind="User"
                                          HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          Width="24"
                                          Height="24"/>
-                        </Border>
-
+                            </Border>
+                            <Border x:Name="OnlineDot" CornerRadius="8" Margin="24,24,0,0" Width="10" Height="10" Background="#FF13831D"/>
+                        </Grid>
+                        
                         <StackPanel DockPanel.Dock="Right"
                     Height="26" MinWidth="170"
                     Margin="10,0,16,0" Orientation="Horizontal">
@@ -58,10 +61,10 @@
                         <Label x:Name="ChatTitle" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
 
                         <Border>
-                            <TextBlock VerticalAlignment="Center"
+                            <TextBlock x:Name="LastActive" VerticalAlignment="Center"
                            Margin="5,0,0,0"
                            Foreground="Gray">
-                    Active 2 minutes ago
+                                Active 2 minutes ago
                             </TextBlock>
                         </Border>
 

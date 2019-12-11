@@ -13,6 +13,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
     public class ConversationFrIDResponse : IPacket
     {
         public string ConversationID { get; set; }
+        public string ConversationName { get; set; }
         public int StatusCode { get; set; }
         public long LastActive { get; set; }
         public HashSet<string> Members { get; set; } = new HashSet<string>();
@@ -28,6 +29,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
             ByteBufUtils.WriteUTF8(byteBuf, ConversationID); 
+            ByteBufUtils.WriteUTF8(byteBuf, ConversationName); 
             byteBuf.WriteInt(StatusCode);
             byteBuf.WriteLong(LastActive);
 

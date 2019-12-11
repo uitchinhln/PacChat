@@ -12,17 +12,34 @@ using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
-    public class ReceiveTextMessage : IPacket
+    public class ReceiveMessage : IPacket
     {
         public string ConversationID { get; set; }
         public string SenderID { get; set; }
-        public TextMessage Message { get; set; } = new TextMessage();
+        public int PreviewCode { get; set; }
+        public AbstractMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             ConversationID = ByteBufUtils.ReadUTF8(buffer);
             SenderID = ByteBufUtils.ReadUTF8(buffer);
-            Message.Message = ByteBufUtils.ReadUTF8(buffer);
+            PreviewCode = buffer.ReadInt();
+
+            switch (PreviewCode)
+            {
+                case 1:
+                    Message = new AttachmentMessage();
+                    (Message as AttachmentMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 3:
+                    Message = new StickerMessage();
+                    (Message as StickerMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 4:
+                    Message = new TextMessage();
+                    (Message as TextMessage).DecodeFromBuffer(buffer);
+                    break;
+            }
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -44,7 +61,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                     temp.Members.Add(SenderID);
                 }
 
-                app.model.Conversations[ConversationID].Bubbles.Add(new Utils.BubbleInfo(Message.Message, true));
+                app.model.Conversations[ConversationID].Bubbles.Add(new Utils.BubbleInfo(Message, true));
                 app.model.PrivateConversations[SenderID] = ConversationID;
 
                 if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)

@@ -19,20 +19,19 @@
         </StackPanel>
         <materialDesign:Transitioner x:Name="Trans" SelectedIndex="1" Margin="0" DockPanel.Dock="Bottom">
             <!-- Recent tab -->
-            <materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect None}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
-                    <ItemsControl ItemsSource="{Binding RecentUsers}" Background="#FF2C2368">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:UserMessage></local:UserMessage>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <DockPanel Margin="0,8,0,0">
+                        <ScrollViewer Margin="0" DockPanel.Dock="Top">
+                            <StackPanel x:Name="RecentListView">
+                            </StackPanel>
+                        </ScrollViewer>
+                    </DockPanel>
                 </ScrollViewer>
             </materialDesign:TransitionerSlide>
 
             <!-- Contacts tab -->
-            <materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect None}">
                 <DockPanel Margin="0,8,0,0">
                     <Border CornerRadius="16"
                     Background= "White"

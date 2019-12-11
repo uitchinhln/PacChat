@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using PacChatServer.Cache.Core;
 using PacChatServer.Entity;
+using PacChatServer.IO.Entity;
 using PacChatServer.IO.Message;
 using PacChatServer.MessageCore.Message;
 using PacChatServer.Network;
@@ -29,6 +30,9 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonId]
         public Guid ID { get; set; }
 
+        [BsonElement("ConversationName")]
+        public string ConversationName { get; set; }
+
         [BsonElement("LastActive")]
         public long LastActive { get; set; }
 
@@ -41,7 +45,7 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
 
-        public void SendMessage(IMessage message, ChatSession chatSession)
+        public void SendMessage(AbstractMessage message, ChatSession chatSession)
         {
             ChatUser user;
             Guid messageID = Guid.NewGuid();
@@ -66,7 +70,7 @@ namespace PacChatServer.MessageCore.Conversation
 
                     SendMessageResponse packet = new SendMessageResponse();
                     packet.ConversationID = this.ID.ToString();
-                    packet.Message = message as TextMessage;
+                    packet.Message = message;
                     packet.SenderID = chatSession.Owner.ID.ToString();
                     user.Send(packet); //Add message packet here
 
@@ -76,6 +80,25 @@ namespace PacChatServer.MessageCore.Conversation
                         user.Conversations.Add(ID, LastActive);
                     }
                 }
+            }
+        }
+
+        public void UpdateLastActive(ChatSession chatSession)
+        {
+            LastActive = long.MaxValue;
+
+            foreach (var member in Members)
+            {
+                if (member.Equals(chatSession.Owner.ID)) continue;
+
+                if (ChatUserManager.OnlineUsers.ContainsKey(member))
+                {
+                    LastActive = 0;
+                    break;
+                }
+
+                ChatUser user = new ChatUserStore().Load(member);
+                LastActive = Math.Min(LastActive, (long)Math.Ceiling((DateTime.UtcNow - user.LastLogoff).TotalMinutes));
             }
         }
     }

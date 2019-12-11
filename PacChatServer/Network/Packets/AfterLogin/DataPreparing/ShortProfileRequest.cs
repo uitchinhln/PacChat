@@ -65,7 +65,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
                         null;
                     if (message == null) break;
 
-                    if (message.Showable(chatSession.Owner.ID))
+                    if (!message.Showable(chatSession.Owner.ID))
                     {
                         response.PreviewCode = 0;
                         break;

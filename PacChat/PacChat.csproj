@@ -66,6 +66,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChatPageContents\ConversationControl.xaml.cs">
+      <DependentUpon>ConversationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChatPageContents\ProfileDisplayer.xaml.cs">
       <DependentUpon>ProfileDisplayer.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,7 @@
     <Compile Include="MessageCore\IConversation.cs" />
     <Compile Include="MessageCore\Message\AbstractMessage.cs" />
     <Compile Include="MessageCore\IMessage.cs" />
+    <Compile Include="MessageCore\Message\AttachmentMessage.cs" />
     <Compile Include="MessageCore\Message\StickerMessage.cs" />
     <Compile Include="MessageCore\Message\TextMessage.cs" />
     <Compile Include="MessageCore\Sticker\Sticker.cs" />
@@ -92,12 +96,14 @@
     <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromIDResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetConversationShortInfo.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetConversationShortInfoResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversation.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversationResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\ReceiveTextMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\ReceiveMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversations.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversationsResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\SendTextMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\SendMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FinalizeAcceptedFriendRequestReceive.cs" />
@@ -217,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatPageContents\ChatBubble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChatPageContents\ConversationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

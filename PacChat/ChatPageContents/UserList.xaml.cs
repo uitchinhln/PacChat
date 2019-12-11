@@ -91,6 +91,21 @@ namespace PacChat.ChatPageContents
             ListView.Children.Add(userControl);
         }
 
+        public void ClearRecentConversation()
+        {
+            RecentListView.Children.Clear();
+        }
+
+        public void AddConversationToRecent(string id, string name, long lastActive)
+        {
+            ConversationControl control = new ConversationControl();
+            control.SetInfo(id, name, lastActive);
+            if (lastActive == 0)
+                RecentListView.Children.Insert(0, control);
+            else
+                RecentListView.Children.Add(control);
+        }
+
         private void UserSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (UserSearchBox.Text.Length == 0)

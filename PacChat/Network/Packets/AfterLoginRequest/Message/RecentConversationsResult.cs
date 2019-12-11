@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
@@ -34,7 +35,18 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
         public void Handle(ISession session)
         {
+            foreach (var x in Conversations)
+                Console.WriteLine("Conv: " + x.Key);
             // Send IDs to get conversation name
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                foreach (var x in Conversations)
+                {
+                    GetConversationShortInfo packet = new GetConversationShortInfo();
+                    packet.ConversationID = x.Key;
+                    _ = ChatConnection.Instance.Send(packet);
+                }
+            });
         }
     }
 }

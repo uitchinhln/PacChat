@@ -370,6 +370,8 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\AcceptedFriendResponse.cs" />

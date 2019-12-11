@@ -47,7 +47,7 @@ namespace PacChatServer.Network
 
             ChatUserManager.MakeOnline(Owner);
 
-            Owner.LastLogon = DateTime.Now;
+            Owner.LastLogon = DateTime.UtcNow;
             Owner.sessions.Add(this);
 
             Protocol = protocolProvider.MainProtocol;

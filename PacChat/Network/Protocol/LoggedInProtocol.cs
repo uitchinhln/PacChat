@@ -24,9 +24,9 @@ namespace PacChat.Network.Protocol
             Inbound(0x01, new GetShortInfoResult());
             Outbound(0x01, new GetShortInfo());
 
-            Inbound(0x04, new ReceiveTextMessage());
+            Inbound(0x04, new ReceiveMessage());
 
-            Outbound(0x05, new SendTextMessage());
+            Outbound(0x05, new SendMessage());
 
             Inbound(0x02, new SingleConversationFrUserIDResult());
             Outbound(0x02, new SingleConversationFrUserID());
@@ -36,6 +36,12 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x06, new ConversationFromIDResult());
             Outbound(0x06, new ConversationFromID());
+
+            Inbound(0x17, new GetConversationShortInfoResult());
+            Outbound(0x17, new GetConversationShortInfo());
+
+            Inbound(0x18, new RecentConversationsResult());
+            Outbound(0x18, new RecentConversations());
 
             // Notifications
             Inbound(0x07, new UserOnlineReceive());
