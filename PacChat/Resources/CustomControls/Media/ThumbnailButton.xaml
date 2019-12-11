@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="100" Cursor="Hand" OpacityMask="#BF000000" >
+             d:DesignHeight="90" d:DesignWidth="100" Cursor="Hand" OpacityMask="#FF000000" >
 
 
     <Grid x:Name="Gat">
@@ -19,5 +19,6 @@
             MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
             MinWidth="90" MinHeight="90"
             RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="UniformToFill" />
+        <Button Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick"/>
     </Grid>
 </UserControl>

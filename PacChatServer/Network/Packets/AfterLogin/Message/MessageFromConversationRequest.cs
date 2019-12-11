@@ -51,11 +51,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             {
                 AbstractMessage mess = new MessageStore().Load(messages[i], ConversationID);
 
-                if (mess != null && mess is TextMessage)
+                if (mess != null)
                 {
                     packet.SenderID.Add(mess.Author.ToString());
-                    packet.MessType.Add(4);
-                    packet.Content.Add((mess as TextMessage).Message);
+                    packet.Content.Add(mess);
                 }
             }
 

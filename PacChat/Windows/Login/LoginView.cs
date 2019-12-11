@@ -41,6 +41,7 @@ namespace PacChat.Windows.Login
         public ICommand RegisterCommand { get; set; }
 
         public Action CloseAction { get; set; }
+        public Action ClearRegisterForm { get; set; }
         public Action<int> MoveToTab { get; set; }
 
         LoginModel loginModel;
@@ -140,6 +141,8 @@ namespace PacChat.Windows.Login
             {
                 _ = await DialogHost.Show(new AnnouncementDialog("Your account has been activated successfully", "You can now login."));
                 MoveToTab(0);
+                if (ClearRegisterForm != null)
+                    ClearRegisterForm();
             }
             else
             {

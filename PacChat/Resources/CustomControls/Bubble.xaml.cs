@@ -1,7 +1,11 @@
-﻿using PacChat.Utils;
+﻿using Microsoft.Win32;
+using PacChat.Network.RestAPI;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,9 +31,9 @@ namespace PacChat.Resources.CustomControls
         public string Messages
         {
             get { return textBlock.Text.ToString(); }
-            set 
+            set
             {
-                textBlock.Text = value.ToString(); 
+                textBlock.Text = value.ToString();
             }
         }
 
@@ -38,10 +42,11 @@ namespace PacChat.Resources.CustomControls
             get { return textBlock.FontSize; }
             set { textBlock.FontSize = (double)value; }
         }
+
         public Bubble()
         {
             InitializeComponent();
-            
+
             AttachmentLink.Visibility = Visibility.Hidden;
         }
 
@@ -86,7 +91,6 @@ namespace PacChat.Resources.CustomControls
                 margin.Right = 170;
                 margin.Bottom = 2;
                 borderBubble.Margin = margin;
-                
             }
             else
             {
@@ -117,10 +121,40 @@ namespace PacChat.Resources.CustomControls
             storyboard.Children.Add(animation);
         }
 
-
-        public void Animation()
+        public void SetLink(string fileID)
         {
+            AttachmentLink.Content = fileID;
+        }
 
+        private void AttachmentLink_Click(object sender, RoutedEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "Select a place to download";
+            dialog.Filter = "All file types|*.*";
+            dialog.FileName = textBlock.Text;
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (dialog.ShowDialog() == true)
+            {
+                FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
+                    AttachmentLink.Content.ToString(), dialog.FileName,
+                    DownloadProgress, OnDownloadFileCompleted, OnDownloadFileError);
+            }
+        }
+
+        private void OnDownloadFileError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine("Download completed");
+        }
+
+        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
         }
     }
 }

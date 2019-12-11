@@ -202,6 +202,7 @@
     <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
+    <Compile Include="Utils\SystemPlacesUtils.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Utils\UserUtils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">

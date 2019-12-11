@@ -25,6 +25,8 @@ namespace PacChat.Network
         protected IChannel Channel;
         protected ProtocolProvider protocolProvider;
 
+        public String Host { get; private set; } = String.Empty;
+
         private ChatConnection(ProtocolProvider protocolProvider)
         {
             this.protocolProvider = protocolProvider;
@@ -40,9 +42,9 @@ namespace PacChat.Network
 
         public async Task Bind()
         {
-            string ip = ConfigurationManager.AppSettings["ServerAddress"];
+            Host = ConfigurationManager.AppSettings["ServerAddress"];
             int port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
-            IPAddress address = IPAddress.Parse(ip);
+            IPAddress address = Dns.GetHostAddresses(Host)[0];
             await Bind(new IPEndPoint(address, port));
         }
 
@@ -57,12 +59,6 @@ namespace PacChat.Network
             {
                 OnBindFailure(address, e);
             }
-        }
-
-        public IPAddress GetIPAddress()
-        {
-            if (Channel == null) return null;
-            return (Channel.RemoteAddress as IPEndPoint).Address;
         }
 
         public bool IsConnected()

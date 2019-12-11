@@ -17,7 +17,7 @@ namespace PacChat.Network.RestAPI
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, token);
-                return client.DownloadString(String.Format(StickerCatesListUrl, ChatConnection.Instance.GetIPAddress()));
+                return client.DownloadString(String.Format(StickerCatesListUrl, ChatConnection.Instance.Host));
             }
         }
 

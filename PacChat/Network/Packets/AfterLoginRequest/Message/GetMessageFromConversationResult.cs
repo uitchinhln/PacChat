@@ -32,8 +32,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public List<int> MessType { get; set; } = new List<int>();
         public List<string> SenderID { get; set; } = new List<string>();
 
-        // Text content is content of text message (if preview code is equal to 4)
-        public List<string> Content { get; set; } = new List<string>();
+        public List<AbstractMessage> Content { get; set; } = new List<AbstractMessage>();
 
         public void Decode(IByteBuffer buffer)
         {
@@ -66,7 +65,24 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             {
                 SenderID.Add(temp);
                 MessType.Add(buffer.ReadInt());
-                Content.Add(ByteBufUtils.ReadUTF8(buffer));
+
+                AbstractMessage Message = null;
+                switch (MessType.Last())
+                {
+                    case 1:
+                        Message = new AttachmentMessage();
+                        (Message as AttachmentMessage).DecodeFromBuffer(buffer);
+                        break;
+                    case 3:
+                        Message = new StickerMessage();
+                        (Message as StickerMessage).DecodeFromBuffer(buffer);
+                        break;
+                    case 4:
+                        Message = new TextMessage();
+                        (Message as TextMessage).DecodeFromBuffer(buffer);
+                        break;
+                }
+                Content.Add(Message);
                 temp = ByteBufUtils.ReadUTF8(buffer);
             }
         }
@@ -86,11 +102,11 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 {
                     if (app.model.SelfID.CompareTo(SenderID[i]) == 0)
                         ChatPage.Instance.SendMessage(
-                            new TextMessage() { Message = Content[i] },
+                            Content[i],
                             true, true);
                     else
                         ChatPage.Instance.SendLeftMessages(
-                            new TextMessage() { Message = Content[i] },
+                            Content[i],
                             true, true);
                 }
             });

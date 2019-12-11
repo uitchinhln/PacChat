@@ -30,6 +30,7 @@ namespace PacChatServer.Network.RestAPI.Controller
             String fileName;
             Guid id = session.Owner.ID;
 
+            Directory.CreateDirectory(AvatarPath);
             var streamProvider = new MultipartFormDataStreamProvider(AvatarPath);
 
             Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith(p =>
@@ -53,7 +54,6 @@ namespace PacChatServer.Network.RestAPI.Controller
 
                     AttachmentStore.Map(id, fileName);
 
-                    Directory.CreateDirectory(AvatarPath);
                     if (File.Exists(Path.Combine(AvatarPath, id.ToString())))
                     {
                         File.Delete(Path.Combine(AvatarPath, id.ToString()));

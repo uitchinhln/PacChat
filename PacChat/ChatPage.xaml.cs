@@ -20,6 +20,8 @@ using PacChat.Utils;
 using Microsoft.Win32;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.Network;
+using PacChat.Network.RestAPI;
+using static PacChat.Network.RestAPI.FileAPI;
 
 namespace PacChat
 {
@@ -66,11 +68,14 @@ namespace PacChat
             else _previousBubbleChat = null;
 
             Bubble b = new Bubble();
-            
+
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
                 b.Messages = (msg as TextMessage).Message;
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
+            {
                 b.Messages = (msg as AttachmentMessage).FileName;
+                b.SetLink((msg as AttachmentMessage).FileID);
+            }
             b.Type = BubbleTypeParser.Parse(msg);
             b.ControlUpdate();
 
@@ -125,7 +130,10 @@ namespace PacChat
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
                 b.Messages = (msg as TextMessage).Message;
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
+            {
                 b.Messages = (msg as AttachmentMessage).FileName;
+                b.SetLink((msg as AttachmentMessage).FileID);
+            }
             b.Type = BubbleTypeParser.Parse(msg);
             b.ControlUpdate();
 
@@ -164,6 +172,7 @@ namespace PacChat
         public void ClearChatPage()
         {
             _previousBubbleChat = null;
+            _headBubbleChat = null;
             spMessagesContainer.Children.Clear();
         }
 
@@ -328,6 +337,35 @@ namespace PacChat
 
         }
 
-        
+        private void btnAttachment_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a file";
+
+            if (op.ShowDialog() == true)
+            {
+                List<string> paths = op.FileNames.ToList();
+                var app = MainWindow.chatApplication;
+                UploadAttachment(app.model.currentSelectedConversation,
+                    paths, OnFileUploadCompleted, OnFileUploadError);
+            }
+        }
+
+        private void OnFileUploadError(Exception error)
+        {
+            Console.WriteLine(error);
+        }
+
+        private void OnFileUploadCompleted(Dictionary<string, string> results)
+        {
+            foreach (var file in results)
+            {
+                AttachmentMessage message = new AttachmentMessage();
+                message.FileID = file.Value;
+                message.FileName = file.Key;
+
+                SendMessage(message, false, false);
+            }
+        }
     }
 }

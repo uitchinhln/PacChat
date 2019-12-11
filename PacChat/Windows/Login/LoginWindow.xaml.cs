@@ -39,6 +39,17 @@ namespace PacChat.Windows.Login
                     MoveToTab(index);
                 });
             }
+            if (loginView.ClearRegisterForm == null)
+            {
+                loginView.ClearRegisterForm = new Action(() =>
+                {
+                    loginView.RegFirstName = String.Empty;
+                    loginView.RegLastName = String.Empty;
+                    loginView.RegUserName = String.Empty;
+                    RegPassword.Password = String.Empty;
+                    loginView.RegToUAgrement = false;
+                });
+            }
 
             //this.HideScriptErrors(this.wbBanner, true);
         }

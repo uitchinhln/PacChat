@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.MessageCore.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         /// </summary>
 
         public List<string> SenderID { get; set; } = new List<string>();
-        public List<int> MessType { get; set; } = new List<int>();
 
         // Text content is content of text message (if preview code is equal to 4)
-        public List<string> Content { get; set; } = new List<string>();
+        public List<AbstractMessage> Content { get; set; } = new List<AbstractMessage>();
 
         public void Decode(IByteBuffer buffer)
         {
@@ -37,8 +37,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             for (int i = 0; i < SenderID.Count; ++i)
             {
                 ByteBufUtils.WriteUTF8(byteBuf, SenderID[i]);
-                byteBuf.WriteInt(MessType[i]);
-                ByteBufUtils.WriteUTF8(byteBuf, Content[i]);
+                byteBuf = Content[i].EncodeToBuffer(byteBuf);
             }
             ByteBufUtils.WriteUTF8(byteBuf, "~");
             return byteBuf;
