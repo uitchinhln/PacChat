@@ -1,4 +1,5 @@
-﻿using PacChat.Network.RestAPI;
+﻿using Microsoft.Win32;
+using PacChat.Network.RestAPI;
 using PacChat.Utils;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,9 @@ namespace PacChat.Resources.CustomControls
         public string Messages
         {
             get { return textBlock.Text.ToString(); }
-            set 
+            set
             {
-                textBlock.Text = value.ToString(); 
+                textBlock.Text = value.ToString();
             }
         }
 
@@ -45,7 +46,7 @@ namespace PacChat.Resources.CustomControls
         public Bubble()
         {
             InitializeComponent();
-            
+
             AttachmentLink.Visibility = Visibility.Hidden;
         }
 
@@ -90,7 +91,7 @@ namespace PacChat.Resources.CustomControls
                 margin.Right = 170;
                 margin.Bottom = 2;
                 borderBubble.Margin = margin;
-                
+
             }
             else
             {
@@ -129,9 +130,18 @@ namespace PacChat.Resources.CustomControls
         private void AttachmentLink_Click(object sender, RoutedEventArgs e)
         {
             var app = MainWindow.chatApplication;
-            FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
-                AttachmentLink.Content.ToString(), KnownFolders.GetPath(KnownFolder.Downloads),
-                DownloadProgress, OnDownloadFileCompleted, OnDownloadFileError);
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "Select a place to download";
+            dialog.Filter = "All file types|*.*";
+            dialog.FileName = textBlock.Text;
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (dialog.ShowDialog() == true)
+            {
+                FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
+                    AttachmentLink.Content.ToString(), dialog.FileName,
+                    DownloadProgress, OnDownloadFileCompleted, OnDownloadFileError);
+            }
         }
 
         private void OnDownloadFileError(Exception error)
@@ -141,6 +151,7 @@ namespace PacChat.Resources.CustomControls
 
         private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            Console.WriteLine("Download completed");
         }
 
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

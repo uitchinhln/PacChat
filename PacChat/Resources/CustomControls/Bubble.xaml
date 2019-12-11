@@ -18,14 +18,16 @@
                     CornerRadius="10" 
                     Background="White"
                     >
-
-                    <TextBlock x:Name="textBlock"
+                    <Grid>
+                        <TextBlock x:Name="textBlock"
                     FontSize="14"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap"
                     Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
                     ToolTip="11:59"
                     Padding="10" TextDecorations="{x:Null}"/>
+                        <Button x:Name="AttachmentLink" Margin="0" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
+                    </Grid>
                 </Border>
                 <Border>
                     <TextBlock
@@ -35,11 +37,10 @@
                         HorizontalAlignment="Right"
                         
                         >
-                        
+
                     </TextBlock>
                 </Border>
             </StackPanel>
         </Border>
-        <Button x:Name="AttachmentLink" Margin="94,0,0,10" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
     </Grid>
 </UserControl>
