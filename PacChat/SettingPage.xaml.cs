@@ -11,8 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using PacChat.Resources.CustomControls;
 
 namespace PacChat
 {
@@ -24,19 +23,19 @@ namespace PacChat
         public SettingPage()
         {
             InitializeComponent();
-           
+            loadBG_Gallery();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var app = MainWindow.chatApplication;
-            StoreDataToModel();
+            storeDataToModel();
             app.controller.OnProfileChanged();
         }
 
         // This method stores data to model, then controller get data and update Database
         // in ChatAMVC -> ChatController: OnProfileChanged()
-        private void StoreDataToModel()
+        private void storeDataToModel()
         {
             var app = MainWindow.chatApplication;
             var model = app.model;
@@ -45,6 +44,16 @@ namespace PacChat
             model.LastName = LastNameInp.Text;
             model.BirthDay = BirthdayInp.SelectedDate.Value;
             model.Gender = GenderInp.SelectedIndex;
+        }
+
+        private void loadBG_Gallery()
+        {
+            for (int i=1; i<=16;i++)
+            {
+                BGSelectContainner bg = new BGSelectContainner("BG" + i.ToString() + ".jpg");
+                wrappanelBG_Gallery.Children.Add(bg);
+            }
+   
         }
 
         private void GeneralTab_Click(object sender, RoutedEventArgs e)
@@ -75,5 +84,7 @@ namespace PacChat
 
             }
         }
+        
+  
     }
 }

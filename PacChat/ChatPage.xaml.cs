@@ -312,7 +312,7 @@ namespace PacChat
             LoadMessages(app.model.currentSelectedConversation);
         }
 
-        private void addBackgroundImage(string path, int blur)
+        public void addBackgroundImage(string path, int blur)
         {
             VisualBrush vb = new VisualBrush();
             Image im = new Image();

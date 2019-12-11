@@ -136,6 +136,9 @@
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\BGSelectContainner.xaml.cs">
+      <DependentUpon>BGSelectContainner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NotificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\BGSelectContainner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
