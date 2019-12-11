@@ -30,6 +30,7 @@
                            Text="{Binding IncomingMsg}"
                            TextTrimming="CharacterEllipsis" Foreground="#FFD1D1D1"/>
 
+                <Border CornerRadius="8" x:Name="IncomingMask" Background="#26FFFFFF" Margin="0,4"></Border>
                 <Button x:Name="ClickMask" Height="65" Background="{x:Null}" BorderBrush="{x:Null}" Click="OnClick" Content="{Binding Id}" Foreground="Transparent" MouseRightButtonDown="ClickMask_MouseRightButtonDown"></Button>
                 <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="False"  VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Foreground="White" HorizontalAlignment="Right" Width="39" Margin="0,0,8,0">
                     <StackPanel>

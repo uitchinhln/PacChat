@@ -339,7 +339,7 @@ namespace PacChat
             {
                 List<string> paths = op.FileNames.ToList();
                 var app = MainWindow.chatApplication;
-                FileAPI.UploadAttachment(app.model.currentSelectedConversation,
+                UploadAttachment(app.model.currentSelectedConversation,
                     paths, OnFileUploadCompleted, OnFileUploadError);
             }
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.MessageCore.Message;
 using PacChat.Network;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
@@ -29,11 +30,15 @@ namespace PacChat.ChatPageContents
         public UserMessage()
         {
             InitializeComponent();
+            UserMessage1.FontWeight = FontWeights.Normal;
+            IncomingMask.Visibility = Visibility.Hidden;
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
             if (!IsFriend) return;
+            UserMessage1.FontWeight = FontWeights.Normal;
+            IncomingMask.Visibility = Visibility.Hidden;
             LoadDataToModel();
             MainWindow.chatApplication.controller.OnUserChanged(ClickMask.Content.ToString());
         }
@@ -84,6 +89,30 @@ namespace PacChat.ChatPageContents
             FriendRequest packet = new FriendRequest();
             packet.TargetID = ClickMask.Content.ToString();
             _ = ChatConnection.Instance.Send(packet);
+        }
+
+        public void IncomingMessage(AbstractMessage message, bool seeing)
+        {
+            if (message is AttachmentMessage)
+            {
+                UserMessage1.Text = "Attachment";
+            }
+
+            if (message is TextMessage)
+            {
+                UserMessage1.Text = (message as TextMessage).Message;
+            }
+
+            if (message is StickerMessage)
+            {
+                UserMessage1.Text = "Sticker";
+            }
+
+            if (!seeing)
+            {
+                IncomingMask.Visibility = Visibility.Visible;
+                UserMessage1.FontWeight = FontWeights.Bold;
+            }
         }
     }
 }

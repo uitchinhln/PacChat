@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChat.ChatPageContents;
 using PacChat.MessageCore.Message;
 using System;
 using System.Collections.Generic;
@@ -65,7 +66,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.PrivateConversations[SenderID] = ConversationID;
 
                 if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)
+                {
                     ChatPage.Instance.SendLeftMessages(Message, true);
+                    (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, true);
+                }
+                else 
+                    (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, false);
             });
         }
     }

@@ -127,7 +127,7 @@
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <DockPanel>
                             <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2C2C" Loaded="UserList_Loaded"/>
-                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Width="0"></chatcontent:ProfileDisplayer>
+                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Margin="0 0 4 0" Width="0"></chatcontent:ProfileDisplayer>
                             <local:ChatPage x:Name="ChatPage" />
                         </DockPanel>
                     </materialDesign:TransitionerSlide>
