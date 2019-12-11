@@ -40,6 +40,7 @@ namespace PacChat
             Instance = this;
             _button1Clicked = false;
             spTabStickerContainner.Children.Add(new TabStickerContainner(this));
+            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             Transitioner.SelectedIndex = 0;
         }
 
@@ -153,6 +154,11 @@ namespace PacChat
         public void SetActive(bool enabled)
         {
             Transitioner.SelectedIndex = enabled ? 1 : 0;
+        }
+
+        public void SetAva(string path)
+        {
+            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
         }
 
         public void ClearChatPage()

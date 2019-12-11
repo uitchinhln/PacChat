@@ -39,7 +39,7 @@ namespace PacChat.Resources.CustomControls
 
         public void SetAva(string path)
         {
-            Ava.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
         }
     }
 }

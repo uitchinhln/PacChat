@@ -27,7 +27,7 @@
                     
                     >
                 <Border.Background>
-                    <ImageBrush x:Name="Ava" />
+                    <ImageBrush x:Name="imageAva" />
                 </Border.Background>
 
 

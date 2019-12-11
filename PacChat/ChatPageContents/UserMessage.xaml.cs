@@ -29,6 +29,7 @@ namespace PacChat.ChatPageContents
         public UserMessage()
         {
             InitializeComponent();
+            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
@@ -65,6 +66,11 @@ namespace PacChat.ChatPageContents
         public void SetOnlineStatus(bool online)
         {
             OnlineStatus.Visibility = online ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        public void SetAva(string path)
+        {
+            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
         }
 
         private void ClickMask_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
