@@ -25,12 +25,26 @@ namespace PacChat.Resources.CustomControls.Media
         public ThumbnailButton()
         {
             InitializeComponent();
+            this.OpacityMask.Opacity = 0.5;
+            this.Margin = new Thickness() { Left = 5, Right = 5 };
         }
+
+        public ThumbnailButton(MediaInfo mediaInfo) :this()
+        {
+            if (mediaInfo == null)
+                throw new NullReferenceException("MediaInfo cannot be null.");
+            this.FileName = mediaInfo.FileName;
+            this.StreamURL = mediaInfo.StreamURL;
+            this.ThumbnailUrl = mediaInfo.ThumbURL;
+        }
+
+        public ImageSource Image { get => ImgThumbnail.Source; }
         
-        public String FileName { get; private set; }
+        public String FileName { get; set; }
 
-        public String StreamURL { get; private set; }
+        public String StreamURL { get; set; }
 
+        #region Custom Property
         public String ThumbnailUrl
         {
             get { return (String)GetValue(ThumbnailURLProperty); }
@@ -53,6 +67,8 @@ namespace PacChat.Resources.CustomControls.Media
         public static readonly DependencyProperty IsActiveProperty =
             DependencyProperty.Register("IsActive", typeof(bool), typeof(ThumbnailButton), new PropertyMetadata(false));
 
+        #endregion
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
@@ -64,6 +80,7 @@ namespace PacChat.Resources.CustomControls.Media
                     {
                         WebClient wc = new WebClient();
                         BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                        wc.Dispose();
                         Application.Current.Dispatcher.Invoke(() => {
                             ImgThumbnail.Source = bitmap;
                             ImgThumbnail.IsEnabled = true;
@@ -89,11 +106,19 @@ namespace PacChat.Resources.CustomControls.Media
                     this.OpacityMask.Opacity = 1;
                 } else
                 {
-                    this.OpacityMask.Opacity = 0.7;
+                    this.OpacityMask.Opacity = 0.5;
                 }
             }
 
             base.OnPropertyChanged(e);
+        }
+
+        public event EventHandler Click;
+
+        private void BtnClick(object sender, RoutedEventArgs e)
+        {
+            if (Click != null)
+                Click(this, e);
         }
     }
 }
