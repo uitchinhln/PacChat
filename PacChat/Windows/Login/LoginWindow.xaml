@@ -83,7 +83,14 @@
                     </materialDesign:TransitionerSlide>
                 </materialDesign:Transitioner>
             </Grid>
-            <Image Source="/PacChat;component/Resources/Drawable/hinh3.png"></Image>
+            <Image x:Name="ImgBg" Source="/PacChat;component/Resources/Drawable/hinh3.png">
+                <Image.OpacityMask>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Black" Offset="0.763"/>
+                        <GradientStop Offset="1"/>
+                    </RadialGradientBrush>
+                </Image.OpacityMask>
+            </Image>
         </Grid>
     </materialDesign:DialogHost>
 </Window>
