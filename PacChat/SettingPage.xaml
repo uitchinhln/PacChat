@@ -119,35 +119,107 @@
                                     <StackPanel Orientation="Vertical" Margin="10 30 10 30">
 
                                         <Border Background="#673AB7" CornerRadius="3" Margin="10">
-                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
+                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
                                                 <materialDesign:PopupBox.ToggleContent>
 
                                                     <Label Content="Choose from gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
                                                 </materialDesign:PopupBox.ToggleContent>
-                                                <ScrollViewer x:Name="BGGalleryPanel" Width="370" Height="325">
+                                                <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
                                                     <WrapPanel>
 
-                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
-                                                            <Border>
-                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3">
+                                                            <Border >
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG.jpg"  Stretch="UniformToFill"/>
                                                             </Border>
                                                         </Button>
 
-                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
                                                             <Border>
-                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG2.jpg"  Stretch="UniformToFill"/>
                                                             </Border>
                                                         </Button>
 
-                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
                                                             <Border>
-                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG3.jpg"  Stretch="UniformToFill"/>
                                                             </Border>
                                                         </Button>
 
-                                                        <Button  Width="96" Height="131" Margin="10" Padding="8" >
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
                                                             <Border>
-                                                                <Image Source="/PacChat;component/resources/drawable/BG.jpg"  Stretch="UniformToFill"/>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG4.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG5.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG6.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG7.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG8.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG9.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG10.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG11.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG12.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG13.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG14.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG15.jpg"  Stretch="UniformToFill"/>
+                                                            </Border>
+                                                        </Button>
+
+                                                        <Button  Margin="1" Width="120" Height="213" Padding="3" >
+                                                            <Border>
+                                                                <Image Source="/PacChat;component/resources/chatbg/BG16.jpg"  Stretch="UniformToFill"/>
                                                             </Border>
                                                         </Button>
 

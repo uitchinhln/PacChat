@@ -248,7 +248,7 @@ namespace PacChat
             {
                 _button1Clicked = true;
                 ChatBorder.Background = null;
-                addBackgroundImage("/PacChat/PacChat/Resources/Drawable/BG.jpg", 0);
+                addBackgroundImage("/PacChat/PacChat/Resources/ChatBG/BG.jpg", 0);
                 return;
             }
             ChatBorder.Background = null;

@@ -22,6 +22,7 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             //textBlock.Text = "asdasdsad";
+            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             NickName.Content = MainWindow.chatApplication.model.Title;
         }
 
@@ -34,6 +35,11 @@ namespace PacChat.Resources.CustomControls
         public void InsertBubble(int index, Bubble b)
         {
             spMessContainer.Children.Insert(index, b);
+        }
+
+        public void SetAva(string path)
+        {
+            Ava.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
         }
     }
 }
