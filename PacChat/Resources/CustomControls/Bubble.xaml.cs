@@ -91,7 +91,6 @@ namespace PacChat.Resources.CustomControls
                 margin.Right = 170;
                 margin.Bottom = 2;
                 borderBubble.Margin = margin;
-
             }
             else
             {
