@@ -23,6 +23,10 @@ namespace PacChat.Resources.CustomControls.Media
         public MediaPlayer()
         {
             InitializeComponent();
+
+            ThumbnailButton thumbnailButton = new ThumbnailButton();
+            thumbnailButton.ThumbnailUrl = "https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg";
+            Galary.Children.Add(thumbnailButton);
         }
     }
 }

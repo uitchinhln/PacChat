@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -58,28 +60,29 @@ namespace PacChat.Resources.CustomControls.Media
 
         public String FileName { get; private set; }
 
-        public String FileID { get; private set; }
+        public String StreamURL { get; private set; }
 
-        public String SourceUrl
+        public String ThumbnailUrl
         {
-            get { return (String)GetValue(SourceUrlProperty); }
-            set { SetValue(SourceUrlProperty, value); }
+            get { return (String)GetValue(ThumbnailURLProperty); }
+            set { SetValue(ThumbnailURLProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SourceUrlProperty =
-            DependencyProperty.Register("SourceUrl", typeof(String), typeof(ThumbnailButton), new PropertyMetadata(String.Empty));
+        public static readonly DependencyProperty ThumbnailURLProperty =
+            DependencyProperty.Register("ThumbnailUrl", typeof(String), typeof(ThumbnailButton), new PropertyMetadata(String.Empty));
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (e.Property == SourceUrlProperty && !String.IsNullOrEmpty(SourceUrl))
+            if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
+                WebClient wc = new WebClient();
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri(SourceUrl, UriKind.Absolute);
+                bitmap.StreamSource = new MemoryStream(wc.DownloadData(ThumbnailUrl));
                 bitmap.EndInit();
 
-                Thumbnail.Source = bitmap;
+                ImgThumbnail.Source = bitmap;
             }
 
             base.OnPropertyChanged(e);
