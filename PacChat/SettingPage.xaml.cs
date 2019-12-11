@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PacChat.Resources.CustomControls;
+using System.Windows.Media.Effects;
 
 namespace PacChat
 {
@@ -20,9 +21,14 @@ namespace PacChat
     /// </summary>
     public partial class SettingPage : UserControl
     {
+        public static SettingPage Instance;
+        private string currentPath;
+
         public SettingPage()
         {
             InitializeComponent();
+            currentPath = null;
+            Instance = this;
             loadBG_Gallery();
         }
 
@@ -80,11 +86,40 @@ namespace PacChat
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                BG_Preview.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.RelativeOrAbsolute));
+                AddBGPreview(op.FileName);
 
             }
         }
-        
-  
+
+        public void AddBGPreview(string path)
+        {
+            currentPath = path;
+            VisualBrush vb = new VisualBrush();
+            Image im = new Image();
+            BlurEffect ef = new BlurEffect();
+            ef.Radius = (int)GetBlurLv();
+            im.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            im.Effect = ef;
+            vb.Visual = im;
+            vb.Stretch = Stretch.Uniform;
+            vb.Viewbox = new Rect(0.05, 0.05, 0.9, 0.9);
+            borderBG_Preview.Background = vb;
+
+            ChatPage.Instance.addBackgroundImage(path, (int)GetBlurLv());
+
+        }
+
+        public int GetBlurLv()
+        {
+            return (int)blurLv.Value;
+        }
+
+        private void blurLv_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (currentPath != null)
+            {
+                AddBGPreview(currentPath);
+            }
+        }
     }
 }

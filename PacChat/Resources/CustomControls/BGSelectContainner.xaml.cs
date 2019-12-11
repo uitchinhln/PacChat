@@ -34,9 +34,10 @@ namespace PacChat.Resources.CustomControls
             imageBG.Source = new BitmapImage(new Uri("/PacChat;component/resources/chatbg/" + BGName, UriKind.RelativeOrAbsolute));
         }
 
+
         private void buttonBG_Click(object sender, RoutedEventArgs e)
         {
-            ChatPage.Instance.addBackgroundImage("/PacChat/PacChat/Resources/ChatBG/" + BGName, 0);
+            SettingPage.Instance.AddBGPreview("/PacChat/PacChat/Resources/ChatBG/" + BGName);
             Console.WriteLine("button");
         }
     }

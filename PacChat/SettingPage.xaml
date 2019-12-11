@@ -18,7 +18,7 @@
                 <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
             </StackPanel>
 
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="1">
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
                 <!-- General tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                     <StackPanel>
@@ -84,11 +84,12 @@
                                             <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
                                         </Border>
 
-                                        <Border Width="96" Height="131" Margin="10" CornerRadius="10" Background="#FF32ACFD">
+                                        <Border>
                                             <materialDesign:PopupBox Padding="0" materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
                                                 <materialDesign:PopupBox.ToggleContent>
-                                                    
-                                                    <Label Content="RGB" FontSize="20" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+
+                                                    <materialDesign:PackIcon Kind="ColorLens" Width="60" Height="60" Foreground="White"/>
+
                                                 </materialDesign:PopupBox.ToggleContent>
                                                 <Border Width="377" Height="269" Margin="0" Padding="0">
                                                     <cp:ColourPicker/>
@@ -107,11 +108,8 @@
                                 <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <Border Width="260" Height="260" Margin="10" CornerRadius="20">
-                                        <Border.Background>
-                                            <ImageBrush x:Name="BG_Preview"/>
-
-                                        </Border.Background>
+                                    <Border x:Name="borderBG_Preview" Width="260" Height="260" Margin="10" CornerRadius="20">
+                                        
 
                                     </Border>
 
@@ -132,13 +130,13 @@
                                         </Border>
 
                                         <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
-                                        <Slider
+                                        <Slider x:Name="blurLv"
                                           Minimum="0"
-                                          Maximum="10"
+                                          Maximum="100"
                                           Style="{StaticResource MaterialDesignDiscreteSlider}"
                                           ToolTip="Blur level"
                                           Value="50"
-                                          Width="280" />
+                                          Width="280" ValueChanged="blurLv_ValueChanged" />
                                     </StackPanel>
 
 
