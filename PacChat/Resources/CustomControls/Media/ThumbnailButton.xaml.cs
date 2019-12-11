@@ -25,6 +25,7 @@ namespace PacChat.Resources.CustomControls.Media
         public ThumbnailButton()
         {
             InitializeComponent();
+
         }
 
         #region Add Click Event
@@ -77,11 +78,7 @@ namespace PacChat.Resources.CustomControls.Media
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
                 WebClient wc = new WebClient();
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = new MemoryStream(wc.DownloadData(ThumbnailUrl));
-                bitmap.EndInit();
-
+                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(ThumbnailUrl)));
                 ImgThumbnail.Source = bitmap;
             }
 

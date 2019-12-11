@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +26,14 @@ namespace PacChat.Resources.CustomControls.Media
         {
             InitializeComponent();
 
-            ThumbnailButton thumbnailButton = new ThumbnailButton();
-            thumbnailButton.ThumbnailUrl = "https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg";
-            Galary.Children.Add(thumbnailButton);
+            Task task = new Task(() =>
+            {
+                WebClient wc = new WebClient();
+                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData("https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg")));
+                Application.Current.Dispatcher.Invoke(() => ImgFull.Source = bitmap);
+
+            });
+            task.Start();
         }
     }
 }
