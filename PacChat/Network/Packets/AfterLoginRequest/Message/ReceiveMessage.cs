@@ -32,6 +32,10 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                     Message = new AttachmentMessage();
                     (Message as AttachmentMessage).DecodeFromBuffer(buffer);
                     break;
+                case 2:
+                    Message = new ImageMessage();
+                    (Message as ImageMessage).DecodeFromBuffer(buffer);
+                    break;
                 case 3:
                     Message = new StickerMessage();
                     (Message as StickerMessage).DecodeFromBuffer(buffer);
@@ -39,6 +43,10 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 case 4:
                     Message = new TextMessage();
                     (Message as TextMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 5:
+                    Message = new VideoMessage();
+                    (Message as VideoMessage).DecodeFromBuffer(buffer);
                     break;
             }
         }

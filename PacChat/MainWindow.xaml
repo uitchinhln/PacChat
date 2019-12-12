@@ -156,21 +156,6 @@
                         </DockPanel>
                     </materialDesign:TransitionerSlide>
                 </materialDesign:Transitioner>
-
-                <!--<chatcontent:ProfileDisplayer></chatcontent:ProfileDisplayer>
--->
-                <!--
-        <DockPanel x:Name="spanelContent" Background="White">
-            <Label x:Name="ChatTitle" Content="IT008" FontSize="24" Background="{x:Null}" Foreground="#FF52176C" Margin="0" FontFamily="Segoe UI Semibold" FontWeight="Bold" VerticalAlignment="Top" DockPanel.Dock="Top"/>
-            <StackPanel VerticalAlignment="Bottom" Height="38" DockPanel.Dock="Bottom">
-                <TextBox x:Name="MsgBox" Text="Message..." Height="38" Padding="4,0,0,0" FontSize="18" Margin="0,0,96,0" Width="602">
-                </TextBox>
-            </StackPanel>
-
-            <ScrollViewer DockPanel.Dock="Top"/>
-
-        </DockPanel>
-        -->
             </DockPanel>
         </Border>
     </Border>

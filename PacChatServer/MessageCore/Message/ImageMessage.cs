@@ -1,4 +1,5 @@
-﻿using DotNetty.Buffers;
+﻿using CNetwork.Utils;
+using DotNetty.Buffers;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,16 @@ namespace PacChatServer.MessageCore.Message
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            FileID = ByteBufUtils.ReadUTF8(buffer);
+            FileName = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            buffer.WriteInt(GetPreviewCode());
+            ByteBufUtils.WriteUTF8(buffer, FileID);
+            ByteBufUtils.WriteUTF8(buffer, FileName);
+            return buffer;
         }
 
         public override int GetPreviewCode()

@@ -13,7 +13,7 @@
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           Value="0"
           IsIndeterminate="True" Height="Auto" Margin="20" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}"
-          Foreground="#FFFFFFFF" />
+          Foreground="#FFB6B6B6" />
         <Image x:Name="ImgThumbnail" 
            MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
             MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"

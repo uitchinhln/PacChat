@@ -63,59 +63,159 @@ namespace PacChat
             }
         }
 
+        public void UploadImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                List<string> paths = op.FileNames.ToList();
+                var app = MainWindow.chatApplication;
+                FileAPI.UploadMedia(app.model.currentSelectedConversation,
+                    paths, OnImageUploadCompleted, OnImageUploadError);
+            }
+        }
+
+        public void UploadVideo()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "Select a video";
+            op.Filter = "MPEG4 (*.mp4)|*.mp4";
+
+            if (op.ShowDialog() == true)
+            {
+                List<string> paths = op.FileNames.ToList();
+                var app = MainWindow.chatApplication;
+                FileAPI.UploadMedia(app.model.currentSelectedConversation,
+                    paths, OnVideoUploadCompleted, OnVideoUploadError);
+            }
+        }
+
+        public MediaInfo GetMediaInfo(string fileID, string fileName, string conversationID)
+        {
+            String thumbUrl = StreamAPI.GetMediaThumbnailURL(fileID, conversationID);
+            String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
+
+            MediaInfo media = new MediaInfo(thumbUrl, streamUrl, fileName, fileID);
+            return media;
+        }
+
+        #region Image Upload Handler
+        private void OnImageUploadCompleted(Dictionary<string, string> result)
+        {
+            foreach (var image in result)
+            {
+                string fileName = image.Key;
+                string fileID = image.Value;
+
+                ImageMessage message = new ImageMessage();
+                message.FileID = fileID;
+                message.FileName = fileName;
+
+                SendMessage(message);
+            }
+        }
+
+        private void OnImageUploadError(Exception error)
+        {
+            Console.WriteLine(error);
+        }
+        #endregion
+
+        #region Video Upload Handler
+        private void OnVideoUploadCompleted(Dictionary<string, string> result)
+        {
+            foreach (var video in result)
+            {
+                string fileName = video.Key;
+                string fileID = video.Value;
+
+                VideoMessage message = new VideoMessage();
+                message.FileID = fileID;
+                message.FileName = fileName;
+
+                SendMessage(message);
+            }
+        }
+
+        private void OnVideoUploadError(Exception error)
+        {
+            Console.WriteLine(error);
+        }
+        #endregion
+
         public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
             if (reversed) _headBubbleChat = null;
             else _previousBubbleChat = null;
 
-            Bubble b = new Bubble();
+            Bubble b = null;
+            ThumbnailButton thumbnail = null;
             var app = MainWindow.chatApplication;
 
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
+            {
+                b = new Bubble();
                 b.Messages = (msg as TextMessage).Message;
+            }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
             {
+                b = new Bubble();
                 b.Messages = (msg as AttachmentMessage).FileName;
                 b.SetLink((msg as AttachmentMessage).FileID);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Image)
             {
-                if (isSimulating)
-                {
-                    // Stream from server
-                }
-                else
-                {
-                    // Upload media
-                }
+                string fileID = (msg as ImageMessage).FileID;
+                string fileName = (msg as ImageMessage).FileName;
+                MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
+                thumbnail = new ThumbnailButton(media);
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.Margin = new Thickness(0, 0, 30, 0);
+                Console.WriteLine("Image sent");
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
-                if (isSimulating)
-                {
-                    // Stream from server
-                }
-                else
-                {
-                    // Upload media
-                }
+                thumbnail = new ThumbnailButton
+                    (
+                    new MediaInfo(
+                        StreamAPI.GetMediaThumbnailURL((msg as VideoMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        StreamAPI.GetMediaURL((msg as VideoMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        (msg as VideoMessage).FileName, (msg as VideoMessage).FileID)
+                    );
+
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.Margin = new Thickness(0, 0, 30, 0);
             }
 
-            b.Type = BubbleTypeParser.Parse(msg);
-            b.ControlUpdate();
+            if (b != null)
+            {
+                b.Type = BubbleTypeParser.Parse(msg);
+                b.ControlUpdate();
 
-            b.SetBG(Color.FromRgb(56, 56, 56));
-            b.SetTextColor(Colors.White);
-            b.SetDirect(false);// true = left false = right
-            b.SetSeen(false);
+                b.SetBG(Color.FromRgb(56, 56, 56));
+                b.SetTextColor(Colors.White);
+                b.SetDirect(false);// true = left false = right
+                b.SetSeen(false);
+            }
 
             if (reversed)
             {
-                spMessagesContainer.Children.Insert(0, b);
+                if (b != null) spMessagesContainer.Children.Insert(0, b);
+                if (thumbnail != null) spMessagesContainer.Children.Insert(0, thumbnail);
             }
             else
             {
-                spMessagesContainer.Children.Add(b);
+                if (b != null) spMessagesContainer.Children.Add(b);
+                if (thumbnail != null) spMessagesContainer.Children.Add(thumbnail);
                 MessagesContainer.ScrollToEnd();
             }
 
@@ -149,36 +249,76 @@ namespace PacChat
                 }
             }
 
-            Bubble b = new Bubble();
+            Bubble b = null;
+            ThumbnailButton thumbnail = null;
+            var app = MainWindow.chatApplication;
 
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
+            {
+                b = new Bubble();
                 b.Messages = (msg as TextMessage).Message;
+            }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Attachment)
             {
+                b = new Bubble();
                 b.Messages = (msg as AttachmentMessage).FileName;
                 b.SetLink((msg as AttachmentMessage).FileID);
             }
-            b.Type = BubbleTypeParser.Parse(msg);
-            b.ControlUpdate();
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Image)
+            {
+                thumbnail = new ThumbnailButton
+                    (
+                    new MediaInfo(
+                        StreamAPI.GetMediaThumbnailURL((msg as ImageMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        StreamAPI.GetMediaURL((msg as ImageMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        (msg as ImageMessage).FileName, (msg as ImageMessage).FileID)
+                    );
 
-            b.SetSeen(false);
-            b.SetBG(Color.FromRgb(246, 246, 246));
-            b.SetDirect(true); // true = left false = right
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.Margin = new Thickness(0, 0, 30, 0);
+            }
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
+            {
+                thumbnail = new ThumbnailButton
+                    (
+                    new MediaInfo(
+                        StreamAPI.GetMediaThumbnailURL((msg as VideoMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        StreamAPI.GetMediaURL((msg as VideoMessage).FileID,
+                        app.model.currentSelectedConversation),
+                        (msg as VideoMessage).FileName, (msg as VideoMessage).FileID)
+                    );
 
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.Margin = new Thickness(0, 0, 30, 0);
+            }
+
+            if (b != null)
+            {
+                b.Type = BubbleTypeParser.Parse(msg);
+                b.ControlUpdate();
+
+                b.SetSeen(false);
+                b.SetBG(Color.FromRgb(246, 246, 246));
+                b.SetDirect(true); // true = left false = right
+            }
 
             if (reversed)
             {
-                _headBubbleChat.InsertBubble(0, b);
+                if (b != null) _headBubbleChat.InsertBubble(0, b);
+                if (thumbnail != null) spMessagesContainer.Children.Insert(0, thumbnail);
             }
             else
             {
-                _previousBubbleChat.AddBubble(b);
+                if (b != null) _previousBubbleChat.AddBubble(b);
+                if (thumbnail != null) spMessagesContainer.Children.Insert(0, thumbnail);
                 MessagesContainer.ScrollToEnd();
             }
 
             if (isSimulating) return;
 
-            var app = MainWindow.chatApplication;
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, true));
         }
@@ -296,12 +436,14 @@ namespace PacChat
             }
             ChatBorder.Background = null;
             Random rd = new Random();
-            ChatBorder.Background = new SolidColorBrush(Color.FromRgb((byte)rd.Next(0, 255),(byte)rd.Next(0, 255), (byte)rd.Next(0, 255)));
+            ChatBorder.Background = new SolidColorBrush(Color.FromRgb((byte)rd.Next(0, 255), (byte)rd.Next(0, 255), (byte)rd.Next(0, 255)));
             _button1Clicked = false;
         }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
         {
+            UploadImage();
+            return;
             OpenFileDialog op = new OpenFileDialog();
             ImageContainner image;
             op.Title = "Select a picture";
@@ -351,7 +493,7 @@ namespace PacChat
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
             ef.Radius = blur;
-            im.Source = new BitmapImage( new Uri(path, UriKind.RelativeOrAbsolute));
+            im.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
             im.Effect = ef;
 
             vb.Visual = im;

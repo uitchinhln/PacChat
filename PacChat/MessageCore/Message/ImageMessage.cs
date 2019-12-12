@@ -1,20 +1,17 @@
-﻿using CNetwork.Utils;
-using DotNetty.Buffers;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CNetwork.Utils;
+using DotNetty.Buffers;
 
-namespace PacChatServer.MessageCore.Message
+namespace PacChat.MessageCore.Message
 {
-    public class VideoMessage : AbstractMessage
+    public class ImageMessage : AbstractMessage
     {
-        [BsonElement("FileID")]
-        public String FileID { get; set; }
-        [BsonElement("FileName")]
-        public String FileName { get; set; }
+        public string FileID { get; set; }
+        public string FileName { get; set; }
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {
@@ -32,7 +29,7 @@ namespace PacChatServer.MessageCore.Message
 
         public override int GetPreviewCode()
         {
-            return 5;
+            return 2;
         }
     }
 }
