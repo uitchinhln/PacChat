@@ -31,7 +31,7 @@ namespace PacChatServer.Network.RestAPI.Controller
             if (!Request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
-            Dictionary<String, String> result = FileHandler.Upload(Request, String.Format(SavePath, conversationID));
+            Dictionary<String, String> result = FileHandler.Upload(Request, String.Format(SavePath, conversationID), true);
 
             return result;
         }
