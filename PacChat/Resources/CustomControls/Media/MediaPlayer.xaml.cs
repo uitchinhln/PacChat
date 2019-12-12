@@ -1,4 +1,5 @@
-﻿using PacChat.Network.RestAPI;
+﻿using PacChat.Cache.Core;
+using PacChat.Network.RestAPI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,8 @@ namespace PacChat.Resources.CustomControls.Media
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
+        private LRUCache<String, BitmapImage> ImgCache = new LRUCache<string, BitmapImage>(40, 2);
+
         public MediaPlayer()
         {
             InitializeComponent();
@@ -154,6 +157,7 @@ namespace PacChat.Resources.CustomControls.Media
             if (hard)            
                 loadedMediaInfo.Clear();
             Gallery.Children.Clear();
+            ImgCache.Clear();
 
             ImgFull.Source = null;
             ImgFull.IsEnabled = false;
@@ -195,7 +199,15 @@ namespace PacChat.Resources.CustomControls.Media
                 VideoFull.Visibility = Visibility.Hidden;
                 ImgFull.Visibility = Visibility.Visible;
 
-                ImgFull.Source = new BitmapImage(new Uri(imageURL));
+                if (ImgCache.Contains(imageURL))
+                {
+                    ImgFull.Source = ImgCache.Get(imageURL);
+                } else
+                {
+                    BitmapImage bitmap = new BitmapImage(new Uri(imageURL));
+                    ImgCache.AddReplace(imageURL, bitmap);
+                    ImgFull.Source = bitmap;
+                }
             } catch (Exception e)
             {
                 Console.WriteLine(e);
