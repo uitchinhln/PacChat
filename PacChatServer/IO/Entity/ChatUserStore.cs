@@ -74,14 +74,15 @@ namespace PacChatServer.IO.Entity
 
             Mongo.Instance.Get<SearchIdByEmail>(Mongo.UserCollectionName, collection =>
             {
-                var condition = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input); 
-                var condition2 = Builders<SearchIdByEmail>.Filter.Ne(p=> p.ID, id); 
+                var findEmailCondtion = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input); 
+                var ingoreSenderCondition = Builders<SearchIdByEmail>.Filter.Ne(p=> p.ID, id); 
 
                 var fields = Builders<SearchIdByEmail>.Projection
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(condition & condition2).Project<SearchIdByEmail>(fields).Limit(20).ToList();
+                var objs = collection.Find(findEmailCondtion & ingoreSenderCondition)
+                    .Project<SearchIdByEmail>(fields).Limit(30).ToList();
 
                 foreach (SearchIdByEmail r in objs)
                 {
