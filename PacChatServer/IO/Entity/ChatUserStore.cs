@@ -96,7 +96,7 @@ namespace PacChatServer.IO.Entity
             return result;
         }
 
-        private bool RelationIgnore(ChatUser user, Guid targetID, Relation.Type relationType)
+        private bool RelationIgnore(ChatUser user, Guid targetID, params Relation.Type[] relationTypes)
         {
             if (user == null || targetID == null) return false;
 
@@ -104,11 +104,9 @@ namespace PacChatServer.IO.Entity
             {
                 Relation relation = Relation.Get(user.Relationship[targetID], true);
                 if (relation == null) return true;
-                return relation.RelationType != relationType || relation.Source == user.ID;
-            } else
-            {
-                return true;
+                return relationTypes.Contains(relation.RelationType) || relation.Source == user.ID;
             }
+            return true;
         }
     }
 

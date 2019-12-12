@@ -420,6 +420,7 @@
     <Compile Include="Network\RestAPI\Controller\AttachmentController.cs" />
     <Compile Include="Network\RestAPI\Controller\MediaController.cs" />
     <Compile Include="Network\RestAPI\Controller\ProfileController.cs" />
+    <Compile Include="Network\RestAPI\Controller\ResourceController.cs" />
     <Compile Include="Network\RestAPI\Controller\StickerController.cs" />
     <Compile Include="Network\RestAPI\CustomContentTypeProvider.cs" />
     <Compile Include="Network\RestAPI\ExceptionHandling.cs" />
