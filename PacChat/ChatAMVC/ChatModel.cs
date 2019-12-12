@@ -18,6 +18,7 @@ namespace PacChat.ChatAMVC
         public static Dictionary<string, ShortProfile> FriendShortProfiles = new Dictionary<string, ShortProfile>();
 
         public string SelfID { get; set; }
+        public string currentMediaFileID { get; set; } = "";
  
         #region OnChatPage
         public string Title { get; set; } = "";

@@ -34,6 +34,7 @@ namespace PacChat.Resources.CustomControls.Media
             if (mediaInfo == null)
                 throw new NullReferenceException("MediaInfo cannot be null.");
             this.FileName = mediaInfo.FileName;
+            this.FileID = mediaInfo.FileID;
             this.StreamURL = mediaInfo.StreamURL;
             this.ThumbnailUrl = mediaInfo.ThumbURL;
         }
@@ -41,6 +42,7 @@ namespace PacChat.Resources.CustomControls.Media
         public ImageSource Image { get => ImgThumbnail.Source; }
         
         public String FileName { get; set; }
+        public String FileID { get; set; }
 
         public String StreamURL { get; set; }
 

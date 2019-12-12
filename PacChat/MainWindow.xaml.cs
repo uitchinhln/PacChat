@@ -28,12 +28,13 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Button> _panelButtons = new List<Button>();
         public static MainWindow Instance { get; private set; }
         public static int CurrentWindowWidth { get; set; }
         public static int CurrentWindowHeight { get; set; }
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight{ get; set; }
+
+        public MediaPlayerWindow MediaPlayerWindow { get; private set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -76,9 +77,13 @@ namespace PacChat
             Packets.SendPacket<GetNotifications>();
             Packets.SendPacket<GetSelfID>();
             Packets.SendPacket<RecentConversations>();
-            Sticker.Load();
+            // Sticker.Load();
 
             SetNotificationDotState(false);
+
+            // Media window
+            MediaPlayerWindow = new MediaPlayerWindow();
+            MediaPlayerWindow.Hide();
 
             /*
             try

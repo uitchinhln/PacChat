@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using PacChat.Resources.CustomControls.Media;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -26,7 +26,6 @@ namespace PacChat.Resources.CustomControls
             NickName.Content = MainWindow.chatApplication.model.Title;
         }
 
-
         public void AddBubble(Bubble b)
         {
             spMessContainer.Children.Add(b);
@@ -35,6 +34,16 @@ namespace PacChat.Resources.CustomControls
         public void InsertBubble(int index, Bubble b)
         {
             spMessContainer.Children.Insert(index, b);
+        }
+
+        public void AddMedia(ThumbnailButton thumbnail)
+        {
+            spMessContainer.Children.Add(thumbnail);
+        }
+
+        public void InsertMedia(ThumbnailButton thumbnail)
+        {
+            spMessContainer.Children.Insert(0, thumbnail);
         }
 
         public void SetAva(string path)
