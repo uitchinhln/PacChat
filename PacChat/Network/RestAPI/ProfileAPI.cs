@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,6 @@ namespace PacChat.Network.RestAPI
         private static readonly String UploadAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetSelfAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetUserAvatarURL = "http://{0}:1403/api/profile/avatar/{1}";
-        private static readonly String AvatarSavePath = Path.Combine(Path.GetTempPath(), "PacChat/Profile/Avatar/");
 
         public static async void AvatarUpload(String filePath, ResultHandler handler, ErrorHandler errorHandler)
         {
@@ -58,10 +58,12 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetSelfAvatarURL, address));
 
+                Directory.CreateDirectory(TempUtil.AvatarSavePath);
+
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(AvatarSavePath, "MyAvatar"));
+                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.AvatarSavePath, "MyAvatar"));
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
@@ -82,10 +84,12 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetUserAvatarURL, address, userID));
 
+                Directory.CreateDirectory(TempUtil.AvatarSavePath);
+
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(AvatarSavePath, userID));
+                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.AvatarSavePath, userID));
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)

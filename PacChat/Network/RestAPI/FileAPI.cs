@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,6 @@ namespace PacChat.Network.RestAPI
 
         private static readonly String MediaUploadUrl = "http://{0}:1403/api/message/media/{1}";
 
-        private static readonly String TempPath = Path.Combine(Path.GetTempPath(), "PacChat/Temp/");
         private static readonly Random Rand = new Random();
 
         public static async void UploadAttachment(String conversationID, List<String> filePaths, 
@@ -71,8 +71,8 @@ namespace PacChat.Network.RestAPI
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
 
-                Directory.CreateDirectory(TempPath);
-                String temp = Path.Combine(TempPath, Rand.Next() + "---" + Rand.Next());
+                Directory.CreateDirectory(TempUtil.DownloadPath);
+                String temp = Path.Combine(TempUtil.DownloadPath, Rand.Next() + "---" + Rand.Next());
 
                 webClient.DownloadFileAsync(uri, temp);
                 webClient.DownloadFileCompleted += (o, e) =>
@@ -142,8 +142,8 @@ namespace PacChat.Network.RestAPI
 
                 WebClient webClient = new WebClient();
 
-                Directory.CreateDirectory(TempPath);
-                String temp = Path.Combine(TempPath, Rand.Next() + "---" + Rand.Next());
+                Directory.CreateDirectory(TempUtil.DownloadPath);
+                String temp = Path.Combine(TempUtil.DownloadPath, Rand.Next() + "---" + Rand.Next());
 
                 webClient.DownloadFileAsync(uri, temp);
                 webClient.DownloadFileCompleted += (o, e) =>

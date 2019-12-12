@@ -140,6 +140,7 @@
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
     <Compile Include="Network\RestAPI\FileAPI.cs" />
     <Compile Include="Network\RestAPI\ProfileAPI.cs" />
+    <Compile Include="Network\RestAPI\ResourceAPI.cs" />
     <Compile Include="Network\RestAPI\StickerAPI.cs" />
     <Compile Include="Network\RestAPI\StreamAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">
@@ -211,7 +212,9 @@
     <Compile Include="Utils\HashUtils.cs" />
     <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
+    <Compile Include="Utils\ResourceUtil.cs" />
     <Compile Include="Utils\SystemPlacesUtils.cs" />
+    <Compile Include="Utils\TempUtil.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Utils\UserUtils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">

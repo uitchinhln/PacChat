@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChatServer.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace PacChatServer.Network.RestAPI.Controller
     {
         public static String ResourcePath { get; } = "Resource/v{0}";
 
-        [HttpGet, Route("api/resource/v{vesion}/{fileName}")]
-        public HttpResponseMessage GetConversationFile(string version, string fileName)
+        [HttpGet, Route("api/resource/v{vesion}/{basedFileName}")]
+        public HttpResponseMessage GetConversationFile(string version, string basedFileName)
         {
+            String fileName = HashUtils.Base64Decode(basedFileName);
             if (!File.Exists(Path.Combine(String.Format(ResourcePath, version), fileName)))
                 throw new FileNotFoundException();
 
@@ -38,7 +40,7 @@ namespace PacChatServer.Network.RestAPI.Controller
                 partialResponse.Content = new ByteRangeStreamContent(stream, Request.Headers.Range, contentType);
                 partialResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = fileName
+                    FileName = Path.GetFileName(fileName)
                 };
                 return partialResponse;
             }
@@ -49,7 +51,7 @@ namespace PacChatServer.Network.RestAPI.Controller
                 fullResponse.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
                 fullResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = fileName
+                    FileName = Path.GetFileName(fileName)
                 };
                 return fullResponse;
             }
