@@ -14,6 +14,8 @@ namespace PacChat.MessageCore.Sticker
         public static ConcurrentDictionary<int, Sticker> LoadedStickers { get; private set; } = new ConcurrentDictionary<int, Sticker>();
         public static ConcurrentDictionary<int, StickerCategory> LoadedCategories { get; set; } = new ConcurrentDictionary<int, StickerCategory>();
 
+        public delegate void LoadedHandler();
+
         [JsonProperty("id")]
         public int ID { get; set; }
 
@@ -35,7 +37,7 @@ namespace PacChat.MessageCore.Sticker
         [JsonProperty("duration")]
         public int Duration { get; set; }
 
-        public static void Load()
+        public static void Load(LoadedHandler loadedHandler)
         {
             new Task(() =>
             {
@@ -50,6 +52,8 @@ namespace PacChat.MessageCore.Sticker
                         cate.Stickers.Add(sticker);
                     }
                 }
+                if (loadedHandler != null)
+                    loadedHandler();
             }).Start();
         }
     }
