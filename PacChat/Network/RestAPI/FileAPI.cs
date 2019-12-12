@@ -108,7 +108,7 @@ namespace PacChat.Network.RestAPI
                 }
 
                 String address = ChatConnection.Instance.Host;
-                String url = String.Format(AttachmentUploadUrl, address, conversationID);
+                String url = String.Format(MediaUploadUrl, address, conversationID);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
