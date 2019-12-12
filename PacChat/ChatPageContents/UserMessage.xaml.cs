@@ -32,7 +32,7 @@ namespace PacChat.ChatPageContents
             InitializeComponent();
             UserMessage1.FontWeight = FontWeights.Normal;
             IncomingMask.Visibility = Visibility.Hidden;
-            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
         }
 
         private void OnClick(object sender, RoutedEventArgs e)

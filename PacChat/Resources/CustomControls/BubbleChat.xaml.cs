@@ -21,8 +21,8 @@ namespace PacChat.Resources.CustomControls
         public BubbleChat()
         {
             InitializeComponent();
-            //textBlock.Text = "asdasdsad";
-            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            // textBlock.Text = "asdasdsad";
+            // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             NickName.Content = MainWindow.chatApplication.model.Title;
         }
 

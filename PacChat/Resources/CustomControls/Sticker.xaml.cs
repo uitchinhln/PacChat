@@ -105,7 +105,6 @@ namespace PacChat.Resources.CustomControls
         {
             if (Clickable)
             {
-
                 Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet);
             }
         }

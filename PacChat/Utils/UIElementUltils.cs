@@ -30,8 +30,10 @@ namespace PacChat.Utils
     public enum BubbleType
     {
         Attachment = 1,
+        Image = 2,
         Sticker = 3, 
-        Text = 4
+        Text = 4,
+        Video = 5
     }
 
     public class BubbleTypeParser

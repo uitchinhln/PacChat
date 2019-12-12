@@ -22,6 +22,7 @@ using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.Network;
 using PacChat.Network.RestAPI;
 using static PacChat.Network.RestAPI.FileAPI;
+using PacChat.Resources.CustomControls.Media;
 
 namespace PacChat
 {
@@ -42,7 +43,7 @@ namespace PacChat
             Instance = this;
             _button1Clicked = false;
             spTabStickerContainner.Children.Add(new TabStickerContainner(this));
-            SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             Transitioner.SelectedIndex = 0;
         }
 
@@ -68,6 +69,7 @@ namespace PacChat
             else _previousBubbleChat = null;
 
             Bubble b = new Bubble();
+            var app = MainWindow.chatApplication;
 
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
                 b.Messages = (msg as TextMessage).Message;
@@ -76,6 +78,29 @@ namespace PacChat
                 b.Messages = (msg as AttachmentMessage).FileName;
                 b.SetLink((msg as AttachmentMessage).FileID);
             }
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Image)
+            {
+                if (isSimulating)
+                {
+                    // Stream from server
+                }
+                else
+                {
+                    // Upload media
+                }
+            }
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
+            {
+                if (isSimulating)
+                {
+                    // Stream from server
+                }
+                else
+                {
+                    // Upload media
+                }
+            }
+
             b.Type = BubbleTypeParser.Parse(msg);
             b.ControlUpdate();
 
@@ -96,7 +121,6 @@ namespace PacChat
 
             if (isSimulating) return;
 
-            var app = MainWindow.chatApplication;
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, false));
 
