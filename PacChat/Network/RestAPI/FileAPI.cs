@@ -18,6 +18,9 @@ namespace PacChat.Network.RestAPI
 
         private static readonly String AttachmentUploadUrl = "http://{0}:1403/api/message/attachment/{1}";
         private static readonly String AttachmentDownloadUrl = "http://{0}:1403/api/message/attachment/{1}/{2}";
+
+        private static readonly String MediaUploadUrl = "http://{0}:1403/api/message/media/{1}";
+
         private static readonly String TempPath = Path.Combine(Path.GetTempPath(), "PacChat/Temp/");
         private static readonly Random Rand = new Random();
 
@@ -40,8 +43,6 @@ namespace PacChat.Network.RestAPI
 
                 String address = ChatConnection.Instance.Host;
                 String url = String.Format(AttachmentUploadUrl, address, conversationID);
-
-                Console.WriteLine(url);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
@@ -85,6 +86,42 @@ namespace PacChat.Network.RestAPI
             } catch (Exception e)
             {
                 Console.WriteLine(e);
+                if (errorHandler != null) errorHandler(e);
+            }
+        }
+
+        public static async void UploadMedia(String conversationID, List<String> filePaths,
+            ResultHandler handler, ErrorHandler errorHandler)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+
+                httpClient.DefaultRequestHeaders.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                foreach (String filePath in filePaths)
+                {
+                    if (!File.Exists(filePath)) continue;
+                    FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                    form.Add(new StreamContent(stream), "file", Path.GetFileName(filePath));
+                }
+
+                String address = ChatConnection.Instance.Host;
+                String url = String.Format(MediaUploadUrl, address, conversationID);
+
+                HttpResponseMessage response = await httpClient.PostAsync(url, form);
+                response.EnsureSuccessStatusCode();
+                httpClient.Dispose();
+
+                string sd = response.Content.ReadAsStringAsync().Result;
+
+                //Dic<FileName, FileID>
+                Dictionary<String, String> result = JsonConvert.DeserializeObject<Dictionary<String, String>>(sd);
+                handler(result);
+            }
+            catch (Exception e)
+            {
                 if (errorHandler != null) errorHandler(e);
             }
         }

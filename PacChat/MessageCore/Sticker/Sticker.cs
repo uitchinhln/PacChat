@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PacChat.Network.RestAPI;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -33,5 +34,23 @@ namespace PacChat.MessageCore.Sticker
 
         [JsonProperty("duration")]
         public int Duration { get; set; }
+
+        public static void Load()
+        {
+            new Task(() =>
+            {
+                List<StickerCategory> categories = StickerAPI.GetCategories();
+                foreach (StickerCategory cate in categories)
+                {
+                    LoadedCategories.TryAdd(cate.ID, cate);
+                    List<Sticker> stickers = StickerAPI.GetStickerCategory(cate.ID);
+                    foreach (Sticker sticker in stickers)
+                    {
+                        LoadedStickers.TryAdd(sticker.ID, sticker);
+                        cate.Stickers.Add(sticker);
+                    }
+                }
+            }).Start();
+        }
     }
 }

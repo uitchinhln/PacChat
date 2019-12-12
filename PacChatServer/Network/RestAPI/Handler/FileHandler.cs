@@ -1,6 +1,10 @@
-﻿using PacChatServer.IO.Message;
+﻿using NReco.VideoConverter;
+using NReco.VideoInfo;
+using PacChatServer.IO.Message;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -11,7 +15,10 @@ namespace PacChatServer.Network.RestAPI.Handler
 {
     public static class FileHandler
     {
-        public static Dictionary<String, String> Upload(HttpRequestMessage Request, String SavePath)
+        public static String[] VideoExtensions = { ".mp4", ".avi" };
+        public static String[] ImageExtensions = { ".png", ".jpg", ".jpeg", ".bmp" };
+
+        public static Dictionary<String, String> Upload(HttpRequestMessage Request, String SavePath, bool createThumb = false)
         {
             Dictionary<String, String> result = new Dictionary<String, String>();
 
@@ -52,6 +59,28 @@ namespace PacChatServer.Network.RestAPI.Handler
                     result.Add(fileName, id.ToString());
 
                     File.Move(fileData.LocalFileName, Path.Combine(SavePath, id.ToString()));
+                    if (createThumb)
+                    {
+                        Task task = new Task(() =>
+                        {
+                            if (VideoExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                            {
+                                var ffProbe = new FFProbe();
+                                var videoInfo = ffProbe.GetMediaInfo(Path.Combine(SavePath, id.ToString()));
+                                FFMpegConverter converter = new FFMpegConverter();
+                                converter.GetVideoThumbnail(Path.Combine(SavePath, id.ToString()), 
+                                    Path.Combine(SavePath, id.ToString() + "_thumb.jpg"), 
+                                    (float) videoInfo.Duration.TotalSeconds / 2);
+                            }
+
+                            if (ImageExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                            {
+                                Image image = Image.FromFile(Path.Combine(SavePath, id.ToString()));
+                                image.GetThumbnailImage(128, 128, null, IntPtr.Zero).Save(Path.Combine(SavePath, id.ToString() + "_thumb.jpg"));
+                            }
+                        });
+                        task.Start();
+                    }
                 }
             }).Wait();
 
