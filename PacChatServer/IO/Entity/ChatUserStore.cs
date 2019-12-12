@@ -76,13 +76,13 @@ namespace PacChatServer.IO.Entity
             Mongo.Instance.Get<SearchIdByEmail>(Mongo.UserCollectionName, collection =>
             {
                 var matchEmail = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input);
-                var ignoreBlocked = Builders<SearchIdByEmail>.Filter.Where(p => !RelationIgnore(user, p.ID, Relation.Type.Block));
+                //var ignoreBlocked = Builders<SearchIdByEmail>.Filter.Where(p => !RelationIgnore(user, p.ID, Relation.Type.Block));
 
                 var fields = Builders<SearchIdByEmail>.Projection
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(matchEmail & ignoreBlocked)
+                var objs = collection.Find(matchEmail)
                     .Project<SearchIdByEmail>(fields).Limit(31).ToList();
 
                 foreach (SearchIdByEmail r in objs)
@@ -98,14 +98,14 @@ namespace PacChatServer.IO.Entity
 
         private bool RelationIgnore(ChatUser user, Guid targetID, params Relation.Type[] relationTypes)
         {
-            if (user == null || targetID == null) return false;
+            //if (user == null || targetID == null) return false;
 
-            if (user.Relationship.ContainsKey(targetID))
-            {
-                Relation relation = Relation.Get(user.Relationship[targetID], true);
-                if (relation == null) return true;
-                return relationTypes.Contains(relation.RelationType) || relation.Source == user.ID;
-            }
+            //if (user.Relationship.ContainsKey(targetID))
+            //{
+            //    Relation relation = Relation.Get(user.Relationship[targetID], true);
+            //    if (relation == null) return true;
+            //    return relationTypes.Contains(relation.RelationType) || relation.Source == user.ID;
+            //}
             return true;
         }
     }
