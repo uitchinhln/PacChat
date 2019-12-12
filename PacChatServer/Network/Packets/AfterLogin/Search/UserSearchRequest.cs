@@ -28,7 +28,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Search
         public void Handle(ISession session)
         {
             UserSearchResponse response = new UserSearchResponse();
-            response.UserIDs = new ChatUserStore().SearchUserIDByEmail(Email);
+            response.UserIDs = new ChatUserStore().SearchUserIDByEmail(Email, (session as ChatSession).Owner.ID);
             session.Send(response);
         }
     }

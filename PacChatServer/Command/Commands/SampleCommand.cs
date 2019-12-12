@@ -69,11 +69,11 @@ namespace PacChatServer.Command.Commands
 
             if (args[1] == "search" && args.Length >=3)
             {
-                List<String> ids = new ChatUserStore().SearchUserIDByEmail(args[2]);
-                foreach (string s in ids)
-                {
-                    Console.WriteLine(s);
-                }
+                //List<String> ids = new ChatUserStore().SearchUserIDByEmail(args[2]);
+                //foreach (string s in ids)
+                //{
+                //    Console.WriteLine(s);
+                //}
             }
 
             if (args[1] == "mkfriend" && args.Length >= 4)
