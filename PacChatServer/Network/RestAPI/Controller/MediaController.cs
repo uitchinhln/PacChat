@@ -76,5 +76,46 @@ namespace PacChatServer.Network.RestAPI.Controller
                 return fullResponse;
             }
         }
+
+        [HttpGet, Route("api/message/media/thumbnail/{fileID}/{conversationID}/{token}")]
+        public HttpResponseMessage GetMediaThumbnail(string conversationID, string fileID, string token)
+        {
+            ChatSession session = Verifier.SessionFromToken(token);
+            if (session == null)
+                throw new UnauthorizedAccessException();
+
+            Guid conversationGid = Guid.Parse(conversationID);
+            if (!session.Owner.ConversationID.Contains(conversationGid))
+                throw new UnauthorizedAccessException();
+
+            if (!File.Exists(Path.Combine(String.Format(SavePath, conversationID), fileID + "_thumb.jpg")))
+                throw new FileNotFoundException();
+
+            String filePath = Path.Combine(String.Format(SavePath, conversationID), fileID + "_thumb.jpg");
+            String fileName = AttachmentStore.Parse(Guid.Parse(fileID));
+
+            FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+            new CustomContentTypeProvider().TryGetContentType(fileName, out var contentType);
+
+            if (contentType == null || contentType.Length < 1)
+            {
+                contentType = "application/octet-stream";
+            }
+
+            if (Request.Headers.Range != null)
+            {
+                HttpResponseMessage partialResponse = Request.CreateResponse(HttpStatusCode.PartialContent);
+                partialResponse.Content = new ByteRangeStreamContent(stream, Request.Headers.Range, contentType);
+                return partialResponse;
+            }
+            else
+            {
+                HttpResponseMessage fullResponse = Request.CreateResponse(HttpStatusCode.OK);
+                fullResponse.Content = new StreamContent(stream);
+                fullResponse.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+                return fullResponse;
+            }
+        }
     }
 }
