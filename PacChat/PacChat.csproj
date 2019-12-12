@@ -66,6 +66,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cache\Core\DataNode.cs" />
+    <Compile Include="Cache\Core\FIFOCache.cs" />
+    <Compile Include="Cache\Core\LFUCache.cs" />
+    <Compile Include="Cache\Core\LRUCache.cs" />
     <Compile Include="ChatPageContents\ConversationControl.xaml.cs">
       <DependentUpon>ConversationControl.xaml</DependentUpon>
     </Compile>

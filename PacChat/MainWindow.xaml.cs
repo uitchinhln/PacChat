@@ -19,6 +19,7 @@ using PacChat.Network;
 using PacChat.Utils;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
+using PacChat.MessageCore.Sticker;
 
 namespace PacChat
 {
@@ -75,6 +76,7 @@ namespace PacChat
             Packets.SendPacket<GetNotifications>();
             Packets.SendPacket<GetSelfID>();
             Packets.SendPacket<RecentConversations>();
+            Sticker.Load();
 
             SetNotificationDotState(false);
 

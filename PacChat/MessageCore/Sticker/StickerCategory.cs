@@ -34,17 +34,8 @@ namespace PacChat.MessageCore.Sticker
         [JsonProperty("iconPreview")]
         public string IconPreview { get; set; }
 
-        [JsonProperty("price")]
-        public int Price { get; set; }
-
         [JsonProperty("group")]
         public int Group { get; set; }
-
-        [JsonProperty("status")]
-        public int Status { get; set; }
-
-        [JsonProperty("version")]
-        public int Version { get; set; }
 
         [JsonProperty("thumbImg")]
         public string ThumbImg { get; set; }
@@ -57,12 +48,6 @@ namespace PacChat.MessageCore.Sticker
 
         [JsonProperty("sourceUrl")]
         public string SourceURL { get; set; }
-
-        [JsonProperty("permission")]
-        public int Permisson { get; set; }
-
-        [JsonProperty("expireTime")]
-        public long ExpireTime { get; set; }
 
         [JsonProperty("is_hidden")]
         public int IsHidden { get; set; }
