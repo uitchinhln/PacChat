@@ -36,7 +36,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Notification
                 ForwardedFriendRequest packet = new ForwardedFriendRequest();
                 packet.SenderID = chatSession.Owner.ID.ToString();
                 packet.Name = chatSession.Owner.FirstName + " " + chatSession.Owner.LastName;
-                Console.WriteLine("Friend request " + packet.Name);
+                PacChatServer.GetServer().Logger.Debug("Friend request " + packet.Name);
                 user.Send(packet);
             }
 

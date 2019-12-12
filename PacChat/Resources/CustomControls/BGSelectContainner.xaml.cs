@@ -20,24 +20,24 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class BGSelectContainner : UserControl
     {
-        public BGSelectContainner(string name)
+        public BGSelectContainner(string uri)
         {
             InitializeComponent();
-            BGName = name;
+            BGUri = uri;
             SetImage();
         }
 
-        public string BGName { get; set; }
+        public string BGUri { get; set; }
 
        public void SetImage()
         {
-            imageBG.Source = new BitmapImage(new Uri("/PacChat;component/resources/chatbg/" + BGName, UriKind.RelativeOrAbsolute));
+            imageBG.Source = new BitmapImage(new Uri(BGUri, UriKind.RelativeOrAbsolute));
         }
 
 
         private void buttonBG_Click(object sender, RoutedEventArgs e)
         {
-            SettingPage.Instance.AddBGPreview("/PacChat/PacChat/Resources/ChatBG/" + BGName);
+            SettingPage.Instance.AddBGPreview(BGUri);
             Console.WriteLine("button");
         }
     }

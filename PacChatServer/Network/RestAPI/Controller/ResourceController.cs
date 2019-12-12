@@ -16,7 +16,7 @@ namespace PacChatServer.Network.RestAPI.Controller
     {
         public static String ResourcePath { get; } = "Resource/v{0}";
 
-        [HttpGet, Route("api/resource/v{vesion}/{basedFileName}")]
+        [HttpGet, Route("api/resource/v{version}/{basedFileName}")]
         public HttpResponseMessage GetConversationFile(string version, string basedFileName)
         {
             String fileName = HashUtils.Base64Decode(basedFileName);

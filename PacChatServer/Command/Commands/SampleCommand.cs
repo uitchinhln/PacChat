@@ -25,11 +25,11 @@ namespace PacChatServer.Command.Commands
                 ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(id);
                 if (profile == null)
                 {
-                    Console.WriteLine("NULL");
+                    PacChatServer.GetServer().Logger.Debug("NULL");
                 }
                 else
                 {
-                    Console.WriteLine(profile.ID);
+                    PacChatServer.GetServer().Logger.Debug(profile.ID);
                 }
             }
 

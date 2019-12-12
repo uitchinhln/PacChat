@@ -26,9 +26,13 @@ namespace PacChat.Network
         protected ProtocolProvider protocolProvider;
 
         public String Host { get; private set; } = String.Empty;
+        public int Port { get; private set; } = 1402;
 
         private ChatConnection(ProtocolProvider protocolProvider)
         {
+            this.Host = ConfigurationManager.AppSettings["ServerAddress"];
+            this.Port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();
             this.workerGroup = new MultithreadEventLoopGroup();
@@ -42,10 +46,8 @@ namespace PacChat.Network
 
         public async Task Bind()
         {
-            Host = ConfigurationManager.AppSettings["ServerAddress"];
-            int port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
             IPAddress address = Dns.GetHostAddresses(Host)[0];
-            await Bind(new IPEndPoint(address, port));
+            await Bind(new IPEndPoint(address, Port));
         }
 
         public async Task Bind(IPEndPoint address)

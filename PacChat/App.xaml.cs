@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using PacChat.Resources.CustomControls;
+using PacChat.Utils;
 
 namespace PacChat
 {
@@ -21,6 +22,7 @@ namespace PacChat
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            ResourceUtil.PrepareResource();
             LoginWindow main = new LoginWindow();
             //MainWindow main = new MainWindow();
             //TestWindows main = new TestWindows();

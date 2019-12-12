@@ -15,7 +15,7 @@ namespace PacChat.Network.RestAPI
     {
         private static readonly String currentVersion = ConfigurationManager.AppSettings["AppVersion"];
 
-        public static readonly String ResourceDownloadUrl = "api/resource/v{0}/{1}";
+        public static readonly String ResourceDownloadUrl = "http://{0}:1403/api/resource/v{1}/{2}";
 
         public delegate void ErrorHandler(Exception error);
 
@@ -28,13 +28,11 @@ namespace PacChat.Network.RestAPI
                 String fileNameParam = HashUtils.Base64Encode(savePath.Replace(TempUtil.ResourcePath, ""));
 
                 String address = ChatConnection.Instance.Host;
-                Uri uri = new Uri(String.Format(ResourceDownloadUrl, currentVersion, fileNameParam));
+                Uri uri = new Uri(String.Format(ResourceDownloadUrl, address, currentVersion, fileNameParam));
 
                 WebClient webClient = new WebClient();
 
-                webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-
-                Directory.CreateDirectory(TempUtil.ResourcePath);
+                Directory.CreateDirectory(savePath.Replace(Path.GetFileName(savePath), ""));
 
                 webClient.DownloadFileAsync(uri, savePath);
                 if (onProgressChange != null)

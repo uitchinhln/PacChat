@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PacChat.Resources.CustomControls;
 using System.Windows.Media.Effects;
+using PacChat.Utils;
+using System.IO;
 
 namespace PacChat
 {
@@ -54,9 +56,10 @@ namespace PacChat
 
         private void loadBG_Gallery()
         {
+            String uri = Path.Combine(TempUtil.ResourcePath, "ChatPageBg/BG{0}.jpg");
             for (int i=1; i<=16;i++)
             {
-                BGSelectContainner bg = new BGSelectContainner("BG" + i.ToString() + ".jpg");
+                BGSelectContainner bg = new BGSelectContainner(String.Format(uri, i));
                 wrappanelBG_Gallery.Children.Add(bg);
             }
    
