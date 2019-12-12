@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.IO.Storage;
 using System;
 using System.Collections.Generic;
@@ -68,24 +69,25 @@ namespace PacChatServer.IO.Entity
             }
         }
 
-        public List<String> SearchUserIDByEmail(string input, Guid id)
+        public List<String> SearchUserIDByEmail(string input, ChatUser user)
         {
             List<String> result = new List<String>();
 
             Mongo.Instance.Get<SearchIdByEmail>(Mongo.UserCollectionName, collection =>
             {
-                var findEmailCondtion = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input); 
-                var ingoreSenderCondition = Builders<SearchIdByEmail>.Filter.Ne(p=> p.ID, id); 
+                var matchEmail = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input);
+                var ignoreBlocked = Builders<SearchIdByEmail>.Filter.Where(p => !RelationIgnore(user, p.ID, Relation.Type.Block));
 
                 var fields = Builders<SearchIdByEmail>.Projection
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(findEmailCondtion & ingoreSenderCondition)
-                    .Project<SearchIdByEmail>(fields).Limit(30).ToList();
+                var objs = collection.Find(matchEmail & ignoreBlocked)
+                    .Project<SearchIdByEmail>(fields).Limit(31).ToList();
 
                 foreach (SearchIdByEmail r in objs)
                 {
+                    if (r.ID == user.ID) continue;
                     result.Add(r.ID.ToString());
                 }
                 return null;
@@ -93,7 +95,23 @@ namespace PacChatServer.IO.Entity
 
             return result;
         }
+
+        private bool RelationIgnore(ChatUser user, Guid targetID, Relation.Type relationType)
+        {
+            if (user == null || targetID == null) return false;
+
+            if (user.Relationship.ContainsKey(targetID))
+            {
+                Relation relation = Relation.Get(user.Relationship[targetID], true);
+                if (relation == null) return true;
+                return relation.RelationType != relationType || relation.Source == user.ID;
+            } else
+            {
+                return true;
+            }
+        }
     }
+
 
     public class SearchIdByEmail
     {
