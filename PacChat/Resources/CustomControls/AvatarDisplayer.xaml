@@ -10,7 +10,6 @@
         <Border x:Name="AvaBorder"
                     CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                    Width="30"
                     BorderThickness="1"
                     BorderBrush="White">
             <Border.Background>
