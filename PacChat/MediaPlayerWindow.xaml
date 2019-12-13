@@ -6,8 +6,17 @@
         xmlns:ccMedia="clr-namespace:PacChat.Resources.CustomControls.Media"
         xmlns:local="clr-namespace:PacChat"
         mc:Ignorable="d"
-        Title="MediaPlayerWindow" Height="450" Width="800" WindowStyle="None" Background="{x:Null}">
-    <Grid>
-        <ccMedia:MediaPlayer x:Name="MediaPlayer"></ccMedia:MediaPlayer>
-    </Grid>
+        Title="MediaPlayerWindow" Height="600" Width="800" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    <Border CornerRadius="8" x:Name="WindowOutline" Background="#FF444444">
+        <Border Margin="1" CornerRadius="8" x:Name="Round" Background="#FF2C2C2C">
+            <Grid>
+                <ccMedia:MediaPlayer x:Name="MediaPlayer" />
+            </Grid>
+        </Border>
+    </Border>
 </Window>
