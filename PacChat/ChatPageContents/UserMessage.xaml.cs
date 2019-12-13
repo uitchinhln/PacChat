@@ -70,7 +70,7 @@ namespace PacChat.ChatPageContents
 
         public void SetAva(string path) // sau nay se merge vao setInfo
         {
-            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            Avatar.ImageSource = path;
         }
 
         public void SetOnlineStatus(bool online)

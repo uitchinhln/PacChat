@@ -146,6 +146,9 @@
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\AvatarDisplayer.xaml.cs">
+      <DependentUpon>AvatarDisplayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\BGSelectContainner.xaml.cs">
       <DependentUpon>BGSelectContainner.xaml</DependentUpon>
     </Compile>
@@ -323,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NotificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\AvatarDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
