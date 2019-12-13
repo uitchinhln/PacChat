@@ -199,6 +199,9 @@
     <Compile Include="Resources\CustomControls\TabStickerStore.xaml.cs">
       <DependentUpon>TabStickerStore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ThumbnailBubble.xaml.cs">
+      <DependentUpon>ThumbnailBubble.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\StickerDialog.xaml.cs">
       <DependentUpon>StickerDialog.xaml</DependentUpon>
     </Compile>
@@ -395,6 +398,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\TabStickerStore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\ThumbnailBubble.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

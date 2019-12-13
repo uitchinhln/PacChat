@@ -156,7 +156,7 @@ namespace PacChat
             else _previousBubbleChat = null;
 
             Bubble b = null;
-            ThumbnailButton thumbnail = null;
+            ThumbnailBubble thumbnail = null;
             var app = MainWindow.chatApplication;
 
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
@@ -175,10 +175,10 @@ namespace PacChat
                 string fileID = (msg as ImageMessage).FileID;
                 string fileName = (msg as ImageMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
-                thumbnail = new ThumbnailButton(media);
+                thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
-                thumbnail.IsActive = true;
+                // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
@@ -192,10 +192,10 @@ namespace PacChat
                 string fileID = (msg as VideoMessage).FileID;
                 string fileName = (msg as VideoMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
-                thumbnail = new ThumbnailButton(media);
+                thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
-                thumbnail.IsActive = true;
+                // thumbnail.IsActive = true;
 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
                 (
@@ -259,7 +259,7 @@ namespace PacChat
             }
 
             Bubble b = null;
-            ThumbnailButton thumbnail = null;
+            ThumbnailBubble thumbnail = null;
             var app = MainWindow.chatApplication;
 
             if (BubbleTypeParser.Parse(msg) == BubbleType.Text)
@@ -278,10 +278,10 @@ namespace PacChat
                 string fileID = (msg as ImageMessage).FileID;
                 string fileName = (msg as ImageMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
-                thumbnail = new ThumbnailButton(media);
+                thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
-                thumbnail.IsActive = true;
+                // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
@@ -295,10 +295,10 @@ namespace PacChat
                 string fileID = (msg as VideoMessage).FileID;
                 string fileName = (msg as VideoMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
-                thumbnail = new ThumbnailButton(media);
+                thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
-                thumbnail.IsActive = true;
+                // thumbnail.IsActive = true;
 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
                 (
@@ -338,7 +338,7 @@ namespace PacChat
 
         public void ThumbnailClick(object sender, EventArgs e)
         {
-            ThumbnailButton thumb = (sender as ThumbnailButton);
+            ThumbnailBubble thumb = (sender as ThumbnailBubble);
             MainWindow.Instance.MediaPlayerWindow.Show();
             MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(thumb.FileID);
         }

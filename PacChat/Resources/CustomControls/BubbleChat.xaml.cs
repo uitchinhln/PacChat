@@ -36,12 +36,12 @@ namespace PacChat.Resources.CustomControls
             spMessContainer.Children.Insert(index, b);
         }
 
-        public void AddMedia(ThumbnailButton thumbnail)
+        public void AddMedia(ThumbnailBubble thumbnail)
         {
             spMessContainer.Children.Add(thumbnail);
         }
 
-        public void InsertMedia(ThumbnailButton thumbnail)
+        public void InsertMedia(ThumbnailBubble thumbnail)
         {
             spMessContainer.Children.Insert(0, thumbnail);
         }
