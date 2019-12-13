@@ -13,7 +13,6 @@
             HorizontalAlignment="Left"
             >
 
-
         <DockPanel>
             <!--AVATAR pic -->
             <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
