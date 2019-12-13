@@ -37,11 +37,11 @@ namespace PacChatServer.Network.RestAPI.Handler
                         continue;
                     }
 
-                    if (new FileInfo(fileData.LocalFileName).Length > ServerSettings.MAX_SIZE_UPLOAD)
-                    {
-                        File.Delete(fileData.LocalFileName);
-                        continue;
-                    }
+                    //if (new FileInfo(fileData.LocalFileName).Length > ServerSettings.MAX_SIZE_UPLOAD)
+                    //{
+                    //    File.Delete(fileData.LocalFileName);
+                    //    continue;
+                    //}
 
                     fileName = fileData.Headers.ContentDisposition.FileName;
                     if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
@@ -61,8 +61,8 @@ namespace PacChatServer.Network.RestAPI.Handler
                     File.Move(fileData.LocalFileName, Path.Combine(SavePath, id.ToString()));
                     if (createThumb)
                     {
-                        Task task = new Task(() =>
-                        {
+                        //Task task = new Task(() =>
+                        //{
                             if (VideoExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
                             {
                                 var ffProbe = new FFProbe();
@@ -78,8 +78,8 @@ namespace PacChatServer.Network.RestAPI.Handler
                                 Image image = Image.FromFile(Path.Combine(SavePath, id.ToString()));
                                 image.GetThumbnailImage(128, 128, null, IntPtr.Zero).Save(Path.Combine(SavePath, id.ToString() + "_thumb.jpg"));
                             }
-                        });
-                        task.Start();
+                        //});
+                        //task.Start();
                     }
                 }
             }).Wait();
