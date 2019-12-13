@@ -59,11 +59,16 @@ namespace PacChat.Network.RestAPI
                     using (WebClient client = new WebClient())
                     {
                         byte[] data = client.DownloadData(url);
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.StreamSource = new MemoryStream(data);
-                        cachedImage.AddReplace(urll, bitmap);
                         if (resultHandler != null)
-                            Application.Current.Dispatcher.Invoke(() => resultHandler(bitmap));
+                            Application.Current.Dispatcher.Invoke(() => 
+                            {
+                                BitmapImage bitmap = new BitmapImage();
+                                bitmap.BeginInit();
+                                bitmap.StreamSource = new MemoryStream(data);
+                                bitmap.EndInit();
+                                cachedImage.AddReplace(urll, bitmap);
+                                resultHandler(bitmap);
+                            });
                     }
                 }).Start();
             } catch (Exception e)
