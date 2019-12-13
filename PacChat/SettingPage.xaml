@@ -13,30 +13,90 @@
     <Grid>
         <DockPanel>
             <StackPanel Width="128">
-                <Button x:Name="GeneralTab" Uid="0" Content="General" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
+                <Button x:Name="GeneralTab" Uid="0" Content="Personal" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
                 <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
                 <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
             </StackPanel>
 
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
+            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
                 <!-- General tab -->
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                     <StackPanel>
-                        <Label Content="General" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                        <Label Content="Personal" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                        <elms:ProfileAvatar Margin="0,32,0,16" Loaded="ProfileAvatar_Loaded" Width="160" Height="192"/>
+                        <DockPanel Width="336">
+                            <TextBlock Margin="8" Foreground="LightSlateGray">
+                                Email: 
+                            </TextBlock>
+                            
+                            <TextBlock Margin="8" Foreground="LightSlateGray" FontStyle="Italic" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                nlebachnlb@gmail.com 
+                            </TextBlock>
+                        </DockPanel>
+                        <Grid Width="336">
+                            <TextBlock Margin="8" Foreground="LightSlateGray" FontSize="16" HorizontalAlignment="Left">
+                            Personal Information
+                            </TextBlock>
+                            <Button Width="64" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Normal">
+                                Edit...
+                            </Button>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,16,0,0" HorizontalAlignment="Center">
+                            <Border x:Name="FirstNameBorder" CornerRadius="16"
+                                    Background= "White"
+                                    DockPanel.Dock="Top"
+                                    Height="32" Margin="10,0" Width="160">
+                                <TextBox x:Name="FirstNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="First name"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    BorderThickness="0" 
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Margin="10,-8,10,0"/>
+                            </Border>
 
-                        <elms:ProfileAvatar></elms:ProfileAvatar>
-
-                        <StackPanel Orientation="Horizontal" Margin="54,5,54,0" HorizontalAlignment="Center">
-                            <TextBox x:Name="FirstNameInp" materialDesign:HintAssist.Hint="First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0" Height="37" Width="132" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
-                            <TextBox x:Name="LastNameInp" materialDesign:HintAssist.Hint="Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="12,0,0,0" Height="37" Width="132" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF" />
+                            <Border x:Name="LastNameBorder" CornerRadius="16"
+                                    Background= "White"
+                                    DockPanel.Dock="Top"
+                                    Height="32" Margin="10,0" Width="160">
+                                <TextBox x:Name="LastNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Last name"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         BorderThickness="0"
+                                    Margin="10,-8,10,0"/>
+                            </Border>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="54,15,54,0" HorizontalAlignment="Center">
-                            <DatePicker x:Name="BirthdayInp" materialDesign:HintAssist.Hint="Birthday" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="36" Margin="0" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch" VerticalAlignment="Bottom" Width="132" Foreground="White" BorderBrush="#89FFFFFF" />
-                            <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="true" materialDesign:HintAssist.Hint="Gender" Margin="12,0,0,0" Height="28" VerticalAlignment="Bottom" Width="132" Background="White">
-                                <ComboBoxItem>Male</ComboBoxItem>
-                                <ComboBoxItem>Female</ComboBoxItem>
-                                <ComboBoxItem>Other</ComboBoxItem>
-                            </ComboBox>
+                        <StackPanel Orientation="Horizontal" Margin="54,24,54,0" HorizontalAlignment="Center">
+                            <Border x:Name="BirthdayBorder" CornerRadius="16"
+                                    Background= "White"
+                                    DockPanel.Dock="Top"
+                                    Height="32" Margin="10,0" Width="160">
+                                <DatePicker x:Name="BirthdayInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Birthday"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                            BorderThickness="0"
+                                    Margin="10,-8,10,0"/>
+                            </Border>
+                            <Border x:Name="GenderBorder" CornerRadius="16"
+                                    Background= "White"
+                                    DockPanel.Dock="Top"
+                                    Height="32" Margin="10,0" Width="160">
+                                <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="false" materialDesign:HintAssist.Hint="Gender" Margin="10,0,0,2" Height="28" VerticalAlignment="Bottom" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <ComboBoxItem>Male</ComboBoxItem>
+                                    <ComboBoxItem>Female</ComboBoxItem>
+                                    <ComboBoxItem>Other</ComboBoxItem>
+                                </ComboBox>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Margin="0,24,0,0">
+                            <Border x:Name="AddressBorder" CornerRadius="16"
+                                    Background= "White"
+                                    Height="32" Margin="165,0,167,0" Width="336">
+                                <TextBox x:Name="AddressInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Address"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         BorderThickness="0"
+                                    Margin="10,-8,10,0"/>
+                            </Border>
                         </StackPanel>
                         <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="131" Height="32" Foreground="#DD000000" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
                     </StackPanel>
@@ -109,7 +169,7 @@
 
                                 <StackPanel Orientation="Horizontal">
                                     <Border x:Name="borderBG_Preview" Width="260" Height="260" Margin="10" CornerRadius="20">
-                                        
+
 
                                     </Border>
 

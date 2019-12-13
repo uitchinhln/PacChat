@@ -365,6 +365,7 @@
     <Compile Include="MessageCore\Message\ImageMessage.cs" />
     <Compile Include="MessageCore\IMessage.cs" />
     <Compile Include="MessageCore\Message\StickerMessage.cs" />
+    <Compile Include="MessageCore\Message\SystemAddNewUserMessage.cs" />
     <Compile Include="MessageCore\Message\TextMessage.cs" />
     <Compile Include="MessageCore\Message\VideoMessage.cs" />
     <Compile Include="MessageCore\Sticker\Sticker.cs" />
