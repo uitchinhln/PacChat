@@ -77,10 +77,14 @@ namespace PacChat
             Packets.SendPacket<GetNotifications>();
             Packets.SendPacket<GetSelfID>();
             Packets.SendPacket<RecentConversations>();
+<<<<<<< HEAD
             Sticker.Load(() =>
             {
                 
             });
+=======
+            //Sticker.Load(() => Console.WriteLine(Sticker.LoadedStickers.Count + " " + Sticker.LoadedCategories.Count));
+>>>>>>> d8ec8f2134a98d4ea7dbac5be3abee3770c5db47
 
             SetNotificationDotState(false);
 

@@ -6,18 +6,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.ChatPageContents"
              xmlns:vm="clr-namespace:PacChat.ChatPageContents.ViewModels"
+             xmlns:localCC="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="64" d:DesignWidth="192">
 
     <Grid x:Name="Grid" d:DataContext="{x:Static vm:UserMessageDesignModel.Instance}">
         <Border Padding="0,0,0,0">
             <Grid>
-                <Border CornerRadius="32" Width="32" Height="32" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center">
-                    <Border.Background>
-                        <ImageBrush x:Name="imageAva"/>
-                    </Border.Background>
-                </Border>
-                
+                <localCC:AvatarDisplayer x:Name="Avatar" Width="32" Height="32" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center"/>
+
                 <Border x:Name="OnlineStatus" CornerRadius="32" Background="#FF02B602" Width="9" Height="9" HorizontalAlignment="Left" Margin="39,39,0,16" VerticalAlignment="Center">
                 </Border>
                 <TextBlock x:Name="UserName" VerticalAlignment="Center"

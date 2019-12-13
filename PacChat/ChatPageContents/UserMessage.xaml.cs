@@ -32,7 +32,7 @@ namespace PacChat.ChatPageContents
             InitializeComponent();
             UserMessage1.FontWeight = FontWeights.Normal;
             IncomingMask.Visibility = Visibility.Hidden;
-            // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            // SetAva(ResourceUtil.ChatPageBG);
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
@@ -70,7 +70,7 @@ namespace PacChat.ChatPageContents
 
         public void SetAva(string path) // sau nay se merge vao setInfo
         {
-            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            Avatar.ImageSource = path;
         }
 
         public void SetOnlineStatus(bool online)

@@ -47,6 +47,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
@@ -145,6 +146,9 @@
     <Compile Include="Network\RestAPI\StreamAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\AvatarDisplayer.xaml.cs">
+      <DependentUpon>AvatarDisplayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\BGSelectContainner.xaml.cs">
       <DependentUpon>BGSelectContainner.xaml</DependentUpon>
@@ -323,6 +327,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NotificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\AvatarDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

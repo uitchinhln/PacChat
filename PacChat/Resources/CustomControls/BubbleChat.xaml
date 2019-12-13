@@ -16,27 +16,12 @@
 
         <DockPanel>
             <!--AVATAR pic -->
-            <Border x:Name="AvaBorder"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Left"
-                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
-                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                    Width="30"
-                    BorderThickness="1"
-                    BorderBrush="White"
-                    
-                    >
-                <Border.Background>
-                    <ImageBrush x:Name="imageAva" />
-                </Border.Background>
-
-
-            </Border>
+            <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
             <!---Messages path -->
             <StackPanel>
                 <Label Name="NickName" Content="Nick Name bla bla"/>
-                <StackPanel x:Name="spMessContainer" Margin="30,0,0,0">
+                <StackPanel x:Name="spMessContainer" Margin="7,0,0,0">
                     <!-- Nick name label -->
                 </StackPanel>
             </StackPanel>

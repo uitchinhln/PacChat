@@ -7,7 +7,8 @@
         xmlns:chatcontent="clr-namespace:PacChat.ChatPageContents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PacChat" Height="500" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" Background="{x:Null}" Padding="0" Margin="0" WindowStyle="None" AllowsTransparency="True" MinWidth="900" MinHeight="500">
+        Title="PacChat" Height="500" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" 
+        Background="{x:Null}" Padding="0" Margin="0" WindowStyle="None" AllowsTransparency="True" MinWidth="900" MinHeight="500">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
@@ -47,14 +48,15 @@
         <Border Margin="1" CornerRadius="8" x:Name="Round" Background="#FF2C2C2C">
             <DockPanel Margin="4">
                 <!--stackPanel HEADER-->
-                <Grid x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
-                    <DockPanel HorizontalAlignment="Right" Width="96">
+                <DockPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
+                    <DockPanel HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right">
+
                         <Button x:Name="BtnMinimize" materialDesign:RippleAssist.Feedback="Transparent"
                                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F"  Height="Auto" Click="BtnMinimize_Click" Cursor="Arrow">
-                                <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
-                                    <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2"/>
-                                </Border>
+                            <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
+                                <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2"/>
+                            </Border>
                         </Button>
 
                         <Button x:Name="BtnMaximize" materialDesign:RippleAssist.Feedback="Transparent"
@@ -64,19 +66,20 @@
                                     <Border CornerRadius="8" Background="#FF1FCF37" Width="10" Height="10" Margin="0,0,0,2"/>
                                 </Border>
                         </Button>
-
-
+                        
                         <Button x:Name="BtnQuit" 
                                 materialDesign:RippleAssist.Feedback="Transparent"
                                 Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" Click="BtnQuit_Click"
                                 Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Padding="0">
-                                <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
-                                    </Border>
+                            <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
                                 </Border>
+                            </Border>
                         </Button>
+
                     </DockPanel>
-                </Grid>
+                    
+                </DockPanel>
 
 
                 <!--stackPanel SIDEMENU-->
@@ -127,7 +130,7 @@
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <DockPanel>
                             <chatcontent:UserList  x:Name="UserList" Width="217" HorizontalAlignment="Left" Background="#FF2C2C2C" Loaded="UserList_Loaded"/>
-                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Margin="0 0 4 0" Width="0"></chatcontent:ProfileDisplayer>
+                            <chatcontent:ProfileDisplayer x:Name="ProfileDisplayer" Margin="4 0 0 0" Width="0" DockPanel.Dock="Right"/>
                             <local:ChatPage x:Name="ChatPage" />
                         </DockPanel>
                     </materialDesign:TransitionerSlide>
