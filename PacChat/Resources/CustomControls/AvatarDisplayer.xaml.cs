@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,8 +27,6 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
         }
-
-        public ImageBrush ImageBrush { get => ImageAva; }
 
         public Border AvatarBorder { get => AvaBorder; }
 
