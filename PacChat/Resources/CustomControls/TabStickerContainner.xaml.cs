@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using PacChat.Network.RestAPI;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -43,18 +44,7 @@ namespace PacChat.Resources.CustomControls
             Chatpage = _chatpage;
 
             addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
-            addStickerTabDemo();
+
 
         }
 
@@ -77,30 +67,33 @@ namespace PacChat.Resources.CustomControls
             tabCrlSticker.Items.Add(a);
         }
 
-        private void initTabSticker(int cateID)
+        public void AddTabSticker(MessageCore.Sticker.StickerCategory cate)
         {
-            TabSticker tempTabSticker = new TabSticker(1, Chatpage);
-            string iconUri = tempTabSticker.IconUri;
-            string name = tempTabSticker.Name;
-
-            TabItem a = new TabItem
+            StickerAPI.DownloadImage(cate.IconURL, (imageCateIcon) => 
             {
-                Width = 38,
-                Height = 38,
-                Content = tempTabSticker,
-            };
-            a.ToolTip = name;
-            Image img = new Image();
-            img.Source = new BitmapImage(new Uri(iconUri, UriKind.RelativeOrAbsolute));
-            a.Header = img;
-            tabCrlSticker.Items.Add(a);
+                TabItem a = new TabItem
+                {
+                    Width = 38,
+                    Height = 38,
+                    Content = new TabSticker(1, Chatpage),
+                    ToolTip = "Tiêm viêu",
+                };
+                Image img = new Image();
+                img.Source = imageCateIcon;
+                a.Header = img;
+
+                Console.WriteLine(cate.ID);
+                tabCrlSticker.Items.Add(a);
+            });
+
+            
         }
 
         private void initTabStickerContainner()
         {
             foreach (var x in _idList)
             {
-                initTabSticker(x);
+                //initTabSticker(x);
             }
         }
 

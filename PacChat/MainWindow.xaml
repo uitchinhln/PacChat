@@ -48,14 +48,12 @@
             <DockPanel Margin="4">
                 <!--stackPanel HEADER-->
                 <Grid x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
-                    <DockPanel HorizontalAlignment="Left" Width="96">
-                        <Button x:Name="BtnQuit" 
-                                materialDesign:RippleAssist.Feedback="Transparent"
-                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" Click="BtnQuit_Click"
-                                Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Padding="0">
-                                <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
-                                    </Border>
+                    <DockPanel HorizontalAlignment="Right" Width="96">
+                        <Button x:Name="BtnMinimize" materialDesign:RippleAssist.Feedback="Transparent"
+                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F"  Height="Auto" Click="BtnMinimize_Click" Cursor="Arrow">
+                                <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
+                                    <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2"/>
                                 </Border>
                         </Button>
 
@@ -67,14 +65,16 @@
                                 </Border>
                         </Button>
 
-                        <Button x:Name="BtnMinimize" materialDesign:RippleAssist.Feedback="Transparent"
-                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="32" Padding="0" Background="#004F4F4F" BorderBrush="#004F4F4F"  Height="Auto" Click="BtnMinimize_Click" Cursor="Arrow">
-                                <Border CornerRadius="8" Background="#FFEEC94D" Width="12" Height="12">
-                                    <Border CornerRadius="8" Background="#FFFFB900" Width="10" Height="10" Margin="0,0,0,2"/>
+
+                        <Button x:Name="BtnQuit" 
+                                materialDesign:RippleAssist.Feedback="Transparent"
+                                Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" Click="BtnQuit_Click"
+                                Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Padding="0">
+                                <Border CornerRadius="8" Background="#FFEE4D4D" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="8" Background="#FFCF1F1F" Width="10" Height="10" Margin="0,0,0,2">
+                                    </Border>
                                 </Border>
                         </Button>
-
                     </DockPanel>
                 </Grid>
 

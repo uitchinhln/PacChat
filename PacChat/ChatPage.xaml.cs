@@ -34,7 +34,6 @@ namespace PacChat
         private BubbleChat _previousBubbleChat;
         private BubbleChat _headBubbleChat;
         private bool _button1Clicked;
-
         public static ChatPage Instance;
 
         public ChatPage()
@@ -42,8 +41,8 @@ namespace PacChat
             InitializeComponent();
             Instance = this;
             _button1Clicked = false;
-            spTabStickerContainner.Children.Add(new TabStickerContainner(this));
             // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            loadStickerToContainner();
             Transitioner.SelectedIndex = 0;
         }
 
@@ -149,6 +148,25 @@ namespace PacChat
             Console.WriteLine(error);
         }
         #endregion
+
+        private void loadStickerToContainner()
+        {
+            MessageCore.Sticker.Sticker.Load(() => 
+            {
+                var Cate = MessageCore.Sticker.Sticker.LoadedCategories;
+                TabStickerContainner stickerTabCon = new TabStickerContainner(this);
+
+                Application.Current.Dispatcher.Invoke((Action)delegate 
+                {
+                    foreach (var x in Cate)
+                    {
+                        stickerTabCon.AddTabSticker(x.Value);
+                    }
+
+                    spTabStickerContainner.Children.Add(stickerTabCon);
+                });
+            });
+        }
 
         public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
