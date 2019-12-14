@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PacChat.Network.RestAPI;
+using PacChat.MessageCore.Message;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -22,7 +23,7 @@ namespace PacChat.Resources.CustomControls
     public partial class Sticker : UserControl
     {
 
-        public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet, bool runWhenLoaded = false)
+        public Sticker(ChatPage chatpage, bool clickable = false, int id = 0, int cateid = 0, int size = 130, int duration = 0, string urisheet = null, bool runWhenLoaded = false)
         {
             InitializeComponent();
 
@@ -98,7 +99,12 @@ namespace PacChat.Resources.CustomControls
         {
             if (Clickable)
             {
-                Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet, true);
+                //Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet, true);
+                ChatPage.Instance.SendMessage(new StickerMessage()
+                {
+                    Sticker = new MessageCore.Sticker.Sticker() 
+                    { ID = ID, CategoryID = CateID, Duration = Duration, SpriteURL = UriSheet}
+                });
             }
         }
     }

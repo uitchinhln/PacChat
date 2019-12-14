@@ -16,15 +16,16 @@ namespace PacChat.MessageCore.Message
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {
+            Sticker = new Sticker.Sticker();
             Sticker.ID = buffer.ReadInt();
-            Sticker.CategoryID = buffer.ReadInt();
+            //Sticker.CategoryID = buffer.ReadInt();
         }
 
         public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
             buffer.WriteInt(GetPreviewCode());
             buffer.WriteInt(Sticker.ID);
-            buffer.WriteInt(Sticker.CategoryID);
+            //buffer.WriteInt(Sticker.CategoryID);
             return buffer;
         }
 
