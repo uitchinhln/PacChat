@@ -19,6 +19,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PacChat.Resources.CustomControls.Media
 {
@@ -32,7 +33,13 @@ namespace PacChat.Resources.CustomControls.Media
         public MediaPlayer()
         {
             InitializeComponent();
-            VideoFull.LoadedBehavior = WPFMediaKit.DirectShow.MediaPlayers.MediaState.Manual;
+            VideoFull.LoadedBehavior = MediaState.Manual;
+
+            #region SeekBar
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Tick += new EventHandler(timer_Tick);
+            #endregion
 
             #region Run Demo
             ThumbnailButton btn = new ThumbnailButton()
@@ -194,6 +201,7 @@ namespace PacChat.Resources.CustomControls.Media
         {
             try
             {
+                timer.IsEnabled = false;
                 VideoFull.Close();
 
                 VideoPlayer.Visibility = Visibility.Hidden;
@@ -337,17 +345,22 @@ namespace PacChat.Resources.CustomControls.Media
         private void PlayBtnClick(object sender, RoutedEventArgs e)
         {
             if (!VideoFull.HasVideo) return;
-            if (VideoFull.IsPlaying && !IsPlayDone)
+            MediaState mediaState = GetMediaState(VideoFull);
+            if (mediaState == MediaState.Play)
             {
                 VideoFull.Pause();
-            } else
+                timer.IsEnabled = false;
+            } 
+            if (mediaState == MediaState.Pause)
             {
                 VideoFull.Play();
+                timer.IsEnabled = true;
             }
             if (IsPlayDone)
             {
-                VideoFull.MediaPosition = 1;
+                VideoFull.Position = TimeSpan.FromSeconds(0);
                 VideoFull.Play();
+                timer.IsEnabled = true;
             }
         }
 
@@ -355,12 +368,57 @@ namespace PacChat.Resources.CustomControls.Media
         private void PlayDone(object sender, RoutedEventArgs e)
         {
             IsPlayDone = true;
+            timer.IsEnabled = false;
         }
+
+        #region SeekBar
+        DispatcherTimer timer;
 
         private void PlayBegin(object sender, RoutedEventArgs e)
         {
             IsPlayDone = false;
+            if (VideoFull.NaturalDuration.HasTimeSpan)
+            {
+                TimeSpan ts = VideoFull.NaturalDuration.TimeSpan;
+                SeekBar.Maximum = ts.TotalSeconds;
+                SeekBar.SmallChange = 3;
+                SeekBar.LargeChange = Math.Min(10, ts.Seconds / 10);
+            }
+            timer.Start();
         }
+
+        String timePattern = "{0:D2}:{1:D2}";
+        bool isDragging = false;
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (!isDragging)
+            {
+                SeekBar.Value = VideoFull.Position.TotalSeconds;
+                lbTime.Content = String.Format(timePattern, VideoFull.Position.Minutes, VideoFull.Position.Seconds);
+            }
+        }
+
+        private void Slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            isDragging = true;
+        }
+
+        private void Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            isDragging = false;
+            VideoFull.Position = TimeSpan.FromSeconds(SeekBar.Value);
+        }
+
+        private MediaState GetMediaState(MediaElement myMedia)
+        {
+            FieldInfo hlp = typeof(MediaElement).GetField("_helper", BindingFlags.NonPublic | BindingFlags.Instance);
+            object helperObject = hlp.GetValue(myMedia);
+            FieldInfo stateField = helperObject.GetType().GetField("_currentState", BindingFlags.NonPublic | BindingFlags.Instance);
+            MediaState state = (MediaState)stateField.GetValue(helperObject);
+            return state;
+        }
+        #endregion
     }
 
     public class MediaInfo

@@ -42,11 +42,18 @@
             <Grid Margin="30,20,30,10">
                 <Image MaxHeight="500" x:Name="ImgFull" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Hidden"/>
                 <Grid x:Name="VideoPlayer">
-                    <controls:MediaUriElement MaxHeight="600" x:Name="VideoFull" 
-                                              Visibility="{Binding Visibility, ElementName=VideoPlayer}" MediaEnded="PlayDone" MediaOpened="PlayBegin" />
-                    <Grid>
+                    <MediaElement MaxHeight="600" x:Name="VideoFull" Visibility="{Binding Visibility, ElementName=VideoPlayer}" 
+                                  MediaEnded="PlayDone" MediaOpened="PlayBegin" />
+                    <DockPanel MaxWidth="{Binding ActualWidth, ElementName=VideoFull, Mode=OneWay}" x:Name="dockPanel" 
+                               MaxHeight="{Binding ActualHeight, ElementName=VideoFull, Mode=OneWay}">
+                        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Background="#99B4B4B4">
+                            <Label x:Name="lbTime" DockPanel.Dock="Right" VerticalAlignment="Center" Content="00:00" Foreground="#FF555555" Margin="0,0,5,0" />
+                            <Slider x:Name="SeekBar" TickFrequency="5" Orientation="Horizontal" Minimum="1" Maximum="50"
+                                    Value="25" VerticalAlignment="Center" Foreground="White" Margin="10,0,5,0"
+                                    Thumb.DragStarted="Slider_DragStarted" Thumb.DragCompleted="Slider_DragCompleted" BorderBrush="{x:Null}"/>
+                        </DockPanel>
                         <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="PlayBtnClick" Height="Auto"/>
-                    </Grid>
+                    </DockPanel>
                 </Grid> 
             </Grid>
         </DockPanel>
