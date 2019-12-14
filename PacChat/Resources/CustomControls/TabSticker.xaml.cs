@@ -39,7 +39,7 @@ namespace PacChat.Resources.CustomControls
         {
             foreach(var x in Cate.Stickers)
             {
-                wplStickerContainner.Children.Add(new Sticker(Chatpage, true, x.ID, x.CategoryID, 130, x.Duration, x.SpriteURL));
+                wplStickerContainner.Children.Add(new Sticker(Chatpage, true, x.ID, x.CategoryID, 130, x.Duration, x.SpriteURL, false));
             }
         }
 

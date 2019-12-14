@@ -188,10 +188,10 @@ namespace PacChat
             MessagesContainer.ScrollToEnd();
         }
 
-        public void SendStickerOnTheLeft(bool clickable, int id, int cateid, int size, int duration, string uriSheet, bool runWhenLoaded)
+        public void SendStickerOnTheLeft(MessageCore.Sticker.Sticker stickerInfo)
         {
             Resources.CustomControls.Sticker sticker =
-                new Resources.CustomControls.Sticker(this, clickable, id, cateid, size, duration, uriSheet, runWhenLoaded);
+                new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
             Thickness margin = sticker.Margin;
             margin.Left = 30;
@@ -369,16 +369,7 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheLeft
-                (
-                    id: sticker.ID,
-                    cateid: sticker.CategoryID,
-                    clickable: false,
-                    size: 130,
-                    duration: sticker.Duration,
-                    uriSheet: sticker.URI,
-                    runWhenLoaded: true
-                );
+                SendStickerOnTheLeft(sticker);
             }
 
             if (b != null)
