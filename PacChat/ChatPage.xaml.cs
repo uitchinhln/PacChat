@@ -262,7 +262,9 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheRight(MessageCore.Sticker.Sticker.LoadedStickers[sticker.ID]);
+                //var result;
+                MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
+                SendStickerOnTheRight(result);
             }
 
             if (b != null)
@@ -370,7 +372,8 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheLeft(MessageCore.Sticker.Sticker.LoadedStickers[sticker.ID]);
+                MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
+                SendStickerOnTheLeft(result);
             }
 
             if (b != null)
