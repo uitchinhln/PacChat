@@ -50,7 +50,7 @@
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                     BorderThickness="0" 
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Margin="10,-8,10,0"/>
+                                    Margin="10,-8,10,0" CaretBrush="White" Height="40"/>
                             </Border>
 
                             <Border x:Name="LastNameBorder" CornerRadius="16"
