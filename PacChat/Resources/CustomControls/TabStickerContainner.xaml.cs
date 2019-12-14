@@ -42,30 +42,9 @@ namespace PacChat.Resources.CustomControls
         {
             InitializeComponent();
             Chatpage = _chatpage;
-
-            addStickerTabDemo();
-
-
+            loadStore();
         }
 
-       
-
-        private void addStickerTabDemo()
-        {
-            TabItem a = new TabItem
-            {
-                Width = 38,
-                Height = 38,
-                //Content = new TabSticker(1, Chatpage),
-                ToolTip = "Tiêm viêu",
-            };
-            Image img = new Image();
-            img.Source = new BitmapImage(new Uri("/PacChat;component/resources/drawable/sprite_ic.png", UriKind.RelativeOrAbsolute));
-            a.Header = img;
-
-            
-            tabCrlSticker.Items.Add(a);
-        }
 
         public void AddTabSticker(MessageCore.Sticker.StickerCategory cate)
         {
@@ -79,7 +58,7 @@ namespace PacChat.Resources.CustomControls
                     ToolTip = cate.Name
                 };
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri(cate.IconURL));
+                img.Source = imageCateIcon;
                 a.Header = img;
                 //a.Header = imageCateIcon;
                 Console.WriteLine(cate.ID);
@@ -99,12 +78,15 @@ namespace PacChat.Resources.CustomControls
 
         private void loadStore()
         {
-            TabItem a = new TabItem
+            int i = 0;
+            foreach (var x in MessageCore.Sticker.Sticker.LoadedCategories)
             {
-                Width = 38,
-                Height = 38,
-                //Content = tempTabSticker,
-            };
+                ++i;
+                TabStickerStore store = new TabStickerStore(x.Value);
+                store.Margin = new Thickness(5, 5, 5, 5);
+                splStickerStore.Children.Add(store);
+                if (i >= 10) break;
+            }
         }
     }
 }

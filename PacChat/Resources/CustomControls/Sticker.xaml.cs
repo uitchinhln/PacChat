@@ -81,12 +81,14 @@ namespace PacChat.Resources.CustomControls
 
             StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
             {
+                //Console.WriteLine(stickerSheet.PixelWidth);
                 anim.ImageSource = stickerSheet;
+                anim.VerticalOffset = Size;
+                anim.HorizontalOffset = Size;
+                anim.Clickable = Clickable;
+                sticker.Children.Add(anim);
             });
-            anim.VerticalOffset = Size;
-            anim.HorizontalOffset = Size;
-            anim.Clickable = Clickable;
-            sticker.Children.Add(anim);
+            
         }
 
         private void sticker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

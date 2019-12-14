@@ -24,12 +24,6 @@ namespace PacChat.Resources.CustomControls
     {
         public MessageCore.Sticker.StickerCategory Cate { get; set; }
 
-        public string IconUri { get; set; }
-
-        public string CateName { get; set; }
-
-        public int TotalSticker { get; set; }
-
         public ChatPage Chatpage { get; set; }
 
         public TabSticker(MessageCore.Sticker.StickerCategory cate, ChatPage chatpage)
@@ -41,23 +35,12 @@ namespace PacChat.Resources.CustomControls
 
         }
 
-        private void initListStickerID()
-        {
-            
-        }
-
         private void initTabSticker() // khoi tao tu cateID
         {
             foreach(var x in Cate.Stickers)
             {
                 wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, x.Duration, x.SpriteURL));
             }
-        }
-
-        private void addSticker()
-        {
-
-                //wplStickerContainner.Children.Add(new Sticker(Chatpage, true, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite.png" + x.ToString() )); //lay info tu stickerID
         }
 
 
