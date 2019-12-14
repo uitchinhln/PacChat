@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Media"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"             
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500">
     <Grid>
         <Border x:Name="PlayerBackground" OpacityMask="#7F000000">
@@ -12,30 +13,41 @@
                 <ImageBrush Stretch="UniformToFill"/>
             </Border.Background>
         </Border>
+        <Label  x:Name="TitleBar"/>
         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                    Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Padding="10,0,5,0" 
-                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA2A2A2" Click="Download_Click">
+                Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Padding="10,0,5,0" 
+                Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFA2A2A2" Click="Download_Click">
             <StackPanel Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <materialDesign:PackIcon Kind="CloudDownloadOutline" Height="30" VerticalContentAlignment="Center" />
                 <Label Content="Download" Foreground="#FFA2A2A2"  Height="30" VerticalContentAlignment="Center" />
             </StackPanel>
         </Button>
         <Button x:Name="BtnClose" Style="{StaticResource MaterialDesignIconButton}"
-                    Margin="0,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="35" Height="35"
-                    Foreground="#FFA2A2A2" >
+                Margin="0,5,5,0" VerticalAlignment="Top" Width="35" Height="35"
+                Foreground="#FFA2A2A2" HorizontalAlignment="Right" >
             <materialDesign:PackIcon Kind="Close" />
+        </Button>
+        <Button x:Name="BtnFullScreen" Style="{StaticResource MaterialDesignIconButton}"
+                Margin="0,5,45,0" VerticalAlignment="Top" Width="35" Height="35"
+                Foreground="#FFA2A2A2" HorizontalAlignment="Right" Click="BtnFullScreen_Click" >
+            <materialDesign:PackIcon x:Name="FullScreenIcon" Kind="Fullscreen" />
         </Button>
         <DockPanel Margin="10">
             <ScrollViewer DockPanel.Dock="Bottom"
-                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                 PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ScrollChanged="OnScrollChanged">
-                <StackPanel x:Name="Gallery" Orientation="Horizontal" MaxHeight="90">
+                <StackPanel x:Name="Gallery" Orientation="Horizontal" MaxHeight="90" Height="90">
                 </StackPanel>
             </ScrollViewer>
             <Grid Margin="30,20,30,10">
                 <Image MaxHeight="500" x:Name="ImgFull" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Hidden"/>
-                <MediaElement  MaxHeight="500" x:Name="VideoFull" Visibility="Hidden" />
+                <Grid x:Name="VideoPlayer">
+                    <controls:MediaUriElement MaxHeight="600" x:Name="VideoFull" 
+                                              Visibility="{Binding Visibility, ElementName=VideoPlayer}" MediaEnded="PlayDone" MediaOpened="PlayBegin" />
+                    <Grid>
+                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="PlayBtnClick" Height="Auto"/>
+                    </Grid>
+                </Grid> 
             </Grid>
         </DockPanel>
     </Grid>

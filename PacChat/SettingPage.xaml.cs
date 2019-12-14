@@ -124,5 +124,10 @@ namespace PacChat
                 AddBGPreview(currentPath);
             }
         }
+
+        private void ProfileAvatar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
