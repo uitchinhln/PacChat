@@ -158,9 +158,12 @@ namespace PacChat
 
                 Application.Current.Dispatcher.Invoke((Action)delegate 
                 {
+                    int i = 0;
                     foreach (var x in Cate)
                     {
+                        ++i;
                         stickerTabCon.AddTabSticker(x.Value);
+                        if (i >= 10) break;
                     }
 
                     spTabStickerContainner.Children.Add(stickerTabCon);
@@ -445,6 +448,8 @@ namespace PacChat
 
             Thickness margin = sticker.Margin;
             margin.Right = 30;
+            margin.Top = 10;
+            margin.Bottom = 10;
             sticker.HorizontalAlignment = HorizontalAlignment.Right;
             sticker.Margin = margin;
             spMessagesContainer.Children.Add(sticker);

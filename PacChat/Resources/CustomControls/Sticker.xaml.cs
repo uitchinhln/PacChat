@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using PacChat.Network.RestAPI;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -20,17 +21,6 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class Sticker : UserControl
     {
-        private int _cateID;
-
-        private int _ID;
-
-        private int _size;
-
-        private int _duration;
-
-        private string _uriSheet;
-
-        private bool _clickable;
 
         public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet)
         {
@@ -54,50 +44,48 @@ namespace PacChat.Resources.CustomControls
         
         public bool Clickable
         {
-            get { return _clickable; }
-            set { _clickable = value; }
+            get; set;
         }
 
 
         public int ID
         {
-            get { return _ID; }
-            set { _ID = value; }
+            get; set;
         }
 
         public int CateID
         {
-            get { return _cateID; }
-            set { _cateID = value; }
+            get; set;
         }
 
         public int Size
         {
-            get { return _size; }
-            set { _size = value; }
+            get; set;
         }
 
         public int Duration
         {
-            get { return _duration; }
-            set { _duration = value; }
+            get; set;
         }
 
         public string UriSheet
         {
-            get { return _uriSheet; }
-            set { _uriSheet = value; }
+            get; set;
         }
 
         private void loadSticker()
         {
             Animator.Animator anim = new Animator.Animator();
-            anim.countLimit = 10;
-            anim.Interval = TimeSpan.FromSeconds((double)_duration / 1000);
-            anim.ImageSource = new BitmapImage(new Uri(_uriSheet, UriKind.RelativeOrAbsolute));
-            anim.VerticalOffset = _size;
-            anim.HorizontalOffset = _size;
-            anim.Clickable = _clickable;
+            anim.CountLimit = 10;
+            anim.Interval = TimeSpan.FromSeconds((double)Duration / 1000);
+
+            StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
+            {
+                anim.ImageSource = stickerSheet;
+            });
+            anim.VerticalOffset = Size;
+            anim.HorizontalOffset = Size;
+            anim.Clickable = Clickable;
             sticker.Children.Add(anim);
         }
 

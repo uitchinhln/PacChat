@@ -56,7 +56,7 @@ namespace PacChat.Resources.CustomControls
             {
                 Width = 38,
                 Height = 38,
-                Content = new TabSticker(1, Chatpage),
+                //Content = new TabSticker(1, Chatpage),
                 ToolTip = "Tiêm viêu",
             };
             Image img = new Image();
@@ -75,13 +75,13 @@ namespace PacChat.Resources.CustomControls
                 {
                     Width = 38,
                     Height = 38,
-                    Content = new TabSticker(1, Chatpage),
-                    ToolTip = "Tiêm viêu",
+                    Content = new TabSticker(cate, Chatpage),
+                    ToolTip = cate.Name
                 };
                 Image img = new Image();
-                img.Source = imageCateIcon;
+                img.Source = new BitmapImage(new Uri(cate.IconURL));
                 a.Header = img;
-
+                //a.Header = imageCateIcon;
                 Console.WriteLine(cate.ID);
                 tabCrlSticker.Items.Add(a);
             });
