@@ -32,7 +32,7 @@ namespace PacChat.Resources.CustomControls.Media
         public MediaPlayer()
         {
             InitializeComponent();
-            VideoFull.LoadedBehavior = MediaState.Manual;
+            VideoFull.LoadedBehavior = WPFMediaKit.DirectShow.MediaPlayers.MediaState.Manual;
 
             #region Run Demo
             ThumbnailButton btn = new ThumbnailButton()
@@ -176,8 +176,7 @@ namespace PacChat.Resources.CustomControls.Media
         {
             try
             {
-                if (VideoFull.CanPause)
-                    VideoFull.Stop();
+                VideoFull.Close();
 
                 VideoPlayer.Visibility = Visibility.Visible;
                 ImgFull.Visibility = Visibility.Hidden;
@@ -195,8 +194,7 @@ namespace PacChat.Resources.CustomControls.Media
         {
             try
             {
-                if (VideoFull.CanPause)
-                    VideoFull.Stop();
+                VideoFull.Close();
 
                 VideoPlayer.Visibility = Visibility.Hidden;
                 ImgFull.Visibility = Visibility.Visible;
@@ -338,30 +336,19 @@ namespace PacChat.Resources.CustomControls.Media
 
         private void PlayBtnClick(object sender, RoutedEventArgs e)
         {
-            if (!VideoFull.CanPause) return;
-            MediaState mediaState = GetMediaState(VideoFull);
-            if (mediaState == MediaState.Play)
+            if (!VideoFull.HasVideo) return;
+            if (VideoFull.IsPlaying && !IsPlayDone)
             {
                 VideoFull.Pause();
-            }
-            if (mediaState == MediaState.Pause)
+            } else
             {
                 VideoFull.Play();
             }
             if (IsPlayDone)
             {
-                VideoFull.Position = TimeSpan.FromSeconds(0);
+                VideoFull.MediaPosition = 1;
                 VideoFull.Play();
             }
-        }
-
-        private MediaState GetMediaState(MediaElement myMedia)
-        {
-            FieldInfo hlp = typeof(MediaElement).GetField("_helper", BindingFlags.NonPublic | BindingFlags.Instance);
-            object helperObject = hlp.GetValue(myMedia);
-            FieldInfo stateField = helperObject.GetType().GetField("_currentState", BindingFlags.NonPublic | BindingFlags.Instance);
-            MediaState state = (MediaState)stateField.GetValue(helperObject);
-            return state;
         }
 
         bool IsPlayDone = false;

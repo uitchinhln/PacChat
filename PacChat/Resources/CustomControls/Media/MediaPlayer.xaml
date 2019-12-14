@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Media"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"             
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500">
     <Grid>
         <Border x:Name="PlayerBackground" OpacityMask="#7F000000">
@@ -41,8 +42,11 @@
             <Grid Margin="30,20,30,10">
                 <Image MaxHeight="500" x:Name="ImgFull" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Hidden"/>
                 <Grid x:Name="VideoPlayer">
-                    <MediaElement MaxHeight="600" x:Name="VideoFull" Visibility="{Binding Visibility, ElementName=VideoPlayer}" MediaEnded="PlayDone" MediaOpened="PlayBegin" />
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="{Binding ActualHeight, ElementName=VideoFull, Mode=OneWay}" Click="PlayBtnClick"/>
+                    <controls:MediaUriElement MaxHeight="600" x:Name="VideoFull" 
+                                              Visibility="{Binding Visibility, ElementName=VideoPlayer}" MediaEnded="PlayDone" MediaOpened="PlayBegin" />
+                    <Grid>
+                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="PlayBtnClick" Height="Auto"/>
+                    </Grid>
                 </Grid> 
             </Grid>
         </DockPanel>
