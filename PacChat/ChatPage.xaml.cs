@@ -175,6 +175,7 @@ namespace PacChat
 
         public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo)
         {
+
             Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
@@ -261,7 +262,7 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheRight(sticker);
+                SendStickerOnTheRight(MessageCore.Sticker.Sticker.LoadedStickers[sticker.ID]);
             }
 
             if (b != null)
@@ -369,7 +370,7 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheLeft(sticker);
+                SendStickerOnTheLeft(MessageCore.Sticker.Sticker.LoadedStickers[sticker.ID]);
             }
 
             if (b != null)
