@@ -23,6 +23,7 @@ using PacChat.Network;
 using PacChat.Network.RestAPI;
 using static PacChat.Network.RestAPI.FileAPI;
 using PacChat.Resources.CustomControls.Media;
+using PacChat.MessageCore.Sticker;
 
 namespace PacChat
 {
@@ -34,7 +35,6 @@ namespace PacChat
         private BubbleChat _previousBubbleChat;
         private BubbleChat _headBubbleChat;
         private bool _button1Clicked;
-
         public static ChatPage Instance;
 
         public ChatPage()
@@ -42,8 +42,8 @@ namespace PacChat
             InitializeComponent();
             Instance = this;
             _button1Clicked = false;
-            spTabStickerContainner.Children.Add(new TabStickerContainner(this));
             // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
+            loadStickerToContainner();
             Transitioner.SelectedIndex = 0;
         }
 
@@ -150,6 +150,61 @@ namespace PacChat
         }
         #endregion
 
+        #region Sticker send
+        private void loadStickerToContainner()
+        {
+            MessageCore.Sticker.Sticker.Load(() => 
+            {
+                var Cate = MessageCore.Sticker.Sticker.LoadedCategories;
+                TabStickerContainner stickerTabCon = new TabStickerContainner(this);
+
+                Application.Current.Dispatcher.Invoke((Action)delegate 
+                {
+                    int i = 0;
+                    foreach (var x in Cate)
+                    {
+                        ++i;
+                        stickerTabCon.AddTabSticker(x.Value);
+                        if (i >= 10) break;
+                    }
+
+                    spTabStickerContainner.Children.Add(stickerTabCon);
+                });
+            });
+        }
+
+        public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo)
+        {
+            Resources.CustomControls.Sticker sticker = 
+                new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
+
+            Thickness margin = sticker.Margin;
+            margin.Right = 30;
+            margin.Top = 10;
+            margin.Bottom = 10;
+            sticker.HorizontalAlignment = HorizontalAlignment.Right;
+            sticker.Margin = margin;
+            spMessagesContainer.Children.Add(sticker);
+            MessagesContainer.ScrollToEnd();
+        }
+
+        public void SendStickerOnTheLeft(bool clickable, int id, int cateid, int size, int duration, string uriSheet, bool runWhenLoaded)
+        {
+            Resources.CustomControls.Sticker sticker = 
+                new Resources.CustomControls.Sticker(this, clickable, id, cateid, size, duration, uriSheet, runWhenLoaded);
+
+            Thickness margin = sticker.Margin;
+            margin.Left = 30;
+            margin.Top = 10;
+            margin.Bottom = 10;
+            sticker.HorizontalAlignment = HorizontalAlignment.Left;
+            sticker.Margin = margin;
+            spMessagesContainer.Children.Add(sticker);
+            MessagesContainer.ScrollToEnd();
+        }
+
+        #endregion
+
         public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
             if (reversed) _headBubbleChat = null;
@@ -202,6 +257,11 @@ namespace PacChat
                     app.model.currentSelectedConversation,
                     fileID, fileName
                 );
+            }
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
+            {
+                MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
+                SendStickerOnTheRight(sticker);
             }
 
             if (b != null)
@@ -421,44 +481,6 @@ namespace PacChat
             ChatInput.Text = "";
         }
 
-        public void sendSticker(bool clickable, int id, int cateid, int size, int duration, string uriSheet)
-        {
-            Sticker sticker = new Sticker(this, clickable, id, cateid, size, duration, uriSheet);
-
-            Thickness margin = sticker.Margin;
-            margin.Right = 30;
-            sticker.HorizontalAlignment = HorizontalAlignment.Right;
-            sticker.Margin = margin;
-            spMessagesContainer.Children.Add(sticker);
-            MessagesContainer.ScrollToEnd();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Sticker sticker = new Sticker(this, false, 1, 1, 130, 100, "/PacChat;component/resources/drawable/sprite (13).png");
-            Thickness margin = sticker.Margin;
-            _previousBubbleChat = null;
-            margin.Left = 30;
-            sticker.HorizontalAlignment = HorizontalAlignment.Left;
-            sticker.Margin = margin;
-            spMessagesContainer.Children.Add(sticker);
-            MessagesContainer.ScrollToEnd();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (!_button1Clicked)
-            {
-                _button1Clicked = true;
-                ChatBorder.Background = null;
-                addBackgroundImage("/PacChat/PacChat/Resources/ChatBG/BG.jpg", 0);
-                return;
-            }
-            ChatBorder.Background = null;
-            Random rd = new Random();
-            ChatBorder.Background = new SolidColorBrush(Color.FromRgb((byte)rd.Next(0, 255), (byte)rd.Next(0, 255), (byte)rd.Next(0, 255)));
-            _button1Clicked = false;
-        }
 
         private void btnSendImage_Click(object sender, RoutedEventArgs e)
         {

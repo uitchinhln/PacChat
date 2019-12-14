@@ -24,6 +24,7 @@ namespace PacChat
         {
             ResourceUtil.PrepareResource();
             LoginWindow main = new LoginWindow();
+            //MediaPlayerWindow main = new MediaPlayerWindow();
             //MainWindow main = new MainWindow();
             //TestWindows main = new TestWindows();
             main.Show();

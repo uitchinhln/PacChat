@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using PacChat.MVC;
 using PacChat.Utils;
+using PacChat.MessageCore.Sticker;
 using PacChat.ChatPageContents.ViewModels;
 using static PacChat.Utils.UserUtils;
 using System.Windows.Controls;
@@ -30,6 +31,8 @@ namespace PacChat.ChatAMVC
         public Dictionary<string, string> PrivateConversations { get; set; } = new Dictionary<string, string>();
         public Dictionary<string, UserControl> UserControls { get; set; } = new Dictionary<string, UserControl>();
         public Dictionary<string, bool> IsOnline { get; set; } = new Dictionary<string, bool>();
+
+        public Dictionary<int, StickerCategory> PaidSticker = new Dictionary<int, StickerCategory>();
         #endregion
 
         #region OnSettingPage

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using PacChat.MessageCore.Sticker;
+using PacChat.Network.RestAPI;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,17 +23,28 @@ namespace PacChat.Resources.CustomControls
     public partial class TabStickerStore : UserControl
     {
         public int ID { get; set; }
-        
+        public StickerCategory Cate { get; set; }
 
 
-        public TabStickerStore()
+        public TabStickerStore(StickerCategory cate)
         {
             InitializeComponent();
-
+            Cate = cate;
+            loadStore();
         }
 
         private void loadStore() //load thumbnail of sticker
         {
+            StickerAPI.DownloadImage(Cate.ThumbImg, (thumbImage) =>
+            {
+                imgPreview.Source = thumbImage;
+                
+            });
+            StickerAPI.DownloadImage(Cate.IconPreview, (iconPreviewImage) =>
+            {
+                imgIconPreview.Source = iconPreviewImage;
+            });
+            txtName.Text = Cate.Name;
 
         }
 

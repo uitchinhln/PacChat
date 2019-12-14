@@ -27,11 +27,8 @@
                         <DockPanel.DataContext>
                             <ChatAMVC:ChatModel/>
                         </DockPanel.DataContext>
-
-                        <DockPanel DockPanel.Dock="Top"
-                   Background="Transparent" 
-                   Height="Auto"
-                   >
+                        
+                        <DockPanel DockPanel.Dock="Top" Background="Transparent"  Height="Auto">
                             <Grid>
                                 <Border Margin="5,3,0,3" Width="35" Height="35" CornerRadius="50">
 
@@ -86,7 +83,7 @@
                                 </materialDesign:PopupBox>
                             </Border>
                             <Border>
-                                <Button Padding="0" Margin="2,2,2,2" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                                <Button Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
                                     <materialDesign:PackIcon Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>

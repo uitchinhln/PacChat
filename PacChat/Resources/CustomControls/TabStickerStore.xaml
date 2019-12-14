@@ -8,18 +8,18 @@
              >
 
 
-    <Grid Width="328" Height="224" Background="White" Margin="0" >
+    <Grid Width="355" Height="237" Background="White" Margin="0" >
 
         <Border HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
-            <Image x:Name="imgPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_tet.png"  Width="204" Height="204"/>
+            <Image x:Name="imgPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_tet.png"  Width="204" Height="204" Margin="10"/>
 
         </Border>
 
         <Border HorizontalAlignment="Right" Margin="0" VerticalAlignment="Stretch">
             <StackPanel>
-                <Image x:Name="imgIconPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_thumb.png"  Width="124" Height="124"/>
+                <Image x:Name="imgIconPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_thumb.png"  Width="124" Height="124" Margin="10"/>
 
-                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5 5 5 5">
+                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="10">
                     Tiêu Viêm - Huân Nhi Tết
                 </TextBlock>
 

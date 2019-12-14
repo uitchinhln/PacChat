@@ -18,7 +18,7 @@
            MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
             MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
             MinWidth="90" MinHeight="90"
-            RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="None" />
+            RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="UniformToFill" />
         <Button Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick"/>
     </Grid>
 </UserControl>
