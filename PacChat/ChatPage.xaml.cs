@@ -442,9 +442,9 @@ namespace PacChat
             ChatInput.Text = "";
         }
 
-        public void sendSticker(bool clickable, int id, int cateid, int size, int duration, string uriSheet)
+        public void sendSticker(bool clickable, int id, int cateid, int size, int duration, string uriSheet, bool runWhenLoaded)
         {
-            Sticker sticker = new Sticker(this, clickable, id, cateid, size, duration, uriSheet);
+            Sticker sticker = new Sticker(this, clickable, id, cateid, size, duration, uriSheet, runWhenLoaded);
 
             Thickness margin = sticker.Margin;
             margin.Right = 30;

@@ -22,7 +22,7 @@ namespace PacChat.Resources.CustomControls
     public partial class Sticker : UserControl
     {
 
-        public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet)
+        public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet, bool runWhenLoaded = false)
         {
             InitializeComponent();
 
@@ -33,9 +33,11 @@ namespace PacChat.Resources.CustomControls
             UriSheet = urisheet;
             Chatpage = chatpage;
             Clickable = clickable;
-            
+            IsRunWhenLoaded = runWhenLoaded;
             loadSticker();
         }
+
+        public bool IsRunWhenLoaded { get; set; }
 
         public ChatPage Chatpage
         {
@@ -86,6 +88,7 @@ namespace PacChat.Resources.CustomControls
                 anim.VerticalOffset = Size;
                 anim.HorizontalOffset = Size;
                 anim.Clickable = Clickable;
+                anim.isRunWhenLoaded = IsRunWhenLoaded;
                 sticker.Children.Add(anim);
             });
             
@@ -95,7 +98,7 @@ namespace PacChat.Resources.CustomControls
         {
             if (Clickable)
             {
-                Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet);
+                Chatpage.sendSticker(false, ID, CateID, Size, Duration, UriSheet, true);
             }
         }
     }
