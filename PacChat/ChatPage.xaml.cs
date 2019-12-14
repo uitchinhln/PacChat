@@ -153,12 +153,12 @@ namespace PacChat
         #region Sticker send
         private void loadStickerToContainner()
         {
-            MessageCore.Sticker.Sticker.Load(() => 
+            MessageCore.Sticker.Sticker.Load(() =>
             {
                 var Cate = MessageCore.Sticker.Sticker.LoadedCategories;
                 TabStickerContainner stickerTabCon = new TabStickerContainner(this);
 
-                Application.Current.Dispatcher.Invoke((Action)delegate 
+                Application.Current.Dispatcher.Invoke((Action)delegate
                 {
                     int i = 0;
                     foreach (var x in Cate)
@@ -175,7 +175,7 @@ namespace PacChat
 
         public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo)
         {
-            Resources.CustomControls.Sticker sticker = 
+            Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
             Thickness margin = sticker.Margin;
@@ -190,7 +190,7 @@ namespace PacChat
 
         public void SendStickerOnTheLeft(bool clickable, int id, int cateid, int size, int duration, string uriSheet, bool runWhenLoaded)
         {
-            Resources.CustomControls.Sticker sticker = 
+            Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, clickable, id, cateid, size, duration, uriSheet, runWhenLoaded);
 
             Thickness margin = sticker.Margin;
@@ -364,6 +364,20 @@ namespace PacChat
                 (
                     app.model.currentSelectedConversation,
                     fileID, fileName
+                );
+            }
+            else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
+            {
+                MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
+                SendStickerOnTheLeft
+                (
+                    id: sticker.ID,
+                    cateid: sticker.CategoryID,
+                    clickable: false,
+                    size: 130,
+                    duration: sticker.Duration,
+                    uriSheet: sticker.URI,
+                    runWhenLoaded: true
                 );
             }
 

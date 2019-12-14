@@ -12,20 +12,19 @@ namespace PacChat.MessageCore.Message
 {
     public class StickerMessage : AbstractMessage
     {
-        public Sticker.Sticker Sticker { get; set; }
+        public Sticker.Sticker Sticker { get; set; } = new Sticker.Sticker();
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            Sticker = new Sticker.Sticker();
             Sticker.ID = buffer.ReadInt();
-            //Sticker.CategoryID = buffer.ReadInt();
+            Sticker.CategoryID = buffer.ReadInt();
         }
 
         public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
             buffer.WriteInt(GetPreviewCode());
             buffer.WriteInt(Sticker.ID);
-            //buffer.WriteInt(Sticker.CategoryID);
+            buffer.WriteInt(Sticker.CategoryID);
             return buffer;
         }
 
