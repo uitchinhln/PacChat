@@ -26,11 +26,6 @@ namespace PacChat.Resources.CustomControls
 
         private App app;
 
-        public ChatPage Chatpage
-        {
-            get; set;
-        }
-
         public List<int> IDList
         {
             get { return _idList; }
@@ -38,10 +33,9 @@ namespace PacChat.Resources.CustomControls
         }
 
 
-        public TabStickerContainner(ChatPage _chatpage)
+        public TabStickerContainner()
         {
             InitializeComponent();
-            Chatpage = _chatpage;
             loadStore();
         }
 
@@ -54,7 +48,7 @@ namespace PacChat.Resources.CustomControls
                 {
                     Width = 38,
                     Height = 38,
-                    Content = new TabSticker(cate, Chatpage),
+                    Content = new TabSticker(cate, ChatPage.Instance),
                     ToolTip = cate.Name
                 };
                 Image img = new Image();

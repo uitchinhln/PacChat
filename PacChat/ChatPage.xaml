@@ -8,6 +8,7 @@
              xmlns:chatpage="clr-namespace:PacChat.ChatPageContents"
              xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" 
              xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" 
+             xmlns:customControls="clr-namespace:PacChat.Resources.CustomControls"
              xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -77,8 +78,8 @@
                                     Foreground="#FF2C2C2C"
                             />
                                     </materialDesign:PopupBox.ToggleContent>
-                                    <StackPanel Width="390" Height="325" x:Name="spTabStickerContainner">
-
+                                    <StackPanel Width="390" Height="325">
+                                        <customControls:TabStickerContainner x:Name="spTabStickerContainner"/>
                                     </StackPanel>
                                 </materialDesign:PopupBox>
                             </Border>
