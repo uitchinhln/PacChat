@@ -61,7 +61,10 @@ namespace PacChat.Resources.CustomControls.Media
         {
             canReplay = true;
             PlayPauseIcon.Kind = PackIconKind.ArrowRotateRight;
-            if (Loop) Replay();
+            if (Loop) 
+                Replay();
+            else
+                dockPanel.Opacity = 1;
         }
 
         private void OnMediaOpened(object sender, RoutedEventArgs e)
@@ -120,6 +123,7 @@ namespace PacChat.Resources.CustomControls.Media
             if (isMediaChange || isDragging) return;
 
             isJumping = true;
+            canReplay = false;
             VideoFull.Clock.Controller.Seek(timeSpan, TimeSeekOrigin.BeginTime);
             isJumping = false;
         }
@@ -133,6 +137,7 @@ namespace PacChat.Resources.CustomControls.Media
         private void SeekBar_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             if (VideoFull.Clock == null) return;
+            canReplay = false;
             VideoFull.Clock.Controller.Seek(TimeSpan.FromSeconds(SeekBar.Value), TimeSeekOrigin.BeginTime);
             isDragging = false;
         }
@@ -258,7 +263,8 @@ namespace PacChat.Resources.CustomControls.Media
 
         private void HideControl(object sender, MouseEventArgs e)
         {
-            dockPanel.Opacity = 0.15;
+            if (!canReplay)
+                dockPanel.Opacity = 0.15;
         }
     }
 }
