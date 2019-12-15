@@ -3,22 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="100" Cursor="Hand" OpacityMask="#FF000000" >
+             d:DesignHeight="90" d:DesignWidth="90" Cursor="Hand" OpacityMask="#FF000000" >
 
 
     <Grid x:Name="Gat">
-        <ProgressBar x:Name="LoadingAhihi"
+        <ProgressBar x:Name="LoadingAhihi" IsIndeterminate="True" 
           Style="{StaticResource MaterialDesignCircularProgressBar}"
-          Value="0"
-          IsIndeterminate="True" Height="Auto" Margin="20" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}"
-          Foreground="#FFB6B6B6" />
+           MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
+            Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB6B6B6" Height="Auto" Width="Auto" />
         <Image x:Name="ImgThumbnail" 
            MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
             MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
             MinWidth="90" MinHeight="90"
             RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="UniformToFill" />
-        <Button Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick"/>
+        <Button Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick">
+            <materialDesign:PackIcon x:Name="PlayIcon" Kind="PlayCircle" Width="Auto" Height="Auto" Visibility="Hidden" Margin="10" />
+        </Button>
     </Grid>
 </UserControl>

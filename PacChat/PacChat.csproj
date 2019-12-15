@@ -175,6 +175,9 @@
     <Compile Include="Resources\CustomControls\Media\MediaPlayer.xaml.cs">
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Media\PacPlayer.xaml.cs">
+      <DependentUpon>PacPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Media\ThumbnailButton.xaml.cs">
       <DependentUpon>ThumbnailButton.xaml</DependentUpon>
     </Compile>
@@ -369,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\CustomControls\Media\PacPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\CustomControls\Media\ThumbnailButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -512,9 +519,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="WPFMediaKit">
-      <Version>2.2.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

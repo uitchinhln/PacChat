@@ -20,6 +20,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public long LastActive { get; set; }
         public HashSet<string> Members { get; set; } = new HashSet<string>();
         public int LastMessID { get; set; }
+        public int LastMediaID { get; set; }
+        public int LastAttachmentID { get; set; }
         public int PreviewCode { get; set; }
         public string PreviewContent { get; set; }
 
@@ -39,6 +41,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             }
 
             LastMessID = buffer.ReadInt();
+            LastMediaID = buffer.ReadInt();
+            LastAttachmentID = buffer.ReadInt();
             PreviewCode = buffer.ReadInt();
             PreviewContent = ByteBufUtils.ReadUTF8(buffer);
         }
@@ -56,6 +60,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 var app = MainWindow.chatApplication;
 
                 app.model.Conversations[ConversationID].LastMessID = LastMessID;
+                app.model.Conversations[ConversationID].LastMediaID = LastMediaID;
+                app.model.Conversations[ConversationID].LastAttachmentID = LastAttachmentID;
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
                 ChatPage.Instance.LoadMessages(ConversationID);

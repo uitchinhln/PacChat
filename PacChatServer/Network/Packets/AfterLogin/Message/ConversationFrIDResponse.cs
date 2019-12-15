@@ -18,6 +18,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         public long LastActive { get; set; }
         public HashSet<string> Members { get; set; } = new HashSet<string>();
         public int LastMessID { get; set; }
+        public int LastMediaID { get; set; }
+        public int LastAttachmentID { get; set; }
         public int PreviewCode { get; set; }
         public string PreviewContent { get; set; }
 
@@ -38,6 +40,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             ByteBufUtils.WriteUTF8(byteBuf, "~");
 
             byteBuf.WriteInt(LastMessID);
+            byteBuf.WriteInt(LastMediaID);
+            byteBuf.WriteInt(LastAttachmentID);
             byteBuf.WriteInt(PreviewCode);
             ByteBufUtils.WriteUTF8(byteBuf, PreviewContent);
 

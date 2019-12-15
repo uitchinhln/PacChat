@@ -46,7 +46,10 @@ namespace PacChatServer.IO.Message
                 Mongo.Instance.Set<AbstractConversation>(conversation.ID.ToString(), collection =>
                 {
                     var condition = Builders<AbstractConversation>.Filter.Eq(p => p.ID, conversation.ID);
-                    var update = Builders<AbstractConversation>.Update.Set(p => p.MessagesID, conversation.MessagesID);
+                    var update = Builders<AbstractConversation>.Update
+                                    .Set(p => p.MessagesID, conversation.MessagesID)
+                                    .Set(p => p.MediaID, conversation.MediaID)
+                                    .Set(p => p.AttachmentID, conversation.AttachmentID);
                     collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
                 });
             }

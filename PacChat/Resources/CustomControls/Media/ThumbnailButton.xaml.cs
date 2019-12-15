@@ -26,7 +26,6 @@ namespace PacChat.Resources.CustomControls.Media
         {
             InitializeComponent();
             this.OpacityMask.Opacity = 0.5;
-            this.Margin = new Thickness() { Left = 5, Right = 5 };
         }
 
         public ThumbnailButton(MediaInfo mediaInfo) :this()
@@ -40,8 +39,18 @@ namespace PacChat.Resources.CustomControls.Media
         }
 
         public ImageSource Image { get => ImgThumbnail.Source; }
-        
-        public String FileName { get; set; }
+
+        string fileName;
+        bool isVideo = false;
+
+        public String FileName 
+        { 
+            get => fileName; 
+            set {
+                fileName = value;
+                isVideo = PacPlayer.SupportedExtensions.Contains(System.IO.Path.GetExtension(fileName).ToLower());
+            } 
+        }
         public String FileID { get; set; }
 
         public String StreamURL { get; set; }
@@ -87,7 +96,9 @@ namespace PacChat.Resources.CustomControls.Media
                             ImgThumbnail.Source = bitmap;
                             ImgThumbnail.IsEnabled = true;
                             Gat.Children.Remove(LoadingAhihi);
-                            });
+                            if (isVideo)
+                                PlayIcon.Visibility = Visibility.Visible;
+                        });
                     }
                     catch (WebException)
                     {
@@ -106,9 +117,12 @@ namespace PacChat.Resources.CustomControls.Media
                 if (IsActive)
                 {
                     this.OpacityMask.Opacity = 1;
+                    PlayIcon.Visibility = Visibility.Hidden;
                 } else
                 {
                     this.OpacityMask.Opacity = 0.5;
+                    if (isVideo)
+                        PlayIcon.Visibility = Visibility.Visible;
                 }
             }
 

@@ -6,7 +6,8 @@
         xmlns:ccMedia="clr-namespace:PacChat.Resources.CustomControls.Media"
         xmlns:local="clr-namespace:PacChat"
         mc:Ignorable="d"
-        Title="MediaPlayerWindow" Height="600" Width="800" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True">
+        Title="MediaPlayerWindow" Height="550" Width="900" WindowStyle="None" Background="{x:Null}" 
+        AllowsTransparency="True" MinHeight="300" MinWidth="400">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"

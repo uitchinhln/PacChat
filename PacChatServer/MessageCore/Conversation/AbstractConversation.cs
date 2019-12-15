@@ -42,6 +42,12 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonElement("MessagesID")]
         public List<Guid> MessagesID { get; set; } = new List<Guid>();
 
+        [BsonElement("MediaID")]
+        public List<Guid> MediaID { get; set; } = new List<Guid>();
+
+        [BsonElement("AttachmentID")]
+        public List<Guid> AttachmentID { get; set; } = new List<Guid>();
+
         [BsonIgnore]
         public LRUCache<Guid, IMessage> LoadedMessages { get; set; } = new LRUCache<Guid, IMessage>(100, 10);
 
@@ -53,6 +59,10 @@ namespace PacChatServer.MessageCore.Conversation
             (message as AbstractMessage).Author = chatSession.Owner.ID;
 
             //Store
+            if (message is VideoMessage || message is ImageMessage)
+                MediaID.Add((message as AbstractMessage).ID);
+            if (message is AttachmentMessage)
+                AttachmentID.Add((message as AbstractMessage).ID);
             MessagesID.Add((message as AbstractMessage).ID);
             LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
 

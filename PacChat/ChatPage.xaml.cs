@@ -236,11 +236,11 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName
-                );
+                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                //(
+                //    app.model.currentSelectedConversation,
+                //    fileID, fileName
+                //);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -252,11 +252,11 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName
-                );
+                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                //(
+                //    app.model.currentSelectedConversation,
+                //    fileID, fileName
+                //);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
@@ -344,11 +344,11 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName
-                );
+                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
+                //(
+                //    app.model.currentSelectedConversation,
+                //    fileID, fileName
+                //);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -360,11 +360,11 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 // thumbnail.IsActive = true;
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName
-                );
+                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
+                //(
+                //    app.model.currentSelectedConversation,
+                //    fileID, fileName
+                //);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {

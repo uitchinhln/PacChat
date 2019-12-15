@@ -33,78 +33,76 @@ namespace PacChat.Resources.CustomControls.Media
         public MediaPlayer()
         {
             InitializeComponent();
-            VideoFull.LoadedBehavior = MediaState.Manual;
-
-            #region SeekBar
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(200);
-            timer.Tick += new EventHandler(timer_Tick);
-            #endregion
 
             #region Run Demo
-            ThumbnailButton btn = new ThumbnailButton()
-            {
-                ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
-                StreamURL = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
-                FileName = "dreamstime_xxl_65780868_small.jpg",
-            };
-            btn.Click += BtnClick;
-            Gallery.Children.Add(btn);
+            //ThumbnailButton btn = new ThumbnailButton()
+            //{
+            //    ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
+            //    StreamURL = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
+            //    FileName = "dreamstime_xxl_65780868_small.jpg",
+            //};
+            //btn.Click += BtnClick;
+            //Gallery.Children.Add(btn);
 
-            ThumbnailButton btn2 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                FileName = "BigBuckBunny.mp4",
-            };
-            btn2.Click += BtnClick;
-            Gallery.Children.Add(btn2);
+            //ThumbnailButton btn2 = new ThumbnailButton()
+            //{
+            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            //    FileName = "BigBuckBunny.mp4",
+            //};
+            //btn2.Click += BtnClick;
+            //Gallery.Children.Add(btn2);
 
-            ThumbnailButton btn3 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                FileName = "ElephantsDream.mp4",
-            };
-            btn3.Click += BtnClick;
-            Gallery.Children.Add(btn3);
+            //ThumbnailButton btn3 = new ThumbnailButton()
+            //{
+            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+            //    StreamURL = "G:/Downloads/Ahihi.mp4",
+            //    FileName = "Ahihi.mp4",
+            //};
+            //btn3.Click += BtnClick;
+            //Gallery.Children.Add(btn3);
 
-            ThumbnailButton btn4 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-                FileName = "ForBiggerBlazes.mp4",
-            };
-            btn4.Click += BtnClick;
-            Gallery.Children.Add(btn4);
+            //ThumbnailButton btn4 = new ThumbnailButton()
+            //{
+            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+            //    FileName = "ForBiggerBlazes.mp4",
+            //};
+            //btn4.Click += BtnClick;
+            //Gallery.Children.Add(btn4);
 
-            ThumbnailButton btn5 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-                FileName = "ForBiggerEscapes.mp4",
-            };
-            btn5.Click += BtnClick;
-            Gallery.Children.Add(btn5);
+            //ThumbnailButton btn5 = new ThumbnailButton()
+            //{
+            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+            //    FileName = "ForBiggerEscapes.mp4",
+            //};
+            //btn5.Click += BtnClick;
+            //Gallery.Children.Add(btn5);
 
-            for (int i = 0; i < 15; i++)
-            {
-                ThumbnailButton btn6 = new ThumbnailButton()
-                {
-                    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg",
-                    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
-                    FileName = "VolkswagenGTIReview.mp4",
-                };
-                btn6.Click += BtnClick;
-                Gallery.Children.Add(btn6);
-            }
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    ThumbnailButton btn6 = new ThumbnailButton()
+            //    {
+            //        ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg",
+            //        StreamURL = "G:/Downloads/Ahihi.mp4",
+            //        FileName = "VolkswagenGTIReview.mp4",
+            //    };
+            //    btn6.Click += BtnClick;
+            //    Gallery.Children.Add(btn6);
+            //}
 
-            SwapToBtn(btn);
+            //SwapToBtn(btn);
             #endregion
         }
 
+        int borderRight = int.MaxValue;
         int loadIndex = 0;
+        public bool IsReachedRight { get; set; } = false;
+
+        int borderLeft = 0;
         int leftIndex = 0;
+        public bool IsReachedLeft { get; set; } = false;
 
         ThumbnailButton currentBtn;
 
@@ -135,7 +133,7 @@ namespace PacChat.Resources.CustomControls.Media
                 SetBackground(bitmap);
             }
 
-            if (String.Equals(System.IO.Path.GetExtension(currentBtn.FileName), ".mp4", StringComparison.OrdinalIgnoreCase))
+            if (PacPlayer.SupportedExtensions.Contains(System.IO.Path.GetExtension(currentBtn.FileName).ToLower()))
             {
                 ShowVideo(currentBtn.StreamURL);
             }
@@ -160,7 +158,6 @@ namespace PacChat.Resources.CustomControls.Media
             PlayerBackground.Background = vb;
         }
 
-
         public void Clean(bool hard = true)
         {
             if (hard)            
@@ -171,8 +168,7 @@ namespace PacChat.Resources.CustomControls.Media
             ImgFull.Source = null;
             ImgFull.IsEnabled = false;
 
-            VideoFull.Stop();
-            VideoFull.IsEnabled = false;
+            VideoFull.Close();
 
             currentBtn = null;
             loadIndex = 0;
@@ -185,11 +181,12 @@ namespace PacChat.Resources.CustomControls.Media
             {
                 VideoFull.Close();
 
-                VideoPlayer.Visibility = Visibility.Visible;
+                VideoFull.Visibility = Visibility.Visible;
                 ImgFull.Visibility = Visibility.Hidden;
 
+                LoadingAhihi.Visibility = Visibility.Visible;
+
                 VideoFull.Source = new Uri(streamURL);
-                VideoFull.Play();
             }
             catch (Exception e)
             {
@@ -201,10 +198,10 @@ namespace PacChat.Resources.CustomControls.Media
         {
             try
             {
-                timer.IsEnabled = false;
+                LoadingAhihi.Visibility = Visibility.Visible;
                 VideoFull.Close();
 
-                VideoPlayer.Visibility = Visibility.Hidden;
+                VideoFull.Visibility = Visibility.Hidden;
                 ImgFull.Visibility = Visibility.Visible;
 
                 if (ImgCache.Contains(imageURL))
@@ -216,6 +213,8 @@ namespace PacChat.Resources.CustomControls.Media
                     ImgCache.AddReplace(imageURL, bitmap);
                     ImgFull.Source = bitmap;
                 }
+
+                LoadingAhihi.Visibility = Visibility.Hidden;
             } catch (Exception e)
             {
                 Console.WriteLine(e);
@@ -240,18 +239,20 @@ namespace PacChat.Resources.CustomControls.Media
             {
                 SwapToBtn(btn);
             }
-        } 
+        }
 
-        public void AddMediaItem(String conversationID, String fileID, String fileName)
+        public void AddMediaItem(String conversationID, String fileID, String fileName, int position, bool reachedRight = false)
         {
             String thumbUrl = StreamAPI.GetMediaThumbnailURL(fileID, conversationID);
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
 
             MediaInfo media = new MediaInfo(thumbUrl, streamUrl, fileName, fileID);
             loadedMediaInfo.Add(media);
+            IsReachedRight = reachedRight;
+            borderRight = Math.Min(position, borderRight);
         }
 
-        public void AddMediaItemToFirst(String conversationID, String fileID, String fileName)
+        public void AddMediaItemToFirst(String conversationID, String fileID, String fileName, int position, bool reachedLeft = true)
         {
             String thumbUrl = StreamAPI.GetMediaThumbnailURL(fileID, conversationID);
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
@@ -261,6 +262,8 @@ namespace PacChat.Resources.CustomControls.Media
 
             loadIndex++;
             leftIndex++;
+            IsReachedLeft = reachedLeft;
+            borderLeft = Math.Max(position, borderLeft);
         }
 
         public void ShowMedia(String fileID)
@@ -306,6 +309,9 @@ namespace PacChat.Resources.CustomControls.Media
                     {
                         this.LoadThumbnail(loadedMediaInfo[loadIndex], int.MaxValue);
                     }
+                } else if (!IsReachedRight)
+                {
+                    //Request data here
                 }
             }
             if (scrollViewer.HorizontalOffset == 0 && loadedMediaInfo.Count > 0)
@@ -317,6 +323,10 @@ namespace PacChat.Resources.CustomControls.Media
                     {
                         this.LoadThumbnail(loadedMediaInfo[i], 0);
                     }
+                }
+                else if (!IsReachedLeft)
+                {
+                    //Request data here
                 }
             }
         }
@@ -341,84 +351,6 @@ namespace PacChat.Resources.CustomControls.Media
                 FullScreenIcon.Kind = PackIconKind.Fullscreen;
             }
         }
-
-        private void PlayBtnClick(object sender, RoutedEventArgs e)
-        {
-            if (!VideoFull.HasVideo) return;
-            MediaState mediaState = GetMediaState(VideoFull);
-            if (mediaState == MediaState.Play)
-            {
-                VideoFull.Pause();
-                timer.IsEnabled = false;
-            } 
-            if (mediaState == MediaState.Pause)
-            {
-                VideoFull.Play();
-                timer.IsEnabled = true;
-            }
-            if (IsPlayDone)
-            {
-                VideoFull.Position = TimeSpan.FromSeconds(0);
-                VideoFull.Play();
-                timer.IsEnabled = true;
-            }
-        }
-
-        bool IsPlayDone = false;
-        private void PlayDone(object sender, RoutedEventArgs e)
-        {
-            IsPlayDone = true;
-            timer.IsEnabled = false;
-        }
-
-        #region SeekBar
-        DispatcherTimer timer;
-
-        private void PlayBegin(object sender, RoutedEventArgs e)
-        {
-            IsPlayDone = false;
-            if (VideoFull.NaturalDuration.HasTimeSpan)
-            {
-                TimeSpan ts = VideoFull.NaturalDuration.TimeSpan;
-                SeekBar.Maximum = ts.TotalSeconds;
-                SeekBar.SmallChange = 3;
-                SeekBar.LargeChange = Math.Min(10, ts.Seconds / 10);
-            }
-            timer.Start();
-        }
-
-        String timePattern = "{0:D2}:{1:D2}";
-        bool isDragging = false;
-
-        void timer_Tick(object sender, EventArgs e)
-        {
-            if (!isDragging)
-            {
-                SeekBar.Value = VideoFull.Position.TotalSeconds;
-                lbTime.Content = String.Format(timePattern, VideoFull.Position.Minutes, VideoFull.Position.Seconds);
-            }
-        }
-
-        private void Slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-            isDragging = true;
-        }
-
-        private void Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            isDragging = false;
-            VideoFull.Position = TimeSpan.FromSeconds(SeekBar.Value);
-        }
-
-        private MediaState GetMediaState(MediaElement myMedia)
-        {
-            FieldInfo hlp = typeof(MediaElement).GetField("_helper", BindingFlags.NonPublic | BindingFlags.Instance);
-            object helperObject = hlp.GetValue(myMedia);
-            FieldInfo stateField = helperObject.GetType().GetField("_currentState", BindingFlags.NonPublic | BindingFlags.Instance);
-            MediaState state = (MediaState)stateField.GetValue(helperObject);
-            return state;
-        }
-        #endregion
     }
 
     public class MediaInfo

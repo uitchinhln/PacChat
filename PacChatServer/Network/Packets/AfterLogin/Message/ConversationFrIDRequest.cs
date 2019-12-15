@@ -58,6 +58,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 }
 
                 packet.LastMessID = conversationStore.MessagesID.Count - 1;
+                packet.LastMediaID = conversationStore.MediaID.Count - 1;
+                packet.LastAttachmentID = conversationStore.AttachmentID.Count - 1;
             }
 
             // Update later
