@@ -33,6 +33,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
             {
                 PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(CateID, out var stickerCate);
                 ChatPage.Instance.spTabStickerContainner.AddTabSticker(stickerCate);
+                ChatPage.Instance.spTabStickerContainner.RemoveCateInStore(stickerCate);
             });
         }
     }

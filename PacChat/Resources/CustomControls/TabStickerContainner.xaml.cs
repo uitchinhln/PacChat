@@ -22,20 +22,15 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class TabStickerContainner : UserControl
     {
-        private List<int> _idList;
+        private Dictionary<int, TabStickerStore> CateStore;
 
         private App app;
-
-        public List<int> IDList
-        {
-            get { return _idList; }
-            set { _idList = value; }
-        }
 
 
         public TabStickerContainner()
         {
             InitializeComponent();
+            CateStore = new Dictionary<int, TabStickerStore>();
         }
 
 
@@ -60,19 +55,17 @@ namespace PacChat.Resources.CustomControls
 
         }
 
-        public void addCateIntoStore(MessageCore.Sticker.StickerCategory cate)
+        public void AddCateIntoStore(MessageCore.Sticker.StickerCategory cate)
         {
             TabStickerStore store = new TabStickerStore(cate);
             store.Margin = new Thickness(5, 5, 5, 5);
+            CateStore.Add(cate.ID, store);
             splStickerStore.Children.Add(store);
         }
 
-        private void initTabStickerContainner()
+        public void RemoveCateInStore(MessageCore.Sticker.StickerCategory cate)
         {
-            foreach (var x in _idList)
-            {
-                //initTabSticker(x);
-            }
+            splStickerStore.Children.Remove(CateStore[cate.ID]);
         }
 
         private void loadStore()

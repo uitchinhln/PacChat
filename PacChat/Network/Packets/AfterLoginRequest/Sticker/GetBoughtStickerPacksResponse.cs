@@ -51,7 +51,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(Cate.Key, out var stickerCate);
-                        ChatPage.Instance.spTabStickerContainner.addCateIntoStore(stickerCate);
+                        ChatPage.Instance.spTabStickerContainner.AddCateIntoStore(stickerCate);
                     });
                 }
             }
