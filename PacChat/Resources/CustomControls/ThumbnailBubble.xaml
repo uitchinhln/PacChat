@@ -19,5 +19,6 @@
                 </Border.Background>
             </Border>
         </Border>
+        <Button x:Name="ClickMask" Background="#00000000" Height="Auto" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="8" Click="ClickMask_Click"></Button>
     </Grid>
 </UserControl>

@@ -28,7 +28,7 @@ namespace PacChat.Resources.CustomControls
             InitializeComponent();
         }
 
-        public ThumbnailBubble(MediaInfo mediaInfo) :this()
+        public ThumbnailBubble(MediaInfo mediaInfo) : this()
         {
             if (mediaInfo == null)
                 throw new NullReferenceException("MediaInfo cannot be null.");
@@ -39,7 +39,7 @@ namespace PacChat.Resources.CustomControls
         }
 
         public ImageSource Image { get => MediaThumb.ImageSource; }
-        
+
         public String FileName { get; set; }
         public String FileID { get; set; }
 
@@ -70,10 +70,11 @@ namespace PacChat.Resources.CustomControls
                         WebClient wc = new WebClient();
                         BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
                         wc.Dispose();
-                        Application.Current.Dispatcher.Invoke(() => {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
                             MediaThumb.ImageSource = bitmap;
                             // BubbleBkg.Children.Remove(LoadingAhihi);
-                            });
+                        });
                     }
                     catch (WebException)
                     {
@@ -96,6 +97,15 @@ namespace PacChat.Resources.CustomControls
         {
             if (Click != null)
                 Click(this, e);
+        }
+
+        private void ClickMask_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.Instance.MediaPlayerWindow != null)
+            {
+                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace PacChat
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight{ get; set; }
 
-        public MediaPlayerWindow MediaPlayerWindow { get; private set; }
+        public MediaPlayerWindow MediaPlayerWindow { get; set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -87,8 +87,8 @@ namespace PacChat
             SetNotificationDotState(false);
 
             // Media window
-            MediaPlayerWindow = new MediaPlayerWindow();
-            MediaPlayerWindow.Hide();
+            // MediaPlayerWindow = new MediaPlayerWindow();
+            // MediaPlayerWindow.Show();
 
             /*
             try

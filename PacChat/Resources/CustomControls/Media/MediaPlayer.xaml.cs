@@ -273,7 +273,7 @@ namespace PacChat.Resources.CustomControls.Media
                 throw new KeyNotFoundException();
 
             int start = Math.Max(0, index - 10);
-            int end = Math.Max(loadedMediaInfo.Count, index + 10);
+            int end = Math.Min(loadedMediaInfo.Count, index + 10);
 
             this.Clean(false);
 

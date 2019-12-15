@@ -254,11 +254,11 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                //(
-                //    app.model.currentSelectedConversation,
-                //    fileID, fileName
-                //);
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                (
+                    app.model.currentSelectedConversation,
+                    fileID, fileName, 0
+                );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -364,11 +364,11 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                //(
-                //    app.model.currentSelectedConversation,
-                //    fileID, fileName
-                //);
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                (
+                    app.model.currentSelectedConversation,
+                    fileID, fileName, 0
+                );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {

@@ -28,7 +28,7 @@ namespace PacChat
             //MainWindow main = new MainWindow();
             //TestWindows main = new TestWindows();
             main.Show();
-
+           
         }
     }
 }
