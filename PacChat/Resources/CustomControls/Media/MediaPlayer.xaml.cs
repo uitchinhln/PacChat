@@ -35,7 +35,7 @@ namespace PacChat.Resources.CustomControls.Media
             InitializeComponent();
 
             #region Run Demo
-            Demo();
+            //Demo();
             #endregion
         }
 
@@ -76,7 +76,7 @@ namespace PacChat.Resources.CustomControls.Media
                 SetBackground(bitmap);
             }
 
-            if (PacPlayer.SupportedExtensions.Contains(System.IO.Path.GetExtension(currentBtn.FileName).ToLower()))
+            if (PacPlayer.IsSupport(currentBtn.FileName))
             {
                 ShowVideo(currentBtn.StreamURL);
             }

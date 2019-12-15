@@ -48,7 +48,7 @@ namespace PacChat.Resources.CustomControls.Media
             get => fileName; 
             set {
                 fileName = value;
-                isVideo = PacPlayer.SupportedExtensions.Contains(System.IO.Path.GetExtension(fileName).ToLower());
+                isVideo = PacPlayer.IsSupport(fileName);
             } 
         }
         public String FileID { get; set; }
