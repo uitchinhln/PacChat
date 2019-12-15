@@ -173,7 +173,7 @@ namespace PacChat
             });
         }
 
-        public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo)
+        public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo, bool reversed = false)
         {
 
             Resources.CustomControls.Sticker sticker =
@@ -185,11 +185,19 @@ namespace PacChat
             margin.Bottom = 10;
             sticker.HorizontalAlignment = HorizontalAlignment.Right;
             sticker.Margin = margin;
-            spMessagesContainer.Children.Add(sticker);
+
+            if (reversed)
+            {
+                spMessagesContainer.Children.Insert(0, sticker);
+            }
+            else
+            {
+                spMessagesContainer.Children.Add(sticker);
+            }
             MessagesContainer.ScrollToEnd();
         }
 
-        public void SendStickerOnTheLeft(MessageCore.Sticker.Sticker stickerInfo)
+        public void SendStickerOnTheLeft(MessageCore.Sticker.Sticker stickerInfo, bool reversed = false, BubbleChat previous = null, BubbleChat head = null)
         {
             Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
@@ -200,7 +208,16 @@ namespace PacChat
             margin.Bottom = 10;
             sticker.HorizontalAlignment = HorizontalAlignment.Left;
             sticker.Margin = margin;
-            spMessagesContainer.Children.Add(sticker);
+
+            if (reversed)
+            {
+                head.InsertSticker(sticker);
+            }
+            else
+            {
+                previous.AddSticker(sticker);
+            }
+            // spMessagesContainer.Children.Add(sticker);
             MessagesContainer.ScrollToEnd();
         }
 
@@ -264,7 +281,7 @@ namespace PacChat
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
                 //var result;
                 MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
-                SendStickerOnTheRight(result);
+                SendStickerOnTheRight(result, reversed);
             }
 
             if (b != null)
@@ -373,7 +390,7 @@ namespace PacChat
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
                 MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
-                SendStickerOnTheLeft(result);
+                SendStickerOnTheLeft(result, reversed, _previousBubbleChat, _headBubbleChat);
             }
 
             if (b != null)

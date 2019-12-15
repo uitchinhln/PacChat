@@ -45,6 +45,15 @@ namespace PacChat.Resources.CustomControls
         {
             spMessContainer.Children.Insert(0, thumbnail);
         }
+        
+        public void AddSticker(Sticker sticker)
+        {
+            spMessContainer.Children.Add(sticker);
+        }
+        public void InsertSticker(Sticker sticker)
+        {
+            spMessContainer.Children.Insert(0, sticker);
+        }
 
         public void SetAva(string path)
         {
