@@ -385,8 +385,11 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\UpdateSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\MediaFromConversationRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\MediaFromConversationResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\MessageFromConversationResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\Messagestore.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\AcceptedFriendResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\AddFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Notification\FinalizeAcceptedFriendRequest.cs" />

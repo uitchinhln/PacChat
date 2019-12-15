@@ -36,6 +36,7 @@ namespace PacChat.Resources.CustomControls
             this.FileID = mediaInfo.FileID;
             this.StreamURL = mediaInfo.StreamURL;
             this.ThumbnailUrl = mediaInfo.ThumbURL;
+            this.IsVideoThumbnail = PacPlayer.IsSupport(FileName);
         }
 
         public ImageSource Image { get => MediaThumb.ImageSource; }
@@ -44,6 +45,8 @@ namespace PacChat.Resources.CustomControls
         public String FileID { get; set; }
 
         public String StreamURL { get; set; }
+
+        public bool IsVideoThumbnail { get; set; }
 
         #region Custom Property
         public String ThumbnailUrl
@@ -62,7 +65,8 @@ namespace PacChat.Resources.CustomControls
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
-                String url = ThumbnailUrl;
+                LoadingAhihi.Visibility = Visibility.Visible;
+                String url = IsVideoThumbnail ? ThumbnailUrl : StreamURL;
                 Task task = new Task(() =>
                 {
                     try
@@ -72,8 +76,27 @@ namespace PacChat.Resources.CustomControls
                         wc.Dispose();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
+
+                            if (!IsVideoThumbnail)
+                            {
+                                if (bitmap.PixelHeight > 300)
+                                {
+                                    BubbleBkg.Height = 300;
+                                    BubbleBkg.Width = bitmap.PixelWidth * 300 / bitmap.PixelHeight;
+                                }
+                                else if (bitmap.PixelWidth > 500)
+                                {
+                                    BubbleBkg.Width = 500;
+                                    BubbleBkg.Height = bitmap.PixelHeight * 500 / bitmap.PixelWidth;
+                                }
+                            }
+                            else
+                            {
+                                PlayIcon.Visibility = Visibility.Visible;
+                            }
+
                             MediaThumb.ImageSource = bitmap;
-                            // BubbleBkg.Children.Remove(LoadingAhihi);
+                            LoadingAhihi.Visibility = Visibility.Hidden;
                         });
                     }
                     catch (WebException)
@@ -101,11 +124,10 @@ namespace PacChat.Resources.CustomControls
 
         private void ClickMask_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.Instance.MediaPlayerWindow != null)
-            {
-                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
-            }
+            var app = MainWindow.chatApplication;
+            app.model.currentMediaFileID = FileID;
+            MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
+            ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
         }
     }
 }

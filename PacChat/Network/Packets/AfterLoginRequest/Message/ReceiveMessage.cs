@@ -75,7 +75,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
                 if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)
                 {
-                    ChatPage.Instance.SendLeftMessages(Message, true);
+                    ChatPage.Instance.SendLeftMessages(Message, false);
                     (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, true);
                 }
                 else 

@@ -84,7 +84,7 @@
                                 </materialDesign:PopupBox>
                             </Border>
                             <Border>
-                                <Button Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                                <Button x:Name="btnVideo" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnVideo_Click">
                                     <materialDesign:PackIcon Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>

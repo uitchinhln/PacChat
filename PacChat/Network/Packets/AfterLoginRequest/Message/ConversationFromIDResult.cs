@@ -66,6 +66,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].Members = Members.ToList();
                 ChatPage.Instance.LoadMessages(ConversationID);
 
+                Console.WriteLine("Conversation load");
+
                 if (LastActive > 0)
                 {
                     string active = "Active ";
