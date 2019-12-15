@@ -83,18 +83,19 @@ namespace PacChat.Resources.CustomControls
                                 {
                                     BubbleBkg.Height = 300;
                                     BubbleBkg.Width = bitmap.PixelWidth * 300 / bitmap.PixelHeight;
-                                } else if (bitmap.PixelWidth > 500)
+                                }
+                                else if (bitmap.PixelWidth > 500)
                                 {
                                     BubbleBkg.Width = 500;
                                     BubbleBkg.Height = bitmap.PixelHeight * 500 / bitmap.PixelWidth;
                                 }
-
-                                MediaThumb.ImageSource = bitmap;
-                            } else
+                            }
+                            else
                             {
                                 PlayIcon.Visibility = Visibility.Visible;
                             }
 
+                            MediaThumb.ImageSource = bitmap;
                             LoadingAhihi.Visibility = Visibility.Hidden;
                         });
                     }
@@ -123,11 +124,10 @@ namespace PacChat.Resources.CustomControls
 
         private void ClickMask_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.Instance.MediaPlayerWindow != null)
-            {
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
-                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
-            }
+            var app = MainWindow.chatApplication;
+            app.model.currentMediaFileID = FileID;
+            MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
+            ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
         }
     }
 }

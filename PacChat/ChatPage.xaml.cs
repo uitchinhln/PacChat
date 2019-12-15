@@ -389,11 +389,14 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 // thumbnail.IsActive = true;
 
-                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
-                //(
-                //    app.model.currentSelectedConversation,
-                //    fileID, fileName
-                //);
+                if (!isSimulating)
+                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                    (
+                        app.model.currentSelectedConversation,
+                        fileID, fileName,
+                        0,
+                        true
+                    );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
@@ -497,7 +500,7 @@ namespace PacChat
                 LoadMessagesBtn.Visibility = Visibility.Collapsed;
         }
 
-        public void LoadMedia(string conversationID)
+        public void LoadMedia(string conversationID, bool firstTime)
         {
             Console.WriteLine("Load media");
             var app = MainWindow.chatApplication;
@@ -507,7 +510,7 @@ namespace PacChat
             packet.ConversationID = conversationID;
             packet.MediaPosition = app.model.Conversations[conversationID].LastMediaID;
             packet.Quantity = 10;
-            app.model.Conversations[conversationID].LastMediaID -= 10;
+            app.model.Conversations[conversationID].LastMediaID -= firstTime ? 0 : 10;
             _ = ChatConnection.Instance.Send(packet);
         }
 
@@ -624,6 +627,11 @@ namespace PacChat
 
                 SendMessage(message, false, false);
             }
+        }
+
+        private void btnVideo_Click(object sender, RoutedEventArgs e)
+        {
+            UploadVideo();
         }
     }
 }

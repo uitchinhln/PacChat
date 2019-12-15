@@ -48,7 +48,7 @@ namespace PacChat
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

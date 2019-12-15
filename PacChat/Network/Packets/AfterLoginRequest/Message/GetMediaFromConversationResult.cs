@@ -39,8 +39,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Console.WriteLine("New media player");
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (MainWindow.Instance.MediaPlayerWindow != null)
-                    MainWindow.Instance.MediaPlayerWindow.Close();
                 MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
                 var mediaPlayer = MainWindow.Instance.MediaPlayerWindow;
                 var app = MainWindow.chatApplication;
@@ -59,6 +57,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 }
 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileIDs[0]); 
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(app.model.currentMediaFileID);
+                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
             });
         }
     }

@@ -65,7 +65,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
                 ChatPage.Instance.LoadMessages(ConversationID);
-                ChatPage.Instance.LoadMedia(ConversationID);
 
                 Console.WriteLine("Conversation load");
 
