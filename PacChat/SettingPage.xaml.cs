@@ -15,6 +15,8 @@ using PacChat.Resources.CustomControls;
 using System.Windows.Media.Effects;
 using PacChat.Utils;
 using System.IO;
+using PacChat.Network.Packets.AfterLoginRequest.Profile;
+using PacChat.Network;
 
 namespace PacChat
 {
@@ -25,6 +27,7 @@ namespace PacChat
     {
         public static SettingPage Instance;
         private string currentPath;
+        private bool editFlag; // 0: edit, 1: save
 
         public SettingPage()
         {
@@ -32,6 +35,14 @@ namespace PacChat
             currentPath = null;
             Instance = this;
             loadBG_Gallery();
+
+            editFlag = false;
+            EditBtn.Content = "Edit...";
+            FirstNameInp.IsEnabled = false;
+            LastNameInp.IsEnabled = false;
+            BirthdayInp.IsEnabled = false;
+            GenderInp.IsEnabled = false;
+            AddressInp.IsEnabled = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -57,12 +68,12 @@ namespace PacChat
         private void loadBG_Gallery()
         {
             String uri = Path.Combine(TempUtil.ResourcePath, "ChatPageBg/BG{0}.jpg");
-            for (int i=1; i<=16;i++)
+            for (int i = 1; i <= 16; i++)
             {
                 BGSelectContainner bg = new BGSelectContainner(String.Format(uri, i));
                 wrappanelBG_Gallery.Children.Add(bg);
             }
-   
+
         }
 
         private void GeneralTab_Click(object sender, RoutedEventArgs e)
@@ -128,6 +139,38 @@ namespace PacChat
         private void ProfileAvatar_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void EditBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (editFlag)
+            {
+                // Save & switch back to edit...
+                EditBtn.Content = "Edit...";
+                FirstNameInp.IsEnabled = false;
+                LastNameInp.IsEnabled = false;
+                BirthdayInp.IsEnabled = false;
+                GenderInp.IsEnabled = false;
+                AddressInp.IsEnabled = false;
+                editFlag = false;
+                UpdateSelfProfile packet = new UpdateSelfProfile();
+                packet.FirstName = FirstNameInp.Text;
+                packet.LastName = LastNameInp.Text;
+                packet.DateOfBirth = BirthdayInp.SelectedDate.Value;
+                packet.Gender = (Gender)GenderInp.SelectedIndex;
+                packet.Town = AddressInp.Text;
+                _ = ChatConnection.Instance.Send(packet);
+            }
+            else
+            {
+                EditBtn.Content = "Save";
+                FirstNameInp.IsEnabled = true;
+                LastNameInp.IsEnabled = true;
+                BirthdayInp.IsEnabled = true;
+                GenderInp.IsEnabled = true;
+                AddressInp.IsEnabled = true;
+                editFlag = true;
+            }
         }
     }
 }

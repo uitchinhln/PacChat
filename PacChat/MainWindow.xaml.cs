@@ -20,6 +20,7 @@ using PacChat.Utils;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.MessageCore.Sticker;
+using PacChat.Network.Packets.AfterLoginRequest.Profile;
 
 namespace PacChat
 {
@@ -76,6 +77,7 @@ namespace PacChat
             Packets.SendPacket<GetFriendIDs>();
             Packets.SendPacket<GetNotifications>();
             Packets.SendPacket<GetSelfID>();
+            Packets.SendPacket<GetSelfProfile>();
             Packets.SendPacket<RecentConversations>();
             Sticker.Load(() =>
             {

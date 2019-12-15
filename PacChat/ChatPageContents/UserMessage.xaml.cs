@@ -66,6 +66,9 @@ namespace PacChat.ChatPageContents
             ClickMask.Content = Id;
             FriendRequestBtn.IsEnabled = !Friend;
             IsFriend = Friend;
+
+            if (IsFriend)
+                FriendRequestBtn.Content = "Unfriend";
         }
 
         public void SetAva(string path) // sau nay se merge vao setInfo
