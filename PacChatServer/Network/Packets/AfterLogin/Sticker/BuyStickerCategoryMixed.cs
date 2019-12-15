@@ -32,6 +32,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.Sticker
             if (!MessageCore.Sticker.Sticker.LoadedCategories.ContainsKey(CateID)) return;
             if (chatSession.Owner.BoughtStickerPacks.Contains(CateID)) return;
 
+            chatSession.Owner.BoughtStickerPacks.Add(CateID);
+            chatSession.Owner.Save();
+
             chatSession.Owner.Send(this);
         }
     }
