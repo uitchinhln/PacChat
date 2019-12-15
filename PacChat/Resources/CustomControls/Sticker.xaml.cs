@@ -23,7 +23,7 @@ namespace PacChat.Resources.CustomControls
     public partial class Sticker : UserControl
     {
 
-        public Sticker(ChatPage chatpage, bool clickable = false, int id = 0, int cateid = 0, int size = 130, int duration = 0, string urisheet = null, bool runWhenLoaded = false)
+        public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet, bool runWhenLoaded)
         {
             InitializeComponent();
 
@@ -40,15 +40,9 @@ namespace PacChat.Resources.CustomControls
 
         public bool IsRunWhenLoaded { get; set; }
 
-        public ChatPage Chatpage
-        {
-            get; set;
-        }
+        public ChatPage Chatpage { get; set; }
         
-        public bool Clickable
-        {
-            get; set;
-        }
+        public bool Clickable { get; set; }
 
 
         public int ID
@@ -81,17 +75,20 @@ namespace PacChat.Resources.CustomControls
             Animator.Animator anim = new Animator.Animator();
             anim.CountLimit = 10;
             anim.Interval = TimeSpan.FromSeconds((double)Duration / 1000);
-
-            StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
+            if (UriSheet != null)
             {
-                //Console.WriteLine(stickerSheet.PixelWidth);
-                anim.ImageSource = stickerSheet;
-                anim.VerticalOffset = Size;
-                anim.HorizontalOffset = Size;
-                anim.Clickable = Clickable;
-                anim.isRunWhenLoaded = IsRunWhenLoaded;
-                sticker.Children.Add(anim);
-            });
+
+                StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
+                {
+                    //Console.WriteLine(stickerSheet.PixelWidth);
+                    anim.ImageSource = stickerSheet;
+                    anim.VerticalOffset = Size;
+                    anim.HorizontalOffset = Size;
+                    anim.Clickable = Clickable;
+                    anim.isRunWhenLoaded = IsRunWhenLoaded;
+                    sticker.Children.Add(anim);
+                });
+            }
             
         }
 

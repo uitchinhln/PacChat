@@ -175,6 +175,7 @@ namespace PacChat
 
         public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo)
         {
+
             Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
@@ -188,10 +189,10 @@ namespace PacChat
             MessagesContainer.ScrollToEnd();
         }
 
-        public void SendStickerOnTheLeft(bool clickable, int id, int cateid, int size, int duration, string uriSheet, bool runWhenLoaded)
+        public void SendStickerOnTheLeft(MessageCore.Sticker.Sticker stickerInfo)
         {
             Resources.CustomControls.Sticker sticker =
-                new Resources.CustomControls.Sticker(this, clickable, id, cateid, size, duration, uriSheet, runWhenLoaded);
+                new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
             Thickness margin = sticker.Margin;
             margin.Left = 30;
@@ -261,7 +262,9 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheRight(sticker);
+                //var result;
+                MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
+                SendStickerOnTheRight(result);
             }
 
             if (b != null)
@@ -369,16 +372,8 @@ namespace PacChat
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
                 MessageCore.Sticker.Sticker sticker = (msg as StickerMessage).Sticker;
-                SendStickerOnTheLeft
-                (
-                    id: sticker.ID,
-                    cateid: sticker.CategoryID,
-                    clickable: false,
-                    size: 130,
-                    duration: sticker.Duration,
-                    uriSheet: sticker.URI,
-                    runWhenLoaded: true
-                );
+                MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker.ID, out var result);
+                SendStickerOnTheLeft(result);
             }
 
             if (b != null)
