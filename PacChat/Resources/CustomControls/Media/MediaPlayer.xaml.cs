@@ -35,64 +35,7 @@ namespace PacChat.Resources.CustomControls.Media
             InitializeComponent();
 
             #region Run Demo
-            //ThumbnailButton btn = new ThumbnailButton()
-            //{
-            //    ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
-            //    StreamURL = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
-            //    FileName = "dreamstime_xxl_65780868_small.jpg",
-            //};
-            //btn.Click += BtnClick;
-            //Gallery.Children.Add(btn);
-
-            //ThumbnailButton btn2 = new ThumbnailButton()
-            //{
-            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            //    FileName = "BigBuckBunny.mp4",
-            //};
-            //btn2.Click += BtnClick;
-            //Gallery.Children.Add(btn2);
-
-            //ThumbnailButton btn3 = new ThumbnailButton()
-            //{
-            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-            //    StreamURL = "G:/Downloads/Ahihi.mp4",
-            //    FileName = "Ahihi.mp4",
-            //};
-            //btn3.Click += BtnClick;
-            //Gallery.Children.Add(btn3);
-
-            //ThumbnailButton btn4 = new ThumbnailButton()
-            //{
-            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            //    FileName = "ForBiggerBlazes.mp4",
-            //};
-            //btn4.Click += BtnClick;
-            //Gallery.Children.Add(btn4);
-
-            //ThumbnailButton btn5 = new ThumbnailButton()
-            //{
-            //    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-            //    StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-            //    FileName = "ForBiggerEscapes.mp4",
-            //};
-            //btn5.Click += BtnClick;
-            //Gallery.Children.Add(btn5);
-
-            //for (int i = 0; i < 15; i++)
-            //{
-            //    ThumbnailButton btn6 = new ThumbnailButton()
-            //    {
-            //        ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg",
-            //        StreamURL = "G:/Downloads/Ahihi.mp4",
-            //        FileName = "VolkswagenGTIReview.mp4",
-            //    };
-            //    btn6.Click += BtnClick;
-            //    Gallery.Children.Add(btn6);
-            //}
-
-            //SwapToBtn(btn);
+            Demo();
             #endregion
         }
 
@@ -350,6 +293,68 @@ namespace PacChat.Resources.CustomControls.Media
             {
                 FullScreenIcon.Kind = PackIconKind.Fullscreen;
             }
+        }
+
+        private void Demo()
+        {
+            ThumbnailButton btn = new ThumbnailButton()
+            {
+                ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
+                StreamURL = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
+                FileName = "dreamstime_xxl_65780868_small.jpg",
+            };
+            btn.Click += BtnClick;
+            Gallery.Children.Add(btn);
+
+            ThumbnailButton btn2 = new ThumbnailButton()
+            {
+                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                FileName = "BigBuckBunny.mp4",
+            };
+            btn2.Click += BtnClick;
+            Gallery.Children.Add(btn2);
+
+            ThumbnailButton btn3 = new ThumbnailButton()
+            {
+                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+                StreamURL = "G:/Downloads/Ahihi.mp4",
+                FileName = "Ahihi.mp4",
+            };
+            btn3.Click += BtnClick;
+            Gallery.Children.Add(btn3);
+
+            ThumbnailButton btn4 = new ThumbnailButton()
+            {
+                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                FileName = "ForBiggerBlazes.mp4",
+            };
+            btn4.Click += BtnClick;
+            Gallery.Children.Add(btn4);
+
+            ThumbnailButton btn5 = new ThumbnailButton()
+            {
+                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                FileName = "ForBiggerEscapes.mp4",
+            };
+            btn5.Click += BtnClick;
+            Gallery.Children.Add(btn5);
+
+            for (int i = 0; i < 15; i++)
+            {
+                ThumbnailButton btn6 = new ThumbnailButton()
+                {
+                    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg",
+                    StreamURL = "G:/Downloads/Ahihi.mp4",
+                    FileName = "VolkswagenGTIReview.mp4",
+                };
+                btn6.Click += BtnClick;
+                Gallery.Children.Add(btn6);
+            }
+
+            SwapToBtn(btn);
         }
     }
 
