@@ -64,7 +64,10 @@ namespace PacChatServer.Entity
         public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         
         [BsonElement("NearestStickers")]
-        public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();        
+        public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();
+
+        [BsonElement("BoughtStickerPacks")]
+        public HashStack<int> BoughtStickerPacks { get; private set; } = new HashStack<int>();        
 
         //True if this user has been banned
         [BsonElement("Banned")]

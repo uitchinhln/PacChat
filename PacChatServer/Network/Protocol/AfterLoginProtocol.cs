@@ -2,6 +2,7 @@
 using PacChatServer.Network.Packets.AfterLogin.Message;
 using PacChatServer.Network.Packets.AfterLogin.Notification;
 using PacChatServer.Network.Packets.AfterLogin.Search;
+using PacChatServer.Network.Packets.AfterLogin.Sticker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,12 @@ namespace PacChatServer.Network.Protocol
             // Profile
             Inbound(0x09, new DisplayedProfileRequest());
             Outbound(0x09, new DisplayedProfileResponse());
+
+            // Sticker
+            Inbound(0x21, new GetBoughtStickerPacksRequest());
+            Outbound(0x21, new GetBoughtStickerPacksResponse());
+            Inbound(0x22, new GetNearestSickerRequest());
+            Outbound(0x22, new GetNearestSickerResponse());
         }
     }
 }

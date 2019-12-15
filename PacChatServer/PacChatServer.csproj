@@ -405,6 +405,10 @@
     <Compile Include="Network\Packets\AfterLogin\Notification\UserOnline.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Sticker\GetBoughtStickerPacksRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Sticker\GetBoughtStickerPacksResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Sticker\GetNearestSickerRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Sticker\GetNearestSickerResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginRequest.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\PingReceive.cs" />

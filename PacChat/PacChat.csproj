@@ -131,6 +131,10 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksResponse.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetNearestSickerRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetNearestSickerResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginData.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />

@@ -3,6 +3,7 @@ using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Network.Packets.AfterLoginRequest.Search;
+using PacChat.Network.Packets.AfterLoginRequest.Sticker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,12 @@ namespace PacChat.Network.Protocol
             // Profile
             Inbound(0x09, new GetDisplayedProfileResult());
             Outbound(0x09, new GetDisplayedProfile());
+
+            // Sticker
+            Inbound(0x21, new GetBoughtStickerPacksResponse());
+            Outbound(0x21, new GetBoughtStickerPacksRequest());
+            Inbound(0x22, new GetNearestSickerResponse());
+            Outbound(0x22, new GetNearestSickerRequest());
         }
     }
 }
