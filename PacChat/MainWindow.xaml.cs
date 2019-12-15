@@ -79,7 +79,7 @@ namespace PacChat
             Packets.SendPacket<RecentConversations>();
             Sticker.Load(() =>
             {
-                
+                //Send packet lấy sticker đã mua + sticker đã dùng ở đây
             });
 
             SetNotificationDotState(false);
