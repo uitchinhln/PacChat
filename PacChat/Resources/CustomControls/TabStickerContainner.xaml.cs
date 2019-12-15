@@ -36,7 +36,6 @@ namespace PacChat.Resources.CustomControls
         public TabStickerContainner()
         {
             InitializeComponent();
-            loadStore();
         }
 
 
@@ -59,7 +58,13 @@ namespace PacChat.Resources.CustomControls
                 tabCrlSticker.Items.Add(a);
             });
 
-            
+        }
+
+        public void addCateIntoStore(MessageCore.Sticker.StickerCategory cate)
+        {
+            TabStickerStore store = new TabStickerStore(cate);
+            store.Margin = new Thickness(5, 5, 5, 5);
+            splStickerStore.Children.Add(store);
         }
 
         private void initTabStickerContainner()

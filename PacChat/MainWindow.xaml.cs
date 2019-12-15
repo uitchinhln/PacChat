@@ -17,10 +17,12 @@ using PacChat.ChatAMVC;
 using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network;
 using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Sticker;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.MessageCore.Sticker;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
+
 
 namespace PacChat
 {
@@ -81,7 +83,9 @@ namespace PacChat
             Packets.SendPacket<RecentConversations>();
             Sticker.Load(() =>
             {
-                //Send packet lấy sticker đã mua + sticker đã dùng ở đây
+                Packets.SendPacket<GetBoughtStickerPacksRequest>();
+
+
             });
 
             SetNotificationDotState(false);

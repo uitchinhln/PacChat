@@ -7,6 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using PacChat.MessageCore.Sticker;
 using PacChat.Network.RestAPI;
+using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Sticker;
+using PacChat.Network;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -38,7 +41,7 @@ namespace PacChat.Resources.CustomControls
             StickerAPI.DownloadImage(Cate.ThumbImg, (thumbImage) =>
             {
                 imgPreview.Source = thumbImage;
-                
+
             });
             StickerAPI.DownloadImage(Cate.IconPreview, (iconPreviewImage) =>
             {
@@ -51,6 +54,11 @@ namespace PacChat.Resources.CustomControls
         private void downSticker()
         {
 
+        }
+
+        private void btnDown_Click(object sender, RoutedEventArgs e)
+        {
+            ChatConnection.Instance.Send(new BuyStickerCategoryRequest() { CateID = Cate.ID });
         }
     }
 }

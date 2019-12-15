@@ -4,6 +4,7 @@ using DotNetty.Buffers;
 using PacChat.Resources.CustomControls;
 using System;
 using System.Collections.Generic;
+using PacChat.MessageCore.Sticker;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,17 +34,28 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
 
         public void Handle(ISession session)
         {
-            foreach (int cateID in BoughtStickerPacks)
+            foreach (var Cate in MessageCore.Sticker.Sticker.LoadedCategories )
             {
-                //CateID tồn tại thì k load lên
-                if (!PacChat.MessageCore.Sticker.Sticker.LoadedCategories.ContainsKey(cateID)) continue;
-
-                Application.Current.Dispatcher.Invoke(() =>
+                //Cate da duoc mua
+                if (BoughtStickerPacks.Contains(Cate.Key))
                 {
-                    PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(cateID, out var stickerCate);
-                    ChatPage.Instance.spTabStickerContainner.AddTabSticker(stickerCate);
-                });
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(Cate.Key, out var stickerCate);
+                        ChatPage.Instance.spTabStickerContainner.AddTabSticker(stickerCate);
+                    });
+                }
+                else
+                {
+                    // cate chua duoc mua
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(Cate.Key, out var stickerCate);
+                        ChatPage.Instance.spTabStickerContainner.addCateIntoStore(stickerCate);
+                    });
+                }
             }
+
         }
     }
 }

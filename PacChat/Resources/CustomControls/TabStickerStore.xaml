@@ -19,11 +19,11 @@
             <StackPanel>
                 <Image x:Name="imgIconPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_thumb.png"  Width="124" Height="124" Margin="10"/>
 
-                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="10">
+                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5">
                     Tiêu Viêm - Huân Nhi Tết
                 </TextBlock>
 
-                <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}">
+                <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnDown_Click">
                     9000
                 </Button>
             </StackPanel>
