@@ -42,13 +42,13 @@ namespace PacChat
             set
             {
                 _isMaximized = value;
-                Application.Current.MainWindow.WindowState = _isMaximized == false ? WindowState.Normal : WindowState.Maximized;
+                this.WindowState = _isMaximized == false ? WindowState.Normal : WindowState.Maximized;
             }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

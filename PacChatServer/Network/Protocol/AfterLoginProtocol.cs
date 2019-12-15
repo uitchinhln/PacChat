@@ -77,6 +77,10 @@ namespace PacChatServer.Network.Protocol
             Outbound(0x21, new GetBoughtStickerPacksResponse());
             Inbound(0x22, new GetNearestSickerRequest());
             Outbound(0x22, new GetNearestSickerResponse());
+
+            // Media
+            Inbound(0x40, new MediaFromConversationRequest());
+            Outbound(0x40, new MediaFromConversationResponse());
         }
     }
 }

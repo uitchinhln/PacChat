@@ -254,11 +254,14 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName, 0
-                );
+                if (!isSimulating)
+                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                    (
+                        app.model.currentSelectedConversation,
+                        fileID, fileName,
+                        0,
+                        true
+                    );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -270,11 +273,14 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
 
-                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                //(
-                //    app.model.currentSelectedConversation,
-                //    fileID, fileName
-                //);
+                if (!isSimulating)
+                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                    (
+                        app.model.currentSelectedConversation,
+                        fileID, fileName,
+                        0,
+                        true
+                    );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
@@ -364,11 +370,14 @@ namespace PacChat
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                (
-                    app.model.currentSelectedConversation,
-                    fileID, fileName, 0
-                );
+                if (!isSimulating)
+                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                    (
+                        app.model.currentSelectedConversation,
+                        fileID, fileName,
+                        0,
+                        true
+                    );
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -424,9 +433,9 @@ namespace PacChat
 
         public void ThumbnailClick(object sender, EventArgs e)
         {
-            ThumbnailBubble thumb = (sender as ThumbnailBubble);
-            MainWindow.Instance.MediaPlayerWindow.Show();
-            MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(thumb.FileID);
+            //ThumbnailBubble thumb = (sender as ThumbnailBubble);
+            //MainWindow.Instance.MediaPlayerWindow.Show();
+            //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(thumb.FileID);
         }
 
         public void SetActive(bool enabled)
@@ -472,6 +481,7 @@ namespace PacChat
 
         public void LoadMessages(string conversationID)
         {
+            Console.WriteLine("Load mess");
             var app = MainWindow.chatApplication;
             if (app.model.Conversations[conversationID].LastMessID < 0)
                 return;
@@ -485,6 +495,20 @@ namespace PacChat
             LoadMessagesBtn.Visibility = Visibility.Visible;
             if (app.model.Conversations[conversationID].LastMessID < 0)
                 LoadMessagesBtn.Visibility = Visibility.Collapsed;
+        }
+
+        public void LoadMedia(string conversationID)
+        {
+            Console.WriteLine("Load media");
+            var app = MainWindow.chatApplication;
+            if (app.model.Conversations[conversationID].LastMediaID < 0)
+                return;
+            GetMediaFromConversation packet = new GetMediaFromConversation();
+            packet.ConversationID = conversationID;
+            packet.MediaPosition = app.model.Conversations[conversationID].LastMediaID;
+            packet.Quantity = 10;
+            app.model.Conversations[conversationID].LastMediaID -= 10;
+            _ = ChatConnection.Instance.Send(packet);
         }
 
         public void StoreChatPage(string conversationID)

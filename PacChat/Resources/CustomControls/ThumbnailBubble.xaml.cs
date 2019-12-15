@@ -103,8 +103,8 @@ namespace PacChat.Resources.CustomControls
         {
             if (MainWindow.Instance.MediaPlayerWindow != null)
             {
-                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
+                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
             }
         }
     }
