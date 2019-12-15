@@ -36,6 +36,7 @@ namespace PacChat.Resources.CustomControls
             this.FileID = mediaInfo.FileID;
             this.StreamURL = mediaInfo.StreamURL;
             this.ThumbnailUrl = mediaInfo.ThumbURL;
+            this.IsVideoThumbnail = PacPlayer.IsSupport(FileName);
         }
 
         public ImageSource Image { get => MediaThumb.ImageSource; }
@@ -44,6 +45,8 @@ namespace PacChat.Resources.CustomControls
         public String FileID { get; set; }
 
         public String StreamURL { get; set; }
+
+        public bool IsVideoThumbnail { get; set; }
 
         #region Custom Property
         public String ThumbnailUrl
@@ -62,7 +65,8 @@ namespace PacChat.Resources.CustomControls
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
-                String url = ThumbnailUrl;
+                LoadingAhihi.Visibility = Visibility.Visible;
+                String url = IsVideoThumbnail ? ThumbnailUrl : StreamURL;
                 Task task = new Task(() =>
                 {
                     try
@@ -72,8 +76,26 @@ namespace PacChat.Resources.CustomControls
                         wc.Dispose();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            MediaThumb.ImageSource = bitmap;
-                            // BubbleBkg.Children.Remove(LoadingAhihi);
+
+                            if (!IsVideoThumbnail)
+                            {
+                                if (bitmap.PixelHeight > 300)
+                                {
+                                    BubbleBkg.Height = 300;
+                                    BubbleBkg.Width = bitmap.PixelWidth * 300 / bitmap.PixelHeight;
+                                } else if (bitmap.PixelWidth > 500)
+                                {
+                                    BubbleBkg.Width = 500;
+                                    BubbleBkg.Height = bitmap.PixelHeight * 500 / bitmap.PixelWidth;
+                                }
+
+                                MediaThumb.ImageSource = bitmap;
+                            } else
+                            {
+                                PlayIcon.Visibility = Visibility.Visible;
+                            }
+
+                            LoadingAhihi.Visibility = Visibility.Hidden;
                         });
                     }
                     catch (WebException)

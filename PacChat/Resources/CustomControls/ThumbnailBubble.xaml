@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="256" d:DesignWidth="320">
     <Grid x:Name="BubbleBkg" Margin="8">
@@ -12,13 +13,15 @@
           Value="0"
           IsIndeterminate="True" Height="96" Margin="20" Width="96" Background="{x:Null}" BorderBrush="{x:Null}"
           Foreground="#FFB6B6B6" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Border CornerRadius="16" Background="#FF5B5B5B">
-            <Border CornerRadius="16" Margin="2">
+        <Border CornerRadius="16">
+            <Border CornerRadius="16" Margin="-1">
                 <Border.Background>
                     <ImageBrush x:Name="MediaThumb" Stretch="Uniform"/>
                 </Border.Background>
             </Border>
         </Border>
-        <Button x:Name="ClickMask" Background="#00000000" Height="Auto" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="8" Click="ClickMask_Click"></Button>
+        <Button x:Name="ClickMask" Background="{x:Null}" Height="Auto" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="8" Click="ClickMask_Click">
+            <materialDesign:PackIcon x:Name="PlayIcon" Kind="PlayCircle" Width="Auto" Height="Auto" Visibility="Hidden" Margin="10" />
+        </Button>
     </Grid>
 </UserControl>
