@@ -43,7 +43,7 @@ namespace PacChat
             Instance = this;
             _button1Clicked = false;
             // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
-            loadStickerToContainner();
+            //loadStickerToContainner();
             Transitioner.SelectedIndex = 0;
         }
 
@@ -153,24 +153,24 @@ namespace PacChat
         #region Sticker send
         private void loadStickerToContainner()
         {
-            MessageCore.Sticker.Sticker.Load(() =>
-            {
-                var Cate = MessageCore.Sticker.Sticker.LoadedCategories;
-                TabStickerContainner stickerTabCon = new TabStickerContainner(this);
+            //MessageCore.Sticker.Sticker.Load(() =>
+            //{
+            //    var Cate = MessageCore.Sticker.Sticker.LoadedCategories;
+            //    TabStickerContainner stickerTabCon = new TabStickerContainner(this);
 
-                Application.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    int i = 0;
-                    foreach (var x in Cate)
-                    {
-                        ++i;
-                        stickerTabCon.AddTabSticker(x.Value);
-                        if (i >= 10) break;
-                    }
+            //    Application.Current.Dispatcher.Invoke((Action)delegate
+            //    {
+            //        int i = 0;
+            //        foreach (var x in Cate)
+            //        {
+            //            ++i;
+            //            stickerTabCon.AddTabSticker(x.Value);
+            //            if (i >= 10) break;
+            //        }
 
-                    spTabStickerContainner.Children.Add(stickerTabCon);
-                });
-            });
+            //        spTabStickerContainner.Children.Add(stickerTabCon);
+            //    });
+            //});
         }
 
         public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo, bool reversed = false)

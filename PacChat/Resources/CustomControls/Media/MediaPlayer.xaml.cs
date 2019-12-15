@@ -35,7 +35,7 @@ namespace PacChat.Resources.CustomControls.Media
             InitializeComponent();
 
             #region Run Demo
-            // Demo();
+            //Demo();
             #endregion
         }
 
@@ -76,7 +76,7 @@ namespace PacChat.Resources.CustomControls.Media
                 SetBackground(bitmap);
             }
 
-            if (PacPlayer.SupportedExtensions.Contains(System.IO.Path.GetExtension(currentBtn.FileName).ToLower()))
+            if (PacPlayer.IsSupport(currentBtn.FileName))
             {
                 ShowVideo(currentBtn.StreamURL);
             }
@@ -183,8 +183,6 @@ namespace PacChat.Resources.CustomControls.Media
                 SwapToBtn(btn);
             }
         }
-
-        public int GetLength() { return loadedMediaInfo.Count; }
 
         public void AddMediaItem(String conversationID, String fileID, String fileName, int position, bool reachedRight = false)
         {

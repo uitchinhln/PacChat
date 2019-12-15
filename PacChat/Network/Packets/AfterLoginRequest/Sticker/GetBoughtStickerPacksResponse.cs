@@ -1,11 +1,13 @@
 ﻿using CNetwork;
 using CNetwork.Sessions;
 using DotNetty.Buffers;
+using PacChat.Resources.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
 {
@@ -31,7 +33,17 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
 
         public void Handle(ISession session)
         {
-            //Code vao day
+            foreach (int cateID in BoughtStickerPacks)
+            {
+                //CateID tồn tại thì k load lên
+                if (!PacChat.MessageCore.Sticker.Sticker.LoadedCategories.ContainsKey(cateID)) continue;
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(cateID, out var stickerCate);
+                    ChatPage.Instance.spTabStickerContainner.AddTabSticker(stickerCate);
+                });
+            }
         }
     }
 }

@@ -136,6 +136,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\UpdateSelfProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\BuyStickerCategoryRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\BuyStickerCategoryResponse.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksResponse.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetNearestSickerRequest.cs" />

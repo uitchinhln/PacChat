@@ -24,7 +24,7 @@ namespace PacChat.Resources.CustomControls.Media
     /// </summary>
     public partial class PacPlayer : UserControl
     {
-        public static List<String> SupportedExtensions = new List<string>()
+        private static List<String> SupportedExtensions = new List<string>()
         {
             ".mp4", ".wmv"
         };
@@ -265,6 +265,11 @@ namespace PacChat.Resources.CustomControls.Media
         {
             if (!canReplay)
                 dockPanel.Opacity = 0.15;
+        }
+
+        public static bool IsSupport(string file)
+        {
+            return SupportedExtensions.Contains(System.IO.Path.GetExtension(file).ToLower());
         }
     }
 }

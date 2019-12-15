@@ -413,6 +413,7 @@
     <Compile Include="Network\Packets\AfterLogin\Notification\UserOnline.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Search\UserSearchResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Sticker\BuyStickerCategoryMixed.cs" />
     <Compile Include="Network\Packets\AfterLogin\Sticker\GetBoughtStickerPacksRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Sticker\GetBoughtStickerPacksResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Sticker\GetNearestSickerRequest.cs" />
