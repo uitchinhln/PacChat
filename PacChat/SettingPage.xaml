@@ -10,205 +10,206 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <DockPanel>
-            <StackPanel Width="128">
-                <Button x:Name="GeneralTab" Uid="0" Content="Personal" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
-                <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
-                <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
-            </StackPanel>
+    <materialDesign:DialogHost>
+        <Grid>
+            <DockPanel>
+                <StackPanel Width="128">
+                    <Button x:Name="GeneralTab" Uid="0" Content="Personal" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
+                    <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
+                    <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
+                </StackPanel>
 
-            <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
-                <!-- General tab -->
-                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <Label Content="Personal" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-                            <elms:ProfileAvatar Margin="0,32,0,16" Loaded="ProfileAvatar_Loaded" Width="160" Height="192"/>
-                            <DockPanel Width="336">
-                                <TextBlock Margin="8" Foreground="LightSlateGray">
+                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+                    <!-- General tab -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <Label Content="Personal" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                <elms:ProfileAvatar Margin="0,32,0,16" Loaded="ProfileAvatar_Loaded" Width="160" Height="192"/>
+                                <DockPanel Width="336">
+                                    <TextBlock Margin="8" Foreground="LightSlateGray">
                                 Email:
-                                </TextBlock>
+                                    </TextBlock>
 
-                                <TextBlock x:Name="Email" Margin="8" Foreground="LightSlateGray" FontStyle="Italic" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <TextBlock x:Name="Email" Margin="8" Foreground="LightSlateGray" FontStyle="Italic" DockPanel.Dock="Right" HorizontalAlignment="Right">
                                 nlebachnlb@gmail.com
-                                </TextBlock>
-                            </DockPanel>
-                            <Grid Width="336">
-                                <TextBlock Margin="8" Foreground="LightSlateGray" FontSize="16" HorizontalAlignment="Left">
+                                    </TextBlock>
+                                </DockPanel>
+                                <Grid Width="336">
+                                    <TextBlock Margin="8" Foreground="LightSlateGray" FontSize="16" HorizontalAlignment="Left">
                             Personal Information
-                                </TextBlock>
-                                <Button x:Name="EditBtn" Width="64" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Normal" Click="EditBtn_Click_1">
-                                    Edit...
-                                </Button>
-                            </Grid>
-                            <StackPanel Orientation="Horizontal" Margin="0,16,0,0" HorizontalAlignment="Center">
-                                <Border x:Name="FirstNameBorder" CornerRadius="16"
+                                    </TextBlock>
+                                    <Button x:Name="EditBtn" Width="64" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Normal" Click="EditBtn_Click_1">
+                                        Edit...
+                                    </Button>
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="0,16,0,0" HorizontalAlignment="Center">
+                                    <Border x:Name="FirstNameBorder" CornerRadius="16"
                                     Background= "White"
                                     DockPanel.Dock="Top"
                                     Height="32" Margin="10,0" Width="160">
-                                    <TextBox x:Name="FirstNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="First name"
+                                        <TextBox x:Name="FirstNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="First name"
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                     BorderThickness="0" 
                                     Margin="10,4,10,0" CaretBrush="White" Height="40"/>
-                                </Border>
+                                    </Border>
 
-                                <Border x:Name="LastNameBorder" CornerRadius="16"
+                                    <Border x:Name="LastNameBorder" CornerRadius="16"
                                     Background= "White"
                                     DockPanel.Dock="Top"
                                     Height="32" Margin="10,0" Width="160">
-                                    <TextBox x:Name="LastNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Last name"
+                                        <TextBox x:Name="LastNameInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Last name"
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                          BorderThickness="0"
                                     Margin="10,4,10,0"/>
-                                </Border>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="54,24,54,0" HorizontalAlignment="Center">
-                                <Border x:Name="BirthdayBorder" CornerRadius="16"
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="54,24,54,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BirthdayBorder" CornerRadius="16"
                                     Background= "White"
                                     DockPanel.Dock="Top"
                                     Height="32" Margin="10,0" Width="160">
-                                    <DatePicker x:Name="BirthdayInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Birthday"
+                                        <DatePicker x:Name="BirthdayInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Birthday"
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                             BorderThickness="0"
                                     Margin="10,4,10,0"/>
-                                </Border>
-                                <Border x:Name="GenderBorder" CornerRadius="16"
+                                    </Border>
+                                    <Border x:Name="GenderBorder" CornerRadius="16"
                                     Background= "White"
                                     DockPanel.Dock="Top"
                                     Height="32" Margin="10,0" Width="160">
-                                    <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="false" materialDesign:HintAssist.Hint="Gender" Margin="10,0,0,2" Height="28" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="#FF4B4B4B">
-                                        <ComboBoxItem>Male</ComboBoxItem>
-                                        <ComboBoxItem>Female</ComboBoxItem>
-                                        <ComboBoxItem>Other</ComboBoxItem>
-                                    </ComboBox>
-                                </Border>
-                            </StackPanel>
-                            <StackPanel Margin="0,24,0,0">
-                                <Border x:Name="AddressBorder" CornerRadius="16"
+                                        <ComboBox x:Name="GenderInp" materialDesign:ComboBoxAssist.ClassicMode="false" materialDesign:HintAssist.Hint="Gender" Margin="10,0,0,2" Height="28" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="#FF4B4B4B">
+                                            <ComboBoxItem>Male</ComboBoxItem>
+                                            <ComboBoxItem>Female</ComboBoxItem>
+                                            <ComboBoxItem>Other</ComboBoxItem>
+                                        </ComboBox>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Margin="0,24,0,0">
+                                    <Border x:Name="AddressBorder" CornerRadius="16"
                                     Background= "White"
                                     Height="32" Margin="165,0,167,0" Width="336">
-                                    <TextBox x:Name="AddressInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Address"
+                                        <TextBox x:Name="AddressInp" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" materialDesign:HintAssist.Hint="Address"
                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                          BorderThickness="0"
                                     Margin="10,4,10,0"/>
-                                </Border>
+                                    </Border>
+                                </StackPanel>
                             </StackPanel>
-                            <Button Content="Save" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="131" Height="32" Foreground="#DD000000" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
+                        </ScrollViewer>
+                    </materialDesign:TransitionerSlide>
+
+                    <!-- Password tab -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <StackPanel >
+                            <Label Content="Privacy" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                            <StackPanel>
+                                <Label Content="Modify password" Foreground="LightSlateGray" HorizontalContentAlignment="Center" FontSize="16" FontFamily="Segoe UI Light"></Label>
+                                <PasswordBox x:Name="OldPassword" materialDesign:HintAssist.Hint="Current password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
+                                <PasswordBox x:Name="NewPassword" materialDesign:HintAssist.Hint="New password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
+                            </StackPanel>
+                            <Button Content="Modify" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="128" Height="32" Foreground="#FF404040" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
                         </StackPanel>
-                    </ScrollViewer>
-                </materialDesign:TransitionerSlide>
+                    </materialDesign:TransitionerSlide>
 
-                <!-- Password tab -->
-                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <StackPanel >
-                        <Label Content="Privacy" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-                        <StackPanel>
-                            <Label Content="Modify password" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center" FontSize="16" FontFamily="Segoe UI Light"></Label>
-                            <PasswordBox x:Name="OldPassword" materialDesign:HintAssist.Hint="Old password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
-                            <PasswordBox x:Name="NewPassword" materialDesign:HintAssist.Hint="New password" materialDesign:HintAssist.Foreground="#FF673AB7" materialDesign:TextFieldAssist.UnderlineBrush="#FF673AB7" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="54,15,54,0" Height="37" Foreground="White" SelectionBrush="White" CaretBrush="White" BorderBrush="#89FFFFFF"/>
-                        </StackPanel>
-                        <Button Content="Change" Background="White" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Width="128" Height="32" Foreground="#FF412978" FontSize="18" Margin="0,32,0,0" FontFamily="Segoe UI Light" Click="Button_Click"></Button>
-                    </StackPanel>
-                </materialDesign:TransitionerSlide>
+                    <!-- Custom tab -->
+                    <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <Label Content="Custom" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                <!-- THEME -->
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Themes" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                    <Border>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
-                <!-- Custom tab -->
-                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <Label Content="Custom" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-                            <!-- THEME -->
-                            <StackPanel Orientation="Vertical">
-                                <Label Content="Themes" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-                                <Border>
-                                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
+                                            <Border Width="96" Height="131" Margin="10" Background="#9BD494" CornerRadius="10">
+                                                <RadioButton Margin="39,103,39,10"/>
+                                            </Border>
 
-                                        <Border Width="96" Height="131" Margin="10" Background="#9BD494" CornerRadius="10">
-                                            <RadioButton Margin="39,103,39,10"/>
-                                        </Border>
-
-                                        <Border Width="96" Height="131" Margin="10" Background="#7EC4EA" CornerRadius="10">
-                                            <RadioButton Margin="39,103,39,10"/>
-                                        </Border>
+                                            <Border Width="96" Height="131" Margin="10" Background="#7EC4EA" CornerRadius="10">
+                                                <RadioButton Margin="39,103,39,10"/>
+                                            </Border>
 
 
-                                        <Border Width="96" Height="131" Margin="10" Background="#41464B" CornerRadius="10">
-                                            <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
-                                        </Border>
+                                            <Border Width="96" Height="131" Margin="10" Background="#41464B" CornerRadius="10">
+                                                <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
+                                            </Border>
 
 
-                                        <Border Width="96" Height="131" Margin="10" Background="#485761" CornerRadius="10">
-                                            <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
-                                        </Border>
+                                            <Border Width="96" Height="131" Margin="10" Background="#485761" CornerRadius="10">
+                                                <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
+                                            </Border>
 
-                                        <Border>
-                                            <materialDesign:PopupBox Padding="0" materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
-                                                <materialDesign:PopupBox.ToggleContent>
+                                            <Border>
+                                                <materialDesign:PopupBox Padding="0" materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
+                                                    <materialDesign:PopupBox.ToggleContent>
 
-                                                    <materialDesign:PackIcon Kind="ColorLens" Width="60" Height="60" Foreground="White"/>
+                                                        <materialDesign:PackIcon Kind="ColorLens" Width="60" Height="60" Foreground="White"/>
 
-                                                </materialDesign:PopupBox.ToggleContent>
-                                                <Border Width="377" Height="269" Margin="0" Padding="0">
-                                                    <cp:ColourPicker/>
-                                                </Border>
-                                            </materialDesign:PopupBox>
-                                        </Border>
+                                                    </materialDesign:PopupBox.ToggleContent>
+                                                    <Border Width="377" Height="269" Margin="0" Padding="0">
+                                                        <cp:ColourPicker/>
+                                                    </Border>
+                                                </materialDesign:PopupBox>
+                                            </Border>
 
 
-                                    </StackPanel>
-
-                                </Border>
-
-                                <Border Height="10" Background="#4BE1C3" Margin="10"/>
-
-                                <!-- CHAT BACKGOUND -->
-                                <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <Border x:Name="borderBG_Preview" Width="260" Height="260" Margin="10" CornerRadius="20">
-
+                                        </StackPanel>
 
                                     </Border>
 
-                                    <StackPanel Orientation="Vertical" Margin="10 30 10 30">
+                                    <Border Height="10" Background="#4BE1C3" Margin="10"/>
 
-                                        <Border Background="#673AB7" CornerRadius="3" Margin="10">
-                                            <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
-                                                <materialDesign:PopupBox.ToggleContent>
+                                    <!-- CHAT BACKGOUND -->
+                                    <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
 
-                                                    <Label Content="Choose from gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
-                                                </materialDesign:PopupBox.ToggleContent>
-                                                <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
-                                                    <WrapPanel x:Name="wrappanelBG_Gallery">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border x:Name="borderBG_Preview" Width="260" Height="260" Margin="10" CornerRadius="20">
 
-                                                    </WrapPanel>
-                                                </ScrollViewer>
-                                            </materialDesign:PopupBox>
+
                                         </Border>
 
-                                        <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
-                                        <Slider x:Name="blurLv"
+                                        <StackPanel Orientation="Vertical" Margin="10 30 10 30">
+
+                                            <Border Background="#673AB7" CornerRadius="3" Margin="10">
+                                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
+                                                    <materialDesign:PopupBox.ToggleContent>
+
+                                                        <Label Content="Choose from gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                    </materialDesign:PopupBox.ToggleContent>
+                                                    <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
+                                                        <WrapPanel x:Name="wrappanelBG_Gallery">
+
+                                                        </WrapPanel>
+                                                    </ScrollViewer>
+                                                </materialDesign:PopupBox>
+                                            </Border>
+
+                                            <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
+                                            <Slider x:Name="blurLv"
                                           Minimum="0"
                                           Maximum="100"
                                           Style="{StaticResource MaterialDesignDiscreteSlider}"
                                           ToolTip="Blur level"
                                           Value="50"
                                           Width="280" ValueChanged="blurLv_ValueChanged" />
-                                    </StackPanel>
+                                        </StackPanel>
 
+
+                                    </StackPanel>
 
                                 </StackPanel>
 
                             </StackPanel>
+                        </ScrollViewer>
 
-                        </StackPanel>
-                    </ScrollViewer>
-
-                </materialDesign:TransitionerSlide>
+                    </materialDesign:TransitionerSlide>
 
 
-            </materialDesign:Transitioner>
+                </materialDesign:Transitioner>
 
-        </DockPanel>
-    </Grid>
+            </DockPanel>
+        </Grid>
+    </materialDesign:DialogHost>
 </UserControl>

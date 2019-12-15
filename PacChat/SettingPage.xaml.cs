@@ -47,9 +47,10 @@ namespace PacChat
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var app = MainWindow.chatApplication;
-            storeDataToModel();
-            app.controller.OnProfileChanged();
+            ModifyPassword packet = new ModifyPassword();
+            packet.OldPassword = OldPassword.Password;
+            packet.NewPassword = NewPassword.Password;
+            _ = ChatConnection.Instance.Send(packet);
         }
 
         // This method stores data to model, then controller get data and update Database

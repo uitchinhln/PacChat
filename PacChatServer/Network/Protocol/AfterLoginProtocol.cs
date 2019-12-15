@@ -68,6 +68,10 @@ namespace PacChatServer.Network.Protocol
             Outbound(0x30, new GetSelfProfileResponse());
 
             Inbound(0x31, new UpdateSelfProfileRequest());
+
+            Inbound(0x32, new ModifyPasswordRequest());
+            Outbound(0x32, new ModifyPasswordResponse());
+
             // Sticker
             Inbound(0x21, new GetBoughtStickerPacksRequest());
             Outbound(0x21, new GetBoughtStickerPacksResponse());

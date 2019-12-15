@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using PacChat.Network.RestAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,33 @@ namespace PacChat.UIElements
         public ProfileAvatar()
         {
             InitializeComponent();
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "Select a picture";
+            op.Filter = "Supported Graphics|*.jpg;*.jpeg|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|";
+
+            if (op.ShowDialog() == true)
+            {
+                List<string> paths = op.FileNames.ToList();
+                var app = MainWindow.chatApplication;
+                FileAPI.UploadMedia(app.model.SelfID,
+                    paths, OnImageUploadCompleted, OnImageUploadError);
+            }
+        }
+
+        private void OnImageUploadError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnImageUploadCompleted(Dictionary<string, string> result)
+        {
+            
         }
     }
 }

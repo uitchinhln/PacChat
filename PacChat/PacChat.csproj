@@ -129,6 +129,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfileResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPassword.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPasswordResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\UpdateSelfProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />

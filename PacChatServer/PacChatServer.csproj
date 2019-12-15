@@ -380,6 +380,8 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\UpdateSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoResponse.cs" />
