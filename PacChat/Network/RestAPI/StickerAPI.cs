@@ -3,6 +3,8 @@ using PacChat.Cache.Core;
 using PacChat.MessageCore.Sticker;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -59,16 +61,21 @@ namespace PacChat.Network.RestAPI
                     using (WebClient client = new WebClient())
                     {
                         byte[] data = client.DownloadData(url);
+
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = new MemoryStream(data);
+                        bitmap.EndInit();
+
                         if (resultHandler != null)
-                            Application.Current.Dispatcher.Invoke(() => 
+                        {
+                            bitmap.Freeze();
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-                                BitmapImage bitmap = new BitmapImage();
-                                bitmap.BeginInit();
-                                bitmap.StreamSource = new MemoryStream(data);
-                                bitmap.EndInit();
                                 cachedImage.AddReplace(urll, bitmap);
                                 resultHandler(bitmap);
                             });
+                        }
                     }
                 }).Start();
             } catch (Exception e)
