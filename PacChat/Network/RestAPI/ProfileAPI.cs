@@ -12,12 +12,16 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PacChat.Network.RestAPI
 {
     public static class ProfileAPI
     {
         public delegate void ResultHandler();
+
+        public delegate void GetAvatarResult(ImageSource source);
         public delegate void ErrorHandler(Exception error);
 
         private static readonly String UploadAvatarURL = "http://{0}:1403/api/profile/avatar";
@@ -78,24 +82,36 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadSelfAvatar(DownloadProgressChangedEventHandler onProgressChange, 
-            AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+        public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler)
         {
+            Console.WriteLine("Start download avatar");
             try
             {
                 String address = ChatConnection.Instance.Host;
-                Uri uri = new Uri(String.Format(GetSelfAvatarURL, address));
+                String url = String.Format(GetSelfAvatarURL, address);
 
-                Directory.CreateDirectory(TempUtil.GetCurrentAvatarPath());
+                new Task(() =>
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+                        byte[] data = client.DownloadData(url);
 
-                WebClient webClient = new WebClient();
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = new MemoryStream(data);
+                        bitmap.EndInit();
 
-                webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.GetCurrentAvatarPath(), "MyAvatar"));
-                if (onProgressChange != null)
-                    webClient.DownloadProgressChanged += onProgressChange;
-                if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;
+                        if (resultHandler != null)
+                        {
+                            bitmap.Freeze();
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                resultHandler(bitmap);
+                            });
+                        }
+                    }
+                }).Start();
             }
             catch (Exception e)
             {
@@ -104,57 +120,41 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadUserAvatar(String userID, DownloadProgressChangedEventHandler onProgressChange, 
-            AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+        public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler)
         {
+            Console.WriteLine("Start download avatar");
             try
             {
                 String address = ChatConnection.Instance.Host;
-                Uri uri = new Uri(String.Format(GetUserAvatarURL, address, userID));
+                String url = String.Format(GetUserAvatarURL, address, userID);
 
-                Directory.CreateDirectory(TempUtil.GetCurrentAvatarPath());
+                new Task(() =>
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+                        byte[] data = client.DownloadData(url);
 
-                WebClient webClient = new WebClient();
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = new MemoryStream(data);
+                        bitmap.EndInit();
 
-                webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.GetCurrentAvatarPath(), userID));
-                if (onProgressChange != null)
-                    webClient.DownloadProgressChanged += onProgressChange;
-                if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;
+                        if (resultHandler != null)
+                        {
+                            bitmap.Freeze();
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                resultHandler(bitmap);
+                            });
+                        }
+                    }
+                }).Start();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 if (errorHandler != null) errorHandler(e);
-            }
-        }
-
-        public delegate void Result(String path);
-
-        public static void GetAvatar(Result result, string userID = "MyAvatar")
-        {
-            String avaPath = Path.Combine(TempUtil.GetCurrentAvatarPath(), userID);
-            if (File.Exists(avaPath))
-                result(avaPath);
-            else
-            {
-                if (userID.Equals("MyAvatar", StringComparison.OrdinalIgnoreCase))
-                {
-                    DownloadSelfAvatar(null, 
-                        (sender, e) => 
-                        {
-                            Application.Current.Dispatcher.Invoke(() => result(avaPath));
-                        }, (ex) => Console.WriteLine(ex));
-                }
-                else
-                {
-                    DownloadUserAvatar(userID, null,
-                        (sender, e) =>
-                        {
-                            Application.Current.Dispatcher.Invoke(() => result(avaPath));
-                        }, (ex) => Console.WriteLine(ex));
-                }
             }
         }
     }

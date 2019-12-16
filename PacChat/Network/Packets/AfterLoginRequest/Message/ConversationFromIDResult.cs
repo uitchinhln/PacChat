@@ -92,12 +92,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
                     active += LastActive + " " + timeUnit + " ago";
                     ChatPage.Instance.LastActive.Text = active;
-                    ChatPage.Instance.OnlineDot.Visibility = Visibility.Hidden;
+                    ChatPage.Instance.Avatar.IsOnline = false;
                 }
                 else
                 {
                     ChatPage.Instance.LastActive.Text = "Active Now";
-                    ChatPage.Instance.OnlineDot.Visibility = Visibility.Visible;
+                    ChatPage.Instance.Avatar.IsOnline = true;
                 }
             });
         }
