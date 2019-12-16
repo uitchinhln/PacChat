@@ -21,7 +21,7 @@ namespace PacChat.Network.RestAPI
         private static readonly String StickerCatesListUrl = "http://{0}:1403/api/message/sticker/category/list";
         private static readonly String StickerCatesUrl = "http://{0}:1403/api/message/sticker/category/stickers/{1}";
 
-        private static LRUCache<String, BitmapImage> cachedImage = new LRUCache<string, BitmapImage>(100, 10);
+        private static LFUCache<String, BitmapImage> cachedImage = new LFUCache<string, BitmapImage>(100, 10);
 
         public delegate void ResultHandler(BitmapImage result);
 
