@@ -24,15 +24,21 @@ namespace PacChat.Resources.CustomControls
     {
         private Dictionary<int, TabStickerStore> CateStore;
 
-        private App app;
 
+        private Dictionary<int, MessageCore.Sticker.StickerCategory> cateStoreList;
 
         public TabStickerContainner()
         {
             InitializeComponent();
             CateStore = new Dictionary<int, TabStickerStore>();
+            cateStoreList = new Dictionary<int, MessageCore.Sticker.StickerCategory>();
+
         }
 
+        public void AddToStoreList(MessageCore.Sticker.StickerCategory cate)
+        {
+            cateStoreList.Add(cate.ID, cate);
+        }
 
         public void AddTabSticker(MessageCore.Sticker.StickerCategory cate)
         {
@@ -54,6 +60,7 @@ namespace PacChat.Resources.CustomControls
             });
 
         }
+
 
         public void AddCateIntoStore(MessageCore.Sticker.StickerCategory cate)
         {
@@ -78,6 +85,29 @@ namespace PacChat.Resources.CustomControls
                 store.Margin = new Thickness(5, 5, 5, 5);
                 splStickerStore.Children.Add(store);
                 if (i >= 10) break;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            int count = 0;
+            List<int> temp = new List<int>();
+            var scrollViewer = (ScrollViewer)sender;
+            if (scrollViewer.VerticalOffset == scrollViewer.ScrollableHeight)
+            {
+
+                foreach(var x in cateStoreList)
+                {
+                    count++;
+                    AddCateIntoStore(x.Value);
+                    temp.Add(x.Key);
+                    if (count == 5) break;
+                }
+
+                foreach (var x in temp)
+                {
+                    cateStoreList.Remove(x);
+                }
             }
         }
     }

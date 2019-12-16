@@ -51,11 +51,6 @@ namespace PacChat.Resources.CustomControls
 
         }
 
-        private void downSticker()
-        {
-
-        }
-
         private void btnDown_Click(object sender, RoutedEventArgs e)
         {
             ChatConnection.Instance.Send(new BuyStickerCategoryRequest() { CateID = Cate.ID });
