@@ -48,11 +48,11 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
                 else
                 {
                     // cate chua duoc mua
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(Cate.Key, out var stickerCate);
-                        ChatPage.Instance.spTabStickerContainner.AddCateIntoStore(stickerCate);
-                    });
+                    //Application.Current.Dispatcher.Invoke(() =>
+                    //{
+                    //    PacChat.MessageCore.Sticker.Sticker.LoadedCategories.TryGetValue(Cate.Key, out var stickerCate);
+                    //    ChatPage.Instance.spTabStickerContainner.AddCateIntoStore(stickerCate);
+                    //});
                 }
             }
 
