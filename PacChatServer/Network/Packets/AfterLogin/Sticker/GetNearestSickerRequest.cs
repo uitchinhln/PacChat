@@ -25,7 +25,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.Sticker
         {
             ChatSession chatSession = session as ChatSession;
             GetNearestSickerResponse response = new GetNearestSickerResponse();
-            response.NearestSticker.AddRange(chatSession.Owner.NearestStickers);
+            for (int i = 0; i < 20 && i < chatSession.Owner.NearestStickers.Count; i++)
+            {
+                response.NearestSticker.Add(chatSession.Owner.NearestStickers[i]);
+            }
             chatSession.Send(response);
         }
     }

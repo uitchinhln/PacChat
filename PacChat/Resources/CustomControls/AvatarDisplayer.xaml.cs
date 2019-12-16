@@ -40,6 +40,18 @@ namespace PacChat.Resources.CustomControls
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(String), typeof(AvatarDisplayer), new PropertyMetadata(String.Empty));
 
+
+
+        public bool IsOnline
+        {
+            get { return (bool)GetValue(IsOnlineProperty); }
+            set { SetValue(IsOnlineProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsOnline.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsOnlineProperty =
+            DependencyProperty.Register("IsOnline", typeof(bool), typeof(AvatarDisplayer), new PropertyMetadata(false));
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ImageSourceProperty && !String.IsNullOrEmpty(ImageSource))
@@ -54,8 +66,24 @@ namespace PacChat.Resources.CustomControls
 
                 }
             }
+
+            if (e.Property == IsOnlineProperty)
+            {
+                if (IsOnline)
+                {
+                    OnlineDot.Visibility = Visibility.Visible;
+                } else
+                {
+                    OnlineDot.Visibility = Visibility.Hidden;
+                }
+            }
+
             base.OnPropertyChanged(e);
         }
+
+
+
+
 
         #region Custom ClickEvent
         public event EventHandler Click;

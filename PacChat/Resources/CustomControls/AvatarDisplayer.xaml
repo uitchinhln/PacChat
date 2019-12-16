@@ -16,9 +16,11 @@
                 <ImageBrush x:Name="ImageAva" />
             </Border.Background>
         </Border>
+        <Border x:Name="OnlineDot" BorderThickness="1" CornerRadius="16" Background="#FF1CFF83" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"></Border>
         <ProgressBar x:Name="LoadingAhihi" Value="0" Foreground="#FFB6B6B6"
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           IsIndeterminate="True" Height="Auto" Margin="5" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}" />
-        <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick" />
+        <Button x:Name="ClickTrigger" Style="{StaticResource MaterialDesignFloatingActionLightButton}" 
+                Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick" Width="30" Height="30" />
     </Grid>
 </UserControl>

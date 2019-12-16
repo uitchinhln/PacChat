@@ -61,7 +61,7 @@ namespace PacChat.Resources.CustomControls
             DependencyProperty.Register("ThumbnailUrl", typeof(String), typeof(ThumbnailBubble), new PropertyMetadata(String.Empty));
 
         #endregion
-        
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
@@ -137,8 +137,32 @@ namespace PacChat.Resources.CustomControls
         {
             var app = MainWindow.chatApplication;
             app.model.currentMediaFileID = FileID;
-            MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
-            ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
+            // MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
+            // ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
+            //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
+            //MainWindow.Instance.MediaPlayerWindow.ShowDialog();
+
+            if (!app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
+                app.model.MediaWindows.Add(app.model.currentSelectedConversation, null);
+
+            if (app.model.MediaWindows[app.model.currentSelectedConversation] == null)
+                app.model.MediaWindows[app.model.currentSelectedConversation] = new MediaPlayerWindow();
+
+            var mediaWindow = app.model.MediaWindows[app.model.currentSelectedConversation];
+            mediaWindow.ConversationID = app.model.currentSelectedConversation;
+            mediaWindow.Title = ChatPage.Instance.ChatTitle.Content.ToString();
+
+            if (mediaWindow.Visibility != Visibility.Visible)
+            {
+                mediaWindow.InitializeMedia();
+                mediaWindow.MediaPlayer.ShowMedia(fileID: FileID);
+                mediaWindow.Show();
+            }
+            else
+            {
+                mediaWindow.InitializeMedia();
+                mediaWindow.MediaPlayer.ShowMedia(fileID: FileID);
+            }
         }
     }
 }

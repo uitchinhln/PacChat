@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PacChat"
         xmlns:chatcontent="clr-namespace:PacChat.ChatPageContents"
+        xmlns:customcontrols="clr-namespace:PacChat.Resources.CustomControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="PacChat" Height="500" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" 
@@ -78,7 +79,18 @@
                         </Button>
 
                     </DockPanel>
-                    
+
+                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,10,0" PlacementMode="BottomAndAlignRightEdges">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
                 </DockPanel>
 
 

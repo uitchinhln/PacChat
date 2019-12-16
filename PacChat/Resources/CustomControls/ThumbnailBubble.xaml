@@ -20,7 +20,7 @@
                 </Border.Background>
             </Border>
         </Border>
-        <Button x:Name="ClickMask" Background="{x:Null}" Height="Auto" BorderBrush="{x:Null}" Foreground="#FFBFBFBF" Margin="8" Click="ClickMask_Click">
+        <Button x:Name="ClickMask" Background="{x:Null}" Height="Auto" BorderBrush="{x:Null}" Foreground="#9F8D8D8D" Margin="8" Click="ClickMask_Click">
             <materialDesign:PackIcon x:Name="PlayIcon" Kind="PlayCircle" Width="96" Height="96" Visibility="Hidden" Margin="10" />
         </Button>
     </Grid>

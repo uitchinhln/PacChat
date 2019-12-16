@@ -22,7 +22,7 @@ using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.MessageCore.Sticker;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
-
+using PacChat.Network.RestAPI;
 
 namespace PacChat
 {
@@ -90,9 +90,17 @@ namespace PacChat
 
             SetNotificationDotState(false);
 
+            SelfAvatar.ClickTrigger.Visibility = Visibility.Hidden;
+            SelfAvatar.ClickTrigger.IsEnabled = false;
+
+            ProfileAPI.GetAvatar((avaPath) =>
+            {
+                SelfAvatar.ImageSource = avaPath;
+            });
+
             // Media window
-            // MediaPlayerWindow = new MediaPlayerWindow();
-            // MediaPlayerWindow.Show();
+            //MediaPlayerWindow = new MediaPlayerWindow();
+            //MediaPlayerWindow.Show();
 
             /*
             try

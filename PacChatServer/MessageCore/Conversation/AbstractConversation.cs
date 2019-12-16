@@ -63,6 +63,12 @@ namespace PacChatServer.MessageCore.Conversation
                 MediaID.Add((message as AbstractMessage).ID);
             if (message is AttachmentMessage)
                 AttachmentID.Add((message as AbstractMessage).ID);
+            if (message is StickerMessage)
+            {
+                chatSession.Owner.NearestStickers.Add((message as StickerMessage).StickerID);
+                chatSession.Owner.Save();
+            }
+
             MessagesID.Add((message as AbstractMessage).ID);
             LoadedMessages.AddReplace((message as AbstractMessage).ID, message);
 

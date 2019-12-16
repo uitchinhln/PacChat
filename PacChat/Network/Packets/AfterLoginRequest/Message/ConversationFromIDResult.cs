@@ -64,7 +64,14 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].LastAttachmentID = LastAttachmentID;
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
+
+                if (app.model.MediaWindows.ContainsKey(ConversationID))
+                {
+                    app.model.MediaWindows[ConversationID].Close();
+                    app.model.MediaWindows[ConversationID] = null;
+                }
                 ChatPage.Instance.LoadMessages(ConversationID);
+                //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.Clean();
 
                 Console.WriteLine("Conversation load");
 

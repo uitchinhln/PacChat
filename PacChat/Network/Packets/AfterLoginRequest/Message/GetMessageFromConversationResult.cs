@@ -105,9 +105,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             // Create a message instance and put information into it
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
-                MainWindow.Instance.MediaPlayerWindow.Hide();
-
                 var app = MainWindow.chatApplication;
                 for (int i = 0; i < SenderID.Count; ++i)
                 {
