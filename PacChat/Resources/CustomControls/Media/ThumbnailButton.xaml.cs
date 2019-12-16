@@ -99,8 +99,6 @@ namespace PacChat.Resources.CustomControls.Media
                             ImgThumbnail.Height = ImgThumbnail.ActualWidth;
 
                             Gat.Children.Remove(LoadingAhihi);
-                            if (isVideo)
-                                PlayIcon.Visibility = Visibility.Visible;
                         });
                     }
                     catch (WebException)
@@ -113,6 +111,8 @@ namespace PacChat.Resources.CustomControls.Media
                     }
                 });
                 task.Start();
+                if (isVideo)
+                    PlayIcon.Visibility = Visibility.Visible;
             }
 
             if (e.Property == IsActiveProperty)
