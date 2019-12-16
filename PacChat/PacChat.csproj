@@ -231,6 +231,7 @@
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\MediaUtils.cs" />
     <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
     <Compile Include="Utils\ResourceUtil.cs" />

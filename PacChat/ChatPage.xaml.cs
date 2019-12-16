@@ -227,6 +227,48 @@ namespace PacChat
         {
             var app = MainWindow.chatApplication;
 
+            if (!app.model.MediaMessages.ContainsKey(app.model.currentSelectedConversation))
+                app.model.MediaMessages.Add(app.model.currentSelectedConversation, new List<MediaPack>());
+
+            if (isSimulating)
+            {
+                app.model.MediaMessages[app.model.currentSelectedConversation].
+                    Add(new MediaPack() { FileID = fileID, FileName = fileName });
+            }
+            else
+            {
+                app.model.MediaMessages[app.model.currentSelectedConversation].
+                    Insert(0, new MediaPack() { FileID = fileID, FileName = fileName });
+            }
+
+            return;
+
+            if (app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
+            {
+                var mediaWindow = app.model.MediaWindows[app.model.currentSelectedConversation];
+                if (mediaWindow != null && mediaWindow.Visibility == Visibility.Visible)
+                {
+                    if (isSimulating)
+                        mediaWindow.MediaPlayer.AddMediaItem
+                        (
+                            conversationID: app.model.currentSelectedConversation,
+                            fileID: fileID, 
+                            fileName: fileName,
+                            0
+                        );
+                    else 
+                        mediaWindow.MediaPlayer.AddMediaItemToFirst
+                        (
+                            conversationID: app.model.currentSelectedConversation,
+                            fileID: fileID, 
+                            fileName: fileName,
+                            0
+                        );
+                }
+            }
+
+            return;
+
             if (!isSimulating)
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
                 (
@@ -321,11 +363,11 @@ namespace PacChat
             }
 
             if (thumbnail != null) thumbnail.Click += ThumbnailClick;
-            if (isSimulating) return;
 
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg, false));
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, false));
 
+            if (isSimulating) return;
             SendMessage packet = new SendMessage();
             packet.ConversationID = app.model.currentSelectedConversation;
             packet.Message = msg;
@@ -417,7 +459,6 @@ namespace PacChat
             }
 
             if (thumbnail != null) thumbnail.Click += ThumbnailClick;
-            if (isSimulating) return;
 
             app.model.CurrentUserMessages.Add(new BubbleInfo(msg, true));
             app.model.Conversations[app.model.currentSelectedConversation].Bubbles.Add(new BubbleInfo(msg, true));

@@ -10,6 +10,7 @@ using PacChat.MessageCore.Sticker;
 using PacChat.ChatPageContents.ViewModels;
 using static PacChat.Utils.UserUtils;
 using System.Windows.Controls;
+using PacChat.MessageCore.Message;
 
 namespace PacChat.ChatAMVC
 {
@@ -33,6 +34,10 @@ namespace PacChat.ChatAMVC
         public Dictionary<string, bool> IsOnline { get; set; } = new Dictionary<string, bool>();
 
         public Dictionary<int, StickerCategory> PaidSticker = new Dictionary<int, StickerCategory>();
+
+        // Key: conversation-id, Value: index of media message in Messages list in Conversations
+        public Dictionary<string, List<MediaPack>> MediaMessages { get; set; } = new Dictionary<string, List<MediaPack>>();
+        public Dictionary<string, MediaPlayerWindow> MediaWindows { get; set; } = new Dictionary<string, MediaPlayerWindow>();
         #endregion
 
         #region OnSettingPage

@@ -19,12 +19,42 @@ namespace PacChat
     /// </summary>
     public partial class MediaPlayerWindow : Window
     {
+        public string ConversationID { get; set; }
+
         public MediaPlayerWindow()
         {
             InitializeComponent();
             MediaPlayer.BtnClose.Click += BtnClose_Click;
             MediaPlayer.TitleBar.MouseMove += FormDrag;
             MediaPlayer.BtnFullScreen.Click += BtnFullScreen_Click;
+
+
+        }
+
+        public void InitializeMedia()
+        {
+            var app = MainWindow.chatApplication;
+
+            if (app.model.MediaMessages.ContainsKey(ConversationID))
+            {
+                var medias = app.model.MediaMessages[ConversationID];
+
+                for (int i = 0; i < medias.Count; ++i)
+                {
+                    var media = medias[i];
+                    MediaPlayer.AddMediaItem
+                    (
+                        conversationID: ConversationID,
+                        fileID: media.FileID,
+                        fileName: media.FileName,
+                        position: medias.Count - i - 1
+                    );
+                }
+            }
+            else
+            {
+                app.model.MediaMessages.Add(ConversationID, new List<Utils.MediaPack>());
+            }
         }
 
         private void BtnFullScreen_Click(object sender, RoutedEventArgs e)
@@ -48,8 +78,12 @@ namespace PacChat
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer.VideoFull.Close();
-            this.Hide();
+            var app = MainWindow.chatApplication;
+            if (app.model.MediaWindows.ContainsKey(ConversationID))
+                app.model.MediaWindows[ConversationID] = null;
+            else
+                app.model.MediaWindows.Add(ConversationID, null);
+            this.Close();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

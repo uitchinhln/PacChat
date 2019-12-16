@@ -91,7 +91,7 @@ namespace PacChat
             SetNotificationDotState(false);
 
             // Media window
-            MediaPlayerWindow = new MediaPlayerWindow();
+            //MediaPlayerWindow = new MediaPlayerWindow();
             //MediaPlayerWindow.Show();
 
             /*
