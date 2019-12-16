@@ -48,7 +48,8 @@ namespace PacChat
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MediaPlayer.VideoFull.Close();
+            this.Hide();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

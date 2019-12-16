@@ -223,6 +223,28 @@ namespace PacChat
 
         #endregion
 
+        public void AddMedia(string fileID, string fileName, bool isSimulating)
+        {
+            var app = MainWindow.chatApplication;
+
+            if (!isSimulating)
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
+                (
+                    app.model.currentSelectedConversation,
+                    fileID, fileName,
+                    0,
+                    true
+                );
+            else
+                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItem
+                (
+                    app.model.currentSelectedConversation,
+                    fileID, fileName,
+                    0,
+                    true
+                );
+        }
+
         public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
         {
             if (reversed) _headBubbleChat = null;
@@ -253,15 +275,7 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
-
-                if (!isSimulating)
-                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                    (
-                        app.model.currentSelectedConversation,
-                        fileID, fileName,
-                        0,
-                        true
-                    );
+                AddMedia(fileID, fileName, isSimulating);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -273,14 +287,7 @@ namespace PacChat
                 thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
 
-                if (!isSimulating)
-                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                    (
-                        app.model.currentSelectedConversation,
-                        fileID, fileName,
-                        0,
-                        true
-                    );
+                AddMedia(fileID, fileName, isSimulating);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {
@@ -367,17 +374,8 @@ namespace PacChat
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
-                // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
-
-                if (!isSimulating)
-                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                    (
-                        app.model.currentSelectedConversation,
-                        fileID, fileName,
-                        0,
-                        true
-                    );
+                AddMedia(fileID, fileName, isSimulating);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Video)
             {
@@ -387,16 +385,7 @@ namespace PacChat
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
-                // thumbnail.IsActive = true;
-
-                if (!isSimulating)
-                    MainWindow.Instance.MediaPlayerWindow.MediaPlayer.AddMediaItemToFirst
-                    (
-                        app.model.currentSelectedConversation,
-                        fileID, fileName,
-                        0,
-                        true
-                    );
+                AddMedia(fileID, fileName, isSimulating);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
             {

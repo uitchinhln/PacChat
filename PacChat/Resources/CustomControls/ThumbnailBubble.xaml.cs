@@ -137,8 +137,10 @@ namespace PacChat.Resources.CustomControls
         {
             var app = MainWindow.chatApplication;
             app.model.currentMediaFileID = FileID;
-            MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
-            ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
+            // MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
+            // ChatPage.Instance.LoadMedia(MainWindow.chatApplication.model.currentSelectedConversation, true);
+            MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileID);
+            MainWindow.Instance.MediaPlayerWindow.ShowDialog();
         }
     }
 }
