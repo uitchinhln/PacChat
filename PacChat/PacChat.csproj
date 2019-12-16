@@ -77,6 +77,9 @@
     <Compile Include="ChatPageContents\ProfileDisplayer.xaml.cs">
       <DependentUpon>ProfileDisplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DownloadWindow.xaml.cs">
+      <DependentUpon>DownloadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversation.cs" />
     <Compile Include="GroupChatPage.xaml.cs">
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatPageContents\UserMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DownloadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

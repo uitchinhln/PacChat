@@ -208,15 +208,27 @@ namespace PacChat
             if (!app.model.MediaMessages.ContainsKey(app.model.currentSelectedConversation))
                 app.model.MediaMessages.Add(app.model.currentSelectedConversation, new List<MediaPack>());
 
+            var mediaPack = new MediaPack() { FileID = fileID, FileName = fileName };
+
             if (isSimulating)
             {
-                app.model.MediaMessages[app.model.currentSelectedConversation].
-                    Add(new MediaPack() { FileID = fileID, FileName = fileName });
+                if (app.model.MediaMessages[app.model.currentSelectedConversation].
+                    FindIndex(x => x.FileID.Equals(mediaPack.FileID)) < 0)
+                {
+                    app.model.MediaMessages[app.model.currentSelectedConversation].
+                        Add(mediaPack);
+                    app.model.Conversations[app.model.currentSelectedConversation].LastMediaID--;
+                }
             }
             else
             {
-                app.model.MediaMessages[app.model.currentSelectedConversation].
-                    Insert(0, new MediaPack() { FileID = fileID, FileName = fileName });
+                if (app.model.MediaMessages[app.model.currentSelectedConversation].
+                    FindIndex(x => x.FileID.Equals(mediaPack.FileID)) < 0)
+                {
+                    app.model.MediaMessages[app.model.currentSelectedConversation].
+                        Insert(0, mediaPack);
+                    app.model.Conversations[app.model.currentSelectedConversation].LastMediaID--;
+                }
             }
 
             return;
