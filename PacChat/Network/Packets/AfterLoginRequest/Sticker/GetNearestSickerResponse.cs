@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
 {
@@ -31,7 +32,15 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
 
         public void Handle(ISession session)
         {
-            //Code vao day
+            foreach (var sticker in NearestSticker)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker, out var recentSticker);
+                    ChatPage.Instance.spTabStickerContainner.AddStickerToRecenttab(recentSticker);
+
+                });
+            }
         }
     }
 }

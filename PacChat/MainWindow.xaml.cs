@@ -84,6 +84,7 @@ namespace PacChat
             Sticker.Load(() =>
             {
                 Packets.SendPacket<GetBoughtStickerPacksRequest>();
+                Packets.SendPacket<GetNearestSickerRequest>();
 
 
             });

@@ -24,14 +24,16 @@ namespace PacChat.Resources.CustomControls
     {
         private Dictionary<int, TabStickerStore> cateStore;
 
-
         private Dictionary<int, MessageCore.Sticker.StickerCategory> cateStoreList;
+
+        private Dictionary<int, MessageCore.Sticker.Sticker> recentStickerList;
 
         public TabStickerContainner()
         {
             InitializeComponent();
             cateStore = new Dictionary<int, TabStickerStore>();
             cateStoreList = new Dictionary<int, MessageCore.Sticker.StickerCategory>();
+            recentStickerList = new Dictionary<int, MessageCore.Sticker.Sticker>(); 
 
         }
         
@@ -80,6 +82,20 @@ namespace PacChat.Resources.CustomControls
         #endregion
 
         #region Sticker recent tab
+
+        public void AddStickerToRecentList(MessageCore.Sticker.Sticker sticker)
+        {
+            
+        }
+        
+        public void AddStickerToRecenttab(MessageCore.Sticker.Sticker sticker)
+        {
+            if (recentStickerList.ContainsKey(sticker.ID)) return;
+            
+            wplStickerRecent.Children.Insert(0, new Sticker(ChatPage.Instance, true, sticker.ID, sticker.CategoryID, 130, sticker.Duration, sticker.SpriteURL, false));
+            recentStickerList.Add(sticker.ID, sticker);
+            
+        }
 
         #endregion
 

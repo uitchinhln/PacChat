@@ -59,7 +59,6 @@ namespace PacChat.Network.RestAPI
                 }
                 new Task(() =>
                 {
-                    Console.WriteLine(caller);
                     using (WebClient client = new WebClient())
                     {
                         byte[] data = client.DownloadData(url);
@@ -90,7 +89,6 @@ namespace PacChat.Network.RestAPI
             String urll = url.ToLower().Trim();
             try
             {
-                Console.WriteLine(caller);
                 if (cachedImage.Contains(urll))
                 {
                     resultHandler(cachedImage.Get(urll));

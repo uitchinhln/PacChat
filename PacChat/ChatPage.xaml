@@ -68,7 +68,7 @@
 
                         <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
                             <Border CornerRadius="4" Margin="3 3 3 4">
-                                <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
+                                <materialDesign:PopupBox  Padding="0" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,0,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
                                     <materialDesign:PopupBox.ToggleContent>
 
                                         <materialDesign:PackIcon

@@ -18,7 +18,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Hidden" >
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Hidden" Margin="0 0 0 -2">
                             <TabPanel x:Name="HeaderPanel"
                           Panel.ZIndex ="1" 
                           KeyboardNavigation.TabIndex="1"
@@ -39,7 +39,7 @@
             <TabItem Width="38" Height="38" Background="LightGray" >
                 <TabItem.Header>
                     <materialDesign:PackIcon Kind="Cart" Margin="0" Width="24" Height="24"/>
-
+                    
                 </TabItem.Header>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Background="LightGray" ScrollChanged="ScrollViewer_ScrollChanged">
@@ -51,7 +51,20 @@
 
             </TabItem>
 
+            <TabItem Width="38" Height="38" Background="LightGray" BorderThickness="0" >
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Recent" Margin="0" Width="24" Height="24"/>
 
+                </TabItem.Header>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0">
+                    <WrapPanel x:Name="wplStickerRecent" Orientation="Horizontal">
+
+
+                    </WrapPanel>
+                </ScrollViewer>
+
+            </TabItem>
 
 
 
