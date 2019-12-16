@@ -84,7 +84,6 @@ namespace PacChat.Network.RestAPI
 
         public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler)
         {
-            Console.WriteLine("Start download avatar");
             try
             {
                 String address = ChatConnection.Instance.Host;
@@ -122,7 +121,6 @@ namespace PacChat.Network.RestAPI
 
         public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler)
         {
-            Console.WriteLine("Start download avatar");
             try
             {
                 String address = ChatConnection.Instance.Host;
