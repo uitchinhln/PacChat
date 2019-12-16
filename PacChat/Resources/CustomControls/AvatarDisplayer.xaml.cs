@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.Network.RestAPI;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -30,17 +31,15 @@ namespace PacChat.Resources.CustomControls
 
         public Border AvatarBorder { get => AvaBorder; }
 
-        public String ImageSource
+        public String UserID
         {
-            get { return (String)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
+            get { return (String)GetValue(UserIDProperty); }
+            set { SetValue(UserIDProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(String), typeof(AvatarDisplayer), new PropertyMetadata(String.Empty));
-
-
+        // Using a DependencyProperty as the backing store for UserID.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UserIDProperty =
+            DependencyProperty.Register("UserID", typeof(String), typeof(AvatarDisplayer), new PropertyMetadata(String.Empty));
 
         public bool IsOnline
         {
@@ -54,17 +53,24 @@ namespace PacChat.Resources.CustomControls
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (e.Property == ImageSourceProperty && !String.IsNullOrEmpty(ImageSource))
+            if (e.Property == UserIDProperty)
             {
-                try
+                LoadingAhihi.Visibility = Visibility.Visible;
+                if (String.IsNullOrEmpty(UserID))
                 {
-                    LoadingAhihi.Visibility = Visibility.Visible;
-                    ImageAva.ImageSource = new BitmapImage(new Uri(ImageSource, UriKind.RelativeOrAbsolute));
-                    LoadingAhihi.Visibility = Visibility.Hidden;
-                } catch
-                {
-
+                    ProfileAPI.DownloadSelfAvatar((avaSource) =>
+                    {
+                        this.ImageAva.ImageSource = avaSource;
+                    }, (ex) => Console.WriteLine(ex));
                 }
+                else
+                {
+                    ProfileAPI.DownloadUserAvatar(UserID,(avaSource) =>
+                    {
+                        this.ImageAva.ImageSource = avaSource;
+                    }, (ex) => Console.WriteLine(ex));
+                }
+                LoadingAhihi.Visibility = Visibility.Hidden;
             }
 
             if (e.Property == IsOnlineProperty)

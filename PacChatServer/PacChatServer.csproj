@@ -473,8 +473,15 @@
     <Folder Include="Cache\Message\" />
     <Folder Include="Command\Commands\Tool\" />
     <Folder Include="Permission\" />
+    <Folder Include="Resource\v0.8.0\Default\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\Default\Avatar_Female.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Default\Avatar_Male.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\v0.8.0\ChatPageBg\BG.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

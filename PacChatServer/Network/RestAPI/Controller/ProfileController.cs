@@ -70,11 +70,23 @@ namespace PacChatServer.Network.RestAPI.Controller
             if (session == null)
                 throw new UnauthorizedAccessException();
 
-            if (!File.Exists(Path.Combine(AvatarPath, userID)))
-                throw new FileNotFoundException();
-
             String filePath = Path.Combine(AvatarPath, userID);
-            String fileName = AttachmentStore.Parse(Guid.Parse(userID));
+            String fileName;
+
+            if (!File.Exists(Path.Combine(AvatarPath, userID)))
+            {
+                if (session.Owner.Gender == Entity.EntityProperty.Gender.Female)
+                {
+                    filePath = "Resource/Default/Avatar_Female.jpg";
+                } else
+                {
+                    filePath = "Resource/Default/Avatar_Male.jpg";
+                }
+                fileName = "Avatar.jpg";
+            } else
+            {
+                fileName = AttachmentStore.Parse(Guid.Parse(userID));
+            }
 
             FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
