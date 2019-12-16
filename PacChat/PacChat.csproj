@@ -236,6 +236,7 @@
     <Compile Include="Utils\ResourceUtil.cs" />
     <Compile Include="Utils\SystemPlacesUtils.cs" />
     <Compile Include="Utils\TempUtil.cs" />
+    <Compile Include="Utils\ThreadUtil.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Utils\UserUtils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">

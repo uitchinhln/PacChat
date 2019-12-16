@@ -76,7 +76,20 @@ namespace PacChatServer.Network.RestAPI.Handler
                             if (ImageExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
                             {
                                 Image image = Image.FromFile(Path.Combine(SavePath, id.ToString()));
-                                image.GetThumbnailImage(128, 128, null, IntPtr.Zero).Save(Path.Combine(SavePath, id.ToString() + "_thumb.jpg"));
+
+                                int w = image.Width, h = image.Height;
+                                if (image.Height > 300)
+                                {
+                                    h = 300;
+                                    w = image.Width * 300 / image.Height;
+                                }
+                                else if (image.Width > 500)
+                                {
+                                    w = 500;
+                                    h = image.Height * 500 / image.Width;
+                                }
+
+                            image.GetThumbnailImage(w, h, null, IntPtr.Zero).Save(Path.Combine(SavePath, id.ToString() + "_thumb.jpg"));
                             }
                         //});
                         //task.Start();

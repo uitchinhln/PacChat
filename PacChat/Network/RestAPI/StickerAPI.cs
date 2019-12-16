@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,7 +47,7 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadImage(String url, ResultHandler resultHandler)
+        public static void DownloadImage(String url, ResultHandler resultHandler, [CallerMemberName] string caller = null)
         {
             String urll = url.ToLower().Trim();
             try
@@ -58,6 +59,7 @@ namespace PacChat.Network.RestAPI
                 }
                 new Task(() =>
                 {
+                    Console.WriteLine(caller);
                     using (WebClient client = new WebClient())
                     {
                         byte[] data = client.DownloadData(url);
@@ -79,6 +81,38 @@ namespace PacChat.Network.RestAPI
                     }
                 }).Start();
             } catch (Exception e)
+            {
+            }
+        }
+
+        public static void DownloadImageSynchronously(String url, ResultHandler resultHandler, [CallerMemberName] string caller = null)
+        {
+            String urll = url.ToLower().Trim();
+            try
+            {
+                Console.WriteLine(caller);
+                if (cachedImage.Contains(urll))
+                {
+                    resultHandler(cachedImage.Get(urll));
+                    return;
+                }
+                using (WebClient client = new WebClient())
+                {
+                    byte[] data = client.DownloadData(url);
+
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = new MemoryStream(data);
+                    bitmap.EndInit();
+
+                    if (resultHandler != null)
+                    {
+                        cachedImage.AddReplace(urll, bitmap);
+                        resultHandler(bitmap);
+                    }
+                }
+            }
+            catch (Exception e)
             {
             }
         }

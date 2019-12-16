@@ -1,4 +1,5 @@
 ﻿using PacChat.Resources.CustomControls.Media;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,11 +33,11 @@ namespace PacChat.Resources.CustomControls
         {
             if (mediaInfo == null)
                 throw new NullReferenceException("MediaInfo cannot be null.");
+            this.IsVideoThumbnail = PacPlayer.IsSupport(mediaInfo.FileName);
             this.FileName = mediaInfo.FileName;
             this.FileID = mediaInfo.FileID;
             this.StreamURL = mediaInfo.StreamURL;
             this.ThumbnailUrl = mediaInfo.ThumbURL;
-            this.IsVideoThumbnail = PacPlayer.IsSupport(FileName);
         }
 
         public ImageSource Image { get => MediaThumb.ImageSource; }
@@ -60,37 +61,47 @@ namespace PacChat.Resources.CustomControls
             DependencyProperty.Register("ThumbnailUrl", typeof(String), typeof(ThumbnailBubble), new PropertyMetadata(String.Empty));
 
         #endregion
-
+        
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ThumbnailURLProperty && !String.IsNullOrEmpty(ThumbnailUrl))
             {
+                Console.WriteLine("Inside ThumbnailURLProperty");
+                Console.WriteLine("Current Threads: {0}", ThreadUtil.GetWorkingThreads());
                 LoadingAhihi.Visibility = Visibility.Visible;
-                String url = IsVideoThumbnail ? ThumbnailUrl : StreamURL;
+                BubbleBkg.Height = BubbleBkg.Width = 96;
+                String url = ThumbnailUrl;
                 Task task = new Task(() =>
                 {
                     try
                     {
                         WebClient wc = new WebClient();
-                        BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                        //BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = new MemoryStream(wc.DownloadData(url));
+                        bitmap.EndInit();
+
                         wc.Dispose();
+                        bitmap.Freeze();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
+                            BubbleBkg.Width = bitmap.PixelWidth;
+                            BubbleBkg.Height = bitmap.PixelHeight;
 
-                            if (!IsVideoThumbnail)
+                            if (bitmap.PixelHeight > 250)
                             {
-                                if (bitmap.PixelHeight > 300)
-                                {
-                                    BubbleBkg.Height = 300;
-                                    BubbleBkg.Width = bitmap.PixelWidth * 300 / bitmap.PixelHeight;
-                                }
-                                else if (bitmap.PixelWidth > 500)
-                                {
-                                    BubbleBkg.Width = 500;
-                                    BubbleBkg.Height = bitmap.PixelHeight * 500 / bitmap.PixelWidth;
-                                }
+                                BubbleBkg.Height = 250;
+                                BubbleBkg.Width = bitmap.PixelWidth * 250 / bitmap.PixelHeight;
                             }
-                            else
+                            else if (bitmap.PixelWidth > 400)
+                            {
+                                BubbleBkg.Width = 400;
+                                BubbleBkg.Height = bitmap.PixelHeight * 400 / bitmap.PixelWidth;
+                            }
+
+                            if (IsVideoThumbnail)
                             {
                                 PlayIcon.Visibility = Visibility.Visible;
                             }
@@ -99,9 +110,9 @@ namespace PacChat.Resources.CustomControls
                             LoadingAhihi.Visibility = Visibility.Hidden;
                         });
                     }
-                    catch (WebException)
+                    catch (WebException we)
                     {
-
+                        Console.WriteLine(we);
                     }
                     catch (Exception ex)
                     {
