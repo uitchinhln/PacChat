@@ -50,8 +50,6 @@ namespace PacChat.Windows.Login
                     loginView.RegToUAgrement = false;
                 });
             }
-
-            //this.HideScriptErrors(this.wbBanner, true);
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -62,6 +60,17 @@ namespace PacChat.Windows.Login
                 {
                     this.DragMove();
                 } catch (Exception) { }
+            }
+        }
+
+        public void CloseAllExcldueThis()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow || window is MediaPlayerWindow)
+                {
+                    window.Close();
+                }
             }
         }
 

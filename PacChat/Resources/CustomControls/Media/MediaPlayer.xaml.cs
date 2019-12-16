@@ -221,6 +221,16 @@ namespace PacChat.Resources.CustomControls.Media
 
         public void AddMediaItem(String conversationID, String fileID, String fileName, int position, bool reachedRight = false)
         {
+            foreach (var uiElement in Gallery.Children)
+            {
+                if (!(uiElement is ThumbnailButton)) continue;
+                ThumbnailButton btn = uiElement as ThumbnailButton;
+                if (btn.FileID.Equals(fileID, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+            }
+
             String thumbUrl = StreamAPI.GetMediaThumbnailURL(fileID, conversationID);
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
 
@@ -233,6 +243,16 @@ namespace PacChat.Resources.CustomControls.Media
 
         public void AddMediaItemToFirst(String conversationID, String fileID, String fileName, int position, bool reachedLeft = true)
         {
+            foreach (var uiElement in Gallery.Children)
+            {
+                if (!(uiElement is ThumbnailButton)) continue;
+                ThumbnailButton btn = uiElement as ThumbnailButton;
+                if (btn.FileID.Equals(fileID, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+            }
+
             String thumbUrl = StreamAPI.GetMediaThumbnailURL(fileID, conversationID);
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
 
