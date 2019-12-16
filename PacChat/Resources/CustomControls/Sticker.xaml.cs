@@ -80,7 +80,6 @@ namespace PacChat.Resources.CustomControls
                 progressBar.Visibility = Visibility.Visible;
                 StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
                 {
-                    //Console.WriteLine(stickerSheet.PixelWidth);
                     anim.ImageSource = stickerSheet;
                     anim.VerticalOffset = Size;
                     anim.HorizontalOffset = Size;

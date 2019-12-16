@@ -22,7 +22,7 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class TabStickerContainner : UserControl
     {
-        private Dictionary<int, TabStickerStore> CateStore;
+        private Dictionary<int, TabStickerStore> cateStore;
 
 
         private Dictionary<int, MessageCore.Sticker.StickerCategory> cateStoreList;
@@ -30,19 +30,16 @@ namespace PacChat.Resources.CustomControls
         public TabStickerContainner()
         {
             InitializeComponent();
-            CateStore = new Dictionary<int, TabStickerStore>();
+            cateStore = new Dictionary<int, TabStickerStore>();
             cateStoreList = new Dictionary<int, MessageCore.Sticker.StickerCategory>();
 
         }
-
-        public void AddToStoreList(MessageCore.Sticker.StickerCategory cate)
-        {
-            cateStoreList.Add(cate.ID, cate);
-        }
+        
+        #region Sticker tab
 
         public void AddTabSticker(MessageCore.Sticker.StickerCategory cate)
         {
-            StickerAPI.DownloadImage(cate.IconURL, (imageCateIcon) => 
+            StickerAPI.DownloadImage(cate.IconURL, (imageCateIcon) =>
             {
                 TabItem a = new TabItem
                 {
@@ -54,39 +51,38 @@ namespace PacChat.Resources.CustomControls
                 Image img = new Image();
                 img.Source = imageCateIcon;
                 a.Header = img;
-                //a.Header = imageCateIcon;
-                Console.WriteLine(cate.ID);
                 tabCrlSticker.Items.Add(a);
             });
 
         }
+        
+        #endregion
 
+        #region Sticker store tab
+        public void AddToStoreList(MessageCore.Sticker.StickerCategory cate)
+        {
+            cateStoreList.Add(cate.ID, cate);
+        }
 
         public void AddCateIntoStore(MessageCore.Sticker.StickerCategory cate)
         {
             TabStickerStore store = new TabStickerStore(cate);
             store.Margin = new Thickness(5, 5, 5, 5);
-            CateStore.Add(cate.ID, store);
+            cateStore.Add(cate.ID, store);
             splStickerStore.Children.Add(store);
         }
 
         public void RemoveCateInStore(MessageCore.Sticker.StickerCategory cate)
         {
-            splStickerStore.Children.Remove(CateStore[cate.ID]);
+            splStickerStore.Children.Remove(cateStore[cate.ID]);
         }
 
-        private void loadStore()
-        {
-            int i = 0;
-            foreach (var x in MessageCore.Sticker.Sticker.LoadedCategories)
-            {
-                ++i;
-                TabStickerStore store = new TabStickerStore(x.Value);
-                store.Margin = new Thickness(5, 5, 5, 5);
-                splStickerStore.Children.Add(store);
-                if (i >= 10) break;
-            }
-        }
+        #endregion
+
+        #region Sticker recent tab
+
+        #endregion
+
 
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
