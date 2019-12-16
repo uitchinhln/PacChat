@@ -80,15 +80,12 @@
 
                     </DockPanel>
 
-                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,2,10,0" PlacementMode="BottomAndAlignRightEdges">
+                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,2,10,0">
                         <materialDesign:PopupBox.ToggleContent>
                             <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Button x:Name="BtnLogout">Logout</Button>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </DockPanel>
