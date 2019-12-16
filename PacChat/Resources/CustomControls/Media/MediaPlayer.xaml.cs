@@ -160,6 +160,8 @@ namespace PacChat.Resources.CustomControls.Media
                 if (ImgCache.Contains(imageURL))
                 {
                     ImgFull.Source = ImgCache.Get(imageURL);
+                    ImgFull.MaxHeight = ImgFull.Source.Height;
+                    ImgFull.MaxWidth = ImgFull.Source.Width;
                 } else
                 {
                     if (imgThread != null && imgThread.IsAlive)
@@ -174,6 +176,8 @@ namespace PacChat.Resources.CustomControls.Media
                             Application.Current.Dispatcher.Invoke(() => {
                                 ImgCache.AddReplace(imageURL, bitmap);
                                 ImgFull.Source = bitmap;
+                                ImgFull.MaxHeight = bitmap.PixelHeight;
+                                ImgFull.MaxWidth = bitmap.PixelWidth;
                             });
                         } catch (Exception ex)
                         {

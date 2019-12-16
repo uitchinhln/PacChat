@@ -46,7 +46,7 @@
                                 Style="{StaticResource MaterialDesignCircularProgressBar}"
                                 MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
                                 Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB6B6B6" Height="100" Width="100" IsTabStop="False" />
-                    <Image x:Name="ImgFull" MaxHeight="500" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Hidden"/>
+                    <Image x:Name="ImgFull" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Hidden"/>
                     <local:PacPlayer x:Name="VideoFull" Visibility="Hidden" MaxHeight="650" />
                 </Grid>
             </DockPanel>
