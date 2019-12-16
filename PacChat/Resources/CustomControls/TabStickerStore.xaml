@@ -11,13 +11,27 @@
     <Grid Width="355" Height="237" Background="White" Margin="0" >
 
         <Border HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
-            <Image x:Name="imgPreview" Width="204" Height="204" Margin="10"/>
+            <Grid>
+                <ProgressBar x:Name="progressBarThumb" Width="124" Height="124"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="0"
+                                IsIndeterminate="True" 
+                                Foreground="Gray"/>
+                <Image x:Name="imgPreview" Width="204" Height="204" Margin="10"/>
+            </Grid>
 
         </Border>
 
         <Border HorizontalAlignment="Right" Margin="0" VerticalAlignment="Stretch">
             <StackPanel>
-                <Image x:Name="imgIconPreview"   Width="124" Height="124" Margin="10"/>
+                <Grid Width="124" Height="124" Margin="10">
+                    <ProgressBar x:Name="progressBar" Width="124" Height="124"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="0"
+                                IsIndeterminate="True" 
+                                Foreground="Gray"/>
+                    <Image x:Name="imgIconPreview"   Width="124" Height="124" Margin="0"/>
+                </Grid>
 
                 <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5">
                     

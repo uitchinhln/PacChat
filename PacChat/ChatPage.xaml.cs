@@ -639,16 +639,27 @@ namespace PacChat
 
         private void btnVideo_Click(object sender, RoutedEventArgs e)
         {
-            //UploadVideo();
-            for (int i=0; i<10; i++) buzz2();
+            UploadVideo();
         }
 
-        public void buzz2()
+        private double randomDouble(double a, double b)
+        {
+            Random rand = new Random();
+            double result = (rand.NextDouble() * (b - a)) + a;
+            return result;
+        }
+
+        private void btnBuzz_Click(object sender, RoutedEventArgs e)
+        {
+            Buzz();
+        }
+
+        public void Buzz()
         {
             var main = PacChat.MainWindow.Instance;
             double currLeft = main.Left;
             double currTop = main.Top;
-            double buffer = 6;
+            double buffer = 10;
             Action<object> buzz = (o) =>
             {
                 Random rand = new Random();
@@ -662,7 +673,7 @@ namespace PacChat
                     buffer -= 0.2f;
                 };
 
-                for (int i=0; i<=30; i++)
+                for (int i = 0; i <= 50; i++)
                 {
                     Dispatcher.Invoke(a);
                     System.Threading.Thread.Sleep(10);
@@ -670,13 +681,6 @@ namespace PacChat
 
             };
             System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(buzz));
-        }
-
-        private double randomDouble(double a, double b)
-        {
-            Random rand = new Random();
-            double result = (rand.NextDouble() * (b - a)) + a;
-            return result;
         }
     }
 }
