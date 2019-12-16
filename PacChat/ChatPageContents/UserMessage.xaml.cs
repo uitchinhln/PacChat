@@ -71,14 +71,14 @@ namespace PacChat.ChatPageContents
                 FriendRequestBtn.Content = "Unfriend";
         }
 
-        public void SetAva(string path) // sau nay se merge vao setInfo
+        public void SetAva(string userID = null) // sau nay se merge vao setInfo
         {
-            Avatar.ImageSource = path;
+            Avatar.UserID = userID;
         }
 
         public void SetOnlineStatus(bool online)
         {
-            OnlineStatus.Visibility = online ? Visibility.Visible : Visibility.Hidden;
+            Avatar.IsOnline = online;
         }
 
         private void ClickMask_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

@@ -14,9 +14,6 @@
         <Border Padding="0,0,0,0">
             <Grid>
                 <localCC:AvatarDisplayer x:Name="Avatar" Width="32" Height="32" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Center"/>
-
-                <Border x:Name="OnlineStatus" CornerRadius="32" Background="#FF02B602" Width="9" Height="9" HorizontalAlignment="Left" Margin="39,39,0,16" VerticalAlignment="Center">
-                </Border>
                 <TextBlock x:Name="UserName" VerticalAlignment="Center"
                            TextTrimming="CharacterEllipsis"
                            Text="{Binding Name}"

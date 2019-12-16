@@ -93,11 +93,8 @@ namespace PacChat
 
             SelfAvatar.ClickTrigger.Visibility = Visibility.Hidden;
             SelfAvatar.ClickTrigger.IsEnabled = false;
-
-            ProfileAPI.GetAvatar((avaPath) =>
-            {
-                SelfAvatar.ImageSource = avaPath;
-            });
+            SelfAvatar.UserID = null;
+            SelfAvatar.IsOnline = true;
 
             // Media window
             //MediaPlayerWindow = new MediaPlayerWindow();

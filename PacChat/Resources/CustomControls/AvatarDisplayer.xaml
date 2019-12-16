@@ -13,10 +13,10 @@
                     BorderThickness="1"
                     BorderBrush="White">
             <Border.Background>
-                <ImageBrush x:Name="ImageAva" />
+                <ImageBrush x:Name="ImageAva" RenderOptions.BitmapScalingMode="HighQuality"/>
             </Border.Background>
         </Border>
-        <Border x:Name="OnlineDot" BorderThickness="1" CornerRadius="16" Background="#FF1CFF83" BorderBrush="#FFE2E2E2" Width="10" Height="10" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"></Border>
+        <Border x:Name="OnlineDot" BorderThickness="1" CornerRadius="16" Background="#FF02B602" BorderBrush="#FF02B602" Width="10" Height="10" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"></Border>
         <ProgressBar x:Name="LoadingAhihi" Value="0" Foreground="#FFB6B6B6"
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           IsIndeterminate="True" Height="Auto" Margin="5" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}" />

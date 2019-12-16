@@ -55,9 +55,9 @@ namespace PacChat.Resources.CustomControls
             spMessContainer.Children.Insert(0, sticker);
         }
 
-        public void SetAva(string path)
+        public void SetAva(string userID = null)
         {
-            Avatar.ImageSource = path;
+            Avatar.UserID = userID;
         }
     }
 }

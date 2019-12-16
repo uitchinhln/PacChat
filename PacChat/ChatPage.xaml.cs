@@ -466,9 +466,9 @@ namespace PacChat
             Transitioner.SelectedIndex = enabled ? 1 : 0;
         }
 
-        public void SetAva(string path)
+        public void SetAva(string userID = null)
         {
-            imageAva.ImageSource = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            Avatar.UserID = userID;
         }
 
         public void ClearChatPage()
