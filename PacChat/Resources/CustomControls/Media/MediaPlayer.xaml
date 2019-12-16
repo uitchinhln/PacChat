@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"            
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500">
     <Grid>
-        <Border x:Name="PlayerBackground" OpacityMask="#7F000000">
+        <Border x:Name="PlayerBackground" OpacityMask="#9F000000">
             <Border.Background>
                 <ImageBrush Stretch="UniformToFill"/>
             </Border.Background>

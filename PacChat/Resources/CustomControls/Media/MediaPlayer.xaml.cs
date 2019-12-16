@@ -105,7 +105,7 @@ namespace PacChat.Resources.CustomControls.Media
             VisualBrush vb = new VisualBrush();
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
-            ef.Radius = 40;
+            ef.Radius = 30;
             im.Source = bitmap;
             im.Effect = ef;
 
