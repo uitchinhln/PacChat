@@ -94,7 +94,10 @@ namespace PacChat.Resources.CustomControls.Media
                         wc.Dispose();
                         Application.Current.Dispatcher.Invoke(() => {
                             ImgThumbnail.Source = bitmap;
-                            ImgThumbnail.IsEnabled = true;
+
+                            ImgThumbnail.Width = ImgThumbnail.ActualHeight;
+                            ImgThumbnail.Height = ImgThumbnail.ActualWidth;
+
                             Gat.Children.Remove(LoadingAhihi);
                             if (isVideo)
                                 PlayIcon.Visibility = Visibility.Visible;

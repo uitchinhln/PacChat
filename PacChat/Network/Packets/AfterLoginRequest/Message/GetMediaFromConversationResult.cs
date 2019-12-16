@@ -56,7 +56,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                     Console.WriteLine("Added");
                 }
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(FileIDs[0]); 
                 MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(app.model.currentMediaFileID);
                 MainWindow.Instance.MediaPlayerWindow.ShowDialog();
             });

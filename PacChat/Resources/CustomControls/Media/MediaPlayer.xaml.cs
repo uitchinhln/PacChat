@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace PacChat.Resources.CustomControls.Media
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
-        private LRUCache<String, BitmapImage> ImgCache = new LRUCache<string, BitmapImage>(40, 2);
+        private LRUCache<String, ImageSource> ImgCache = new LRUCache<string, ImageSource>(40, 2);
 
         public MediaPlayer()
         {
@@ -40,16 +41,12 @@ namespace PacChat.Resources.CustomControls.Media
         }
 
         int borderRight = int.MaxValue;
-        int loadIndex = 0;
         public bool IsReachedRight { get; set; } = false;
 
-        int borderLeft = 0;
-        int leftIndex = 0;
-        public bool IsReachedLeft { get; set; } = false;
+        Thread imgThread, thumbThread;
+
 
         ThumbnailButton currentBtn;
-
-        List<MediaInfo> loadedMediaInfo = new List<MediaInfo>();
 
         private void BtnClick(object sender, EventArgs e)
         {
@@ -66,14 +63,30 @@ namespace PacChat.Resources.CustomControls.Media
             }
             currentBtn = btn;
 
-            currentBtn.IsActive = true;
             if (currentBtn.Image != null)
                 SetBackground(currentBtn.Image);
             else
             {
-                WebClient wc = new WebClient();
-                BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(currentBtn.ThumbnailUrl)));
-                SetBackground(bitmap);
+                String url = currentBtn.ThumbnailUrl;
+                if (thumbThread != null && thumbThread.IsAlive)
+                    thumbThread.Abort();
+                thumbThread = new Thread(() =>
+                {
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
+                        wc.Dispose();
+                        Application.Current.Dispatcher.Invoke(() => {
+                            SetBackground(bitmap);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                });
+                thumbThread.Start();
             }
 
             if (PacPlayer.IsSupport(currentBtn.FileName))
@@ -84,6 +97,7 @@ namespace PacChat.Resources.CustomControls.Media
             {
                 ShowImage(currentBtn.StreamURL);
             }
+            currentBtn.IsActive = true;
         }
 
         private void SetBackground(ImageSource bitmap)
@@ -103,8 +117,6 @@ namespace PacChat.Resources.CustomControls.Media
 
         public void Clean(bool hard = true)
         {
-            if (hard)            
-                loadedMediaInfo.Clear();
             Gallery.Children.Clear();
             ImgCache.Clear();
 
@@ -114,8 +126,6 @@ namespace PacChat.Resources.CustomControls.Media
             VideoFull.Close();
 
             currentBtn = null;
-            loadIndex = 0;
-            leftIndex = 0;
         }
 
         public void ShowVideo(String streamURL)
@@ -152,9 +162,25 @@ namespace PacChat.Resources.CustomControls.Media
                     ImgFull.Source = ImgCache.Get(imageURL);
                 } else
                 {
-                    BitmapImage bitmap = new BitmapImage(new Uri(imageURL));
-                    ImgCache.AddReplace(imageURL, bitmap);
-                    ImgFull.Source = bitmap;
+                    if (imgThread != null && imgThread.IsAlive)
+                        imgThread.Abort();
+                    imgThread = new Thread(() =>
+                    {
+                        try
+                        {
+                            WebClient wc = new WebClient();
+                            BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(imageURL)));
+                            wc.Dispose();
+                            Application.Current.Dispatcher.Invoke(() => {
+                                ImgCache.AddReplace(imageURL, bitmap);
+                                ImgFull.Source = bitmap;
+                            });
+                        } catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    });
+                    imgThread.Start();
                 }
 
                 LoadingAhihi.Visibility = Visibility.Hidden;
@@ -167,15 +193,14 @@ namespace PacChat.Resources.CustomControls.Media
         private void LoadThumbnail(MediaInfo media, int index, bool swapTo = false)
         {
             ThumbnailButton btn = new ThumbnailButton(media);
+
             btn.Click += BtnClick;
             if (index > Gallery.Children.Count-1)
             {
                 Gallery.Children.Add(btn);
-                loadIndex++;
             } else
             {
                 Gallery.Children.Insert(index, btn);
-                leftIndex--;
             }
 
             if (swapTo)
@@ -190,7 +215,8 @@ namespace PacChat.Resources.CustomControls.Media
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
 
             MediaInfo media = new MediaInfo(thumbUrl, streamUrl, fileName, fileID);
-            loadedMediaInfo.Add(media);
+            LoadThumbnail(media, int.MaxValue);
+
             IsReachedRight = reachedRight;
             borderRight = Math.Min(position, borderRight);
         }
@@ -201,32 +227,21 @@ namespace PacChat.Resources.CustomControls.Media
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
 
             MediaInfo media = new MediaInfo(thumbUrl, streamUrl, fileName, fileID);
-            loadedMediaInfo.Insert(0, media);
-
-            loadIndex++;
-            leftIndex++;
-            IsReachedLeft = reachedLeft;
-            borderLeft = Math.Max(position, borderLeft);
+            LoadThumbnail(media, 0);
         }
 
         public void ShowMedia(String fileID)
         {
-            int index = loadedMediaInfo.FindIndex(p => p.FileID.Equals(fileID, StringComparison.OrdinalIgnoreCase));
-            if (index < 0)
-                throw new KeyNotFoundException();
-
-            int start = Math.Max(0, index - 10);
-            int end = Math.Min(loadedMediaInfo.Count, index + 10);
-
-            this.Clean(false);
-
-            for (int i = start; i < end; i++)
+            foreach (var uiElement in Gallery.Children)
             {
-                LoadThumbnail(loadedMediaInfo[i], int.MaxValue, i == index);
+                if (!(uiElement is ThumbnailButton)) continue;
+                ThumbnailButton btn = uiElement as ThumbnailButton;
+                if (btn.FileID.Equals(fileID, StringComparison.OrdinalIgnoreCase))
+                {
+                    SwapToBtn(btn);
+                    break;
+                }
             }
-
-            loadIndex = end-1;
-            leftIndex = start;
         }
 
         #region Horizontal Support
@@ -244,30 +259,9 @@ namespace PacChat.Resources.CustomControls.Media
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             var scrollViewer = (ScrollViewer)sender;
-            if (scrollViewer.HorizontalOffset == scrollViewer.ScrollableWidth && loadedMediaInfo.Count > 0)
+            if (scrollViewer.HorizontalOffset == scrollViewer.ScrollableWidth)
             {
-                if (loadIndex < loadedMediaInfo.Count)
-                {
-                    for (int i = 0; i < 5  && loadIndex < loadedMediaInfo.Count; i++)
-                    {
-                        this.LoadThumbnail(loadedMediaInfo[loadIndex], int.MaxValue);
-                    }
-                } else if (!IsReachedRight)
-                {
-                    //Request data here
-                }
-            }
-            if (scrollViewer.HorizontalOffset == 0 && loadedMediaInfo.Count > 0)
-            {
-                if (leftIndex > 0)
-                {
-                    int temp = leftIndex;
-                    for (int i = Math.Max(0, temp - 5); i < temp; i++)
-                    {
-                        this.LoadThumbnail(loadedMediaInfo[i], 0);
-                    }
-                }
-                else if (!IsReachedLeft)
+                if (!IsReachedRight)
                 {
                     //Request data here
                 }
@@ -295,66 +289,17 @@ namespace PacChat.Resources.CustomControls.Media
             }
         }
 
-        private void Demo()
+        public void Demo()
         {
             ThumbnailButton btn = new ThumbnailButton()
             {
-                ThumbnailUrl = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
-                StreamURL = "https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg",
+                ThumbnailUrl = StreamAPI.GetMediaThumbnailURL("7ca94feb-4f57-4beb-8b6a-fe9225337794", "7516cdee-0971-472c-9a01-b2804dcedd9f"),
+                StreamURL = StreamAPI.GetMediaURL("7ca94feb-4f57-4beb-8b6a-fe9225337794", "7516cdee-0971-472c-9a01-b2804dcedd9f"),
                 FileName = "dreamstime_xxl_65780868_small.jpg",
+                FileID = "7ca94feb-4f57-4beb-8b6a-fe9225337794"
             };
             btn.Click += BtnClick;
             Gallery.Children.Add(btn);
-
-            ThumbnailButton btn2 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                FileName = "BigBuckBunny.mp4",
-            };
-            btn2.Click += BtnClick;
-            Gallery.Children.Add(btn2);
-
-            ThumbnailButton btn3 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-                StreamURL = "G:/Downloads/Ahihi.mp4",
-                FileName = "Ahihi.mp4",
-            };
-            btn3.Click += BtnClick;
-            Gallery.Children.Add(btn3);
-
-            ThumbnailButton btn4 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-                FileName = "ForBiggerBlazes.mp4",
-            };
-            btn4.Click += BtnClick;
-            Gallery.Children.Add(btn4);
-
-            ThumbnailButton btn5 = new ThumbnailButton()
-            {
-                ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-                StreamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-                FileName = "ForBiggerEscapes.mp4",
-            };
-            btn5.Click += BtnClick;
-            Gallery.Children.Add(btn5);
-
-            for (int i = 0; i < 15; i++)
-            {
-                ThumbnailButton btn6 = new ThumbnailButton()
-                {
-                    ThumbnailUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg",
-                    StreamURL = "G:/Downloads/Ahihi.mp4",
-                    FileName = "VolkswagenGTIReview.mp4",
-                };
-                btn6.Click += BtnClick;
-                Gallery.Children.Add(btn6);
-            }
-
-            SwapToBtn(btn);
         }
     }
 

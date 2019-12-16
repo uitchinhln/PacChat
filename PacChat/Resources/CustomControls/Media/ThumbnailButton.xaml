@@ -14,11 +14,9 @@
           Style="{StaticResource MaterialDesignCircularProgressBar}"
            MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
             Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB6B6B6" Height="Auto" Width="Auto" />
-        <Image x:Name="ImgThumbnail" 
-           MaxWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
-            MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+        <Image x:Name="ImgThumbnail"
             MinWidth="90" MinHeight="90"
-            RenderOptions.BitmapScalingMode="HighQuality" IsEnabled="False" Stretch="UniformToFill" />
+            RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill" />
         <Button Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick">
             <materialDesign:PackIcon x:Name="PlayIcon" Kind="PlayCircle" Width="Auto" Height="Auto" Visibility="Hidden" Margin="10" />
         </Button>

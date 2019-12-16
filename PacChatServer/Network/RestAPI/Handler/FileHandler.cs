@@ -61,38 +61,35 @@ namespace PacChatServer.Network.RestAPI.Handler
                     File.Move(fileData.LocalFileName, Path.Combine(SavePath, id.ToString()));
                     if (createThumb)
                     {
-                        //Task task = new Task(() =>
-                        //{
-                            if (VideoExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                        if (VideoExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                        {
+                            var ffProbe = new FFProbe();
+                            var videoInfo = ffProbe.GetMediaInfo(Path.Combine(SavePath, id.ToString()));
+                            FFMpegConverter converter = new FFMpegConverter();
+                            converter.GetVideoThumbnail(Path.Combine(SavePath, id.ToString()), 
+                                Path.Combine(SavePath, id.ToString() + "_thumb.jpg"), 
+                                (float) videoInfo.Duration.TotalSeconds / 2);
+                        }
+
+                        if (ImageExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                        {
+                            Image image = Image.FromFile(Path.Combine(SavePath, id.ToString()));
+
+                            int w = image.Width, h = image.Height;
+                            if (image.Height > 300)
                             {
-                                var ffProbe = new FFProbe();
-                                var videoInfo = ffProbe.GetMediaInfo(Path.Combine(SavePath, id.ToString()));
-                                FFMpegConverter converter = new FFMpegConverter();
-                                converter.GetVideoThumbnail(Path.Combine(SavePath, id.ToString()), 
-                                    Path.Combine(SavePath, id.ToString() + "_thumb.jpg"), 
-                                    (float) videoInfo.Duration.TotalSeconds / 2);
+                                h = 300;
+                                w = image.Width * 300 / image.Height;
                             }
-
-                            if (ImageExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase))
+                            else if (image.Width > 500)
                             {
-                                Image image = Image.FromFile(Path.Combine(SavePath, id.ToString()));
-
-                                int w = image.Width, h = image.Height;
-                                if (image.Height > 300)
-                                {
-                                    h = 300;
-                                    w = image.Width * 300 / image.Height;
-                                }
-                                else if (image.Width > 500)
-                                {
-                                    w = 500;
-                                    h = image.Height * 500 / image.Width;
-                                }
+                                w = 500;
+                                h = image.Height * 500 / image.Width;
+                            }
 
                             image.GetThumbnailImage(w, h, null, IntPtr.Zero).Save(Path.Combine(SavePath, id.ToString() + "_thumb.jpg"));
-                            }
-                        //});
-                        //task.Start();
+                            image.Dispose();
+                        }
                     }
                 }
             }).Wait();
