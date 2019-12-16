@@ -230,15 +230,15 @@ namespace PacChat
                         mediaWindow.MediaPlayer.AddMediaItem
                         (
                             conversationID: app.model.currentSelectedConversation,
-                            fileID: fileID, 
+                            fileID: fileID,
                             fileName: fileName,
                             0
                         );
-                    else 
+                    else
                         mediaWindow.MediaPlayer.AddMediaItemToFirst
                         (
                             conversationID: app.model.currentSelectedConversation,
-                            fileID: fileID, 
+                            fileID: fileID,
                             fileName: fileName,
                             0
                         );
@@ -640,6 +640,47 @@ namespace PacChat
         private void btnVideo_Click(object sender, RoutedEventArgs e)
         {
             UploadVideo();
+        }
+
+        private double randomDouble(double a, double b)
+        {
+            Random rand = new Random();
+            double result = (rand.NextDouble() * (b - a)) + a;
+            return result;
+        }
+
+        private void btnBuzz_Click(object sender, RoutedEventArgs e)
+        {
+            Buzz();
+        }
+
+        public void Buzz()
+        {
+            var main = PacChat.MainWindow.Instance;
+            double currLeft = main.Left;
+            double currTop = main.Top;
+            double buffer = 10;
+            Action<object> buzz = (o) =>
+            {
+                Random rand = new Random();
+
+                //Tuple<double, double> curr =new Tuple<double, double>(main.Top, main.Left);
+
+                Action a = () =>
+                {
+                    main.Left = currLeft + randomDouble(-buffer, buffer);
+                    main.Top = currTop + randomDouble(-buffer, buffer);
+                    buffer -= 0.2f;
+                };
+
+                for (int i = 0; i <= 50; i++)
+                {
+                    Dispatcher.Invoke(a);
+                    System.Threading.Thread.Sleep(10);
+                }
+
+            };
+            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(buzz));
         }
     }
 }

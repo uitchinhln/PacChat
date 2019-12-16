@@ -96,7 +96,7 @@ namespace PacChat.Resources.CustomControls
         {
             if (Clickable)
             {
-                ChatPage.Instance.spTabStickerContainner.AddStickerToRecenttab(MessageCore.Sticker.Sticker.LoadedStickers[ID]);
+                ChatPage.Instance.spTabStickerContainner.AddStickerToRecentTab(MessageCore.Sticker.Sticker.LoadedStickers[ID]);
                 ChatPage.Instance.SendMessage(new StickerMessage()
                 {
                     Sticker = new MessageCore.Sticker.Sticker() 

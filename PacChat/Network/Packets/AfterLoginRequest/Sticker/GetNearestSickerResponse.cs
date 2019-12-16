@@ -37,7 +37,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Sticker
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     MessageCore.Sticker.Sticker.LoadedStickers.TryGetValue(sticker, out var recentSticker);
-                    ChatPage.Instance.spTabStickerContainner.AddStickerToRecenttab(recentSticker);
+                    ChatPage.Instance.spTabStickerContainner.AddStickerToRecentTab(recentSticker);
 
                 });
             }

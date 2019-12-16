@@ -9,7 +9,7 @@
              mc:Ignorable="d" Width="390" Height="325">
     <Grid>
 
-        <TabControl x:Name="tabCrlSticker" Padding="0">
+        <TabControl x:Name="tabCrlSticker" Padding="0" SelectedIndex="1">
 
             <TabControl.Template>
                 <ControlTemplate TargetType="TabControl">

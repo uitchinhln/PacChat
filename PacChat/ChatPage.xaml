@@ -92,6 +92,12 @@
                                 </Button>
                             </Border>
 
+                            <Border>
+                                <Button x:Name="btnBuzz" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnBuzz_Click">
+                                    <materialDesign:PackIcon Kind="WarningDecagram" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                </Button>
+                            </Border>
+
                             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
                                 <materialDesign:PackIcon Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
                             </Button>
