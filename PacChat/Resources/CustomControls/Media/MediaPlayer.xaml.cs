@@ -155,13 +155,17 @@ namespace PacChat.Resources.CustomControls.Media
                 VideoFull.Close();
 
                 VideoFull.Visibility = Visibility.Hidden;
-                ImgFull.Visibility = Visibility.Visible;
+                ImgFull.Visibility = Visibility.Hidden;
 
                 if (ImgCache.Contains(imageURL))
                 {
                     ImgFull.Source = ImgCache.Get(imageURL);
+
                     ImgFull.MaxHeight = ImgFull.Source.Height;
                     ImgFull.MaxWidth = ImgFull.Source.Width;
+
+                    ImgFull.Visibility = Visibility.Visible;
+                    LoadingAhihi.Visibility = Visibility.Hidden;
                 } else
                 {
                     if (imgThread != null && imgThread.IsAlive)
@@ -176,8 +180,12 @@ namespace PacChat.Resources.CustomControls.Media
                             Application.Current.Dispatcher.Invoke(() => {
                                 ImgCache.AddReplace(imageURL, bitmap);
                                 ImgFull.Source = bitmap;
+
                                 ImgFull.MaxHeight = bitmap.PixelHeight;
                                 ImgFull.MaxWidth = bitmap.PixelWidth;
+                                ImgFull.Visibility = Visibility.Visible;
+
+                                LoadingAhihi.Visibility = Visibility.Hidden;
                             });
                         } catch (Exception ex)
                         {
@@ -186,8 +194,6 @@ namespace PacChat.Resources.CustomControls.Media
                     });
                     imgThread.Start();
                 }
-
-                LoadingAhihi.Visibility = Visibility.Hidden;
             } catch (Exception e)
             {
                 Console.WriteLine(e);
