@@ -83,12 +83,15 @@ namespace PacChat.Resources.CustomControls
 
         #region Sticker recent tab
 
-        public void AddStickerToRecentList(MessageCore.Sticker.Sticker sticker)
+        public void AddStickerToRecentTabFromSV(MessageCore.Sticker.Sticker sticker)
         {
-            
+            if (recentStickerList.ContainsKey(sticker.ID)) return;
+
+            wplStickerRecent.Children.Add( new Sticker(ChatPage.Instance, true, sticker.ID, sticker.CategoryID, 130, sticker.Duration, sticker.SpriteURL, false));
+            recentStickerList.Add(sticker.ID, sticker);
         }
         
-        public void AddStickerToRecenttab(MessageCore.Sticker.Sticker sticker)
+        public void AddStickerToRecentTab(MessageCore.Sticker.Sticker sticker)
         {
             if (recentStickerList.ContainsKey(sticker.ID)) return;
             

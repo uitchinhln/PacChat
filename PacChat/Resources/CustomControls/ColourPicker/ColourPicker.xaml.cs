@@ -27,6 +27,15 @@ namespace PacChat.Resources.CustomControls.ColourPicker
             InitializeComponent();
         }
 
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(ColorPicker.Color);
+        }
+
+        public Color GetColor()
+        {
+            return ColorPicker.Color;
+        }
     }
 }
 
