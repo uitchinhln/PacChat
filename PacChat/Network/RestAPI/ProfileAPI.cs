@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network.RestAPI
 {
@@ -85,12 +86,12 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetSelfAvatarURL, address));
 
-                Directory.CreateDirectory(TempUtil.AvatarSavePath);
+                Directory.CreateDirectory(TempUtil.GetCurrentAvatarPath());
 
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.AvatarSavePath, "MyAvatar"));
+                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.GetCurrentAvatarPath(), "MyAvatar"));
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
@@ -111,12 +112,12 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.Host;
                 Uri uri = new Uri(String.Format(GetUserAvatarURL, address, userID));
 
-                Directory.CreateDirectory(TempUtil.AvatarSavePath);
+                Directory.CreateDirectory(TempUtil.GetCurrentAvatarPath());
 
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.AvatarSavePath, userID));
+                webClient.DownloadFileAsync(uri, Path.Combine(TempUtil.GetCurrentAvatarPath(), userID));
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
@@ -126,6 +127,34 @@ namespace PacChat.Network.RestAPI
             {
                 Console.WriteLine(e);
                 if (errorHandler != null) errorHandler(e);
+            }
+        }
+
+        public delegate void Result(String path);
+
+        public static void GetAvatar(Result result, string userID = "MyAvatar")
+        {
+            String avaPath = Path.Combine(TempUtil.GetCurrentAvatarPath(), userID);
+            if (File.Exists(avaPath))
+                result(avaPath);
+            else
+            {
+                if (userID.Equals("MyAvatar", StringComparison.OrdinalIgnoreCase))
+                {
+                    DownloadSelfAvatar(null, 
+                        (sender, e) => 
+                        {
+                            Application.Current.Dispatcher.Invoke(() => result(avaPath));
+                        }, (ex) => Console.WriteLine(ex));
+                }
+                else
+                {
+                    DownloadUserAvatar(userID, null,
+                        (sender, e) =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() => result(avaPath));
+                        }, (ex) => Console.WriteLine(ex));
+                }
             }
         }
     }
