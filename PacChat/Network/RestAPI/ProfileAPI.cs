@@ -3,6 +3,8 @@ using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -25,6 +27,30 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
+                if (!File.Exists(filePath)) return;
+
+                Image image = Image.FromFile(filePath);
+                int w = image.Width;
+                int h = image.Height;
+
+                if (w > h)
+                {
+                    if (h > 500)
+                    {
+                        w = 500 * w / h;
+                        h = 500;
+                    }
+                } else
+                {
+                    if (w > 500)
+                    {
+                        h = 500 * h / w;
+                        w = 500;
+                    }
+                }
+
+                Image thumbnail = image.GetThumbnailImage(w, h, null, IntPtr.Zero);
+
                 HttpClient httpClient = new HttpClient();
 
                 httpClient.DefaultRequestHeaders.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
@@ -33,7 +59,8 @@ namespace PacChat.Network.RestAPI
 
                 if (!File.Exists(filePath))
                     throw new EntryPointNotFoundException();
-                FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                Stream stream = new MemoryStream();
+                thumbnail.Save(stream, ImageFormat.Png);
                 form.Add(new StreamContent(stream));
 
                 String address = ChatConnection.Instance.Host;
