@@ -26,7 +26,7 @@ namespace PacChat.Resources.CustomControls
         public Sticker(ChatPage chatpage, bool clickable, int id, int cateid, int size, int duration, string urisheet, bool runWhenLoaded)
         {
             InitializeComponent();
-
+            
             ID = id;
             CateID = cateid;
             Size = size;
@@ -77,7 +77,7 @@ namespace PacChat.Resources.CustomControls
             anim.Interval = TimeSpan.FromSeconds((double)Duration / 1000);
             if (UriSheet != null)
             {
-
+                progressBar.Visibility = Visibility.Visible;
                 StickerAPI.DownloadImage(UriSheet, (stickerSheet) =>
                 {
                     //Console.WriteLine(stickerSheet.PixelWidth);
@@ -87,6 +87,7 @@ namespace PacChat.Resources.CustomControls
                     anim.Clickable = Clickable;
                     anim.isRunWhenLoaded = IsRunWhenLoaded;
                     sticker.Children.Add(anim);
+                    progressBar.Visibility = Visibility.Hidden;
                 });
             }
             

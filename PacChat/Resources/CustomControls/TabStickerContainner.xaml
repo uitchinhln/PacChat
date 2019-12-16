@@ -42,7 +42,7 @@
 
                 </TabItem.Header>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Background="LightGray">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Background="LightGray" ScrollChanged="ScrollViewer_ScrollChanged">
                     <StackPanel x:Name="splStickerStore" Orientation="Vertical">
 
 
