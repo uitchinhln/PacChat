@@ -31,7 +31,7 @@ namespace PacChat.Network.RestAPI
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                String r = client.DownloadString(String.Format(StickerCatesListUrl, ChatConnection.Instance.Host));
+                String r = client.DownloadString(String.Format(StickerCatesListUrl, ChatConnection.Instance.WebHost));
                 return JsonConvert.DeserializeObject<List<StickerCategory>>(r);
             }
         }
@@ -42,7 +42,7 @@ namespace PacChat.Network.RestAPI
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                String r = client.DownloadString(String.Format(StickerCatesUrl, ChatConnection.Instance.Host, id));
+                String r = client.DownloadString(String.Format(StickerCatesUrl, ChatConnection.Instance.WebHost, id));
                 return JsonConvert.DeserializeObject<List<Sticker>>(r);
             }
         }

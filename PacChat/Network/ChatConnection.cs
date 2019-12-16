@@ -28,10 +28,16 @@ namespace PacChat.Network
         public String Host { get; private set; } = String.Empty;
         public int Port { get; private set; } = 1402;
 
+        public String WebHost { get; private set; } = String.Empty;
+        public int WebPort { get; private set; } = 1402;
+
         private ChatConnection(ProtocolProvider protocolProvider)
         {
             this.Host = ConfigurationManager.AppSettings["ServerAddress"];
             this.Port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+
+            this.WebHost = ConfigurationManager.AppSettings["WebAddress"];
+            this.WebPort = Convert.ToInt32(ConfigurationManager.AppSettings["WebPort"]);
 
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();

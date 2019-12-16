@@ -16,7 +16,7 @@ namespace PacChat.Network.RestAPI
 
         public static String GetMediaURL(String fileID, String conversationID)
         {
-            String address = ChatConnection.Instance.Host;
+            String address = ChatConnection.Instance.WebHost;
             String token = ChatConnection.Instance.Session.SessionID;
 
             return String.Format(MediaStreamUrl, address, fileID, conversationID, token);
@@ -24,7 +24,7 @@ namespace PacChat.Network.RestAPI
 
         public static String GetMediaThumbnailURL(String fileID, String conversationID)
         {
-            String address = ChatConnection.Instance.Host;
+            String address = ChatConnection.Instance.WebHost;
             String token = ChatConnection.Instance.Session.SessionID;
 
             return String.Format(MediaThumbnailUrl, address, fileID, conversationID, token);

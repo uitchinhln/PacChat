@@ -27,7 +27,7 @@ namespace PacChat.Network.RestAPI
             {
                 String fileNameParam = HashUtils.Base64Encode(savePath.Replace(TempUtil.ResourcePath, ""));
 
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 Uri uri = new Uri(String.Format(ResourceDownloadUrl, address, currentVersion, fileNameParam));
 
                 WebClient webClient = new WebClient();

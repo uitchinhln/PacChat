@@ -68,7 +68,7 @@ namespace PacChat.Network.RestAPI
                 thumbnail.Save(stream, ImageFormat.Png);
                 form.Add(new StreamContent(stream));
 
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(UploadAvatarURL, address);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
@@ -86,7 +86,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(GetSelfAvatarURL, address);
 
                 new Task(() =>
@@ -123,7 +123,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(GetUserAvatarURL, address, userID);
 
                 new Task(() =>
