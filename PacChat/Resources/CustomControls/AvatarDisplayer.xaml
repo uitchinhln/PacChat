@@ -20,6 +20,7 @@
         <ProgressBar x:Name="LoadingAhihi" Value="0" Foreground="#FFB6B6B6"
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           IsIndeterminate="True" Height="Auto" Margin="5" Width="Auto" Background="{x:Null}" BorderBrush="{x:Null}" />
-        <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}" Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick" Width="30" Height="30" />
+        <Button x:Name="ClickTrigger" Style="{StaticResource MaterialDesignFloatingActionLightButton}" 
+                Background="{x:Null}" BorderBrush="{x:Null}" Click="BtnClick" Width="30" Height="30" />
     </Grid>
 </UserControl>

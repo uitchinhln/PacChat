@@ -79,9 +79,18 @@
                         </Button>
 
                     </DockPanel>
-                    <customcontrols:AvatarDisplayer x:Name="SelfAvatar" VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,10,0">
 
-                    </customcontrols:AvatarDisplayer>
+                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,10,0" PlacementMode="BottomAndAlignRightEdges">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Label>AAAAAAAAAAAAAAA</Label>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
                 </DockPanel>
 
 

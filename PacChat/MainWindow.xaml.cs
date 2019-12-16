@@ -90,6 +90,9 @@ namespace PacChat
 
             SetNotificationDotState(false);
 
+            SelfAvatar.ClickTrigger.Visibility = Visibility.Hidden;
+            SelfAvatar.ClickTrigger.IsEnabled = false;
+
             ProfileAPI.GetAvatar((avaPath) =>
             {
                 SelfAvatar.ImageSource = avaPath;
