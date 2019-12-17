@@ -28,7 +28,6 @@ namespace PacChat
             MediaPlayer.TitleBar.MouseMove += FormDrag;
             MediaPlayer.BtnFullScreen.Click += BtnFullScreen_Click;
 
-
         }
 
         public void InitializeMedia()
@@ -55,6 +54,7 @@ namespace PacChat
             {
                 app.model.MediaMessages.Add(ConversationID, new List<Utils.MediaPack>());
             }
+            MediaPlayer.ConversationID = ConversationID;
         }
 
         private void BtnFullScreen_Click(object sender, RoutedEventArgs e)

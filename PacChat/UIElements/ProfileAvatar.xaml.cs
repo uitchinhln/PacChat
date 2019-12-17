@@ -32,15 +32,12 @@ namespace PacChat.UIElements
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a picture";
-            op.Filter = "Supported Graphics|*.jpg;*.jpeg|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|";
+            op.Filter =  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg";
 
             if (op.ShowDialog() == true)
             {
-                List<string> paths = op.FileNames.ToList();
                 var app = MainWindow.chatApplication;
-                FileAPI.UploadMedia(app.model.SelfID,
-                    paths, OnImageUploadCompleted, OnImageUploadError);
+                ProfileAPI.AvatarUpload(op.FileName, OnImageUploadCompleted, OnImageUploadError);
             }
         }
 
@@ -49,9 +46,11 @@ namespace PacChat.UIElements
             throw new NotImplementedException();
         }
 
-        private void OnImageUploadCompleted(Dictionary<string, string> result)
+        private void OnImageUploadCompleted()
         {
-            
+            Console.WriteLine("Avatar upload completed");
+            AvtDisplayer.UserID = null;
+            MainWindow.Instance.SelfAvatar.UserID = null;
         }
     }
 }

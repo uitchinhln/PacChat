@@ -66,6 +66,7 @@ namespace PacChat.ChatPageContents
             ClickMask.Content = Id;
             FriendRequestBtn.IsEnabled = !Friend;
             IsFriend = Friend;
+            Avatar.UserID = Id;
 
             if (IsFriend)
                 FriendRequestBtn.Content = "Unfriend";
