@@ -660,12 +660,22 @@ namespace PacChat
 
 
             FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.StreamSource = stream;
-            bitmap.EndInit();
 
-            im.Source = bitmap;
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+
+                im.Source = bitmap;
+            }
+            catch
+            {
+                stream.Close();
+                throw;
+            }
+
             im.Effect = ef;
 
             vb.Visual = im;

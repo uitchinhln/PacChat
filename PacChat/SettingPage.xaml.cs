@@ -87,8 +87,9 @@ namespace PacChat
                     {
                         BGSelectContainner bg = new BGSelectContainner(uri);
                         wrappanelBG_Gallery.Children.Add(bg);
-                    } catch
+                    } catch (Exception ex)
                     {
+                        Console.WriteLine(ex);
                         try
                         {
                             File.Delete(uri);
@@ -100,7 +101,7 @@ namespace PacChat
                                     wrappanelBG_Gallery.Children.Add(bg);
                                 });
                             }, (e) => Console.WriteLine(e));
-                        } catch { }
+                        } catch (Exception e) { Console.WriteLine(e); }
                     }
                 }
             }
@@ -145,12 +146,21 @@ namespace PacChat
             ef.Radius = (int)GetBlurLv();
 
             FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.StreamSource = stream;
-            bitmap.EndInit();
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
 
-            im.Source = bitmap;
+                im.Source = bitmap;
+            }
+            catch
+            {
+                stream.Close();
+                throw;
+            }
+
             im.Effect = ef;
             vb.Visual = im;
             vb.Stretch = Stretch.Uniform;

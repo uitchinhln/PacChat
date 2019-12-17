@@ -33,12 +33,19 @@ namespace PacChat.Resources.CustomControls
        public void SetImage()
         {
             FileStream stream = new FileStream(BGUri, FileMode.Open, FileAccess.Read);
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.StreamSource = stream;
-            bitmap.EndInit();
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
 
-            imageBG.Source = bitmap;
+                imageBG.Source = bitmap;
+            } catch
+            {
+                stream.Close();
+                throw;
+            }
         }
 
 
