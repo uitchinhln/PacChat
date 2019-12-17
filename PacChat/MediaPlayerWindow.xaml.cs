@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,6 @@ namespace PacChat
             MediaPlayer.BtnClose.Click += BtnClose_Click;
             MediaPlayer.TitleBar.MouseMove += FormDrag;
             MediaPlayer.BtnFullScreen.Click += BtnFullScreen_Click;
-
         }
 
         public void InitializeMedia()
@@ -78,15 +78,6 @@ namespace PacChat
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            var app = MainWindow.chatApplication;
-            if (app.model.MediaWindows.ContainsKey(ConversationID))
-                app.model.MediaWindows[ConversationID] = null;
-            else
-                app.model.MediaWindows.Add(ConversationID, null);
-            if (app.model.Conversations.ContainsKey(ConversationID) && app.model.Conversations[ConversationID] != null)
-            {
-                app.model.Conversations[ConversationID].LastMediaID = app.model.Conversations[ConversationID].LastMediaIDBackup;
-            }
             this.Close();
         }
 
@@ -100,6 +91,20 @@ namespace PacChat
                 }
                 catch (Exception) { }
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var app = MainWindow.chatApplication;
+            if (app.model.MediaWindows.ContainsKey(ConversationID))
+                app.model.MediaWindows[ConversationID] = null;
+            else
+                app.model.MediaWindows.Add(ConversationID, null);
+            if (app.model.Conversations.ContainsKey(ConversationID) && app.model.Conversations[ConversationID] != null)
+            {
+                app.model.Conversations[ConversationID].LastMediaID = app.model.Conversations[ConversationID].LastMediaIDBackup;
+            }
+            base.OnClosing(e);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Console.WriteLine("New media player");
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
+                //MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
                 var app = MainWindow.chatApplication;
 
                 if (app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
