@@ -12,14 +12,14 @@
             <DoubleAnimation
                 Storyboard.TargetName="PopUp"
                 Storyboard.TargetProperty="Width"
-                From="0" To="256" Duration="0:0:0.5"
+                From="0" To="256" Duration="0:0:0.3"
                 AutoReverse="False"
                 BeginTime="0">
             </DoubleAnimation>
             <DoubleAnimation
                 Storyboard.TargetName="PopUp"
                 Storyboard.TargetProperty="Height"
-                From="0" To="512" Duration="0:0:0.5"
+                From="0" To="512" Duration="0:0:0.3"
                 AutoReverse="False"
                 BeginTime="0">
             </DoubleAnimation>
@@ -28,14 +28,14 @@
             <DoubleAnimation
                 Storyboard.TargetName="PopUp"
                 Storyboard.TargetProperty="Width"
-                From="256" To="0" Duration="0:0:0.5"
+                From="256" To="0" Duration="0:0:0.3"
                 AutoReverse="False"
                 BeginTime="0">
             </DoubleAnimation>
             <DoubleAnimation
                 Storyboard.TargetName="PopUp"
                 Storyboard.TargetProperty="Height"
-                From="512" To="0" Duration="0:0:0.5"
+                From="512" To="0" Duration="0:0:0.3"
                 AutoReverse="False"
                 BeginTime="0">
             </DoubleAnimation>

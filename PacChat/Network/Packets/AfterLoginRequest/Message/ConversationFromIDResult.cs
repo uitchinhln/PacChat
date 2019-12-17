@@ -60,17 +60,23 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 var app = MainWindow.chatApplication;
 
                 app.model.Conversations[ConversationID].LastMessID = LastMessID;
-                app.model.Conversations[ConversationID].LastMediaID = LastMediaID;
+
+                if (app.model.Conversations[ConversationID].FirstTimeLoaded)
+                {
+                    app.model.Conversations[ConversationID].FirstTimeLoaded = false;
+                    app.model.Conversations[ConversationID].LastMediaID = LastMediaID;
+                }
+
                 app.model.Conversations[ConversationID].LastAttachmentID = LastAttachmentID;
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
 
-                if (app.model.MediaWindows.ContainsKey(ConversationID)
-                && app.model.MediaWindows[ConversationID] != null)
-                {
-                    app.model.MediaWindows[ConversationID].Close();
-                    app.model.MediaWindows[ConversationID] = null;
-                }
+                //if (app.model.MediaWindows.ContainsKey(ConversationID)
+                //&& app.model.MediaWindows[ConversationID] != null)
+                //{
+                //    app.model.MediaWindows[ConversationID].Close();
+                //    app.model.MediaWindows[ConversationID] = null;
+                //}
                 ChatPage.Instance.LoadMessages(ConversationID);
                 //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.Clean();
 

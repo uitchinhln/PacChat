@@ -26,6 +26,7 @@ namespace PacChat.Utils
         public int LastMediaID { get; set; }
         public int LastAttachmentID { get; set; }
         public string ConversationName { get; set; }
+        public bool FirstTimeLoaded { get; set; } = true;
         public List<BubbleInfo> Bubbles = new List<BubbleInfo>();
     }
 
