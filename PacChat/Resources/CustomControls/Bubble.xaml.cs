@@ -145,7 +145,7 @@ namespace PacChat.Resources.CustomControls
                 var downloadWindow = DownloadWindow.Instance;
 
                 DownloadProgressNoti noti = new DownloadProgressNoti();
-                noti.SetFileName(textBlock.Text);
+                noti.SetFileName(System.IO.Path.GetFileName(dialog.FileName));
                 noti.FileLocation = dialog.FileName;
                 downloadWindow.DownloadList.Children.Insert(0, noti);
                 MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
