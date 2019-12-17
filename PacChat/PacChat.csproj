@@ -197,6 +197,9 @@
     <Compile Include="Resources\CustomControls\Media\ThumbnailButton.xaml.cs">
       <DependentUpon>ThumbnailButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml.cs">
+      <DependentUpon>DownloadProgressNoti.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml.cs">
       <DependentUpon>FriendRequestAcceptedNoti.xaml</DependentUpon>
     </Compile>
@@ -404,6 +407,10 @@
     <Page Include="Resources\CustomControls\Media\ThumbnailButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml">
       <SubType>Designer</SubType>

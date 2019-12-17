@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.Resources.CustomControls.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,26 @@ namespace PacChat
     /// </summary>
     public partial class DownloadWindow : Window
     {
+        public bool Visible { get; private set; }
+
         public DownloadWindow()
         {
             InitializeComponent();
-            ShowPopUp();
+            TitleBar.MouseMove += FormDrag;
+            Visible = false;
         }
 
         public void ShowPopUp()
         {
+            if (Visibility != Visibility.Visible) Visibility = Visibility.Visible;
+            Visible = true;
             var sb = this.FindResource("entrance") as Storyboard;
             sb.Begin();
         }
 
         public void HidePopUp()
         {
+            Visible = false;
             var sb = this.FindResource("exit") as Storyboard;
             sb.Begin();
         }
@@ -41,6 +48,18 @@ namespace PacChat
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             HidePopUp();
+        }
+
+        private void FormDrag(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                try
+                {
+                    this.DragMove();
+                }
+                catch (Exception) { }
+            }
         }
     }
 }
