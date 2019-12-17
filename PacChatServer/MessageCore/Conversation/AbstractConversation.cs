@@ -92,8 +92,9 @@ namespace PacChatServer.MessageCore.Conversation
 
                     lock (user.Conversations)
                     {
-                        user.Conversations.Remove(ID);
-                        user.Conversations.Add(ID, LastActive);
+                        long err;
+                        user.Conversations.TryRemove(ID, out err);
+                        user.Conversations.TryAdd(ID, LastActive);
                     }
                 }
             }

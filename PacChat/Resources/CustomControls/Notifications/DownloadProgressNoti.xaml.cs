@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -22,6 +23,8 @@ namespace PacChat.Resources.CustomControls.Notifications
     /// </summary>
     public partial class DownloadProgressNoti : UserControl
     {
+        public string FileLocation { get; set; }
+
         public DownloadProgressNoti()
         {
             InitializeComponent();
@@ -51,6 +54,14 @@ namespace PacChat.Resources.CustomControls.Notifications
             ProgressBar.Value = 0;
             ProgressBar.Visibility = Visibility.Collapsed;
             DownloadStatus.Text = "Download Error";
+        }
+
+        private void ClickMask_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(FileLocation))
+            {
+                Process proc = Process.Start(FileLocation);
+            }
         }
     }
 }
