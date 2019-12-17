@@ -94,23 +94,5 @@ namespace PacChat.Windows.Login
                 trnsEr.SelectedIndex = index;
             }
         }
-
-        private void Banner_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            if (!(e.Uri.ToString().Equals("https://cs15083a2f24621x4ad7x9d4.z23.web.core.windows.net/", StringComparison.InvariantCultureIgnoreCase)))
-            {               
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-                e.Cancel = true;
-            }
-        }
-
-        public void HideScriptErrors(WebBrowser wb, bool Hide)
-        {
-            FieldInfo fiComWebBrowser = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (fiComWebBrowser == null) return;
-            object objComWebBrowser = fiComWebBrowser.GetValue(wb);
-            if (objComWebBrowser == null) return;
-            objComWebBrowser.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, objComWebBrowser, new object[] { Hide });
-        }
     }
 }
