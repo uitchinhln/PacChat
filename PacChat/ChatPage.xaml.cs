@@ -36,6 +36,7 @@ namespace PacChat
         private BubbleChat _headBubbleChat;
         private bool _button1Clicked;
         public static ChatPage Instance;
+        public Color bubbleColor = (Color)ColorConverter.ConvertFromString("#0F4C82");
 
         public ChatPage()
         {
@@ -153,50 +154,64 @@ namespace PacChat
         #region Sticker send
         public void SendStickerOnTheRight(MessageCore.Sticker.Sticker stickerInfo, bool reversed = false)
         {
-
-            Resources.CustomControls.Sticker sticker =
-                new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
-
-            Thickness margin = sticker.Margin;
-            margin.Right = 30;
-            margin.Top = 10;
-            margin.Bottom = 10;
-            sticker.HorizontalAlignment = HorizontalAlignment.Right;
-            sticker.Margin = margin;
-
-            if (reversed)
+            try
             {
-                spMessagesContainer.Children.Insert(0, sticker);
+
+                Resources.CustomControls.Sticker sticker =
+                    new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
+
+                Thickness margin = sticker.Margin;
+                margin.Right = 30;
+                margin.Top = 10;
+                margin.Bottom = 10;
+                sticker.HorizontalAlignment = HorizontalAlignment.Right;
+                sticker.Margin = margin;
+
+                if (reversed)
+                {
+                    spMessagesContainer.Children.Insert(0, sticker);
+                }
+                else
+                {
+                    spMessagesContainer.Children.Add(sticker);
+                }
+                MessagesContainer.ScrollToEnd();
             }
-            else
+            catch (Exception e)
             {
-                spMessagesContainer.Children.Add(sticker);
+                throw new Exception("Sticker ex: ", e);
             }
-            MessagesContainer.ScrollToEnd();
         }
 
         public void SendStickerOnTheLeft(MessageCore.Sticker.Sticker stickerInfo, bool reversed = false, BubbleChat previous = null, BubbleChat head = null)
         {
-            Resources.CustomControls.Sticker sticker =
+            try
+            {
+                Resources.CustomControls.Sticker sticker =
                 new Resources.CustomControls.Sticker(this, false, stickerInfo.ID, stickerInfo.CategoryID, 130, stickerInfo.Duration, stickerInfo.SpriteURL, true);
 
-            Thickness margin = sticker.Margin;
-            margin.Left = 30;
-            margin.Top = 10;
-            margin.Bottom = 10;
-            sticker.HorizontalAlignment = HorizontalAlignment.Left;
-            sticker.Margin = margin;
+                Thickness margin = sticker.Margin;
+                margin.Left = 30;
+                margin.Top = 10;
+                margin.Bottom = 10;
+                sticker.HorizontalAlignment = HorizontalAlignment.Left;
+                sticker.Margin = margin;
 
-            if (reversed)
-            {
-                head.InsertSticker(sticker);
+                if (reversed)
+                {
+                    head.InsertSticker(sticker);
+                }
+                else
+                {
+                    previous.AddSticker(sticker);
+                }
+                // spMessagesContainer.Children.Add(sticker);
+                MessagesContainer.ScrollToEnd();
             }
-            else
+            catch (Exception e)
             {
-                previous.AddSticker(sticker);
+                throw new Exception("Sticker ex: ", e);
             }
-            // spMessagesContainer.Children.Add(sticker);
-            MessagesContainer.ScrollToEnd();
         }
 
         #endregion
@@ -350,8 +365,10 @@ namespace PacChat
                 b.Type = BubbleTypeParser.Parse(msg);
                 b.ControlUpdate();
 
-                b.SetBG(Color.FromRgb(56, 56, 56));
-                b.SetTextColor(Colors.White);
+                b.SetBG(bubbleColor);
+
+                if (bubbleColor.R + bubbleColor.G + bubbleColor.B >= 565) b.SetTextColor(Colors.Black);
+                else b.SetTextColor(Colors.White);
                 b.SetDirect(false);// true = left false = right
                 b.SetSeen(false);
             }
