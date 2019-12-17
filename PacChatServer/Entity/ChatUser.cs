@@ -115,6 +115,11 @@ namespace PacChatServer.Entity
             }
         }
 
+        public void SendOnly(IPacket packet, ChatSession session)
+        {
+            session.Send(packet);
+        }
+
         public void Online()
         {
             UserOnline packet = new UserOnline();
