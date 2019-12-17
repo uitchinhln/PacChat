@@ -201,6 +201,9 @@
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestNoti.xaml.cs">
       <DependentUpon>FriendRequestNoti.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ProfileContext.xaml.cs">
+      <DependentUpon>ProfileContext.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
     </Compile>
@@ -405,6 +408,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestNoti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\ProfileContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
