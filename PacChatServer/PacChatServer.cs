@@ -40,6 +40,7 @@ namespace PacChatServer
         public PacChatServer()
         {
             instance = this;
+            new ServerSettings();
 
             protocolProvider = new ProtocolProvider();
             SessionRegistry = new SessionRegistry();
@@ -63,7 +64,7 @@ namespace PacChatServer
             _ = this.Network.Bind(new IPEndPoint(ServerSettings.SERVER_HOST, ServerSettings.SERVER_PORT));
 
             RestAPI = new RestServer();
-            RestAPI.Start(ServerSettings.SERVER_HOST.ToString(), ServerSettings.FILESERVER_PORT, latch);
+            RestAPI.Start(ServerSettings.WEBSERVER_HOST, ServerSettings.WEBSERVER_PORT, latch);
 
             latch.Wait();
 

@@ -38,13 +38,19 @@ namespace PacChat.Resources.CustomControls
 
         private void loadStore() //load thumbnail of sticker
         {
+            progressBar.Visibility = Visibility.Visible;
+            progressBarThumb.Visibility = Visibility.Visible;
+
+
             StickerAPI.DownloadImage(Cate.ThumbImg, (thumbImage) =>
             {
+                progressBar.Visibility = Visibility.Hidden;
                 imgPreview.Source = thumbImage;
 
             });
             StickerAPI.DownloadImage(Cate.IconPreview, (iconPreviewImage) =>
             {
+                progressBarThumb.Visibility = Visibility.Hidden;
                 imgIconPreview.Source = iconPreviewImage;
             });
             txtName.Text = Cate.Name;

@@ -41,7 +41,7 @@ namespace PacChat.Network.RestAPI
                     form.Add(new StreamContent(stream), "file", Path.GetFileName(filePath));
                 }
 
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(AttachmentUploadUrl, address, conversationID);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
@@ -64,7 +64,7 @@ namespace PacChat.Network.RestAPI
         {
             try
             {
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, fileID, conversationID));
 
                 WebClient webClient = new WebClient();
@@ -107,7 +107,7 @@ namespace PacChat.Network.RestAPI
                     form.Add(new StreamContent(stream), "file", Path.GetFileName(filePath));
                 }
 
-                String address = ChatConnection.Instance.Host;
+                String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(MediaUploadUrl, address, conversationID);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);

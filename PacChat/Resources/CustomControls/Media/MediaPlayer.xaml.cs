@@ -31,7 +31,7 @@ namespace PacChat.Resources.CustomControls.Media
     /// </summary>
     public partial class MediaPlayer : UserControl
     {
-        private LRUCache<String, ImageSource> ImgCache = new LRUCache<string, ImageSource>(40, 2);
+        private LRUCache<String, ImageSource> ImgCache = new LRUCache<string, ImageSource>(15, 2);
 
         public MediaPlayer()
         {

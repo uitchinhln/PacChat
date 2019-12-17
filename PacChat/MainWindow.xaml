@@ -49,7 +49,7 @@
         <Border Margin="1" CornerRadius="8" x:Name="Round" Background="#FF2C2C2C">
             <DockPanel Margin="4">
                 <!--stackPanel HEADER-->
-                <DockPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="32" MouseMove="FormDrag" Background="#FF2C2C2C">
+                <DockPanel x:Name="spanelHeader" DockPanel.Dock="Top" Height="36" MouseMove="FormDrag" Background="#FF2C2C2C">
                     <DockPanel HorizontalAlignment="Right" Width="96" DockPanel.Dock="Right">
 
                         <Button x:Name="BtnMinimize" materialDesign:RippleAssist.Feedback="Transparent"
@@ -80,15 +80,12 @@
 
                     </DockPanel>
 
-                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,10,0" PlacementMode="BottomAndAlignRightEdges">
+                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,2,10,0">
                         <materialDesign:PopupBox.ToggleContent>
                             <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
-                            <Label>AAAAAAAAAAAAAAA</Label>
+                            <Button x:Name="BtnLogout">Logout</Button>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </DockPanel>
