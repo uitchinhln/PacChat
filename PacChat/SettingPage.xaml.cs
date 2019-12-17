@@ -17,6 +17,7 @@ using PacChat.Utils;
 using System.IO;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Network;
+using PacChat.Network.RestAPI;
 
 namespace PacChat
 {
@@ -68,11 +69,37 @@ namespace PacChat
 
         private void loadBG_Gallery()
         {
-            String uri = Path.Combine(TempUtil.ResourcePath, "ChatPageBg/BG{0}.jpg");
-            for (int i = 1; i <= 16; i++)
+            foreach (String uri in ResourceUtil.ChatPageResource)
             {
-                BGSelectContainner bg = new BGSelectContainner(String.Format(uri, i));
-                wrappanelBG_Gallery.Children.Add(bg);
+                if (!File.Exists(uri))
+                {
+                    ResourceAPI.DownloadResource(uri, null, (sender, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            BGSelectContainner bg = new BGSelectContainner(uri);
+                            wrappanelBG_Gallery.Children.Add(bg);
+                        });
+                    }, (e) => Console.WriteLine(e));
+                } else
+                {
+                    try
+                    {
+                        BGSelectContainner bg = new BGSelectContainner(uri);
+                        wrappanelBG_Gallery.Children.Add(bg);
+                    } catch
+                    {
+                        File.Delete(uri);
+                        ResourceAPI.DownloadResource(uri, null, (sender, e) =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                BGSelectContainner bg = new BGSelectContainner(uri);
+                                wrappanelBG_Gallery.Children.Add(bg);
+                            });
+                        }, (e) => Console.WriteLine(e));
+                    }
+                }
             }
 
         }

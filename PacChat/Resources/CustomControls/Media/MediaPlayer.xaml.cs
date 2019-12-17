@@ -91,6 +91,7 @@ namespace PacChat.Resources.CustomControls.Media
                         Console.WriteLine(ex);
                     }
                 });
+                thumbThread.IsBackground = true;
                 thumbThread.Start();
             }
 
@@ -200,6 +201,7 @@ namespace PacChat.Resources.CustomControls.Media
                             Console.WriteLine(ex);
                         }
                     });
+                    imgThread.IsBackground = true;
                     imgThread.Start();
                 }
             }

@@ -67,7 +67,7 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.WebHost;
                 Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, fileID, conversationID));
 
-                WebClient webClient = new WebClient();
+                WebClient webClient = RestUtils.CreateWebClient();
 
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
 
@@ -82,7 +82,11 @@ namespace PacChat.Network.RestAPI
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;           
+                    webClient.DownloadFileCompleted += onDownloadComplete;
+                webClient.DownloadFileCompleted += (o, e) =>
+                {
+                    RestUtils.Remove(webClient);
+                };
             } catch (Exception e)
             {
                 Console.WriteLine(e);
@@ -140,7 +144,7 @@ namespace PacChat.Network.RestAPI
             {
                 Uri uri = new Uri(streamURL);
 
-                WebClient webClient = new WebClient();
+                WebClient webClient = RestUtils.CreateWebClient();
 
                 Directory.CreateDirectory(TempUtil.DownloadPath);
                 String temp = Path.Combine(TempUtil.DownloadPath, Rand.Next() + "---" + Rand.Next());
@@ -154,6 +158,10 @@ namespace PacChat.Network.RestAPI
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
                     webClient.DownloadFileCompleted += onDownloadComplete;
+                webClient.DownloadFileCompleted += (o, e) =>
+                {
+                    RestUtils.Remove(webClient);
+                };
             }
             catch (Exception e)
             {

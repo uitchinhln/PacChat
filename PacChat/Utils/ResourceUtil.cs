@@ -28,23 +28,11 @@ namespace PacChat.Utils
         public static readonly String ChatPageBG15 = Path.Combine(TempUtil.ResourcePath, "ChatPageBg/BG15.jpg");
         public static readonly String ChatPageBG16 = Path.Combine(TempUtil.ResourcePath, "ChatPageBg/BG16.jpg");
 
-        private static List<String> resources = new List<string>()
+        public static List<String> ChatPageResource = new List<string>()
         {
             ChatPageBG, ChatPageBG1, ChatPageBG2, ChatPageBG3, ChatPageBG4, ChatPageBG5, ChatPageBG6,
             ChatPageBG7, ChatPageBG8, ChatPageBG9, ChatPageBG10, ChatPageBG11, ChatPageBG12, ChatPageBG13,
             ChatPageBG14, ChatPageBG15, ChatPageBG16
         };
-
-        public static void PrepareResource()
-        {
-            foreach (String resource in resources)
-            {
-                if (File.Exists(resource)) continue;
-                ResourceAPI.DownloadResource(resource, null, (sender, e) =>
-                    {
-
-                    }, (e) => Console.WriteLine(e));
-            }
-        }
     }
 }

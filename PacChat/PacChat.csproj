@@ -249,6 +249,7 @@
     <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
     <Compile Include="Utils\ResourceUtil.cs" />
+    <Compile Include="Utils\RestUtils.cs" />
     <Compile Include="Utils\SystemPlacesUtils.cs" />
     <Compile Include="Utils\TempUtil.cs" />
     <Compile Include="Utils\ThreadUtil.cs" />

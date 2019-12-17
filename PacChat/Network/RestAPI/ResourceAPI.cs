@@ -30,7 +30,7 @@ namespace PacChat.Network.RestAPI
                 String address = ChatConnection.Instance.WebHost;
                 Uri uri = new Uri(String.Format(ResourceDownloadUrl, address, currentVersion, fileNameParam));
 
-                WebClient webClient = new WebClient();
+                WebClient webClient = RestUtils.CreateWebClient();
 
                 Directory.CreateDirectory(savePath.Replace(Path.GetFileName(savePath), ""));
 
@@ -39,6 +39,10 @@ namespace PacChat.Network.RestAPI
                     webClient.DownloadProgressChanged += onProgressChange;
                 if (onDownloadComplete != null)
                     webClient.DownloadFileCompleted += onDownloadComplete;
+                webClient.DownloadFileCompleted += (o, e) =>
+                {
+                    RestUtils.Remove(webClient);
+                };
             }
             catch (Exception e)
             {
