@@ -32,26 +32,27 @@ namespace PacChat.UIElements
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a picture";
-            op.Filter = "Supported Graphics|*.jpg;*.jpeg|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
 
             if (op.ShowDialog() == true)
             {
-                List<string> paths = op.FileNames.ToList();
+                if (op.FileName.Length < 1) return;
+                String path = op.FileNames[0];
                 var app = MainWindow.chatApplication;
-                FileAPI.UploadMedia(app.model.SelfID,
-                    paths, OnImageUploadCompleted, OnImageUploadError);
+                ProfileAPI.AvatarUpload(path, OnImageUploadCompleted, OnImageUploadError);
             }
         }
 
         private void OnImageUploadError(Exception error)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(error);
         }
 
-        private void OnImageUploadCompleted(Dictionary<string, string> result)
+        private void OnImageUploadCompleted()
         {
-            
+            AvtDisplayer.UpdateAllInstance();
         }
     }
 }

@@ -24,9 +24,13 @@ namespace PacChat.Resources.CustomControls
     /// </summary>
     public partial class AvatarDisplayer : UserControl
     {
+        private static List<AvatarDisplayer> avatarInstance = new List<AvatarDisplayer>();
+
         public AvatarDisplayer()
         {
             InitializeComponent();
+            UserID = null;
+            avatarInstance.Add(this);
         }
 
         public Border AvatarBorder { get => AvaBorder; }
@@ -87,9 +91,46 @@ namespace PacChat.Resources.CustomControls
             base.OnPropertyChanged(e);
         }
 
+        public void UpdateAllInstance(ImageSource source, String userID = null)
+        {
+            List<AvatarDisplayer> filtered;
+            if (String.IsNullOrEmpty(userID))
+            {
+                filtered = avatarInstance.Where(p => String.IsNullOrEmpty(p.UserID)).ToList();
+            } else
+            {
+                filtered = avatarInstance.Where(p => p.UserID == userID).ToList();
+            }
+            foreach (AvatarDisplayer item in filtered)
+            {
+                item.ImageAva.ImageSource = source;
+            }
+        }
 
+        public void UpdateAllInstance(String userID = null)
+        {
+            LoadingAhihi.Visibility = Visibility.Visible;
+            if (String.IsNullOrEmpty(UserID))
+            {
+                ProfileAPI.DownloadSelfAvatar((avaSource) =>
+                {
+                    UpdateAllInstance(avaSource);
+                }, (ex) => Console.WriteLine(ex));
+            }
+            else
+            {
+                ProfileAPI.DownloadUserAvatar(UserID, (avaSource) =>
+                {
+                    UpdateAllInstance(avaSource, UserID);
+                }, (ex) => Console.WriteLine(ex));
+            }
+            LoadingAhihi.Visibility = Visibility.Hidden;
+        }
 
-
+        private void OnUnload(object sender, RoutedEventArgs e)
+        {
+            avatarInstance.Remove(this);
+        }
 
         #region Custom ClickEvent
         public event EventHandler Click;
@@ -100,5 +141,6 @@ namespace PacChat.Resources.CustomControls
                 Click(this, e);
         }
         #endregion
+
     }
 }

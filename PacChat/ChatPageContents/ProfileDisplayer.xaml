@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PacChat.ChatPageContents"
+             xmlns:cc="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Width="256">
     <Grid>
         <Border CornerRadius="8" Background="White">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right">
-                    <Image x:Name="AvatarDisplayer" Height="225" Width="225"/>
+                    <cc:AvatarDisplayer x:Name="AvatarDisplayer" Width="225" Height="225"></cc:AvatarDisplayer>
                     <Border Height="1" Background="#FFB6B6B6"/>
                     <DockPanel>
                         <TextBlock x:Name="NameDisplayer" Margin ="4" FontFamily="Segoe UI Semibold" FontSize="24" Text="Bach Nguyen" TextAlignment="Center" DockPanel.Dock="Top"/>

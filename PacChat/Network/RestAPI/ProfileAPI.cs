@@ -34,6 +34,9 @@ namespace PacChat.Network.RestAPI
             {
                 if (!File.Exists(filePath)) return;
 
+                Directory.CreateDirectory(TempUtil.RenderTempPath);
+                String tempPath = Path.Combine(TempUtil.RenderTempPath, "MyAvatar");
+
                 Image image = Image.FromFile(filePath);
                 int w = image.Width;
                 int h = image.Height;
@@ -62,11 +65,9 @@ namespace PacChat.Network.RestAPI
 
                 MultipartFormDataContent form = new MultipartFormDataContent();
 
-                if (!File.Exists(filePath))
-                    throw new EntryPointNotFoundException();
-                Stream stream = new MemoryStream();
-                thumbnail.Save(stream, ImageFormat.Png);
-                form.Add(new StreamContent(stream));
+                thumbnail.Save(tempPath);
+                FileStream stream = new FileStream(tempPath, FileMode.Open, FileAccess.Read);
+                form.Add(new StreamContent(stream), "avatar", ChatConnection.Instance.Session.SessionID);
 
                 String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(UploadAvatarURL, address);
@@ -74,7 +75,12 @@ namespace PacChat.Network.RestAPI
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
                 httpClient.Dispose();
+                stream.Close();
+                stream.Dispose();
+                image.Dispose();
+                thumbnail.Dispose();
                 handler();
+                if (File.Exists(tempPath)) File.Delete(tempPath);
             }
             catch (Exception e)
             {
