@@ -29,17 +29,10 @@ namespace PacChat.UIElements
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
+            var app = MainWindow.chatApplication;
             OpenFileDialog op = new OpenFileDialog();
 
-            op.Title = "Select a picture";
-<<<<<<< HEAD
-            op.Filter =  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg";
-
-            if (op.ShowDialog() == true)
-            {
-                var app = MainWindow.chatApplication;
-                ProfileAPI.AvatarUpload(op.FileName, OnImageUploadCompleted, OnImageUploadError);
-=======
+            ProfileAPI.AvatarUpload(op.FileName, OnImageUploadCompleted, OnImageUploadError);
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
@@ -48,26 +41,21 @@ namespace PacChat.UIElements
             {
                 if (op.FileName.Length < 1) return;
                 String path = op.FileNames[0];
-                var app = MainWindow.chatApplication;
                 ProfileAPI.AvatarUpload(path, OnImageUploadCompleted, OnImageUploadError);
->>>>>>> 6c8fb3127bbe9f2ca7afa610cae61c2ee7138513
             }
         }
 
-        private void OnImageUploadError(Exception error)
+        void OnImageUploadError(Exception error)
         {
             Console.WriteLine(error);
         }
 
-        private void OnImageUploadCompleted()
+        void OnImageUploadCompleted()
         {
-<<<<<<< HEAD
             Console.WriteLine("Avatar upload completed");
             AvtDisplayer.UserID = null;
             MainWindow.Instance.SelfAvatar.UserID = null;
-=======
             AvtDisplayer.UpdateAllInstance();
->>>>>>> 6c8fb3127bbe9f2ca7afa610cae61c2ee7138513
         }
     }
 }
