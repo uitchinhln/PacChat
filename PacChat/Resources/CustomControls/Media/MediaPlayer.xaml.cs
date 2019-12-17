@@ -357,6 +357,7 @@ namespace PacChat.Resources.CustomControls.Media
 
             DownloadProgressNoti noti = new DownloadProgressNoti();
             noti.SetFileName(currentBtn.FileName);
+            noti.FileLocation = savePath;
             MainWindow.Instance.DownloadWindow.DownloadList.Children.Add(noti);
 
             FileAPI.DownloadMedia(currentBtn.StreamURL, savePath,

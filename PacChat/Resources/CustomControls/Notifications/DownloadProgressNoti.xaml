@@ -14,6 +14,8 @@
                     <ProgressBar x:Name="ProgressBar" Background="LightGray" BorderBrush="#FFB8B8B8" Foreground="#FF555555" Height="4" Margin="12,8,16,0" Value="20" DockPanel.Dock="Top"></ProgressBar>
                     <TextBlock x:Name="DownloadStatus" Text="Download completed" FontFamily="Segoe UI Semilight" Margin="12,4,0,0" DockPanel.Dock="Bottom" FontSize="10"/>
                 </DockPanel>
+                <Button x:Name="ClickMask" Height="Auto" Margin="8" Background="{x:Null}" BorderBrush="{x:Null}" Click="ClickMask_Click">
+                </Button>
             </Grid>
         </Border>
     </Border>

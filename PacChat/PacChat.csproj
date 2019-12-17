@@ -227,6 +227,9 @@
     <Compile Include="Resources\CustomControls\ThumbnailBubble.xaml.cs">
       <DependentUpon>ThumbnailBubble.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\FakeLoadingBubble.xaml.cs">
+      <DependentUpon>FakeLoadingBubble.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\StickerDialog.xaml.cs">
       <DependentUpon>StickerDialog.xaml</DependentUpon>
     </Compile>
@@ -451,6 +454,10 @@
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\FakeLoadingBubble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StickerDialog.xaml">
       <SubType>Designer</SubType>
