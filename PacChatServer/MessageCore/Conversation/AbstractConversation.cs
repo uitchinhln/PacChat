@@ -90,12 +90,8 @@ namespace PacChatServer.MessageCore.Conversation
                     packet.SenderID = chatSession.Owner.ID.ToString();
                     user.Send(packet); //Add message packet here
 
-                    lock (user.Conversations)
-                    {
-                        long err;
-                        user.Conversations.TryRemove(ID, out err);
-                        user.Conversations.TryAdd(ID, LastActive);
-                    }
+                    user.Conversations.TryRemove(ID, out long lact);
+                    user.Conversations.TryAdd(ID, LastActive);
                 }
             }
         }
