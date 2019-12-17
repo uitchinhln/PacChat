@@ -383,6 +383,8 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\UpdateSelfProfileRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\BuzzRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\BuzzResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\MediaFromConversationRequest.cs" />

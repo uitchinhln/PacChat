@@ -39,13 +39,27 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
         {
             ChatSession chatSession = session as ChatSession;
 
-            ChatUser user = chatSession.Owner;
-            user.FirstName = FirstName;
-            user.LastName = LastName;
-            user.Town = Town;
-            user.DateOfBirth = DateOfBirth;
-            user.Gender = Gender;
-            user.Save();
+            
+            //if info is validated
+            if (true)
+            {
+                ChatUser user = chatSession.Owner;
+                user.FirstName = FirstName;
+                user.LastName = LastName;
+                user.Town = Town;
+                user.DateOfBirth = DateOfBirth;
+                user.Gender = Gender;
+                user.Save();
+
+                GetSelfProfileResponse packet = new GetSelfProfileResponse();
+                packet.FirstName = user.FirstName;
+                packet.LastName = user.LastName;
+                packet.Email = user.Email;
+                packet.Town = user.Town;
+                packet.DateOfBirth = user.DateOfBirth;
+                packet.Gender = user.Gender;
+                chatSession.Owner.Send(packet);
+            }
         }
     }
 }

@@ -65,6 +65,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 {
                     app.model.Conversations[ConversationID].FirstTimeLoaded = false;
                     app.model.Conversations[ConversationID].LastMediaID = LastMediaID;
+                    app.model.Conversations[ConversationID].LastMediaIDBackup = LastMediaID;
                 }
 
                 app.model.Conversations[ConversationID].LastAttachmentID = LastAttachmentID;

@@ -52,6 +52,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
                 setting.GenderInp.SelectedIndex = (int)Gender;
                 setting.AddressInp.Text = Town;
 
+                MainWindow.Instance.ProfileContext.FullName.Content = FirstName + " " + LastName;
                 // Bind to Avatar displayer
             });
         }

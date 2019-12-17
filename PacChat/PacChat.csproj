@@ -81,6 +81,8 @@
       <DependentUpon>DownloadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GetID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzSend.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversation.cs" />
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
