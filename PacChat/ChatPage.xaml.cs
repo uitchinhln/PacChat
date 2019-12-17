@@ -25,6 +25,7 @@ using static PacChat.Network.RestAPI.FileAPI;
 using PacChat.Resources.CustomControls.Media;
 using PacChat.MessageCore.Sticker;
 using PacChat.Resources;
+using System.IO;
 
 namespace PacChat
 {
@@ -607,37 +608,37 @@ namespace PacChat
         {
             UploadImage();
             return;
-            OpenFileDialog op = new OpenFileDialog();
-            ImageContainner image;
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                _previousBubbleChat = null;
-                image = new ImageContainner(1, op.FileName);
-                image.HorizontalAlignment = HorizontalAlignment.Right;
+            //OpenFileDialog op = new OpenFileDialog();
+            //ImageContainner image;
+            //op.Title = "Select a picture";
+            //op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+            //  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+            //  "Portable Network Graphic (*.png)|*.png";
+            //if (op.ShowDialog() == true)
+            //{
+            //    _previousBubbleChat = null;
+            //    image = new ImageContainner(1, op.FileName);
+            //    image.HorizontalAlignment = HorizontalAlignment.Right;
 
-                Thickness margin = image.Margin;
-                margin.Right = 30;
-                image.Margin = margin;
-                spMessagesContainer.Children.Add(image);
-                MessagesContainer.ScrollToEnd();
-            }
+            //    Thickness margin = image.Margin;
+            //    margin.Right = 30;
+            //    image.Margin = margin;
+            //    spMessagesContainer.Children.Add(image);
+            //    MessagesContainer.ScrollToEnd();
+            //}
 
         }
 
         private void showLeftImage(int id, string uri)
         {
-            ImageContainner image = new ImageContainner(1, uri);
-            image.HorizontalAlignment = HorizontalAlignment.Right;
+            //ImageContainner image = new ImageContainner(1, uri);
+            //image.HorizontalAlignment = HorizontalAlignment.Right;
 
-            Thickness margin = image.Margin;
-            margin.Left = 30;
-            image.Margin = margin;
-            spMessagesContainer.Children.Add(image);
-            MessagesContainer.ScrollToEnd();
+            //Thickness margin = image.Margin;
+            //margin.Left = 30;
+            //image.Margin = margin;
+            //spMessagesContainer.Children.Add(image);
+            //MessagesContainer.ScrollToEnd();
         }
 
         private void MessagesContainer_ScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -656,7 +657,15 @@ namespace PacChat
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
             ef.Radius = blur;
-            im.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+
+
+            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();
+
+            im.Source = bitmap;
             im.Effect = ef;
 
             vb.Visual = im;

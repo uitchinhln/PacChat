@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,13 @@ namespace PacChat.Resources.CustomControls
 
        public void SetImage()
         {
-            imageBG.Source = new BitmapImage(new Uri(BGUri, UriKind.RelativeOrAbsolute));
+            FileStream stream = new FileStream(BGUri, FileMode.Open, FileAccess.Read);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();
+
+            imageBG.Source = bitmap;
         }
 
 

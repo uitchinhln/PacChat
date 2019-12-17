@@ -89,15 +89,18 @@ namespace PacChat
                         wrappanelBG_Gallery.Children.Add(bg);
                     } catch
                     {
-                        File.Delete(uri);
-                        ResourceAPI.DownloadResource(uri, null, (sender, e) =>
+                        try
                         {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            File.Delete(uri);
+                            ResourceAPI.DownloadResource(uri, null, (sender, e) =>
                             {
-                                BGSelectContainner bg = new BGSelectContainner(uri);
-                                wrappanelBG_Gallery.Children.Add(bg);
-                            });
-                        }, (e) => Console.WriteLine(e));
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    BGSelectContainner bg = new BGSelectContainner(uri);
+                                    wrappanelBG_Gallery.Children.Add(bg);
+                                });
+                            }, (e) => Console.WriteLine(e));
+                        } catch { }
                     }
                 }
             }
@@ -140,7 +143,14 @@ namespace PacChat
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
             ef.Radius = (int)GetBlurLv();
-            im.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+
+            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();
+
+            im.Source = bitmap;
             im.Effect = ef;
             vb.Visual = im;
             vb.Stretch = Stretch.Uniform;
