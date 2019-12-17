@@ -53,8 +53,6 @@ namespace PacChat.UIElements
         void OnImageUploadCompleted()
         {
             Console.WriteLine("Avatar upload completed");
-            AvtDisplayer.UserID = null;
-            MainWindow.Instance.SelfAvatar.UserID = null;
             AvtDisplayer.UpdateAllInstance();
         }
     }
