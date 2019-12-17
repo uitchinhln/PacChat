@@ -22,32 +22,33 @@ namespace PacChat
     public partial class DownloadWindow : Window
     {
         public bool Visible { get; private set; }
+        private static DownloadWindow _instance;
 
-        public DownloadWindow()
+        private DownloadWindow()
         {
             InitializeComponent();
             TitleBar.MouseMove += FormDrag;
             Visible = false;
         }
 
-        public void ShowPopUp()
-        {
-            if (Visibility != Visibility.Visible) Visibility = Visibility.Visible;
-            Visible = true;
-            var sb = this.FindResource("entrance") as Storyboard;
-            sb.Begin();
-        }
+        //public void ShowPopUp()
+        //{
+        //    if (Visibility != Visibility.Visible) Visibility = Visibility.Visible;
+        //    Visible = true;
+        //    var sb = this.FindResource("entrance") as Storyboard;
+        //    sb.Begin();
+        //}
 
-        public void HidePopUp()
-        {
-            Visible = false;
-            var sb = this.FindResource("exit") as Storyboard;
-            sb.Begin();
-        }
+        //public void HidePopUp()
+        //{
+        //    Visible = false;
+        //    var sb = this.FindResource("exit") as Storyboard;
+        //    sb.Begin();
+        //}
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
-            HidePopUp();
+            this.Close();
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -60,6 +61,39 @@ namespace PacChat
                 }
                 catch (Exception) { }
             }
+        }
+
+        private void LoadData()
+        {
+            var app = MainWindow.chatApplication;
+            foreach (var item in app.model.DownloadProgresses)
+            {
+                this.DownloadList.Children.Insert(0, item);
+            }
+        }
+
+        public static void ShowPopup()
+        {
+            if (_instance == null || !Application.Current.Windows.OfType<DownloadWindow>().Any())
+            {
+                _instance = new DownloadWindow();
+                _instance.LoadData();
+            }
+            _instance.Show();
+        }
+
+        public static DownloadWindow Instance
+        {
+            get
+            {
+                ShowPopup();
+                return _instance;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.DownloadList.Children.RemoveRange(0, this.DownloadList.Children.Count);
         }
     }
 }

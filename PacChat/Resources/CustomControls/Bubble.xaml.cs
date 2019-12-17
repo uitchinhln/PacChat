@@ -138,15 +138,17 @@ namespace PacChat.Resources.CustomControls
 
             if (dialog.ShowDialog() == true)
             {
-                if (!MainWindow.Instance.DownloadWindow.Visible)
-                {
-                    MainWindow.Instance.DownloadWindow.ShowPopUp();
-                }
+                //if (!MainWindow.Instance.DownloadWindow.Visible)
+                //{
+                //    MainWindow.Instance.DownloadWindow.ShowPopUp();
+                //}
+                var downloadWindow = DownloadWindow.Instance;
 
                 DownloadProgressNoti noti = new DownloadProgressNoti();
                 noti.SetFileName(textBlock.Text);
                 noti.FileLocation = dialog.FileName;
-                MainWindow.Instance.DownloadWindow.DownloadList.Children.Add(noti);
+                downloadWindow.DownloadList.Children.Insert(0, noti);
+                MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
 
                 FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
                     AttachmentLink.Content.ToString(), dialog.FileName,

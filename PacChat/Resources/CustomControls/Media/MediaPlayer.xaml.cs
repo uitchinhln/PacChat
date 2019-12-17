@@ -350,15 +350,17 @@ namespace PacChat.Resources.CustomControls.Media
             Directory.CreateDirectory(dir);
             String savePath = System.IO.Path.Combine(dir, currentBtn.FileName);
 
-            if (!MainWindow.Instance.DownloadWindow.Visible)
-            {
-                MainWindow.Instance.DownloadWindow.ShowPopUp();
-            }
+            //if (!MainWindow.Instance.DownloadWindow.Visible)
+            //{
+            //    MainWindow.Instance.DownloadWindow.ShowPopUp();
+            //}
+            var downloadWindow = DownloadWindow.Instance;
 
             DownloadProgressNoti noti = new DownloadProgressNoti();
-            noti.SetFileName(currentBtn.FileName);
-            noti.FileLocation = savePath;
-            MainWindow.Instance.DownloadWindow.DownloadList.Children.Add(noti);
+            noti.FileLocation = FileAPI.RepairSavePath(savePath);
+            noti.SetFileName(System.IO.Path.GetFileName(noti.FileLocation));
+            downloadWindow.DownloadList.Children.Insert(0, noti);
+            MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
 
             FileAPI.DownloadMedia(currentBtn.StreamURL, savePath,
                 noti.SetProgress, noti.FinalizeDownload, null);
