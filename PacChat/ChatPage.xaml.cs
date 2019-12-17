@@ -24,6 +24,7 @@ using PacChat.Network.RestAPI;
 using static PacChat.Network.RestAPI.FileAPI;
 using PacChat.Resources.CustomControls.Media;
 using PacChat.MessageCore.Sticker;
+using PacChat.Resources;
 
 namespace PacChat
 {
@@ -73,13 +74,22 @@ namespace PacChat
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
 
+            FakeLoadingBubble bubble = new FakeLoadingBubble();
+
             if (op.ShowDialog() == true)
             {
                 List<string> paths = op.FileNames.ToList();
                 var app = MainWindow.chatApplication;
                 FileAPI.UploadMedia(app.model.currentSelectedConversation,
-                    paths, OnImageUploadCompleted, OnImageUploadError);
+                    paths, bubble.OnImageUploadCompleted, OnImageUploadError);
+                AddFakeLoadingBubble(bubble);
             }
+        }
+
+        public void AddFakeLoadingBubble(FakeLoadingBubble bubble)
+        {
+            bubble.HorizontalAlignment = HorizontalAlignment.Right;
+            spMessagesContainer.Children.Add(bubble);
         }
 
         public void UploadVideo()
@@ -89,12 +99,15 @@ namespace PacChat
             op.Title = "Select a video";
             op.Filter = "MPEG4 (*.mp4)|*.mp4";
 
+            FakeLoadingBubble bubble = new FakeLoadingBubble();
+           
             if (op.ShowDialog() == true)
             {
                 List<string> paths = op.FileNames.ToList();
                 var app = MainWindow.chatApplication;
                 FileAPI.UploadMedia(app.model.currentSelectedConversation,
-                    paths, OnVideoUploadCompleted, OnVideoUploadError);
+                    paths, bubble.OnVideoUploadCompleted, OnVideoUploadError);
+                AddFakeLoadingBubble(bubble);
             }
         }
 
@@ -658,12 +671,15 @@ namespace PacChat
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a file";
 
+            FakeLoadingBubble bubble = new FakeLoadingBubble();
+
             if (op.ShowDialog() == true)
             {
                 List<string> paths = op.FileNames.ToList();
                 var app = MainWindow.chatApplication;
                 UploadAttachment(app.model.currentSelectedConversation,
-                    paths, OnFileUploadCompleted, OnFileUploadError);
+                    paths, bubble.OnFileUploadCompleted, OnFileUploadError);
+                AddFakeLoadingBubble(bubble);
             }
         }
 

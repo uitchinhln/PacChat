@@ -81,6 +81,8 @@
       <DependentUpon>DownloadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GetID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzSend.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversation.cs" />
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
@@ -195,6 +197,9 @@
     <Compile Include="Resources\CustomControls\Media\ThumbnailButton.xaml.cs">
       <DependentUpon>ThumbnailButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml.cs">
+      <DependentUpon>DownloadProgressNoti.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml.cs">
       <DependentUpon>FriendRequestAcceptedNoti.xaml</DependentUpon>
     </Compile>
@@ -221,6 +226,9 @@
     </Compile>
     <Compile Include="Resources\CustomControls\ThumbnailBubble.xaml.cs">
       <DependentUpon>ThumbnailBubble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FakeLoadingBubble.xaml.cs">
+      <DependentUpon>FakeLoadingBubble.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\StickerDialog.xaml.cs">
       <DependentUpon>StickerDialog.xaml</DependentUpon>
@@ -403,6 +411,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -442,6 +454,10 @@
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\FakeLoadingBubble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StickerDialog.xaml">
       <SubType>Designer</SubType>

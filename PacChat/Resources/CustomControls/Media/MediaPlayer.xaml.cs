@@ -3,6 +3,7 @@ using PacChat.Cache.Core;
 using PacChat.Network;
 using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.Network.RestAPI;
+using PacChat.Resources.CustomControls.Notifications;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -349,7 +350,20 @@ namespace PacChat.Resources.CustomControls.Media
             Directory.CreateDirectory(dir);
             String savePath = System.IO.Path.Combine(dir, currentBtn.FileName);
 
-            FileAPI.DownloadMedia(currentBtn.StreamURL, savePath, null, null, null);
+            //if (!MainWindow.Instance.DownloadWindow.Visible)
+            //{
+            //    MainWindow.Instance.DownloadWindow.ShowPopUp();
+            //}
+            var downloadWindow = DownloadWindow.Instance;
+
+            DownloadProgressNoti noti = new DownloadProgressNoti();
+            noti.FileLocation = FileAPI.RepairSavePath(savePath);
+            noti.SetFileName(System.IO.Path.GetFileName(noti.FileLocation));
+            downloadWindow.DownloadList.Children.Insert(0, noti);
+            MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
+
+            FileAPI.DownloadMedia(currentBtn.StreamURL, savePath,
+                noti.SetProgress, noti.FinalizeDownload, null);
         }
 
         private void BtnFullScreen_Click(object sender, RoutedEventArgs e)

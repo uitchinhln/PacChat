@@ -8,6 +8,7 @@ using PacChatServer.Network;
 using PacChatServer.Network.Packets.AfterLogin.Notification;
 using PacChatServer.Utils;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,10 +59,6 @@ namespace PacChatServer.Entity
 
         [BsonElement("Conversations")]
         public List<Guid> ConversationID { get; set; } = new List<Guid>();
-
-        //Key is conversation id, value is the last time it have action
-        [BsonIgnore]
-        public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         
         [BsonElement("NearestStickers")]
         public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();
@@ -75,6 +72,14 @@ namespace PacChatServer.Entity
 
         [BsonElement("Notifications")]
         public List<string> Notifications { get; set; } = new List<string>();
+
+        //Key is conversation id, value is the last time it have action
+        [BsonIgnore]
+        public ConcurrentDictionary<Guid, long> Conversations { get; private set; } = new ConcurrentDictionary<Guid, long>();
+
+        //Key is conversation id, value is the last time it have action
+        [BsonIgnore]
+        public ConcurrentDictionary<Guid, long> LastBuzz { get; private set; } = new ConcurrentDictionary<Guid, long>();
 
         public ChatUser()
         {
@@ -108,6 +113,11 @@ namespace PacChatServer.Entity
                     session.Send(packet);
                 }
             }
+        }
+
+        public void SendOnly(IPacket packet, ChatSession session)
+        {
+            session.Send(packet);
         }
 
         public void Online()

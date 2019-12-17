@@ -94,10 +94,8 @@ namespace PacChat
 
             SelfAvatar.ClickTrigger.Visibility = Visibility.Hidden;
             SelfAvatar.ClickTrigger.IsEnabled = false;
-            SelfAvatar.UserID = null;
             SelfAvatar.IsOnline = true;
-
-            SettingPage.Instance.SelfAvt.AvtDisplayer.UserID = null;
+            SelfAvatar.UpdateAllInstance();
 
             ProfileContext.BtnSignOut.Click += BtnSignOut_Click;
         }

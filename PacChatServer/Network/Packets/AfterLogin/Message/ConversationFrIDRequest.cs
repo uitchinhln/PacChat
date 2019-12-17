@@ -66,7 +66,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             packet.PreviewCode = -1;
             packet.PreviewContent = "";
 
-            session.Send(packet);
+            chatSession.Send(packet);
         }
     }
 }

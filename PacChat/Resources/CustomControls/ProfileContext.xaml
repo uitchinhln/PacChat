@@ -18,6 +18,13 @@
         <StackPanel DockPanel.Dock="Top" Margin="15,0,0,0">
             <Grid Height="26" Cursor="Hand">
                 <DockPanel>
+                    <materialDesign:PackIcon Kind="ProgressDownload" VerticalAlignment="Center" Height="Auto" Width="Auto" Margin="0,3,5,3" Foreground="#FF616161" />
+                    <Label VerticalContentAlignment="Center" FontWeight="Bold" FontSize="11.5">Download Manager</Label>
+                </DockPanel>
+                <Button x:Name="BtnDownload" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Padding="0"/>
+            </Grid>
+            <Grid Height="26" Cursor="Hand">
+                <DockPanel>
                     <materialDesign:PackIcon Kind="PersonSwitch" VerticalAlignment="Center" Height="Auto" Width="Auto" Margin="0,3,5,3" Foreground="#FF616161" />
                     <Label VerticalContentAlignment="Center" FontWeight="Bold" FontSize="11.5">Switch Account</Label>
                 </DockPanel>

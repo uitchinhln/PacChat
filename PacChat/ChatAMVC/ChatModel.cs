@@ -11,6 +11,7 @@ using PacChat.ChatPageContents.ViewModels;
 using static PacChat.Utils.UserUtils;
 using System.Windows.Controls;
 using PacChat.MessageCore.Message;
+using PacChat.Resources.CustomControls.Notifications;
 
 namespace PacChat.ChatAMVC
 {
@@ -38,6 +39,10 @@ namespace PacChat.ChatAMVC
         // Key: conversation-id, Value: index of media message in Messages list in Conversations
         public Dictionary<string, List<MediaPack>> MediaMessages { get; set; } = new Dictionary<string, List<MediaPack>>();
         public Dictionary<string, MediaPlayerWindow> MediaWindows { get; set; } = new Dictionary<string, MediaPlayerWindow>();
+        #endregion
+
+        #region OnDownloadManager
+        public List<DownloadProgressNoti> DownloadProgresses = new List<DownloadProgressNoti>();
         #endregion
 
         #region OnSettingPage

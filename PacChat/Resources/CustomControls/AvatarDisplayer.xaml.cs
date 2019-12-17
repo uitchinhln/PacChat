@@ -29,7 +29,6 @@ namespace PacChat.Resources.CustomControls
         public AvatarDisplayer()
         {
             InitializeComponent();
-            UserID = null;
             avatarInstance.Add(this);
         }
 
@@ -65,6 +64,7 @@ namespace PacChat.Resources.CustomControls
                     ProfileAPI.DownloadSelfAvatar((avaSource) =>
                     {
                         this.ImageAva.ImageSource = avaSource;
+                        LoadingAhihi.Visibility = Visibility.Hidden;
                     }, (ex) => Console.WriteLine(ex));
                 }
                 else
@@ -72,9 +72,9 @@ namespace PacChat.Resources.CustomControls
                     ProfileAPI.DownloadUserAvatar(UserID,(avaSource) =>
                     {
                         this.ImageAva.ImageSource = avaSource;
+                        LoadingAhihi.Visibility = Visibility.Hidden;
                     }, (ex) => Console.WriteLine(ex));
                 }
-                LoadingAhihi.Visibility = Visibility.Hidden;
             }
 
             if (e.Property == IsOnlineProperty)
@@ -104,27 +104,29 @@ namespace PacChat.Resources.CustomControls
             foreach (AvatarDisplayer item in filtered)
             {
                 item.ImageAva.ImageSource = source;
+                item.LoadingAhihi.Visibility = Visibility.Hidden;
             }
         }
 
         public void UpdateAllInstance(String userID = null)
         {
             LoadingAhihi.Visibility = Visibility.Visible;
-            if (String.IsNullOrEmpty(UserID))
+            if (String.IsNullOrEmpty(userID))
             {
                 ProfileAPI.DownloadSelfAvatar((avaSource) =>
                 {
                     UpdateAllInstance(avaSource);
+                    LoadingAhihi.Visibility = Visibility.Hidden;
                 }, (ex) => Console.WriteLine(ex));
             }
             else
             {
-                ProfileAPI.DownloadUserAvatar(UserID, (avaSource) =>
+                ProfileAPI.DownloadUserAvatar(userID, (avaSource) =>
                 {
-                    UpdateAllInstance(avaSource, UserID);
+                    UpdateAllInstance(avaSource, userID);
+                    LoadingAhihi.Visibility = Visibility.Hidden;
                 }, (ex) => Console.WriteLine(ex));
             }
-            LoadingAhihi.Visibility = Visibility.Hidden;
         }
 
         private void OnUnload(object sender, RoutedEventArgs e)

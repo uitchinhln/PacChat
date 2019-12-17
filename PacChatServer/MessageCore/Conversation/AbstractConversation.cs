@@ -81,20 +81,17 @@ namespace PacChatServer.MessageCore.Conversation
 
                 if (ChatUserManager.OnlineUsers.TryGetValue(userID, out user))
                 {
-                    if (userID.CompareTo(chatSession.Owner.ID) == 0)
-                        continue;
+                    //if (userID.CompareTo(chatSession.Owner.ID) == 0)
+                    //    continue;
 
                     SendMessageResponse packet = new SendMessageResponse();
                     packet.ConversationID = this.ID.ToString();
                     packet.Message = message;
                     packet.SenderID = chatSession.Owner.ID.ToString();
-                    user.Send(packet); //Add message packet here
+                    user.Send(packet, chatSession); //Add message packet here
 
-                    lock (user.Conversations)
-                    {
-                        user.Conversations.Remove(ID);
-                        user.Conversations.Add(ID, LastActive);
-                    }
+                    user.Conversations.TryRemove(ID, out long lact);
+                    user.Conversations.TryAdd(ID, LastActive);
                 }
             }
         }

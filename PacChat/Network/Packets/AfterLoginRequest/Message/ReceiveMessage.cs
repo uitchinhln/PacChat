@@ -75,10 +75,17 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
                 if (app.model.currentSelectedConversation.CompareTo(ConversationID) == 0)
                 {
-                    ChatPage.Instance.SendLeftMessages(Message, false);
-                    (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, true);
+                    if (app.model.SelfID.Equals(SenderID))
+                    {
+                        ChatPage.Instance.SendMessage(Message, true);
+                    }
+                    else
+                    {
+                        ChatPage.Instance.SendLeftMessages(Message, false);
+                        (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, true);
+                    }
                 }
-                else 
+                else if (!app.model.SelfID.Equals(SenderID))
                     (app.model.UserControls[SenderID] as UserMessage).IncomingMessage(Message, false);
             });
         }

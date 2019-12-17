@@ -145,7 +145,8 @@ namespace PacChat.Resources.CustomControls
             if (!app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
                 app.model.MediaWindows.Add(app.model.currentSelectedConversation, null);
 
-            if (app.model.MediaWindows[app.model.currentSelectedConversation] == null)
+            if (app.model.MediaWindows[app.model.currentSelectedConversation] == null
+                 || !Application.Current.Windows.OfType<MediaPlayerWindow>().Any(p => (p != null && p.ConversationID == app.model.currentSelectedConversation)))
                 app.model.MediaWindows[app.model.currentSelectedConversation] = new MediaPlayerWindow();
 
             var mediaWindow = app.model.MediaWindows[app.model.currentSelectedConversation];
@@ -163,6 +164,8 @@ namespace PacChat.Resources.CustomControls
                 mediaWindow.InitializeMedia();
                 mediaWindow.MediaPlayer.ShowMedia(fileID: FileID);
             }
+            mediaWindow.MediaPlayer.FillGallery();
+            mediaWindow.Activate();
         }
     }
 }

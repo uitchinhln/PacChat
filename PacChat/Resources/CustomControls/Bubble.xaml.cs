@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using PacChat.Network.RestAPI;
+using PacChat.Resources.CustomControls.Notifications;
 using PacChat.Utils;
 using System;
 using System.Collections.Generic;
@@ -137,9 +138,21 @@ namespace PacChat.Resources.CustomControls
 
             if (dialog.ShowDialog() == true)
             {
+                //if (!MainWindow.Instance.DownloadWindow.Visible)
+                //{
+                //    MainWindow.Instance.DownloadWindow.ShowPopUp();
+                //}
+                var downloadWindow = DownloadWindow.Instance;
+
+                DownloadProgressNoti noti = new DownloadProgressNoti();
+                noti.SetFileName(textBlock.Text);
+                noti.FileLocation = dialog.FileName;
+                downloadWindow.DownloadList.Children.Insert(0, noti);
+                MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
+
                 FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
                     AttachmentLink.Content.ToString(), dialog.FileName,
-                    DownloadProgress, OnDownloadFileCompleted, OnDownloadFileError);
+                    noti.SetProgress, noti.FinalizeDownload, OnDownloadFileError);
             }
         }
 

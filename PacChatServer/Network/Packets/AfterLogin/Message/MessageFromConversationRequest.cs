@@ -58,7 +58,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 }
             }
 
-            chatSession.Owner.Send(packet);
+            chatSession.Owner.SendOnly(packet, chatSession);
         }
     }
 }

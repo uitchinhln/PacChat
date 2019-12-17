@@ -54,6 +54,7 @@ namespace PacChat.ChatPageContents
             if (app.model.PrivateConversations.ContainsKey(ClickMask.Content.ToString()))
             {
                 app.model.currentSelectedConversation = app.model.PrivateConversations[ClickMask.Content.ToString()];
+                ChatPage.Instance.Avatar.UserID = ClickMask.Content.ToString();
             }
 
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
@@ -66,7 +67,7 @@ namespace PacChat.ChatPageContents
             ClickMask.Content = Id;
             FriendRequestBtn.IsEnabled = !Friend;
             IsFriend = Friend;
-            Avatar.UserID = Id;
+            SetAva(ClickMask.Content.ToString());
 
             if (IsFriend)
                 FriendRequestBtn.Content = "Unfriend";

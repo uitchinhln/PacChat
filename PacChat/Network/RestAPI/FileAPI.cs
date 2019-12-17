@@ -162,7 +162,7 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        private static String RepairSavePath(String savePath)
+        public static String RepairSavePath(String savePath)
         {
             string fileNameOnly = Path.GetFileNameWithoutExtension(savePath);
             string extension = Path.GetExtension(savePath);

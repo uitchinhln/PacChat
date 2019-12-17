@@ -23,6 +23,13 @@ namespace PacChat.Resources.CustomControls
         public ProfileContext()
         {
             InitializeComponent();
+
+            BtnDownload.Click += BtnDownload_Click;
+        }
+
+        private void BtnDownload_Click(object sender, RoutedEventArgs e)
+        {
+            var downloadWindow = DownloadWindow.Instance;
         }
     }
 }
