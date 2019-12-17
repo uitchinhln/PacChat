@@ -60,6 +60,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                             );
                             Console.WriteLine("Added");
                         }
+
+                        mediaPlayer.MediaPlayer.FillGallery();
                     }
                 }
             });

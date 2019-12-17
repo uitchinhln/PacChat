@@ -83,6 +83,10 @@ namespace PacChat
                 app.model.MediaWindows[ConversationID] = null;
             else
                 app.model.MediaWindows.Add(ConversationID, null);
+            if (app.model.Conversations.ContainsKey(ConversationID) && app.model.Conversations[ConversationID] != null)
+            {
+                app.model.Conversations[ConversationID].LastMediaID = app.model.Conversations[ConversationID].LastMediaIDBackup;
+            }
             this.Close();
         }
 

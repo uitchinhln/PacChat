@@ -24,6 +24,7 @@ namespace PacChat.Utils
         public List<string> Members { get; set; } = new List<string>();
         public int LastMessID { get; set; }
         public int LastMediaID { get; set; }
+        public int LastMediaIDBackup { get; set; }
         public int LastAttachmentID { get; set; }
         public string ConversationName { get; set; }
         public bool FirstTimeLoaded { get; set; } = true;

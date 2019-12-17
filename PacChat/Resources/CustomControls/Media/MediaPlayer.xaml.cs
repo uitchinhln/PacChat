@@ -282,6 +282,27 @@ namespace PacChat.Resources.CustomControls.Media
                     break;
                 }
             }
+            FillGallery();
+        }
+
+        public void FillGallery()
+        {
+            if (GalleryScroller.ComputedHorizontalScrollBarVisibility != Visibility.Visible && !IsReachedRight)
+            {
+                Console.WriteLine("Media conversation id: " + ConversationID);
+                var app = MainWindow.chatApplication;
+                if (!String.IsNullOrEmpty(ConversationID) && app.model.Conversations.ContainsKey(ConversationID) &&
+                    app.model.Conversations[ConversationID] != null)
+                    if (app.model.Conversations[ConversationID].LastMediaID >= 0)
+                    {
+                        GetMediaFromConversation packet = new GetMediaFromConversation();
+                        packet.ConversationID = ConversationID;
+                        packet.MediaPosition = app.model.Conversations[ConversationID].LastMediaID;
+                        packet.Quantity = 15;
+                        _ = ChatConnection.Instance.Send(packet);
+                        app.model.Conversations[ConversationID].LastMediaID -= 15;
+                    }
+            }
         }
 
         #region Horizontal Support

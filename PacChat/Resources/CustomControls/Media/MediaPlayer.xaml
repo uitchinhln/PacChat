@@ -35,7 +35,7 @@
                 </Button>
             </Grid>
             <DockPanel Margin="10,0,10,10" DockPanel.Dock="Bottom">
-                <ScrollViewer DockPanel.Dock="Bottom"
+                <ScrollViewer DockPanel.Dock="Bottom" x:Name="GalleryScroller"
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                         PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" ScrollChanged="OnScrollChanged">
                     <StackPanel x:Name="Gallery" Orientation="Horizontal" MaxHeight="90" Height="90">
