@@ -24,6 +24,7 @@ using PacChat.MessageCore.Sticker;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Network.RestAPI;
 using PacChat.Windows.Login;
+using System.ComponentModel;
 
 namespace PacChat
 {
@@ -188,6 +189,12 @@ namespace PacChat
         private void UserList_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            RestUtils.CancelAllTask();
+            base.OnClosing(e);
         }
     }
 }
