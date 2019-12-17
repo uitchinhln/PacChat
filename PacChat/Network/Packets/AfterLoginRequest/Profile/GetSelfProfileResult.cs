@@ -49,7 +49,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
                 setting.LastNameInp.Text = LastName;
                 setting.Email.Text = Email;
                 setting.BirthdayInp.SelectedDate = DateOfBirth;
-                setting.GenderInp.SelectedIndex = (int)Gender;
+                setting.GenderInp.SelectedIndex = (int)Gender - 1;
                 setting.AddressInp.Text = Town;
 
                 MainWindow.Instance.ProfileContext.FullName.Content = FirstName + " " + LastName;
