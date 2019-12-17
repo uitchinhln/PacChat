@@ -30,6 +30,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         {
             ChatSession chatSession = session as ChatSession;
 
+            if (!chatSession.Owner.ConversationID.Contains(ConversationID)) return;
+
             AbstractConversation conversation = ConversationManager.GetConversation(ConversationID);
 
             if (conversation == null) return;
