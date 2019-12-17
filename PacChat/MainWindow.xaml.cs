@@ -23,6 +23,7 @@ using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.MessageCore.Sticker;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Network.RestAPI;
+using PacChat.Windows.Login;
 
 namespace PacChat
 {
@@ -98,20 +99,13 @@ namespace PacChat
 
             SettingPage.Instance.SelfAvt.AvtDisplayer.UserID = null;
 
-            // Media window
-            //MediaPlayerWindow = new MediaPlayerWindow();
-            //MediaPlayerWindow.Show();
+            ProfileContext.BtnSignOut.Click += BtnSignOut_Click;
+        }
 
-            /*
-            try
-            {
-                GetFriendIDs data = new GetFriendIDs();
-                _ = ChatConnection.Instance.Send(data);
-            } catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            */
+        private void BtnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppDomain.CurrentDomain.FriendlyName));
+            Environment.Exit(0);
         }
 
         private void FormDrag(object sender, MouseEventArgs e)

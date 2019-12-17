@@ -85,7 +85,7 @@
                             <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <customcontrols:ProfileContext Width="250"></customcontrols:ProfileContext>
+                            <customcontrols:ProfileContext x:Name="ProfileContext" Width="250"></customcontrols:ProfileContext>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </DockPanel>
