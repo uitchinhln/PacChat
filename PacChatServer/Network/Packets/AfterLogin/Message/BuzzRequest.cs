@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.MessageCore;
 using PacChatServer.MessageCore.Conversation;
 using System;
@@ -34,7 +35,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
             AbstractConversation conversation = ConversationManager.GetConversation(ConversationID);
 
-            if (conversation == null) return;
+            if (conversation == null || conversation is GroupConversation) return;
 
             if (chatSession.Owner.LastBuzz.ContainsKey(ConversationID))
             {
@@ -52,6 +53,9 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             {
                 if (ChatUserManager.IsOnline(guid) && guid != chatSession.Owner.ID)
                 {
+                    chatSession.Owner.Relationship.TryGetValue(guid, out var relationID);
+                    Relation relation = Relation.Get(relationID);
+                    if (relation == null || relation.RelationType != Relation.Type.Friend) continue;
                     ChatUserManager.LoadUser(guid).Send(message);
                 } 
             }
