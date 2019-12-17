@@ -15,11 +15,11 @@
 
         <DockPanel>
             <!--AVATAR pic -->
-            <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0"/>
 
             <!---Messages path -->
-            <StackPanel>
-                <Label Name="NickName" Content="Nick Name bla bla"/>
+            <StackPanel VerticalAlignment="Top">
+                <Label Name="NickName" Content="Nick Name bla bla" VerticalAlignment="Top" Padding="4,0,4,4"/>
                 <StackPanel x:Name="spMessContainer" Margin="7,0,0,0">
                     <!-- Nick name label -->
                 </StackPanel>
