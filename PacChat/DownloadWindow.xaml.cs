@@ -80,7 +80,10 @@ namespace PacChat
                 _instance = new DownloadWindow();
                 _instance.LoadData();
             }
-            _instance.ShowPopUp();
+            if (!_instance.Visible)
+            {
+                _instance.ShowPopUp();
+            }
             _instance.Activate();
         }
 
