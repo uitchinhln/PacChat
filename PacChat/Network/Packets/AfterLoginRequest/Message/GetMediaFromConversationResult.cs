@@ -40,24 +40,28 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Application.Current.Dispatcher.Invoke(() =>
             {
                 MainWindow.Instance.MediaPlayerWindow = new MediaPlayerWindow();
-                var mediaPlayer = MainWindow.Instance.MediaPlayerWindow;
                 var app = MainWindow.chatApplication;
 
-                for (int i = 0; i < FileIDs.Count; ++i)
+                if (app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
                 {
-                    mediaPlayer.MediaPlayer.AddMediaItem
-                    (
-                        conversationID: app.model.currentSelectedConversation,
-                        fileID: FileIDs[i],
-                        fileName: FileNames[i],
-                        position: Positions[i],
-                        reachedRight: app.model.Conversations[app.model.currentSelectedConversation].LastMediaID <= 0
-                    );
-                    Console.WriteLine("Added");
-                }
+                    if (app.model.MediaWindows[app.model.currentSelectedConversation] != null)
+                    {
+                        var mediaPlayer = app.model.MediaWindows[app.model.currentSelectedConversation];
 
-                MainWindow.Instance.MediaPlayerWindow.MediaPlayer.ShowMedia(app.model.currentMediaFileID);
-                MainWindow.Instance.MediaPlayerWindow.ShowDialog();
+                        for (int i = 0; i < FileIDs.Count; ++i)
+                        {
+                            mediaPlayer.MediaPlayer.AddMediaItem
+                            (
+                                conversationID: app.model.currentSelectedConversation,
+                                fileID: FileIDs[i],
+                                fileName: FileNames[i],
+                                position: Positions[i],
+                                reachedRight: app.model.Conversations[app.model.currentSelectedConversation].LastMediaID < 0
+                            );
+                            Console.WriteLine("Added");
+                        }
+                    }
+                }
             });
         }
     }

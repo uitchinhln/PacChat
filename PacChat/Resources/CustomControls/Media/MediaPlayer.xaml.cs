@@ -1,5 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using PacChat.Cache.Core;
+using PacChat.Network;
+using PacChat.Network.Packets.AfterLoginRequest.Message;
 using PacChat.Network.RestAPI;
 using System;
 using System.Collections.Generic;
@@ -42,6 +44,7 @@ namespace PacChat.Resources.CustomControls.Media
 
         int borderRight = int.MaxValue;
         public bool IsReachedRight { get; set; } = false;
+        public string ConversationID { get; set; }
 
         Thread imgThread, thumbThread;
 
@@ -77,7 +80,8 @@ namespace PacChat.Resources.CustomControls.Media
                         WebClient wc = new WebClient();
                         BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(url)));
                         wc.Dispose();
-                        Application.Current.Dispatcher.Invoke(() => {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
                             SetBackground(bitmap);
                         });
                     }
@@ -166,7 +170,8 @@ namespace PacChat.Resources.CustomControls.Media
 
                     ImgFull.Visibility = Visibility.Visible;
                     LoadingAhihi.Visibility = Visibility.Hidden;
-                } else
+                }
+                else
                 {
                     if (imgThread != null && imgThread.IsAlive)
                         imgThread.Abort();
@@ -177,7 +182,8 @@ namespace PacChat.Resources.CustomControls.Media
                             WebClient wc = new WebClient();
                             BitmapFrame bitmap = BitmapFrame.Create(new MemoryStream(wc.DownloadData(imageURL)));
                             wc.Dispose();
-                            Application.Current.Dispatcher.Invoke(() => {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
                                 ImgCache.AddReplace(imageURL, bitmap);
                                 ImgFull.Source = bitmap;
 
@@ -187,14 +193,16 @@ namespace PacChat.Resources.CustomControls.Media
 
                                 LoadingAhihi.Visibility = Visibility.Hidden;
                             });
-                        } catch (Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             Console.WriteLine(ex);
                         }
                     });
                     imgThread.Start();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -205,10 +213,11 @@ namespace PacChat.Resources.CustomControls.Media
             ThumbnailButton btn = new ThumbnailButton(media);
 
             btn.Click += BtnClick;
-            if (index > Gallery.Children.Count-1)
+            if (index > Gallery.Children.Count - 1)
             {
                 Gallery.Children.Add(btn);
-            } else
+            }
+            else
             {
                 Gallery.Children.Insert(index, btn);
             }
@@ -221,6 +230,7 @@ namespace PacChat.Resources.CustomControls.Media
 
         public void AddMediaItem(String conversationID, String fileID, String fileName, int position, bool reachedRight = false)
         {
+            Console.WriteLine("reached right: " + reachedRight);
             foreach (var uiElement in Gallery.Children)
             {
                 if (!(uiElement is ThumbnailButton)) continue;
@@ -294,6 +304,19 @@ namespace PacChat.Resources.CustomControls.Media
                 if (!IsReachedRight)
                 {
                     //Request data here
+                    Console.WriteLine("Media conversation id: " + ConversationID);
+                    var app = MainWindow.chatApplication;
+                    if (!String.IsNullOrEmpty(ConversationID) && app.model.Conversations.ContainsKey(ConversationID) &&
+                        app.model.Conversations[ConversationID] != null)
+                        if (app.model.Conversations[ConversationID].LastMediaID >= 0)
+                        {
+                            GetMediaFromConversation packet = new GetMediaFromConversation();
+                            packet.ConversationID = ConversationID;
+                            packet.MediaPosition = app.model.Conversations[ConversationID].LastMediaID;
+                            packet.Quantity = 5;
+                            _ = ChatConnection.Instance.Send(packet);
+                            app.model.Conversations[ConversationID].LastMediaID -= 5;
+                        }
                 }
             }
         }
@@ -313,7 +336,8 @@ namespace PacChat.Resources.CustomControls.Media
             if (FullScreenIcon.Kind == PackIconKind.Fullscreen)
             {
                 FullScreenIcon.Kind = PackIconKind.FullscreenExit;
-            } else
+            }
+            else
             {
                 FullScreenIcon.Kind = PackIconKind.Fullscreen;
             }

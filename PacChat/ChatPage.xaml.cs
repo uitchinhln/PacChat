@@ -208,15 +208,43 @@ namespace PacChat
             if (!app.model.MediaMessages.ContainsKey(app.model.currentSelectedConversation))
                 app.model.MediaMessages.Add(app.model.currentSelectedConversation, new List<MediaPack>());
 
+            var mediaPack = new MediaPack() { FileID = fileID, FileName = fileName };
+
+            MediaPlayerWindow mediaWin = null;
+            if (app.model.MediaWindows.ContainsKey(app.model.currentSelectedConversation))
+                mediaWin = app.model.MediaWindows[app.model.currentSelectedConversation];
+
             if (isSimulating)
             {
-                app.model.MediaMessages[app.model.currentSelectedConversation].
-                    Add(new MediaPack() { FileID = fileID, FileName = fileName });
+                if (app.model.MediaMessages[app.model.currentSelectedConversation].
+                    FindIndex(x => x.FileID.Equals(mediaPack.FileID)) < 0)
+                {
+                    app.model.MediaMessages[app.model.currentSelectedConversation].
+                        Add(mediaPack);
+                    if (mediaWin != null)
+                        mediaWin.MediaPlayer.AddMediaItem
+                        (
+                            app.model.currentSelectedConversation,
+                            fileID, fileName, 0
+                        );
+                    app.model.Conversations[app.model.currentSelectedConversation].LastMediaID--;
+                }
             }
             else
             {
-                app.model.MediaMessages[app.model.currentSelectedConversation].
-                    Insert(0, new MediaPack() { FileID = fileID, FileName = fileName });
+                if (app.model.MediaMessages[app.model.currentSelectedConversation].
+                    FindIndex(x => x.FileID.Equals(mediaPack.FileID)) < 0)
+                {
+                    app.model.MediaMessages[app.model.currentSelectedConversation].
+                        Insert(0, mediaPack);
+                    if (mediaWin != null)
+                        mediaWin.MediaPlayer.AddMediaItemToFirst
+                        (
+                            app.model.currentSelectedConversation,
+                            fileID, fileName, 0
+                        );
+                    app.model.Conversations[app.model.currentSelectedConversation].LastMediaID--;
+                }
             }
 
             return;
@@ -359,6 +387,7 @@ namespace PacChat
                 if (_headBubbleChat == null)
                 {
                     _headBubbleChat = new BubbleChat();
+                    _headBubbleChat.SetAva(msg.SenderID);
                     spMessagesContainer.Children.Insert(0, _headBubbleChat);
                 }
             }
@@ -367,6 +396,7 @@ namespace PacChat
                 if (_previousBubbleChat == null)
                 {
                     _previousBubbleChat = new BubbleChat();
+                    _previousBubbleChat.SetAva(msg.SenderID);
                     spMessagesContainer.Children.Add(_previousBubbleChat);
                 }
             }

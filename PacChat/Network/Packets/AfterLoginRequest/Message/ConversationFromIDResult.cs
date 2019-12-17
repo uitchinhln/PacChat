@@ -65,7 +65,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
 
-                if (app.model.MediaWindows.ContainsKey(ConversationID))
+                if (app.model.MediaWindows.ContainsKey(ConversationID)
+                && app.model.MediaWindows[ConversationID] != null)
                 {
                     app.model.MediaWindows[ConversationID].Close();
                     app.model.MediaWindows[ConversationID] = null;
@@ -81,7 +82,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                     string timeUnit = "minute";
 
                     if (LastActive > 1) timeUnit += "s";
-                    
+
                     if (LastActive > 59)
                     {
                         timeUnit = "hour";

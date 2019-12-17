@@ -96,6 +96,8 @@ namespace PacChat
             SelfAvatar.UserID = null;
             SelfAvatar.IsOnline = true;
 
+            SettingPage.Instance.SelfAvt.AvtDisplayer.UserID = null;
+
             // Media window
             //MediaPlayerWindow = new MediaPlayerWindow();
             //MediaPlayerWindow.Show();

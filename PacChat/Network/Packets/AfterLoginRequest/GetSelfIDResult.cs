@@ -28,7 +28,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public void Handle(ISession session)
         {
             Application.Current.Dispatcher.Invoke(() =>
-            MainWindow.chatApplication.model.SelfID = ID);
+            {
+                MainWindow.chatApplication.model.SelfID = ID;
+            });
         }
     }
 }
