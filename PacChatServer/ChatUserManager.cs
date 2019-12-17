@@ -33,7 +33,7 @@ namespace PacChatServer
                     foreach (Guid cid in result.ConversationID)
                     {
                         time = conversationStore.GetLastActive(cid);
-                        result.Conversations.Add(cid, time);
+                        result.Conversations.TryAdd(cid, time);
                     }
                 }
             } catch (Exception e)
