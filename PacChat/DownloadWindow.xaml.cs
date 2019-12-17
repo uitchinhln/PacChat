@@ -1,6 +1,7 @@
 ﻿using PacChat.Resources.CustomControls.Notifications;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,20 +32,20 @@ namespace PacChat
             Visible = false;
         }
 
-        //public void ShowPopUp()
-        //{
-        //    if (Visibility != Visibility.Visible) Visibility = Visibility.Visible;
-        //    Visible = true;
-        //    var sb = this.FindResource("entrance") as Storyboard;
-        //    sb.Begin();
-        //}
+        private void ShowPopUp()
+        {
+            if (Visibility != Visibility.Visible) Visibility = Visibility.Visible;
+            Visible = true;
+            var sb = this.FindResource("entrance") as Storyboard;
+            sb.Begin();
+        }
 
-        //public void HidePopUp()
-        //{
-        //    Visible = false;
-        //    var sb = this.FindResource("exit") as Storyboard;
-        //    sb.Begin();
-        //}
+        private void HidePopUp()
+        {
+            Visible = false;
+            var sb = this.FindResource("exit") as Storyboard;
+            sb.Begin();
+        }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -79,7 +80,8 @@ namespace PacChat
                 _instance = new DownloadWindow();
                 _instance.LoadData();
             }
-            _instance.Show();
+            _instance.ShowPopUp();
+            _instance.Activate();
         }
 
         public static DownloadWindow Instance
@@ -91,9 +93,11 @@ namespace PacChat
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
+            this.HidePopUp();
             this.DownloadList.Children.RemoveRange(0, this.DownloadList.Children.Count);
+            base.OnClosing(e);
         }
     }
 }

@@ -165,6 +165,7 @@ namespace PacChat.Resources.CustomControls
                 mediaWindow.MediaPlayer.ShowMedia(fileID: FileID);
             }
             mediaWindow.MediaPlayer.FillGallery();
+            mediaWindow.Activate();
         }
     }
 }
