@@ -39,6 +39,7 @@ namespace PacChat
         public static int ScreenHeight{ get; set; }
 
         public MediaPlayerWindow MediaPlayerWindow { get; set; }
+        public DownloadWindow DownloadWindow { get; set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -100,6 +101,8 @@ namespace PacChat
             SettingPage.Instance.SelfAvt.AvtDisplayer.UserID = null;
 
             ProfileContext.BtnSignOut.Click += BtnSignOut_Click;
+
+            DownloadWindow = new DownloadWindow();
         }
 
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
