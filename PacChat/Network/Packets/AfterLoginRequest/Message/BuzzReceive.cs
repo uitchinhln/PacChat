@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
+using System.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,12 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
         public void Handle(ISession session)
         {
-            
+            var app = MainWindow.chatApplication;
+            Application.Current.Dispatcher.Invoke(() => 
+            {
+                ChatPage.Instance.Buzz();
+                Console.WriteLine(ConversationID);
+            });
         }
     }
 }
