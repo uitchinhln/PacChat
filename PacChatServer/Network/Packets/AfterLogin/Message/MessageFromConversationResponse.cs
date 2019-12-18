@@ -27,6 +27,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         // Text content is content of text message (if preview code is equal to 4)
         public List<AbstractMessage> Content { get; set; } = new List<AbstractMessage>();
 
+        public bool LoadConversation { get; set; }
+
         public void Decode(IByteBuffer buffer)
         {
             throw new NotImplementedException();
@@ -40,6 +42,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 byteBuf = Content[i].EncodeToBuffer(byteBuf);
             }
             ByteBufUtils.WriteUTF8(byteBuf, "~");
+            byteBuf.WriteBoolean(LoadConversation);
             return byteBuf;
         }
 

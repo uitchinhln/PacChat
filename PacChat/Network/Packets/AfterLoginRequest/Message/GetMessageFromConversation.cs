@@ -15,6 +15,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public string ConversationID { get; set; }
         public int MessagePosition { get; set; }
         public int Quantity { get; set; }
+        public bool LoadConversation { get; set; } = false;
 
         public void Decode(IByteBuffer buffer)
         {
@@ -25,6 +26,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             ByteBufUtils.WriteUTF8(byteBuf, ConversationID);
             byteBuf.WriteInt(MessagePosition);
             byteBuf.WriteInt(Quantity);
+            byteBuf.WriteBoolean(LoadConversation);
 
             return byteBuf;
         }

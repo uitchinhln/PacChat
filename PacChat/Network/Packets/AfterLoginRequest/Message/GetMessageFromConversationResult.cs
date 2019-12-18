@@ -33,6 +33,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
         public List<string> SenderID { get; set; } = new List<string>();
 
         public List<AbstractMessage> Content { get; set; } = new List<AbstractMessage>();
+        public bool LoadConversation { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -93,6 +94,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 Content.Add(Message);
                 temp = ByteBufUtils.ReadUTF8(buffer);
             }
+
+            LoadConversation = buffer.ReadBoolean();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -113,11 +116,11 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                     if (app.model.SelfID.CompareTo(SenderID[i]) == 0)
                         ChatPage.Instance.SendMessage(
                             Content[i],
-                            true, true);
+                            true, true, LoadConversation);
                     else
                         ChatPage.Instance.SendLeftMessages(
                             Content[i],
-                            true, true);
+                            true, true, LoadConversation);
                 }
             });
         }

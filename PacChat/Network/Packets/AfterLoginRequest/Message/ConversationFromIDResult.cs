@@ -78,7 +78,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 //    app.model.MediaWindows[ConversationID].Close();
                 //    app.model.MediaWindows[ConversationID] = null;
                 //}
-                ChatPage.Instance.LoadMessages(ConversationID);
+                ChatPage.Instance.LoadMessages(ConversationID, true);
                 //MainWindow.Instance.MediaPlayerWindow.MediaPlayer.Clean();
 
                 Console.WriteLine("Conversation load");

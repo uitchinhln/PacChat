@@ -322,7 +322,7 @@ namespace PacChat
                 );
         }
 
-        public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false) //on the Rightside
+        public void SendMessage(AbstractMessage msg, bool isSimulating = false, bool reversed = false, bool loadConversation = false) //on the Rightside
         {
             if (reversed) _headBubbleChat = null;
             else _previousBubbleChat = null;
@@ -391,6 +391,10 @@ namespace PacChat
             {
                 if (b != null) spMessagesContainer.Children.Insert(0, b);
                 if (thumbnail != null) spMessagesContainer.Children.Insert(0, thumbnail);
+                if (loadConversation)
+                    MessagesContainer.ScrollToEnd();
+                else
+                    MessagesContainer.ScrollToHome();
             }
             else
             {
@@ -411,7 +415,7 @@ namespace PacChat
             _ = ChatConnection.Instance.Send(packet);
         }
 
-        public void SendLeftMessages(AbstractMessage msg, bool isSimulating = false, bool reversed = false)
+        public void SendLeftMessages(AbstractMessage msg, bool isSimulating = false, bool reversed = false, bool loadConversation = false)
         {
             Console.WriteLine(msg.SenderID);
 
@@ -491,6 +495,10 @@ namespace PacChat
             {
                 if (b != null) _headBubbleChat.InsertBubble(0, b);
                 if (thumbnail != null) _headBubbleChat.InsertMedia(thumbnail);
+                if (loadConversation)
+                    MessagesContainer.ScrollToEnd();
+                else
+                    MessagesContainer.ScrollToHome();
             }
             else
             {
@@ -542,6 +550,7 @@ namespace PacChat
                 packet.UserID = userID;
                 _ = ChatConnection.Instance.Send(packet);
                 Console.WriteLine("Create conversation");
+                LoadMessagesBtn.Visibility = Visibility.Collapsed;
                 return;
             }
 
@@ -553,7 +562,7 @@ namespace PacChat
             return;
         }
 
-        public void LoadMessages(string conversationID)
+        public void LoadMessages(string conversationID, bool loadConversation = false)
         {
             Console.WriteLine("Load mess");
             var app = MainWindow.chatApplication;
@@ -563,6 +572,7 @@ namespace PacChat
             msgPacket.ConversationID = conversationID;
             msgPacket.MessagePosition = app.model.Conversations[conversationID].LastMessID;
             msgPacket.Quantity = 10;
+            msgPacket.LoadConversation = loadConversation;
             app.model.Conversations[conversationID].LastMessID -= 10;
             _ = ChatConnection.Instance.Send(msgPacket);
 

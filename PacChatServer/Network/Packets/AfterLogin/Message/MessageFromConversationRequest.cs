@@ -18,12 +18,14 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         public Guid ConversationID { get; set; }
         public int MessagePosition { get; set; }
         public int Quantity { get; set; }
+        public bool LoadConversation { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             ConversationID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
             MessagePosition = buffer.ReadInt();
             Quantity = buffer.ReadInt();
+            LoadConversation = buffer.ReadBoolean();
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -57,6 +59,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                     packet.Content.Add(mess);
                 }
             }
+
+            packet.LoadConversation = LoadConversation;
 
             chatSession.Owner.SendOnly(packet, chatSession);
         }
