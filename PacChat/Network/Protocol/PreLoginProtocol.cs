@@ -24,6 +24,9 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x03, new RegisterResult());
             Outbound(0x03, new RegisterData());
+
+            Inbound(0x04, new ReconnectResponse());
+            Outbound(0x04, new ReconnectResquest());
         }
     }
 }

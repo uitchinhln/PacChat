@@ -1,4 +1,5 @@
-﻿using PacChatServer.IO.Entity;
+﻿using PacChatServer.Cache.Core;
+using PacChatServer.IO.Entity;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace PacChatServer.Entity.Meta.Profile
 {
     public class ProfileCache
     {
-        ConcurrentDictionary<Guid, ChatUserProfile> StoredProfiles { get; set; } = new ConcurrentDictionary<Guid, ChatUserProfile>();
+        LRUCache<Guid, ChatUserProfile> StoredProfiles { get; set; } = new LRUCache<Guid, ChatUserProfile>(1000, 20);
         ConcurrentDictionary<string, Guid> MappedEmail { get; set; } = new ConcurrentDictionary<string, Guid>();
 
         private ProfileCache()
@@ -20,15 +21,15 @@ namespace PacChatServer.Entity.Meta.Profile
 
         public ChatUserProfile GetUserProfile(Guid id)
         {
-            if (StoredProfiles.ContainsKey(id))
+            if (StoredProfiles.Contains(id))
             {
-                return StoredProfiles[id];
+                return StoredProfiles.Get(id);
             }
 
             ChatUserProfile profile = new UserProfileStore().LoadById(id);
             if (profile == null) return null;
 
-            StoredProfiles.TryAdd(profile.ID, profile);
+            StoredProfiles.AddReplace(profile.ID, profile);
             MappedEmail.TryAdd(profile.Email.ToLower(), profile.ID);
 
             return profile;
@@ -51,7 +52,7 @@ namespace PacChatServer.Entity.Meta.Profile
             if (profile == null) return Guid.Empty;
 
             MappedEmail.TryAdd(email.ToLower(), profile.ID);
-            StoredProfiles.TryAdd(profile.ID, profile);
+            StoredProfiles.AddReplace(profile.ID, profile);
 
             return profile.ID;
         }

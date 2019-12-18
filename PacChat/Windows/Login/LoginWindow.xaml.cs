@@ -76,7 +76,7 @@ namespace PacChat.Windows.Login
 
         private void CloseApp(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Environment.Exit(Environment.ExitCode);
         }
 
         private void TabClick(object sender, RoutedEventArgs e)

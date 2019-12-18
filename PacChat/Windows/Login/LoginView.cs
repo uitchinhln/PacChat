@@ -22,6 +22,8 @@ namespace PacChat.Windows.Login
         private bool lgRemember;
         public bool LgRemember { get => lgRemember; set { lgRemember = value; OnPropertyChanged(); } }
 
+        private string lgPassword;
+
         public ICommand LoginCommand { get; set; }
 
         // Register Data
@@ -80,6 +82,7 @@ namespace PacChat.Windows.Login
             // Then notify to controller
             DialogHost.Show(new WaitingDialog());
             app.controller.OnLogin(LgUserName, wnd.LgPassword.Password, LgRemember);
+            lgPassword = wnd.LgPassword.Password;
         }
 
         public void EnterMainWindow()
@@ -87,6 +90,7 @@ namespace PacChat.Windows.Login
             MainWindow main = new MainWindow();
             Application.Current.MainWindow = main;
             main.Show();
+            MainWindow.chatApplication.model.Hashed = HashUtils.MD5(lgPassword);
             CloseAction();
         }
 

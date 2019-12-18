@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.MVC
 {
     public class AppManager
     {
-        public static bool isLostConnection { get; private set; }
-
         public static List<App> apps { get; private set; } = new List<App>();
 
         /// <summary>
@@ -19,9 +18,6 @@ namespace PacChat.MVC
         /// <returns></returns>
         public static App GetAppOfType<T>() where T : App
         {
-            if (isLostConnection)
-                throw new Exception("Lost connection to server.");
-
             foreach (App app in apps)
             {
                 if (app is T)
@@ -50,12 +46,12 @@ namespace PacChat.MVC
         // This will be called when connection to server is lost
         public static void OnDisconnection(bool lostConnection = false)
         {
-            isLostConnection = lostConnection;
+            
         }
 
         public static void OnReconnected()
         {
-            isLostConnection = false;
+            
         }
     }
 }

@@ -4,6 +4,7 @@ using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using PacChat.MVC;
+using PacChat.Network.Packets;
 using PacChat.Network.Pipeline;
 using PacChat.Network.Protocol;
 using System;
@@ -12,7 +13,9 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network
 {
@@ -30,6 +33,8 @@ namespace PacChat.Network
 
         public String WebHost { get; private set; } = String.Empty;
         public int WebPort { get; private set; } = 1402;
+
+        private bool CanReconnect = false;
 
         private ChatConnection(ProtocolProvider protocolProvider)
         {
@@ -83,7 +88,17 @@ namespace PacChat.Network
         public void SessionInactivated(ISession session)
         {
             Console.WriteLine("Server has disconnected!!!");
-            AppManager.OnDisconnection(lostConnection:true);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AppManager.OnDisconnection(lostConnection: true);
+            });
+            if (CanReconnect)
+            {
+                ReconnectResquest packet = new ReconnectResquest();
+                packet.UserID = MainWindow.chatApplication.model.SelfID;
+                packet.UserID = MainWindow.chatApplication.model.SelfID;
+                Send(packet);
+            }
         }
 
         public void Shutdown()
@@ -107,7 +122,6 @@ namespace PacChat.Network
                 if (Session == null || !IsConnected())
                 {
                     await Bind();
-                    AppManager.OnReconnected();
                 }
                 if (Session == null || !IsConnected())
                 {
@@ -116,8 +130,28 @@ namespace PacChat.Network
                 Session.Send(packet);
             } catch 
             {
+                if (packet is ReconnectResquest && CanReconnect)
+                {
+                    new Task(() =>
+                    {
+                        Console.WriteLine("Reconnecting...");
+                        Thread.Sleep(15000);
+                        Send(packet);
+                    }).Start();
+                }
                 throw;
             }
+        }
+
+        public void OnResponse(int code)
+        {
+            if (code == 200)
+            {
+                CanReconnect = true;
+                Console.WriteLine("Reconnected!");
+            }
+            else
+                CanReconnect = false;
         }
 
         public static ChatConnection Instance

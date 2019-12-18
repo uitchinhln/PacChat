@@ -20,6 +20,10 @@ namespace PacChat.ChatAMVC
         public static List<string> FriendIDs { get; set; } = new List<string>();
         public static Dictionary<string, ShortProfile> FriendShortProfiles = new Dictionary<string, ShortProfile>();
 
+        #region for reconnect
+        public string Hashed;
+        #endregion
+
         public string SelfID { get; set; }
         public string currentMediaFileID { get; set; } = "";
  

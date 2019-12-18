@@ -139,6 +139,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPassword.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPasswordResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\UpdateSelfProfile.cs" />
+    <Compile Include="Network\Packets\ReconnectResponse.cs" />
+    <Compile Include="Network\Packets\ReconnectResquest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Sticker\BuyStickerCategoryRequest.cs" />
