@@ -33,7 +33,7 @@ namespace PacChat.Windows.Login
         public string RegLastName { get => regLastName; set { regLastName = value; OnPropertyChanged(); } }
         private string regUserName;
         public string RegUserName { get => regUserName; set { regUserName = value; OnPropertyChanged(); } }
-        private DateTime regDoB = DateTime.Now.AddYears(-13);
+        private DateTime regDoB = DateTime.UtcNow.AddYears(-13);
         public DateTime RegDoB { get => regDoB; set { regDoB = value; OnPropertyChanged(); } }
         private Gender regGender;
         public Gender RegGender { get => regGender; set { regGender = value; OnPropertyChanged(); } }

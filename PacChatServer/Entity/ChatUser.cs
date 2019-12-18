@@ -47,11 +47,11 @@ namespace PacChatServer.Entity
 
         //LastLogon is the time that last session logged in
         [BsonElement("LastLogon")]
-        public DateTime LastLogon { get; set; } = DateTime.Now;
+        public DateTime LastLogon { get; set; } = DateTime.UtcNow;
 
         //LastLogoff is the time that last session logged out
         [BsonElement("LastLogoff")]
-        public DateTime LastLogoff { get; set; } = DateTime.Now;
+        public DateTime LastLogoff { get; set; } = DateTime.UtcNow;
 
         //Key is id of user who have a reationship with this user, Value is id of relationship
         [BsonElement("Relationship"), BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
