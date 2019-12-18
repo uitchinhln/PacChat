@@ -144,5 +144,19 @@ namespace PacChat.Resources.CustomControls
         }
         #endregion
 
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            AvatarDisplayer demo = avatarInstance.Where(p => p.UserID == this.UserID).FirstOrDefault();
+            if (demo != null)
+            {
+                this.ImageAva.ImageSource = demo.ImageAva.ImageSource;
+                this.LoadingAhihi.Visibility = Visibility.Hidden;
+            } else
+            {
+                this.UserID = this.UserID;
+            }
+            if (!avatarInstance.Contains(this))
+                avatarInstance.Add(this);
+        }
     }
 }
