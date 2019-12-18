@@ -19,7 +19,7 @@
                     <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
                 </StackPanel>
 
-                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
                     <!-- General tab -->
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <ScrollViewer>
@@ -123,37 +123,10 @@
                                     <Border>
                                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
-                                            <Border Width="96" Height="131" Margin="10" Background="#9BD494" CornerRadius="10">
-                                                <RadioButton Margin="39,103,39,10"/>
-                                            </Border>
-
-                                            <Border Width="96" Height="131" Margin="10" Background="#7EC4EA" CornerRadius="10">
-                                                <RadioButton Margin="39,103,39,10"/>
-                                            </Border>
-
-
-                                            <Border Width="96" Height="131" Margin="10" Background="#41464B" CornerRadius="10">
-                                                <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
-                                            </Border>
-
-
-                                            <Border Width="96" Height="131" Margin="10" Background="#485761" CornerRadius="10">
-                                                <RadioButton Margin="39,103,39,10" Background="White" BorderBrush="White" Foreground="White"/>
-                                            </Border>
-
                                             <Border>
-                                                <materialDesign:PopupBox Padding="0" materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="96">
-                                                    <materialDesign:PopupBox.ToggleContent>
-
-                                                        <materialDesign:PackIcon Kind="ColorLens" Width="60" Height="60" Foreground="White"/>
-
-                                                    </materialDesign:PopupBox.ToggleContent>
-                                                    <Border Width="377" Height="269" Margin="0" Padding="0">
-                                                        <cp:ColourPicker/>
-                                                    </Border>
-                                                </materialDesign:PopupBox>
+                                                <cp:ColourPicker x:Name="iconColorPicker" Margin="20"/>
                                             </Border>
-
+                                            
 
                                         </StackPanel>
 
@@ -171,12 +144,12 @@
                                         </Border>
 
                                         <StackPanel Orientation="Vertical" Margin="10 30 10 30">
-
+                                            <StackPanel Orientation="Horizontal">
                                             <Border Background="#673AB7" CornerRadius="3" Margin="10">
-                                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="260">
+                                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="103">
                                                     <materialDesign:PopupBox.ToggleContent>
 
-                                                        <Label Content="Choose from gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                        <Label Content="Gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
                                                     </materialDesign:PopupBox.ToggleContent>
                                                     <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
                                                         <WrapPanel x:Name="wrappanelBG_Gallery">
@@ -186,6 +159,19 @@
                                                 </materialDesign:PopupBox>
                                             </Border>
 
+                                                <Border Background="#673AB7" CornerRadius="3" Margin="10">
+                                                    <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="103">
+                                                        <materialDesign:PopupBox.ToggleContent>
+
+                                                            <Label Content="Color" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                        </materialDesign:PopupBox.ToggleContent>
+                                                            
+                                                        <cp:ColourPicker x:Name="bubbleColorPicker" Margin="0"/>
+                                                    
+                                                    </materialDesign:PopupBox>
+                                                </Border>
+                                            </StackPanel>
+
                                             <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
                                             <Slider x:Name="blurLv"
                                           Minimum="0"
@@ -193,7 +179,7 @@
                                           Style="{StaticResource MaterialDesignDiscreteSlider}"
                                           ToolTip="Blur level"
                                           Value="50"
-                                          Width="280" ValueChanged="blurLv_ValueChanged" />
+                                          Width="230" ValueChanged="blurLv_ValueChanged" />
                                         </StackPanel>
 
 

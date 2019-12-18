@@ -27,25 +27,14 @@ namespace PacChat.Resources.CustomControls.ColourPicker
             InitializeComponent();
         }
 
+        public delegate void ClickHander(Color color);
+        public event ClickHander buttonClick;
+
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
-            var chatApplication = MainWindow.chatApplication;
-            Console.WriteLine(ColorPicker.Color);
-            ChatPage.Instance.bubbleColor = ColorPicker.Color;
-
-
-            ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
-
-            // Store chat content before switching
-            if (chatApplication.model.previousSelectedConversation != "")
-                ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedConversation);
-
-            // Clear Scrollview content
-            ChatPage.Instance.ClearChatPage();
-
-            // Load target user messages (from model) and add to scrollview
-            ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedConversation, chatApplication.model.SelfID);
+            buttonClick(ColorPicker.Color);
         }
+
 
         public Color GetColor()
         {
