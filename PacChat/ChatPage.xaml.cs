@@ -736,6 +736,10 @@ namespace PacChat
         private void btnBuzz_Click(object sender, RoutedEventArgs e)
         {
             Buzz();
+            var app = MainWindow.chatApplication;
+            _ = ChatConnection.Instance.Send(new BuzzSend() { ConversationID = app.model.currentSelectedConversation });
+
+
         }
 
         public void Buzz()
