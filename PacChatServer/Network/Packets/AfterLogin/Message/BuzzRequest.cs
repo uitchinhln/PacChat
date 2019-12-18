@@ -39,9 +39,10 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
 
             if (chatSession.Owner.LastBuzz.ContainsKey(ConversationID))
             {
-                chatSession.Owner.LastBuzz.TryRemove(ConversationID, out var lastBuzz);
-                if (DateTime.Now.Ticks - lastBuzz < 10000000 * 20) return;
+                chatSession.Owner.LastBuzz.TryGetValue(ConversationID, out var lastBuzz);
+                if (DateTime.Now.Ticks - lastBuzz < 10000000 * 10) return;
             }
+            chatSession.Owner.LastBuzz.TryRemove(ConversationID, out var lastz);
             chatSession.Owner.LastBuzz.TryAdd(ConversationID, DateTime.Now.Ticks);
 
             BuzzResponse message = new BuzzResponse() {

@@ -33,6 +33,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Application.Current.Dispatcher.Invoke(() => 
             {
                 ChatPage.Instance.Buzz();
+                MainWindow.Instance.Activate();
                 Console.WriteLine(ConversationID);
             });
         }
