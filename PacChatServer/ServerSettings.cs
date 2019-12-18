@@ -30,7 +30,7 @@ namespace PacChatServer
 
         public void LoadSettings()
         {
-            SERVER_HOST = IPAddress.Parse(ConfigurationManager.AppSettings["ServerAddress"]);
+            SERVER_HOST = Dns.GetHostAddresses(ConfigurationManager.AppSettings["ServerAddress"])[0];
             SERVER_PORT = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
 
             WEBSERVER_HOST = ConfigurationManager.AppSettings["WebAddress"];
