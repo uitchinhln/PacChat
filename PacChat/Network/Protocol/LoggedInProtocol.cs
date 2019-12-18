@@ -44,6 +44,9 @@ namespace PacChat.Network.Protocol
             Inbound(0x18, new RecentConversationsResult());
             Outbound(0x18, new RecentConversations());
 
+            Inbound(0x19, new BuzzReceive());
+            Outbound(0x19, new BuzzSend());
+
             // Notifications
             Inbound(0x07, new UserOnlineReceive());
             Inbound(0x08, new UserOfflineReceive());
