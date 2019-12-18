@@ -31,7 +31,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             ByteBufUtils.WriteUTF8(byteBuf, LastName);
             ByteBufUtils.WriteUTF8(byteBuf, Town);
             ByteBufUtils.WriteUTF8(byteBuf, Email);
-            ByteBufUtils.WriteUTF8(byteBuf, DateOfBirth.ToString());
+            byteBuf.WriteLong(DateOfBirth.Ticks);
             byteBuf.WriteInt((int)Gender);
             return byteBuf;
         }

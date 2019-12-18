@@ -28,7 +28,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
             LastName = ByteBufUtils.ReadUTF8(buffer);
             Town = ByteBufUtils.ReadUTF8(buffer);
             Email = ByteBufUtils.ReadUTF8(buffer);
-            DateOfBirth = DateTime.Parse(ByteBufUtils.ReadUTF8(buffer));
+            DateOfBirth = new DateTime(buffer.ReadLong());
             Gender = (Gender)buffer.ReadInt();
 
             // Avatar ID
