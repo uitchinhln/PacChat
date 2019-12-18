@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PacChat.Cache.Core;
 using PacChat.Utils;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace PacChat.Network.RestAPI
         private static readonly String UploadAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetSelfAvatarURL = "http://{0}:1403/api/profile/avatar";
         private static readonly String GetUserAvatarURL = "http://{0}:1403/api/profile/avatar/{1}";
+
+        private static LRUCache<String, ImageSource> avatarCache = new LRUCache<String, ImageSource>(100, 10);
 
         public static async void AvatarUpload(String filePath, ResultHandler handler, ErrorHandler errorHandler)
         {
@@ -88,35 +91,42 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler)
+        public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false)
         {
             try
             {
                 String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(GetSelfAvatarURL, address);
 
-                new Task(() =>
+                if (avatarCache.Contains("Self") && !ignoreCache)
                 {
-                    using (WebClient client = new WebClient())
+                    resultHandler(avatarCache.Get("Self"));
+                } else
+                {
+                    new Task(() =>
                     {
-                        client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                        byte[] data = client.DownloadData(url);
-
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.StreamSource = new MemoryStream(data);
-                        bitmap.EndInit();
-
-                        if (resultHandler != null)
+                        using (WebClient client = new WebClient())
                         {
-                            bitmap.Freeze();
-                            Application.Current.Dispatcher.Invoke(() =>
+                            client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+                            byte[] data = client.DownloadData(url);
+
+                            BitmapImage bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.StreamSource = new MemoryStream(data);
+                            bitmap.EndInit();
+
+                            if (resultHandler != null)
                             {
-                                resultHandler(bitmap);
-                            });
+                                bitmap.Freeze();
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    avatarCache.AddReplace("Self", bitmap);
+                                    resultHandler(bitmap);
+                                });
+                            }
                         }
-                    }
-                }).Start();
+                    }).Start();
+                }
             }
             catch (Exception e)
             {
@@ -125,35 +135,43 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler)
+        public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false)
         {
             try
             {
                 String address = ChatConnection.Instance.WebHost;
                 String url = String.Format(GetUserAvatarURL, address, userID);
 
-                new Task(() =>
+                if (avatarCache.Contains(userID) && !ignoreCache)
                 {
-                    using (WebClient client = new WebClient())
+                    resultHandler(avatarCache.Get(userID));
+                }
+                else
+                {
+                    new Task(() =>
                     {
-                        client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                        byte[] data = client.DownloadData(url);
-
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.StreamSource = new MemoryStream(data);
-                        bitmap.EndInit();
-
-                        if (resultHandler != null)
+                        using (WebClient client = new WebClient())
                         {
-                            bitmap.Freeze();
-                            Application.Current.Dispatcher.Invoke(() =>
+                            client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+                            byte[] data = client.DownloadData(url);
+
+                            BitmapImage bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.StreamSource = new MemoryStream(data);
+                            bitmap.EndInit();
+
+                            if (resultHandler != null)
                             {
-                                resultHandler(bitmap);
-                            });
+                                bitmap.Freeze();
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    avatarCache.AddReplace(userID, bitmap);
+                                    resultHandler(bitmap);
+                                });
+                            }
                         }
-                    }
-                }).Start();
+                    }).Start();
+                }
             }
             catch (Exception e)
             {

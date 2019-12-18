@@ -108,6 +108,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 var app = MainWindow.chatApplication;
                 for (int i = 0; i < SenderID.Count; ++i)
                 {
+                    Content[i].SenderID = SenderID[i];
+
                     if (app.model.SelfID.CompareTo(SenderID[i]) == 0)
                         ChatPage.Instance.SendMessage(
                             Content[i],

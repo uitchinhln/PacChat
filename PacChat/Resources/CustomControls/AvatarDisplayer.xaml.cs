@@ -117,7 +117,7 @@ namespace PacChat.Resources.CustomControls
                 {
                     UpdateAllInstance(avaSource);
                     LoadingAhihi.Visibility = Visibility.Hidden;
-                }, (ex) => Console.WriteLine(ex));
+                }, (ex) => Console.WriteLine(ex), true);
             }
             else
             {
@@ -125,7 +125,7 @@ namespace PacChat.Resources.CustomControls
                 {
                     UpdateAllInstance(avaSource, userID);
                     LoadingAhihi.Visibility = Visibility.Hidden;
-                }, (ex) => Console.WriteLine(ex));
+                }, (ex) => Console.WriteLine(ex), true);
             }
         }
 

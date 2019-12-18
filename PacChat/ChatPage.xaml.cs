@@ -413,6 +413,8 @@ namespace PacChat
 
         public void SendLeftMessages(AbstractMessage msg, bool isSimulating = false, bool reversed = false)
         {
+            Console.WriteLine(msg.SenderID);
+
             if (reversed)
             {
                 if (_headBubbleChat == null)
