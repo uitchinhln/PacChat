@@ -101,8 +101,6 @@
                             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
                                 <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
                             </Button>
-
-                            <Button Content="asdsad"/>
                             <Border CornerRadius="16"
                     Background= "LightGray"
                     Margin="10,4,0,5">
