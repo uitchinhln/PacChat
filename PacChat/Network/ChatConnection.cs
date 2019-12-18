@@ -96,7 +96,7 @@ namespace PacChat.Network
             {
                 ReconnectResquest packet = new ReconnectResquest();
                 packet.UserID = MainWindow.chatApplication.model.SelfID;
-                packet.UserID = MainWindow.chatApplication.model.SelfID;
+                packet.Hash = MainWindow.chatApplication.model.Hashed;
                 Send(packet);
             }
         }
@@ -135,7 +135,7 @@ namespace PacChat.Network
                     new Task(() =>
                     {
                         Console.WriteLine("Reconnecting...");
-                        Thread.Sleep(15000);
+                        Thread.Sleep(3000);
                         Send(packet);
                     }).Start();
                 }

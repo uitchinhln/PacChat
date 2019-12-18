@@ -54,7 +54,9 @@ namespace PacChat.Resources.CustomControls.Media
 
         private void BtnClick(object sender, EventArgs e)
         {
-            SwapToBtn(sender as ThumbnailButton);
+            ThumbnailButton thumbnail = sender as ThumbnailButton;
+            thumbnail.StreamURL = StreamAPI.GetMediaURL(thumbnail.FileID, ConversationID);
+            SwapToBtn(thumbnail);
         }
 
         private void SwapToBtn(ThumbnailButton btn)
