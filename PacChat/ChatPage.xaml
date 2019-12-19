@@ -62,7 +62,7 @@
                                 <materialDesign:PopupBox  Padding="0" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,0,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
                                     <materialDesign:PopupBox.ToggleContent>
 
-                                        <materialDesign:PackIcon
+                                        <materialDesign:PackIcon x:Name="iconSticker"
                                     Kind="Emoticon" 
                                     Width="24"
                                     Height="24"
@@ -76,30 +76,30 @@
                             </Border>
                             <Border>
                                 <Button x:Name="btnVideo" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnVideo_Click">
-                                    <materialDesign:PackIcon Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                    <materialDesign:PackIcon x:Name="iconVideo" Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
                             <Border>
                                 <Button x:Name="btnAttachment" Padding="0" Margin="2,2,2,2" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
-                                    <materialDesign:PackIcon Kind="Attachment" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF2C2C2C"/>
+                                    <materialDesign:PackIcon x:Name="iconAttach" Kind="Attachment" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
                             <Border>
                                 <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
-                                    <materialDesign:PackIcon Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                    <materialDesign:PackIcon x:Name="iconImage" Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
                             <Border>
                                 <Button x:Name="btnBuzz" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnBuzz_Click">
-                                    <materialDesign:PackIcon Kind="WarningDecagram" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                    <materialDesign:PackIcon x:Name="iconBuzz" Kind="WarningDecagram" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
                             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
-                                <materialDesign:PackIcon Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
+                                <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
                             </Button>
                             <Border CornerRadius="16"
                     Background= "LightGray"

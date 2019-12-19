@@ -16,7 +16,7 @@
         <StackPanel Orientation="Vertical" Width="377">
             <StackPanel Orientation="Horizontal">
 
-                <materialDesign:ColorPicker x:Name="ColorPicker" Height="259" Width="250" Margin="5" Color="{Binding SelectedColor, Delay=25}" />
+                <materialDesign:ColorPicker x:Name="ColorPicker" Height="198" Width="250" Margin="5" Color="{Binding SelectedColor, Delay=25}" />
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="117">
                     <Border x:Name="borColorPreview" Height="70" Margin="10">
@@ -25,10 +25,8 @@
 
                     <TextBox Width="105" Foreground="White" BorderBrush="White" FontSize="20" Margin="5 0 5 5" Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button x:Name="btnAccept" Content="Accept" Margin="10" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnAccept_Click" 
-                            Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}"/>
-                    <Button  Content="Cancel" Margin="10" Style="{StaticResource MaterialDesignRaisedButton}"
-                             Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}"/>
+                    <Button x:Name="btnAccept" Content="Accept" Margin="10 15 10 10" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnAccept_Click"/>
+
                 </StackPanel>
             </StackPanel>
 

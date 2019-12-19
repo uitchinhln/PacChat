@@ -12,7 +12,7 @@
 
         <Border HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
             <Grid>
-                <ProgressBar x:Name="progressBarThumb" Width="124" Height="124"
+                <ProgressBar x:Name="progressBarThumb" Width="80" Height="80"
                                 Style="{StaticResource MaterialDesignCircularProgressBar}"
                                 Value="0"
                                 IsIndeterminate="True" 
@@ -25,7 +25,7 @@
         <Border HorizontalAlignment="Right" Margin="0" VerticalAlignment="Stretch">
             <StackPanel>
                 <Grid Width="124" Height="124" Margin="10">
-                    <ProgressBar x:Name="progressBar" Width="124" Height="124"
+                    <ProgressBar x:Name="progressBar" Width="60" Height="60"
                                 Style="{StaticResource MaterialDesignCircularProgressBar}"
                                 Value="0"
                                 IsIndeterminate="True" 
@@ -38,7 +38,7 @@
                 </TextBlock>
 
                 <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnDown_Click">
-                    9000
+                    Free
                 </Button>
             </StackPanel>
 

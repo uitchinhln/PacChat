@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="ABOUT" Background="#FF32176C" Foreground="#DDFFFFFF" FontSize="48"></Label> 
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Background="#2C2C2C">
+    <StackPanel Orientation="Vertical">
+        <Label Content="ABOUT" Foreground="#DDFFFFFF" FontSize="48" HorizontalAlignment="Center"></Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="22,0,32,0" Width="746">
+            <StackPanel Orientation="Vertical" Margin="20 20 80 20">
+                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
+                <Label Content="18520304" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Label Content="Nguyễn Nhật Long" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="20 20 20 20">
+                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
+                <Label Content="18520480" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Label Content="Nguyễn Lê Bách" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="80 20 20 20">
+                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
+                <Label Content="18520257" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Label Content="Lê Ngọc Chính" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

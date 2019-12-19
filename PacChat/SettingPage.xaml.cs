@@ -37,6 +37,9 @@ namespace PacChat
             Instance = this;
             loadBG_Gallery();
 
+            iconColorPicker.buttonClick += IconColorPicker_buttonClick;
+            bubbleColorPicker.buttonClick += BubbleColorPicker_buttonClick;
+
             editFlag = false;
             EditBtn.Content = "Edit...";
             FirstNameInp.IsEnabled = false;
@@ -44,6 +47,31 @@ namespace PacChat
             BirthdayInp.IsEnabled = false;
             GenderInp.IsEnabled = false;
             AddressInp.IsEnabled = false;
+        }
+
+        private void BubbleColorPicker_buttonClick(Color color)
+        {
+            Console.WriteLine("bubble color picker");
+            var chatApplication = MainWindow.chatApplication;
+            Console.WriteLine(color);
+            ChatPage.Instance.bubbleColor = color;
+
+            ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
+
+            if (chatApplication.model.previousSelectedConversation != "")
+                ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedConversation);
+
+
+            ChatPage.Instance.ClearChatPage();
+
+
+            ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedConversation, chatApplication.model.SelfID);
+        }
+
+        private void IconColorPicker_buttonClick(Color color)
+        {
+            Console.WriteLine("icon color Picker");
+            ChatPage.Instance.ChangeIconColor(color);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

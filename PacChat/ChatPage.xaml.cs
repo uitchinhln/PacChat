@@ -40,6 +40,8 @@ namespace PacChat
         public static ChatPage Instance;
         public Color bubbleColor = (Color)ColorConverter.ConvertFromString("#0F4C82");
 
+        public Color ThemeColor { get; set; }
+
         public ChatPage()
         {
             InitializeComponent();
@@ -781,6 +783,17 @@ namespace PacChat
 
             };
             System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(buzz));
+        }
+
+        public void ChangeIconColor(Color color)
+        {
+            Brush colorBrush = new SolidColorBrush(color);
+            iconAttach.Foreground = colorBrush;
+            iconSend.Foreground = colorBrush;
+            iconImage.Foreground = colorBrush;
+            iconBuzz.Foreground = colorBrush;
+            iconVideo.Foreground = colorBrush;
+            iconSticker.Foreground = colorBrush;
         }
     }
 }

@@ -16,8 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
-using PacChat.Network;
-using PacChat.Network.Packets.AfterLoginRequest.Message;
 
 namespace PacChat.Resources.CustomControls.ColourPicker
 {
@@ -29,32 +27,14 @@ namespace PacChat.Resources.CustomControls.ColourPicker
             InitializeComponent();
         }
 
+        public delegate void ClickHander(Color color);
+        public event ClickHander buttonClick;
+
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
-            var chatApplication = MainWindow.chatApplication;
-            Console.WriteLine(ColorPicker.Color);
-            //ChatPage.Instance.bubbleColor = ColorPicker.Color;
-
-
-            //ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
-
-            //// Store chat content before switching
-            //if (chatApplication.model.previousSelectedConversation != "")
-            //    ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedConversation);
-
-            //// Clear Scrollview content
-            //ChatPage.Instance.ClearChatPage();
-
-            //// Load target user messages (from model) and add to scrollview
-            //ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedConversation, chatApplication.model.SelfID);
-
-            ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
-            {
-                ConversationID = chatApplication.model.currentSelectedConversation,
-                BubbleColor = BitConverter.ToInt32(new byte[] { ColorPicker.Color.B, ColorPicker.Color.G, ColorPicker.Color.R, ColorPicker.Color.A }, 0)
-            };
-            ChatConnection.Instance.Send(packet);
+            buttonClick(ColorPicker.Color);
         }
+
 
         public Color GetColor()
         {
