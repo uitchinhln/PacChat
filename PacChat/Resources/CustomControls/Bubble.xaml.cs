@@ -29,6 +29,8 @@ namespace PacChat.Resources.CustomControls
     {
         public BubbleType Type { get; set; }
 
+        public bool IsLeft { get; set; } = true;
+
         public string Messages
         {
             get { return textBlock.Text.ToString(); }

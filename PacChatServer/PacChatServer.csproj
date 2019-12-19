@@ -380,9 +380,10 @@
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileResponse.cs" />
-    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordRequest.cs" />
-    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ModifyPasswordResponse.cs" />
-    <Compile Include="Network\Packets\AfterLogin\DataPreparing\UpdateSelfProfileRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Message\ChangeBubbleChatColor.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Setting\ModifyPasswordRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Setting\ModifyPasswordResponse.cs" />
+    <Compile Include="Network\Packets\AfterLogin\Setting\UpdateSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\BuzzRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\BuzzResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\GetConversationShortInfoRequest.cs" />

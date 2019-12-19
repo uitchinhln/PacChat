@@ -2,6 +2,7 @@
 using PacChatServer.Network.Packets.AfterLogin.Message;
 using PacChatServer.Network.Packets.AfterLogin.Notification;
 using PacChatServer.Network.Packets.AfterLogin.Search;
+using PacChatServer.Network.Packets.AfterLogin.Setting;
 using PacChatServer.Network.Packets.AfterLogin.Sticker;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,9 @@ namespace PacChatServer.Network.Protocol
 
             Inbound(0x19, new BuzzRequest());
             Outbound(0x19, new BuzzResponse());
+
+            Inbound(0x50, new ChangeBubbleChatColor());
+            Outbound(0x50, new ChangeBubbleChatColor());
 
             // Notifications
             Outbound(0x07, new UserOnline());

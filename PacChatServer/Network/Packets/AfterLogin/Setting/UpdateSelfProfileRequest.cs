@@ -5,13 +5,14 @@ using DotNetty.Buffers;
 using PacChatServer.Entity;
 using PacChatServer.Entity.EntityProperty;
 using PacChatServer.IO.Entity;
+using PacChatServer.Network.Packets.AfterLogin.DataPreparing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
+namespace PacChatServer.Network.Packets.AfterLogin.Setting
 {
     public class UpdateSelfProfileRequest : IPacket
     {

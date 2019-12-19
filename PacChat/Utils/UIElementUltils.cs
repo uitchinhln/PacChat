@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using PacChat.MessageCore.Message;
 
 namespace PacChat.Utils
@@ -26,6 +27,7 @@ namespace PacChat.Utils
         public int LastMediaID { get; set; }
         public int LastMediaIDBackup { get; set; }
         public int LastAttachmentID { get; set; }
+        public Color Color { get; set; }
         public string ConversationName { get; set; }
         public bool FirstTimeLoaded { get; set; } = true;
         public List<BubbleInfo> Bubbles = new List<BubbleInfo>();

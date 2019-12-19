@@ -47,6 +47,10 @@ namespace PacChat.Network.Protocol
             Inbound(0x19, new BuzzReceive());
             Outbound(0x19, new BuzzSend());
 
+            Inbound(0x50, new ChangeBubbleChatColor());
+            Outbound(0x50, new ChangeBubbleChatColor());
+
+
             // Notifications
             Inbound(0x07, new UserOnlineReceive());
             Inbound(0x08, new UserOfflineReceive());

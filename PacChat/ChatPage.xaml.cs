@@ -381,6 +381,8 @@ namespace PacChat
 
                 b.SetBG(bubbleColor);
 
+                b.IsLeft = false;
+
                 if (bubbleColor.R + bubbleColor.G + bubbleColor.B >= 565) b.SetTextColor(Colors.Black);
                 else b.SetTextColor(Colors.White);
                 b.SetDirect(false);// true = left false = right

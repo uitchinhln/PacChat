@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
+namespace PacChatServer.Network.Packets.AfterLogin.Setting
 {
     public class ModifyPasswordRequest : IPacket
     {

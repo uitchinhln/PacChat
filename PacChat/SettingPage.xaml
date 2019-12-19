@@ -149,7 +149,7 @@
 
                                                     </materialDesign:PopupBox.ToggleContent>
                                                     <Border Width="377" Height="269" Margin="0" Padding="0">
-                                                        <cp:ColourPicker/>
+                                                        <cp:ColourPicker x:Name="_ColorPicker" />
                                                     </Border>
                                                 </materialDesign:PopupBox>
                                             </Border>

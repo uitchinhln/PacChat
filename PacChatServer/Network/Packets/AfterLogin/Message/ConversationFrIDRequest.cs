@@ -62,6 +62,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 packet.LastAttachmentID = conversationStore.AttachmentID.Count - 1;
             }
 
+            packet.BubbleColor = conversationStore.Color;
+
             // Update later
             packet.PreviewCode = -1;
             packet.PreviewContent = "";

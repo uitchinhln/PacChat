@@ -36,6 +36,9 @@ namespace PacChatServer.MessageCore.Conversation
         [BsonElement("LastActive")]
         public long LastActive { get; set; }
 
+        [BsonElement("Color")]
+        public int Color { get; set; } = -12500671;
+
         [BsonElement("Members")]
         public HashSet<Guid> Members { get; set; } = new HashSet<Guid>();
 
@@ -99,7 +102,6 @@ namespace PacChatServer.MessageCore.Conversation
         public void UpdateLastActive(ChatSession chatSession)
         {
             LastActive = long.MaxValue;
-
             foreach (var member in Members)
             {
                 if (member.Equals(chatSession.Owner.ID)) continue;
@@ -112,6 +114,39 @@ namespace PacChatServer.MessageCore.Conversation
 
                 ChatUser user = new ChatUserStore().Load(member);
                 LastActive = Math.Min(LastActive, (long)Math.Ceiling((DateTime.UtcNow - user.LastLogoff).TotalMinutes));
+            }
+        }
+
+        public void UpdateColor(int color, ChatUser sender)
+        {
+            //Check change condition
+            if (true)
+            {
+                this.Color = color;
+                store.Save(this);
+
+                Console.WriteLine(color);
+
+                ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
+                {
+                    ConversationID = this.ID.ToString(),
+                    Color = color
+                };
+
+                foreach (Guid memberID in Members)
+                {
+                    if (!ChatUserManager.IsOnline(memberID)) continue;
+                    ChatUser user = ChatUserManager.LoadUser(memberID);
+                    user.Send(packet);
+                }
+            } else
+            {
+                ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
+                {
+                    ConversationID = this.ID.ToString(),
+                    Color = this.Color
+                };
+                sender.Send(packet);
             }
         }
     }

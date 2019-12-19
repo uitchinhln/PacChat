@@ -21,6 +21,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         public int LastMediaID { get; set; }
         public int LastAttachmentID { get; set; }
         public int PreviewCode { get; set; }
+        public int BubbleColor { get; set; }
         public string PreviewContent { get; set; }
 
         public void Decode(IByteBuffer buffer)
@@ -43,6 +44,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             byteBuf.WriteInt(LastMediaID);
             byteBuf.WriteInt(LastAttachmentID);
             byteBuf.WriteInt(PreviewCode);
+            byteBuf.WriteInt(BubbleColor);
             ByteBufUtils.WriteUTF8(byteBuf, PreviewContent);
 
             return byteBuf;
