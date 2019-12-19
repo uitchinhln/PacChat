@@ -18,6 +18,7 @@ using System.IO;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
 using PacChat.Network;
 using PacChat.Network.RestAPI;
+using PacChat.Network.Packets.AfterLoginRequest.Message;
 
 namespace PacChat
 {
@@ -50,22 +51,20 @@ namespace PacChat
         }
 
         private void BubbleColorPicker_buttonClick(Color color)
-        {
-            Console.WriteLine("bubble color picker");
+        {            
             var chatApplication = MainWindow.chatApplication;
-            Console.WriteLine(color);
-            ChatPage.Instance.bubbleColor = color;
 
-            ChatPage.Instance.ChatTitle.Content = chatApplication.model.Title;
+            if (String.IsNullOrEmpty(chatApplication.model.currentSelectedConversation))
+            {
+                return;
+            }
 
-            if (chatApplication.model.previousSelectedConversation != "")
-                ChatPage.Instance.StoreChatPage(chatApplication.model.previousSelectedConversation);
-
-
-            ChatPage.Instance.ClearChatPage();
-
-
-            ChatPage.Instance.LoadChatPage(chatApplication.model.currentSelectedConversation, chatApplication.model.SelfID);
+            ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
+            {
+                ConversationID = chatApplication.model.currentSelectedConversation,
+                BubbleColor = BitConverter.ToInt32(new byte[] { color.B, color.G, color.R, color.A }, 0)
+            };
+            ChatConnection.Instance.Send(packet);
         }
 
         private void IconColorPicker_buttonClick(Color color)

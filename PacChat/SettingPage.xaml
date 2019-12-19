@@ -116,10 +116,10 @@
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <ScrollViewer>
                             <StackPanel>
-                                <Label Content="Custom" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                <Label Content="Design Your Theme" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                 <!-- THEME -->
                                 <StackPanel Orientation="Vertical">
-                                    <Label Content="Themes" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                    <Label Content="Chat Bubble Color" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                     <Border>
                                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
