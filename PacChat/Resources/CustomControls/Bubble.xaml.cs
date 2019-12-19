@@ -126,7 +126,8 @@ namespace PacChat.Resources.CustomControls
 
         public void SetLink(string fileID)
         {
-            AttachmentLink.Content = fileID;
+            //AttachmentLink.Content = fileID;
+            AttachmentLink.Tag = fileID;
         }
 
         private void AttachmentLink_Click(object sender, RoutedEventArgs e)
@@ -153,7 +154,7 @@ namespace PacChat.Resources.CustomControls
                 MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
 
                 FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
-                    AttachmentLink.Content.ToString(), dialog.FileName,
+                    AttachmentLink.Tag as String, dialog.FileName,
                     noti.SetProgress, noti.FinalizeDownload, OnDownloadFileError);
             }
         }

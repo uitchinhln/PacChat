@@ -23,10 +23,14 @@
                     FontSize="14"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap"
-                    Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
+                    Text=""
                     ToolTip="11:59"
                     Padding="10" TextDecorations="{x:Null}"/>
-                        <Button Padding="0" x:Name="AttachmentLink" Margin="0" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
+                        <Button MinWidth="0" Padding="0" x:Name="AttachmentLink" Margin="0" Height="Auto" 
+                                Background="#00000000" BorderBrush="{x:Null}" 
+                                Foreground="{x:Null}" Click="AttachmentLink_Click">
+                            <Label x:Name="attatchName"/>
+                        </Button>
                     </Grid>
                 </Border>
                 <Border>
