@@ -9,7 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="PacChat" Height="500" Width="900" UseLayoutRounding="False" WindowStartupLocation="CenterScreen" 
-        Background="{x:Null}" Padding="0" Margin="0" WindowStyle="None" AllowsTransparency="True" MinWidth="900" MinHeight="500">
+        Background="{x:Null}" Padding="0" Margin="0" WindowStyle="None" AllowsTransparency="True" MinWidth="900" MinHeight="500" Icon="Resources/Drawable/361994.png">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"

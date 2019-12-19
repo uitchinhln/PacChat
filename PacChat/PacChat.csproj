@@ -585,6 +585,7 @@
     <Resource Include="Resources\Drawable\Chinh.jpg" />
     <Resource Include="Resources\Drawable\Long.jpg" />
     <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
+    <Resource Include="Resources\Drawable\361994.png" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

@@ -7,7 +7,7 @@
         xmlns:noti="clr-namespace:PacChat.Resources.CustomControls.Notifications"
         mc:Ignorable="d"
         Title="Downloads" Height="512" Width="256" Background="{x:Null}" WindowStyle="None" ResizeMode="NoResize"
-        UseLayoutRounding="False" AllowsTransparency="True">
+        UseLayoutRounding="False" AllowsTransparency="True" Icon="Resources/Drawable/361994.png">
     <Window.Resources>
         <Storyboard x:Key="entrance">
             <DoubleAnimation

@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:PacChat"
         mc:Ignorable="d"
         Title="MediaPlayerWindow" Height="550" Width="900" WindowStyle="None" Background="{x:Null}" 
-        AllowsTransparency="True" MinHeight="300" MinWidth="400">
+        AllowsTransparency="True" MinHeight="300" MinWidth="400" 
+        Icon="/PacChat;component/Resources/Drawable/361994.png">
     <WindowChrome.WindowChrome>
         <WindowChrome 
         CaptionHeight="0"
