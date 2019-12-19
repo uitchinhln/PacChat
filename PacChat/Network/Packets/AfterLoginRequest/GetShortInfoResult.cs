@@ -29,15 +29,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public DateTime LastLogout { get; set; }
         public int Relationship { get; set; }
 
-        //private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
-        //{
-        //    {0, "Hidden message" },
-        //    {1, "Attachment" },
-        //    {2, "You got an image message" },
-        //    {3, "You got a sticker message" },
-        //    {5, "Video"}
-        //};
-
         private readonly string[] TranslatedPreviewCode = new string[6]
         {
             "Hidden message",

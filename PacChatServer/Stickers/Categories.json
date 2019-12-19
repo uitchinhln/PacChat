@@ -2583,27 +2583,6 @@
         "order": 0
     },
     {
-        "id": 39,
-        "name": "Trả lời nhanh",
-        "desc": "",
-        "totalImage": 7,
-        "thumbUrl": "https://zalo-api.zadn.vn/d/6/7/d/8/39/preview/",
-        "iconUrl": "https://zalo-api.zadn.vn/d/6/7/d/8/39/icon/abc_ic.png",
-        "iconPreview": "https://zalo-api.zadn.vn/d/6/7/d/8/39/icon_pre/abc_thumb.png",
-        "price": -1,
-        "group": 2,
-        "status": 0,
-        "version": 3,
-        "thumbImg": "https://zalo-api.zadn.vn/d/6/7/d/8/39/preview/https://zalo-api.zadn.vn/d/6/7/d/8/39/preview/abc_cover.jpg",
-        "source": "Zalo",
-        "type": 1,
-        "sourceUrl": "",
-        "permission": 1,
-        "expireTime": 0,
-        "is_hidden": 0,
-        "order": 0
-    },
-    {
         "id": 42,
         "name": "Ủn Ủn",
         "desc": "",
