@@ -50,6 +50,25 @@ namespace PacChat
             // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             //loadStickerToContainner();
             Transitioner.SelectedIndex = 0;
+            bubbleColorPicker.buttonClick += BubbleColorPicker_buttonClick;
+        }
+
+        private void BubbleColorPicker_buttonClick(Color color)
+        {
+            var chatApplication = MainWindow.chatApplication;
+
+            if (String.IsNullOrEmpty(chatApplication.model.currentSelectedConversation))
+            {
+                return;
+            }
+
+            ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
+            {
+                ConversationID = chatApplication.model.currentSelectedConversation,
+                BubbleColor = BitConverter.ToInt32(new byte[] { color.B, color.G, color.R, color.A }, 0)
+            };
+            ChatConnection.Instance.Send(packet);
+
         }
 
         // Chat Input KeyDown if and only if message is text message
@@ -616,7 +635,11 @@ namespace PacChat
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
-            SendLeftMessages(new TextMessage() { Message = ChatInput.Text });
+            if (ChatInput.Text == "") return;
+
+            SendMessage(new TextMessage() { Message = ChatInput.Text });
+
+            // Clear textbox
             ChatInput.Text = "";
         }
 
@@ -794,6 +817,15 @@ namespace PacChat
             iconImage.Foreground = colorBrush;
             iconBuzz.Foreground = colorBrush;
             iconSticker.Foreground = colorBrush;
+            ChatTitle.Foreground = colorBrush;
+            LastActive.Foreground = colorBrush;
+            iconColor.Foreground = colorBrush;
+            LastActive.Foreground.Opacity = 0.6;
+        }
+
+        public void SetSolidBG(Color color)
+        {
+            ChatBorder.Background = new SolidColorBrush(color);
         }
     }
 }

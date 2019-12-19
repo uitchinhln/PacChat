@@ -39,7 +39,7 @@ namespace PacChat
             loadBG_Gallery();
 
             iconColorPicker.buttonClick += IconColorPicker_buttonClick;
-            bubbleColorPicker.buttonClick += BubbleColorPicker_buttonClick;
+            BGColorPicker.buttonClick += BubbleColorPicker_buttonClick;
 
             editFlag = false;
             EditBtn.Content = "Edit...";
@@ -51,20 +51,8 @@ namespace PacChat
         }
 
         private void BubbleColorPicker_buttonClick(Color color)
-        {            
-            var chatApplication = MainWindow.chatApplication;
-
-            if (String.IsNullOrEmpty(chatApplication.model.currentSelectedConversation))
-            {
-                return;
-            }
-
-            ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
-            {
-                ConversationID = chatApplication.model.currentSelectedConversation,
-                BubbleColor = BitConverter.ToInt32(new byte[] { color.B, color.G, color.R, color.A }, 0)
-            };
-            ChatConnection.Instance.Send(packet);
+        {
+            ChatPage.Instance.SetSolidBG(color);
         }
 
         private void IconColorPicker_buttonClick(Color color)

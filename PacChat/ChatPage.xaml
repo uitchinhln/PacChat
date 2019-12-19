@@ -33,18 +33,7 @@
                         <DockPanel DockPanel.Dock="Top" Background="Transparent"  Height="Auto">
                             <customControls:AvatarDisplayer x:Name="Avatar" Margin="5,3,0,3" Width="35" Height="35" />
 
-                            <StackPanel DockPanel.Dock="Right"
-                    Height="26" MinWidth="170"
-                    Margin="10,0,16,0" Orientation="Horizontal">
 
-                                <TextBox 
-                    Height="26" MinWidth="150"        
-                    x:Name="MsgSearchBox" VerticalAlignment="Center" 
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    materialDesign:HintAssist.Hint="Search messages">
-                                </TextBox>
-                                <materialDesign:PackIcon Kind="CommentSearchOutline" Width="20" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,2,2,0" Foreground="#FF747474" />
-                            </StackPanel>
 
                             <Label x:Name="ChatTitle" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
 
@@ -91,9 +80,9 @@
                             <Border Background="Transparent" CornerRadius="3" Margin="0">
                                 <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
                                     <materialDesign:PopupBox.ToggleContent>
-                                        <materialDesign:PackIcon x:Name="colorIcon" Width="24" Height="24" Kind="ColorLens"/>
+                                        <materialDesign:PackIcon x:Name="iconColor" Width="24" Height="24" Kind="ColorLens" Foreground="#FF2C2C2C"/>
                                     </materialDesign:PopupBox.ToggleContent>
-                                    <cp:ColourPicker/>
+                                    <cp:ColourPicker x:Name="bubbleColorPicker"/>
                                 </materialDesign:PopupBox>
                             </Border>
 
@@ -104,7 +93,7 @@
                             </Border>
 
                             <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
-                                <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="DimGray"  Width="24" Height="Auto"/>
+                                <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="#FF2C2C2C"  Width="24" Height="Auto"/>
                             </Button>
                             <Border CornerRadius="16"
                     Background= "LightGray"

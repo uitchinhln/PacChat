@@ -9,7 +9,7 @@
              d:DesignHeight="160" d:DesignWidth="128">
     <Grid>
         <StackPanel>
-            <ad:AvatarDisplayer x:Name="AvtDisplayer"/>
+            <ad:AvatarDisplayer x:Name="AvtDisplayer" />
             <Button x:Name="UpdateBtn" Background="{x:Null}" BorderBrush="{x:Null}" Height="26" Click="UpdateBtn_Click">
                 <TextBlock HorizontalAlignment="Center" Foreground="#FF9EB4CB" TextDecorations="{x:Null}" FontStyle="Italic" Margin="0">
                 Update Avatar

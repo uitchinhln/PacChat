@@ -19,7 +19,7 @@
                     <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
                 </StackPanel>
 
-                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
+                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
                     <!-- General tab -->
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <ScrollViewer>
@@ -119,14 +119,14 @@
                                 <Label Content="Design Your Theme" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                 <!-- THEME -->
                                 <StackPanel Orientation="Vertical">
-                                    <Label Content="Chat Bubble Color" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                    <Label Content="Theme" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                     <Border>
                                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
                                             <Border>
                                                 <cp:ColourPicker x:Name="iconColorPicker" Margin="20"/>
                                             </Border>
-                                            
+
 
                                         </StackPanel>
 
@@ -137,7 +137,7 @@
                                     <!-- CHAT BACKGOUND -->
                                     <Label Content="Chat background" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
 
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Border x:Name="borderBG_Preview" Width="260" Height="260" Margin="10" CornerRadius="20">
 
 
@@ -145,19 +145,19 @@
 
                                         <StackPanel Orientation="Vertical" Margin="10 30 10 30">
                                             <StackPanel Orientation="Horizontal">
-                                            <Border Background="#673AB7" CornerRadius="3" Margin="10">
-                                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="103">
-                                                    <materialDesign:PopupBox.ToggleContent>
+                                                <Border Background="#673AB7" CornerRadius="3" Margin="10">
+                                                    <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="103">
+                                                        <materialDesign:PopupBox.ToggleContent>
 
-                                                        <Label Content="Gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
-                                                    </materialDesign:PopupBox.ToggleContent>
-                                                    <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
-                                                        <WrapPanel x:Name="wrappanelBG_Gallery">
+                                                            <Label Content="Gallery" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
+                                                        </materialDesign:PopupBox.ToggleContent>
+                                                        <ScrollViewer x:Name="BGGalleryPanel" Width="375" Height="325">
+                                                            <WrapPanel x:Name="wrappanelBG_Gallery">
 
-                                                        </WrapPanel>
-                                                    </ScrollViewer>
-                                                </materialDesign:PopupBox>
-                                            </Border>
+                                                            </WrapPanel>
+                                                        </ScrollViewer>
+                                                    </materialDesign:PopupBox>
+                                                </Border>
 
                                                 <Border Background="#673AB7" CornerRadius="3" Margin="10">
                                                     <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False" Width="103">
@@ -165,9 +165,9 @@
 
                                                             <Label Content="Color" FontSize="20" Height="41" FontFamily="Segoe UI Light" Foreground="White" Margin="0 6 0 0"/>
                                                         </materialDesign:PopupBox.ToggleContent>
-                                                            
-                                                        <cp:ColourPicker x:Name="bubbleColorPicker" Margin="0"/>
-                                                    
+
+                                                        <cp:ColourPicker x:Name="BGColorPicker" Margin="0"/>
+
                                                     </materialDesign:PopupBox>
                                                 </Border>
                                             </StackPanel>

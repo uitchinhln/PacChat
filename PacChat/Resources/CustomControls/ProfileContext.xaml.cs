@@ -23,8 +23,13 @@ namespace PacChat.Resources.CustomControls
         public ProfileContext()
         {
             InitializeComponent();
-
+            this.Avatar.Click += Avatar_Click;
             BtnDownload.Click += BtnDownload_Click;
+        }
+
+        private void Avatar_Click(object sender, EventArgs e)
+        {
+            SettingPage.Instance.SelfAvt.ChangeAva();
         }
 
         private void BtnDownload_Click(object sender, RoutedEventArgs e)

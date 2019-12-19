@@ -25,7 +25,9 @@
 
                     <TextBox Width="105" Foreground="White" BorderBrush="White" FontSize="20" Margin="5 0 5 5" Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button x:Name="btnAccept" Content="Accept" Margin="10 15 10 10" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnAccept_Click"/>
+                    <Button x:Name="btnAccept" Content="Accept" Margin="10 15 10 10" 
+                            Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" 
+                            Style="{StaticResource MaterialDesignRaisedButton}" Click="btnAccept_Click"/>
 
                 </StackPanel>
             </StackPanel>

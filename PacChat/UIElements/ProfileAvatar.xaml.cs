@@ -27,7 +27,24 @@ namespace PacChat.UIElements
             InitializeComponent();
         }
 
+
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeAva();
+        }
+
+        void OnImageUploadError(Exception error)
+        {
+            Console.WriteLine(error);
+        }
+
+        void OnImageUploadCompleted()
+        {
+            Console.WriteLine("Avatar upload completed");
+            AvtDisplayer.UpdateAllInstance();
+        }
+
+        public void ChangeAva()
         {
             var app = MainWindow.chatApplication;
             OpenFileDialog op = new OpenFileDialog();
@@ -43,17 +60,6 @@ namespace PacChat.UIElements
                 String path = op.FileNames[0];
                 ProfileAPI.AvatarUpload(path, OnImageUploadCompleted, OnImageUploadError);
             }
-        }
-
-        void OnImageUploadError(Exception error)
-        {
-            Console.WriteLine(error);
-        }
-
-        void OnImageUploadCompleted()
-        {
-            Console.WriteLine("Avatar upload completed");
-            AvtDisplayer.UpdateAllInstance();
         }
     }
 }
