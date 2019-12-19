@@ -38,11 +38,11 @@ namespace PacChat.Network
 
         private ChatConnection(ProtocolProvider protocolProvider)
         {
-            this.Host = ConfigurationManager.AppSettings["ServerAddress"];
-            this.Port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+            this.Host = "pacchat.hytalevn.com";
+            this.Port = 8080;
 
-            this.WebHost = ConfigurationManager.AppSettings["WebAddress"];
-            this.WebPort = Convert.ToInt32(ConfigurationManager.AppSettings["WebPort"]);
+            this.WebHost = "pacchat.hytalevn.com";
+            this.WebPort = 80;
 
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();
