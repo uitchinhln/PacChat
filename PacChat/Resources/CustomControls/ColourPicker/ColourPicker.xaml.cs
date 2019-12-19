@@ -25,6 +25,7 @@ namespace PacChat.Resources.CustomControls.ColourPicker
         public ColourPicker()
         {
             InitializeComponent();
+            
         }
 
         public delegate void ClickHander(Color color);
@@ -33,6 +34,7 @@ namespace PacChat.Resources.CustomControls.ColourPicker
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
             buttonClick(ColorPicker.Color);
+
         }
 
 

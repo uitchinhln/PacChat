@@ -37,8 +37,7 @@ namespace PacChat
             currentPath = null;
             Instance = this;
             loadBG_Gallery();
-
-            iconColorPicker.buttonClick += IconColorPicker_buttonClick;
+            
             BGColorPicker.buttonClick += BubbleColorPicker_buttonClick;
 
             editFlag = false;
@@ -55,11 +54,7 @@ namespace PacChat
             ChatPage.Instance.SetSolidBG(color);
         }
 
-        private void IconColorPicker_buttonClick(Color color)
-        {
-            Console.WriteLine("icon color Picker");
-            ChatPage.Instance.ChangeIconColor(color);
-        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

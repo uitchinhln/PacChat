@@ -182,6 +182,9 @@
     <Compile Include="Resources\CustomControls\ColourPicker\ColourPicker.xaml.cs">
       <DependentUpon>ColourPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ColourPicker\ColourPickerNonePopup.xaml.cs">
+      <DependentUpon>ColourPickerNonePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml.cs">
       <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
     </Compile>
@@ -388,6 +391,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\CustomControls\ColourPicker\ColourPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\ColourPicker\ColourPickerNonePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

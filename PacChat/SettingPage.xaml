@@ -19,7 +19,7 @@
                     <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
                 </StackPanel>
 
-                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
+                <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="2">
                     <!-- General tab -->
                     <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                         <ScrollViewer>
@@ -124,7 +124,7 @@
                                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
                                             <Border>
-                                                <cp:ColourPicker x:Name="iconColorPicker" Margin="20"/>
+                                                <cp:ColourPickerNonePopup x:Name="iconColorPicker" Margin="20"/>
                                             </Border>
 
 
