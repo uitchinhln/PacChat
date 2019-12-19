@@ -125,8 +125,6 @@ namespace PacChatServer.MessageCore.Conversation
                 this.Color = color;
                 store.Save(this);
 
-                Console.WriteLine(color);
-
                 ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
                 {
                     ConversationID = this.ID.ToString(),
