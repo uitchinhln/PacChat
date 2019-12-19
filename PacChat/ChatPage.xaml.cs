@@ -483,7 +483,7 @@ namespace PacChat
                 string fileName = (msg as ImageMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
-                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Left;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 Console.WriteLine("Image sent");
                 AddMedia(fileID, fileName, isSimulating);
@@ -494,7 +494,7 @@ namespace PacChat
                 string fileName = (msg as VideoMessage).FileName;
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
-                thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
+                thumbnail.HorizontalAlignment = HorizontalAlignment.Left;
                 thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 AddMedia(fileID, fileName, isSimulating);
             }

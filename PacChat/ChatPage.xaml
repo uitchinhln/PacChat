@@ -78,7 +78,7 @@
                             </Border>
 
                             <Border Background="Transparent" CornerRadius="3" Margin="0">
-                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
+                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" Padding="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
                                     <materialDesign:PopupBox.ToggleContent>
                                         <materialDesign:PackIcon x:Name="iconColor" Width="24" Height="24" Kind="ColorLens" Foreground="#FF2C2C2C"/>
                                     </materialDesign:PopupBox.ToggleContent>

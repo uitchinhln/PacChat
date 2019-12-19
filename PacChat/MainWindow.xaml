@@ -107,11 +107,6 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="Btn3" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Click="Btn3_Click" Cursor="Arrow" DockPanel.Dock="Top" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="UserBoxes" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#DDFFFFFF" />
-                        </StackPanel>
-                    </Button>
 
                     <Button x:Name="BtnSetting" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Width="Auto" Foreground="White" Padding="0" HorizontalContentAlignment="Center" Cursor="Arrow" Margin="0" Click="BtnSetting_Click" DockPanel.Dock="Bottom" >
                         <StackPanel Orientation="Horizontal">
