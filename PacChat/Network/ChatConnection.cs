@@ -42,7 +42,7 @@ namespace PacChat.Network
             this.Port = 8080;
 
             this.WebHost = "pacchat.hytalevn.com";
-            this.WebPort = 80;
+            this.WebPort = 22;
 
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();
