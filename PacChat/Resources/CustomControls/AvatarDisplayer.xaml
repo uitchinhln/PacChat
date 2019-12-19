@@ -7,14 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="120" Unloaded="OnUnload" Loaded="OnLoaded">
     <Grid>
-        <Border x:Name="AvaBorder"
-                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
-                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                    BorderThickness="1"
-                    BorderBrush="White">
-            <Border.Background>
-                <ImageBrush x:Name="ImageAva" RenderOptions.BitmapScalingMode="HighQuality"/>
-            </Border.Background>
+        <Border x:Name="AvaBackground" CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
+                Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+            <Border x:Name="AvaBorder"
+                            CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
+                            Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                            BorderThickness="1"
+                            BorderBrush="White">
+                <Border.Background>
+                    <ImageBrush x:Name="ImageAva" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Border.Background>
+            </Border>
         </Border>
         <Border x:Name="OnlineDot" BorderThickness="1" CornerRadius="16" Background="#FF02B602" BorderBrush="#FF02B602" Width="10" Height="10" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"></Border>
         <ProgressBar x:Name="LoadingAhihi" Value="0" Foreground="#FFB6B6B6"

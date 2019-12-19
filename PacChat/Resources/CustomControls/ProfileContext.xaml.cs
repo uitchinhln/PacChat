@@ -25,6 +25,7 @@ namespace PacChat.Resources.CustomControls
             InitializeComponent();
             this.Avatar.Click += Avatar_Click;
             BtnDownload.Click += BtnDownload_Click;
+            Avatar.AvaBackground.Background = (SolidColorBrush) new BrushConverter().ConvertFrom("#FFF0F0F0");
         }
 
         private void Avatar_Click(object sender, EventArgs e)

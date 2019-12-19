@@ -80,7 +80,9 @@
 
                     </DockPanel>
 
-                    <materialDesign:PopupBox StaysOpen="True" IsTabStop="False" VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8,2,10,0" PlacementMode="BottomAndAlignRightEdges" Padding="0,8,0,0">
+                    <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" StaysOpen="True" IsTabStop="False" 
+                                             VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8,2,10,0" 
+                                             PlacementMode="BottomAndAlignRightEdges" Padding="0,0,0,0">
                         <materialDesign:PopupBox.ToggleContent>
                             <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>
                         </materialDesign:PopupBox.ToggleContent>
