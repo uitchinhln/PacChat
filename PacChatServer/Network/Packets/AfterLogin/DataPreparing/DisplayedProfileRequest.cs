@@ -33,6 +33,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             if (targetUser == null) return;
 
             DisplayedProfileResponse packet = new DisplayedProfileResponse();
+            packet.ID = targetUser.ID.ToString();
             packet.Name = targetUser.FirstName + " " + targetUser.LastName;
             packet.Email = targetUser.Email;
             packet.DoB = targetUser.DateOfBirth.ToString();

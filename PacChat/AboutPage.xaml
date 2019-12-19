@@ -7,24 +7,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="#2C2C2C">
     <StackPanel Orientation="Vertical">
-        <Label Content="ABOUT" Foreground="#DDFFFFFF" FontSize="48" HorizontalAlignment="Center"></Label>
+        <Label Content="ABOUT" Foreground="#DDFFFFFF" FontSize="48" HorizontalAlignment="Center" Margin="20"></Label>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="22,0,32,0" Width="746">
             <StackPanel Orientation="Vertical" Margin="20 20 80 20">
-                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
+                <Border Width="130" Height="130"  CornerRadius="120" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="Resources/Drawable/Long.jpg"/>
+                    </Border.Background>
+                </Border>
                 <Label Content="18520304" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
                 <Label Content="Nguyễn Nhật Long" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="20 20 20 20">
-                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
-                <Label Content="18520480" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
-                <Label Content="Nguyễn Lê Bách" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Border Width="130" Height="130"  CornerRadius="130" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="Resources/Drawable/Chinh.jpg"/>
+                    </Border.Background>
+                </Border>
+                <Label Content="18520257" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Label Content="Lê Ngọc Chính" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="80 20 20 20">
-                <Border Width="130" Height="130"  CornerRadius="50" Background="Gray"></Border>
-                <Label Content="18520257" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
-                <Label Content="Lê Ngọc Chính" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Border Width="130" Height="130"  CornerRadius="130" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="Resources/Drawable/Bach.jpg"/>
+                    </Border.Background>
+                </Border>
+                <Label Content="18520480" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
+                <Label Content="Nguyễn Lê Bách" HorizontalAlignment="Center" Margin="5" FontSize="20" Foreground ="White"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

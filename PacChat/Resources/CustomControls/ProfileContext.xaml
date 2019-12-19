@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="250">
     <DockPanel>
         <Grid Height="100" DockPanel.Dock="Top">
-            <Image x:Name="Background" Height="75" Margin="0" VerticalAlignment="Top" Source="/PacChat;component/Resources/Drawable/LoginSlideImage.jpg" Stretch="UniformToFill"></Image>
+            <Image x:Name="Background" Height="75" Margin="0" VerticalAlignment="Top" Source="/PacChat;component/Resources/Drawable/LoginSlideImage.jpg" Stretch="UniformToFill"/>
             <local:AvatarDisplayer x:Name="Avatar" Height="50" Width="50" VerticalAlignment="Bottom"></local:AvatarDisplayer>
         </Grid>
         <Label x:Name="FullName" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Ngoc Chinh" FontWeight="Bold" FontSize="16">

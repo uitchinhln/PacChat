@@ -168,9 +168,9 @@ namespace PacChat
             isMaximized = !isMaximized;
         }
 
-        public void OpenProfileDisplayer(string name, string email, string dob, string address)
+        public void OpenProfileDisplayer(string id, string name, string email, string dob, string address)
         {
-            ProfileDisplayer.Display(name, email, dob, address);
+            ProfileDisplayer.Display(id, name, email, dob, address);
             var sb = this.FindResource("left-side-panel-expand") as Storyboard;
             sb.Begin();
         }

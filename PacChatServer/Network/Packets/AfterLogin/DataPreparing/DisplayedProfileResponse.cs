@@ -12,6 +12,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 {
     public class DisplayedProfileResponse : IPacket
     {
+        public string ID { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string DoB { get; set; }
@@ -24,6 +25,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
+            ByteBufUtils.WriteUTF8(byteBuf, ID);
             ByteBufUtils.WriteUTF8(byteBuf, Name);
             ByteBufUtils.WriteUTF8(byteBuf, Email);
             ByteBufUtils.WriteUTF8(byteBuf, DoB);

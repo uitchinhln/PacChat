@@ -25,8 +25,9 @@ namespace PacChat.ChatPageContents
             InitializeComponent();
         }
 
-        public void Display(string name, string email, string dob, string address)
+        public void Display(string id, string name, string email, string dob, string address)
         {
+            AvatarDisplayer.UserID = id;
             NameDisplayer.Text = name;
             EmailDisplayer.Text = email;
             DoBDisplayer.Text = dob;
