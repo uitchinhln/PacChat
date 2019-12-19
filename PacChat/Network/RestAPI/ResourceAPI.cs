@@ -15,7 +15,7 @@ namespace PacChat.Network.RestAPI
     {
         private static readonly String currentVersion = ConfigurationManager.AppSettings["AppVersion"];
 
-        public static readonly String ResourceDownloadUrl = "http://{0}:1403/api/resource/v{1}/{2}";
+        public static readonly String ResourceDownloadUrl = "http://{0}:{1}/api/resource/v{2}/{3}";
 
         public delegate void ErrorHandler(Exception error);
 
@@ -28,7 +28,8 @@ namespace PacChat.Network.RestAPI
                 String fileNameParam = HashUtils.Base64Encode(savePath.Replace(TempUtil.ResourcePath, ""));
 
                 String address = ChatConnection.Instance.WebHost;
-                Uri uri = new Uri(String.Format(ResourceDownloadUrl, address, currentVersion, fileNameParam));
+                int port = ChatConnection.Instance.WebPort;
+                Uri uri = new Uri(String.Format(ResourceDownloadUrl, address, port, currentVersion, fileNameParam));
 
                 WebClient webClient = RestUtils.CreateWebClient();
 

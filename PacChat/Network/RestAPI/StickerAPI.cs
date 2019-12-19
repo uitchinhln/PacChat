@@ -18,8 +18,8 @@ namespace PacChat.Network.RestAPI
 {
     public class StickerAPI
     {
-        private static readonly String StickerCatesListUrl = "http://{0}:1403/api/message/sticker/category/list";
-        private static readonly String StickerCatesUrl = "http://{0}:1403/api/message/sticker/category/stickers/{1}";
+        private static readonly String StickerCatesListUrl = "http://{0}:{1}/api/message/sticker/category/list";
+        private static readonly String StickerCatesUrl = "http://{0}:{1}/api/message/sticker/category/stickers/{2}";
 
         private static LFUCache<String, BitmapImage> cachedImage = new LFUCache<string, BitmapImage>(100, 10);
 
@@ -31,7 +31,9 @@ namespace PacChat.Network.RestAPI
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                String r = client.DownloadString(String.Format(StickerCatesListUrl, ChatConnection.Instance.WebHost));
+                String address = ChatConnection.Instance.WebHost;
+                int port = ChatConnection.Instance.WebPort;
+                String r = client.DownloadString(String.Format(StickerCatesListUrl, address, port));
                 return JsonConvert.DeserializeObject<List<StickerCategory>>(r);
             }
         }
@@ -42,7 +44,9 @@ namespace PacChat.Network.RestAPI
             {
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
-                String r = client.DownloadString(String.Format(StickerCatesUrl, ChatConnection.Instance.WebHost, id));
+                String address = ChatConnection.Instance.WebHost;
+                int port = ChatConnection.Instance.WebPort;
+                String r = client.DownloadString(String.Format(StickerCatesUrl, address, port, id));
                 return JsonConvert.DeserializeObject<List<Sticker>>(r);
             }
         }

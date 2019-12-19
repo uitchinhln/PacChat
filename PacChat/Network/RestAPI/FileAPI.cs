@@ -17,10 +17,10 @@ namespace PacChat.Network.RestAPI
         public delegate void ResultHandler(Dictionary<String, String> result);
         public delegate void ErrorHandler(Exception error);
 
-        private static readonly String AttachmentUploadUrl = "http://{0}:1403/api/message/attachment/{1}";
-        private static readonly String AttachmentDownloadUrl = "http://{0}:1403/api/message/attachment/{1}/{2}";
+        private static readonly String AttachmentUploadUrl = "http://{0}:{1}/api/message/attachment/{2}";
+        private static readonly String AttachmentDownloadUrl = "http://{0}:{1}/api/message/attachment/{2}/{3}";
 
-        private static readonly String MediaUploadUrl = "http://{0}:1403/api/message/media/{1}";
+        private static readonly String MediaUploadUrl = "http://{0}:{1}/api/message/media/{2}";
 
         private static readonly Random Rand = new Random();
 
@@ -42,7 +42,8 @@ namespace PacChat.Network.RestAPI
                 }
 
                 String address = ChatConnection.Instance.WebHost;
-                String url = String.Format(AttachmentUploadUrl, address, conversationID);
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(AttachmentUploadUrl, address, port, conversationID);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
@@ -65,7 +66,8 @@ namespace PacChat.Network.RestAPI
             try
             {
                 String address = ChatConnection.Instance.WebHost;
-                Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, fileID, conversationID));
+                int port = ChatConnection.Instance.WebPort;
+                Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, port, fileID, conversationID));
 
                 WebClient webClient = RestUtils.CreateWebClient();
 
@@ -112,7 +114,8 @@ namespace PacChat.Network.RestAPI
                 }
 
                 String address = ChatConnection.Instance.WebHost;
-                String url = String.Format(MediaUploadUrl, address, conversationID);
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(MediaUploadUrl, address, port, conversationID);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();

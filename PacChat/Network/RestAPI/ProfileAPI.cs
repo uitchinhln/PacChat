@@ -25,9 +25,9 @@ namespace PacChat.Network.RestAPI
         public delegate void GetAvatarResult(ImageSource source);
         public delegate void ErrorHandler(Exception error);
 
-        private static readonly String UploadAvatarURL = "http://{0}:1403/api/profile/avatar";
-        private static readonly String GetSelfAvatarURL = "http://{0}:1403/api/profile/avatar";
-        private static readonly String GetUserAvatarURL = "http://{0}:1403/api/profile/avatar/{1}";
+        private static readonly String UploadAvatarURL = "http://{0}:{1}/api/profile/avatar";
+        private static readonly String GetSelfAvatarURL = "http://{0}:{1}/api/profile/avatar";
+        private static readonly String GetUserAvatarURL = "http://{0}:{1}/api/profile/avatar/{2}";
 
         private static LRUCache<String, ImageSource> avatarCache = new LRUCache<String, ImageSource>(100, 10);
 
@@ -73,7 +73,8 @@ namespace PacChat.Network.RestAPI
                 form.Add(new StreamContent(stream), "avatar", ChatConnection.Instance.Session.SessionID);
 
                 String address = ChatConnection.Instance.WebHost;
-                String url = String.Format(UploadAvatarURL, address);
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(UploadAvatarURL, address, port);
 
                 HttpResponseMessage response = await httpClient.PostAsync(url, form);
                 response.EnsureSuccessStatusCode();
@@ -96,7 +97,8 @@ namespace PacChat.Network.RestAPI
             try
             {
                 String address = ChatConnection.Instance.WebHost;
-                String url = String.Format(GetSelfAvatarURL, address);
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(GetSelfAvatarURL, address, port);
 
                 if (avatarCache.Contains("Self") && !ignoreCache)
                 {
@@ -140,7 +142,8 @@ namespace PacChat.Network.RestAPI
             try
             {
                 String address = ChatConnection.Instance.WebHost;
-                String url = String.Format(GetUserAvatarURL, address, userID);
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(GetUserAvatarURL, address, port, userID);
 
                 if (avatarCache.Contains(userID) && !ignoreCache)
                 {
