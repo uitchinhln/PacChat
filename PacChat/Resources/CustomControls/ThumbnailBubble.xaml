@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="256" d:DesignWidth="320">
-    <Grid x:Name="BubbleBkg" Margin="8">
+    <Grid x:Name="BubbleBkg" Margin="0,8">
         <ProgressBar x:Name="LoadingAhihi"
           Style="{StaticResource MaterialDesignCircularProgressBar}"
           Value="0"

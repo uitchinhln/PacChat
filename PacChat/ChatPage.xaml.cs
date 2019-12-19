@@ -371,7 +371,7 @@ namespace PacChat
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
-                thumbnail.Margin = new Thickness(0, 0, 30, 0);
+                //thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
                 Console.WriteLine("Image sent");
                 AddMedia(fileID, fileName, isSimulating);
@@ -383,7 +383,7 @@ namespace PacChat
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Right;
-                thumbnail.Margin = new Thickness(0, 0, 30, 0);
+                //thumbnail.Margin = new Thickness(0, 0, 30, 0);
                 // thumbnail.IsActive = true;
 
                 AddMedia(fileID, fileName, isSimulating);
@@ -484,7 +484,7 @@ namespace PacChat
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Left;
-                thumbnail.Margin = new Thickness(15, 0, 0, 0);
+                //thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 Console.WriteLine("Image sent");
                 AddMedia(fileID, fileName, isSimulating);
             }
@@ -495,7 +495,7 @@ namespace PacChat
                 MediaInfo media = GetMediaInfo(fileID, fileName, app.model.currentSelectedConversation);
                 thumbnail = new ThumbnailBubble(media);
                 thumbnail.HorizontalAlignment = HorizontalAlignment.Left;
-                thumbnail.Margin = new Thickness(15, 0, 0, 0);
+                //thumbnail.Margin = new Thickness(15, 0, 0, 0);
                 AddMedia(fileID, fileName, isSimulating);
             }
             else if (BubbleTypeParser.Parse(msg) == BubbleType.Sticker)
