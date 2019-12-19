@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" 
-             d:DesignWidth="400">
+            >
     <Grid>
         <Border
             x:Name="borderBubble"
             MaxWidth="900"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Center"
             >
             <StackPanel>
                 <Border
@@ -26,7 +26,7 @@
                     Text="hello adasdqw eqweqeqwe chiều adafsfda sda dasdajkasdadadadasdasdasdmoi nguoi"
                     ToolTip="11:59"
                     Padding="10" TextDecorations="{x:Null}"/>
-                        <Button x:Name="AttachmentLink" Margin="0" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
+                        <Button Padding="0" x:Name="AttachmentLink" Margin="0" Height="Auto" Background="#00000000" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AttachmentLink_Click"></Button>
                     </Grid>
                 </Border>
                 <Border>

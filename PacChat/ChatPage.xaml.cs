@@ -73,9 +73,10 @@ namespace PacChat
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png;*.mp4|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
+              "Portable Network Graphic (*.png)|*.png|" + 
+              "MPEG4 (*.mp4)|*.mp4";
 
             FakeLoadingBubble bubble = new FakeLoadingBubble();
 
@@ -792,7 +793,6 @@ namespace PacChat
             iconSend.Foreground = colorBrush;
             iconImage.Foreground = colorBrush;
             iconBuzz.Foreground = colorBrush;
-            iconVideo.Foreground = colorBrush;
             iconSticker.Foreground = colorBrush;
         }
     }

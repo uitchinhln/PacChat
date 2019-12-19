@@ -9,6 +9,7 @@
              xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" 
              xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" 
              xmlns:customControls="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:cp="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
              xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -74,11 +75,6 @@
                                     </StackPanel>
                                 </materialDesign:PopupBox>
                             </Border>
-                            <Border>
-                                <Button x:Name="btnVideo" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnVideo_Click">
-                                    <materialDesign:PackIcon x:Name="iconVideo" Kind="Video" Width="24" Height="24" Foreground="#FF2C2C2C"/>
-                                </Button>
-                            </Border>
 
                             <Border>
                                 <Button x:Name="btnAttachment" Padding="0" Margin="2,2,2,2" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
@@ -90,6 +86,15 @@
                                 <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
                                     <materialDesign:PackIcon x:Name="iconImage" Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
+                            </Border>
+
+                            <Border Background="Transparent" CornerRadius="3" Margin="0">
+                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
+                                    <materialDesign:PopupBox.ToggleContent>
+                                        <materialDesign:PackIcon x:Name="colorIcon" Width="24" Height="24" Kind="ColorLens"/>
+                                    </materialDesign:PopupBox.ToggleContent>
+                                    <cp:ColourPicker/>
+                                </materialDesign:PopupBox>
                             </Border>
 
                             <Border>
