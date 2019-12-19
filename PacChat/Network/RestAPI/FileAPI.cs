@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,10 +62,11 @@ namespace PacChat.Network.RestAPI
         }
 
         public static void DownloadAttachment(String conversationID, String fileID, String savePath, 
-            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler, [CallerMemberName] string caller = null)
         {
             try
             {
+                Console.WriteLine(caller + " downloading attachment...");
                 String address = ChatConnection.Instance.WebHost;
                 int port = ChatConnection.Instance.WebPort;
                 Uri uri = new Uri(String.Format(AttachmentDownloadUrl, address, port, fileID, conversationID));
@@ -134,17 +136,18 @@ namespace PacChat.Network.RestAPI
         }
 
         public static void DownloadMedia(String conversationID, String fileID, String savePath,
-            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler, [CallerMemberName] string caller = null)
         {
             String streamUrl = StreamAPI.GetMediaURL(fileID, conversationID);
-            DownloadMedia(streamUrl, savePath, onProgressChange, onDownloadComplete, errorHandler);
+            DownloadMedia(streamUrl, savePath, onProgressChange, onDownloadComplete, errorHandler, caller);
         }
 
         public static void DownloadMedia(String streamURL, String savePath,
-            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler)
+            DownloadProgressChangedEventHandler onProgressChange, AsyncCompletedEventHandler onDownloadComplete, ErrorHandler errorHandler, [CallerMemberName] string caller = null)
         {
             try
             {
+                Console.WriteLine(caller + " downloading media...");
                 Uri uri = new Uri(streamURL);
 
                 WebClient webClient = RestUtils.CreateWebClient();

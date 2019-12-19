@@ -25,10 +25,11 @@ namespace PacChat.Network.RestAPI
 
         public delegate void ResultHandler(BitmapImage result);
 
-        public static List<StickerCategory> GetCategories()
+        public static List<StickerCategory> GetCategories([CallerMemberName] string caller = null)
         {
             using (WebClient client = new WebClient())
             {
+                Console.WriteLine(caller + " getting sticker categories...");
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
                 String address = ChatConnection.Instance.WebHost;
@@ -38,10 +39,11 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static List<Sticker> GetStickerCategory(int id) 
+        public static List<Sticker> GetStickerCategory(int id, [CallerMemberName] string caller = null) 
         {
             using (WebClient client = new WebClient())
             {
+                Console.WriteLine(caller + " getting sticker category...");
                 client.Encoding = Encoding.UTF8;
                 client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
                 String address = ChatConnection.Instance.WebHost;
@@ -65,6 +67,7 @@ namespace PacChat.Network.RestAPI
                 {
                     using (WebClient client = new WebClient())
                     {
+                        Console.WriteLine(caller + " downloading sticker...");
                         byte[] data = client.DownloadData(url);
 
                         BitmapImage bitmap = new BitmapImage();
@@ -100,6 +103,7 @@ namespace PacChat.Network.RestAPI
                 }
                 using (WebClient client = new WebClient())
                 {
+                    Console.WriteLine(caller + " downloading sticker synchronously...");
                     byte[] data = client.DownloadData(url);
 
                     BitmapImage bitmap = new BitmapImage();

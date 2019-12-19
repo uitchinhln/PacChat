@@ -35,7 +35,6 @@ namespace PacChat.Resources.CustomControls
             Chatpage = chatpage;
             Clickable = clickable;
             IsRunWhenLoaded = runWhenLoaded;
-            loadSticker();
         }
 
         public bool IsRunWhenLoaded { get; set; }
@@ -103,6 +102,11 @@ namespace PacChat.Resources.CustomControls
                     { ID = ID, CategoryID = CateID, Duration = Duration, SpriteURL = UriSheet}
                 });
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadSticker();
         }
     }
 }

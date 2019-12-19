@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -92,7 +93,7 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false)
+        public static void DownloadSelfAvatar(GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false, [CallerMemberName] string caller = null)
         {
             try
             {
@@ -109,6 +110,7 @@ namespace PacChat.Network.RestAPI
                     {
                         using (WebClient client = new WebClient())
                         {
+                            Console.WriteLine(caller + " downloading self avatar");
                             client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
                             byte[] data = client.DownloadData(url);
 
@@ -137,7 +139,7 @@ namespace PacChat.Network.RestAPI
             }
         }
 
-        public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false)
+        public static void DownloadUserAvatar(String userID, GetAvatarResult resultHandler, ErrorHandler errorHandler, bool ignoreCache = false, [CallerMemberName] string caller = null)
         {
             try
             {
@@ -155,6 +157,7 @@ namespace PacChat.Network.RestAPI
                     {
                         using (WebClient client = new WebClient())
                         {
+                            Console.WriteLine(caller + " downloading avatar of " + userID);
                             client.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
                             byte[] data = client.DownloadData(url);
 
