@@ -29,7 +29,8 @@
 
         </Storyboard>
         
-        <Storyboard x:Key="left-side-panel-compress"> <DoubleAnimation
+        <Storyboard x:Key="left-side-panel-compress"> 
+            <DoubleAnimation
                 Storyboard.TargetName="ProfileDisplayer"
                 Storyboard.TargetProperty="Width"
                 From="256" To="0" Duration="0:0:0.25"
@@ -81,7 +82,7 @@
                     </DockPanel>
 
                     <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" StaysOpen="True" IsTabStop="False" 
-                                             VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8,2,10,0" 
+                                             VerticalAlignment="Top" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8,0,10,2" 
                                              PlacementMode="BottomAndAlignRightEdges" Padding="0,0,0,0">
                         <materialDesign:PopupBox.ToggleContent>
                             <customcontrols:AvatarDisplayer x:Name="SelfAvatar" Width="30"/>

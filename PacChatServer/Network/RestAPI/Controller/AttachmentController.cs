@@ -65,7 +65,7 @@ namespace PacChatServer.Network.RestAPI.Controller
             if (Request.Headers.Range != null)
             {
                 HttpResponseMessage partialResponse = Request.CreateResponse(HttpStatusCode.PartialContent);
-                partialResponse.Content = new ByteRangeStreamContent(stream, Request.Headers.Range, contentType);
+                partialResponse.Content = new ByteRangeStreamContent(stream, Request.Headers.Range, contentType, ServerSettings.BUFFER_SIZE);
                 partialResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
                     FileName = fileName
@@ -75,7 +75,7 @@ namespace PacChatServer.Network.RestAPI.Controller
             else
             {
                 HttpResponseMessage fullResponse = Request.CreateResponse(HttpStatusCode.OK);
-                fullResponse.Content = new StreamContent(stream);
+                fullResponse.Content = new StreamContent(stream, ServerSettings.BUFFER_SIZE);
                 fullResponse.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
                 fullResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {

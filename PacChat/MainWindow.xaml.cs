@@ -76,6 +76,7 @@ namespace PacChat
             InitializeComponent();
             Instance = this;
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            System.Net.ServicePointManager.DefaultConnectionLimit = 100;
             InitAMVC();
 
             Packets.SendPacket<GetFriendIDs>();
@@ -99,6 +100,7 @@ namespace PacChat
             SelfAvatar.UpdateAllInstance();
 
             ProfileContext.BtnSignOut.Click += BtnSignOut_Click;
+
         }
 
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)

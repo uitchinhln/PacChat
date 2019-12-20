@@ -33,6 +33,10 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             Application.Current.Dispatcher.Invoke(() => 
             {
                 ChatPage.Instance.Buzz();
+                if (MainWindow.Instance.WindowState == WindowState.Minimized)
+                {
+                    MainWindow.Instance.WindowState = MainWindow.Instance.isMaximized ? WindowState.Maximized : WindowState.Normal;
+                }
                 MainWindow.Instance.Activate();
                 Console.WriteLine(ConversationID);
             });
