@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -25,6 +26,10 @@ namespace PacChat.Resources.CustomControls.Notifications
     {
         public string FileLocation { get; set; }
 
+        public string FileID { get; set; }
+
+        public bool IsCompleted { get; private set; } = false;
+
         public DownloadProgressNoti()
         {
             InitializeComponent();
@@ -47,6 +52,7 @@ namespace PacChat.Resources.CustomControls.Notifications
             ProgressBar.Value = 100;
             ProgressBar.Visibility = Visibility.Collapsed;
             DownloadStatus.Text = "Download Completed";
+            IsCompleted = true;
         }
         
         public void DownloadError()
@@ -58,7 +64,7 @@ namespace PacChat.Resources.CustomControls.Notifications
 
         private void ClickMask_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(FileLocation))
+            if (File.Exists(FileLocation))
             {
                 Process proc = Process.Start(FileLocation);
             }

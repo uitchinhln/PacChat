@@ -96,6 +96,13 @@ namespace PacChat
             }
         }
 
+        public bool IsDownloading(string fileID)
+        {
+            DownloadProgressNoti noti = DownloadList.Children.OfType<DownloadProgressNoti>()
+                .Where(p => !p.IsCompleted && p.FileID.Equals(fileID, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            return noti != null;
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
             this.HidePopUp();

@@ -359,10 +359,13 @@ namespace PacChat.Resources.CustomControls.Media
             //    MainWindow.Instance.DownloadWindow.ShowPopUp();
             //}
             var downloadWindow = DownloadWindow.Instance;
+            if (downloadWindow.IsDownloading(currentBtn.FileID)) return;
 
             DownloadProgressNoti noti = new DownloadProgressNoti();
             noti.FileLocation = FileAPI.RepairSavePath(savePath);
             noti.SetFileName(System.IO.Path.GetFileName(noti.FileLocation));
+            noti.FileID = currentBtn.FileID;
+
             downloadWindow.DownloadList.Children.Insert(0, noti);
             MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
 

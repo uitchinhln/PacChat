@@ -145,16 +145,21 @@ namespace PacChat.Resources.CustomControls
                 //{
                 //    MainWindow.Instance.DownloadWindow.ShowPopUp();
                 //}
+                String fileID = AttachmentLink.Tag as String;
                 var downloadWindow = DownloadWindow.Instance;
+
+                if (downloadWindow.IsDownloading(fileID)) return;
 
                 DownloadProgressNoti noti = new DownloadProgressNoti();
                 noti.SetFileName(System.IO.Path.GetFileName(dialog.FileName));
                 noti.FileLocation = dialog.FileName;
+                noti.FileID = fileID;
+
                 downloadWindow.DownloadList.Children.Insert(0, noti);
                 MainWindow.chatApplication.model.DownloadProgresses.Add(noti);
 
                 FileAPI.DownloadAttachment(app.model.currentSelectedConversation,
-                    AttachmentLink.Tag as String, dialog.FileName,
+                    noti.FileID, dialog.FileName,
                     noti.SetProgress, noti.FinalizeDownload, OnDownloadFileError);
             }
         }
