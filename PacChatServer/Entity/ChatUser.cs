@@ -73,6 +73,9 @@ namespace PacChatServer.Entity
         [BsonElement("Notifications")]
         public List<string> Notifications { get; set; } = new List<string>();
 
+        [BsonElement("ChatInterfaceSettings")]
+        public ChatDecorate ChatInterfaceSettings { get; set; } = new ChatDecorate();
+
         //Key is conversation id, value is the last time it have action
         [BsonIgnore]
         public ConcurrentDictionary<Guid, long> Conversations { get; private set; } = new ConcurrentDictionary<Guid, long>();
