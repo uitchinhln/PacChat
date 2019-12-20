@@ -338,7 +338,7 @@
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="Entity\AbstractEntity.cs" />
     <Compile Include="Entity\Builder\ChatUserBuilder.cs" />
-    <Compile Include="Entity\EntityProperty\ChatDecorate.cs" />
+    <Compile Include="Entity\EntityProperty\ChatTheme.cs" />
     <Compile Include="Entity\EntityProperty\Gender.cs" />
     <Compile Include="Entity\ChatUser.cs" />
     <Compile Include="Entity\EntityProperty\Relation.cs" />
@@ -375,13 +375,14 @@
     <Compile Include="Network\ChatServer.cs" />
     <Compile Include="Network\ChatSession.cs" />
     <Compile Include="Network\ChatSocketServer.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ChatThemeGetRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\DisplayedProfileResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfIDResponse.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\DataPreparing\GetSelfProfileResponse.cs" />
-    <Compile Include="Network\Packets\AfterLogin\DataPreparing\SetChatInterfaceRequest.cs" />
+    <Compile Include="Network\Packets\AfterLogin\DataPreparing\ChatThemeSetRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Message\ChangeBubbleChatColor.cs" />
     <Compile Include="Network\Packets\AfterLogin\Setting\ModifyPasswordRequest.cs" />
     <Compile Include="Network\Packets\AfterLogin\Setting\ModifyPasswordResponse.cs" />

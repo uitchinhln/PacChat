@@ -30,11 +30,12 @@ namespace PacChat.Resources.CustomControls
 
         public string BGUri { get; set; }
 
-       public void SetImage()
+        public void SetImage()
         {
-            FileStream stream = new FileStream(BGUri, FileMode.Open, FileAccess.Read);
+            FileStream stream = null;
             try
             {
+                stream = new FileStream(BGUri, FileMode.Open, FileAccess.Read);
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.StreamSource = stream;
@@ -43,16 +44,38 @@ namespace PacChat.Resources.CustomControls
                 imageBG.Source = bitmap;
             } catch
             {
-                stream.Close();
                 throw;
             }
+            //finally
+            //{
+            //    if (stream != null) stream.Close();
+            //}
         }
 
 
         private void buttonBG_Click(object sender, RoutedEventArgs e)
         {
-            SettingPage.Instance.AddBGPreview(BGUri);
-            Console.WriteLine("button");
+            FileStream stream = null;
+            try
+            {
+                stream = new FileStream(BGUri, FileMode.Open, FileAccess.Read);
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+
+                SettingPage.Instance.AddBGPreview(bitmap);
+            }
+            catch
+            {
+                throw;
+            }
+            //finally
+            //{
+            //    stream.Close();
+            //}
+            //SettingPage.Instance.AddBGPreview(BGUri);
+            //Console.WriteLine("button");
         }
     }
 }

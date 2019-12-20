@@ -83,7 +83,7 @@
     <Compile Include="GetID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzSend.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\ChangeBubbleChatColor.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BubbleChatColorSetRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversation.cs" />
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
@@ -133,6 +133,8 @@
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOfflineReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOnlineReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ChatThemeGetRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ChatThemeSetRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfile.cs" />
@@ -248,6 +250,8 @@
     <Compile Include="UIElements\ProfileAvatar.xaml.cs">
       <DependentUpon>ProfileAvatar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ChatBackgroundType.cs" />
+    <Compile Include="Utils\ColorUtils.cs" />
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />

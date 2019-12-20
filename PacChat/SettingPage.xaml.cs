@@ -28,13 +28,13 @@ namespace PacChat
     public partial class SettingPage : UserControl
     {
         public static SettingPage Instance;
-        private string currentPath;
+        private ImageSource currentImage;
         private bool editFlag; // 0: edit, 1: save
 
         public SettingPage()
         {
             InitializeComponent();
-            currentPath = null;
+            currentImage = null;
             Instance = this;
             loadBG_Gallery();
             
@@ -51,10 +51,9 @@ namespace PacChat
 
         private void BubbleColorPicker_buttonClick(Color color)
         {
+            Console.WriteLine(ColorUtils.ColorToInt(color));
             ChatPage.Instance.SetSolidBG(color);
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -79,6 +78,7 @@ namespace PacChat
 
         private void loadBG_Gallery()
         {
+            int count = 0;
             foreach (String uri in ResourceUtil.ChatPageResource)
             {
                 if (!File.Exists(uri))
@@ -89,6 +89,11 @@ namespace PacChat
                         {
                             BGSelectContainner bg = new BGSelectContainner(uri);
                             wrappanelBG_Gallery.Children.Add(bg);
+                            count++;
+                            if (count >= ResourceUtil.ChatPageResource.Count)
+                            {
+                                Packets.SendPacket<ChatThemeGetRequest>();
+                            } 
                         });
                     }, (e) => Console.WriteLine(e));
                 } else
@@ -97,6 +102,11 @@ namespace PacChat
                     {
                         BGSelectContainner bg = new BGSelectContainner(uri);
                         wrappanelBG_Gallery.Children.Add(bg);
+                        count++;
+                        if (count >= ResourceUtil.ChatPageResource.Count)
+                        {
+                            Packets.SendPacket<ChatThemeGetRequest>();
+                        }
                     } catch (Exception ex)
                     {
                         Console.WriteLine(ex);
@@ -109,13 +119,17 @@ namespace PacChat
                                 {
                                     BGSelectContainner bg = new BGSelectContainner(uri);
                                     wrappanelBG_Gallery.Children.Add(bg);
+                                    count++;
+                                    if (count >= ResourceUtil.ChatPageResource.Count)
+                                    {
+                                        Packets.SendPacket<ChatThemeGetRequest>();
+                                    }
                                 });
                             }, (e) => Console.WriteLine(e));
                         } catch (Exception e) { Console.WriteLine(e); }
                     }
                 }
             }
-
         }
 
         private void GeneralTab_Click(object sender, RoutedEventArgs e)
@@ -142,34 +156,54 @@ namespace PacChat
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                AddBGPreview(op.FileName);
+                FileStream stream = null;
+                try
+                {
+                    stream = new FileStream(op.FileName, FileMode.Open, FileAccess.Read);
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.EndInit();
 
+                    AddBGPreview(bitmap);
+                }
+                catch
+                {
+                    throw;
+                }
+                //finally
+                //{
+                //    stream.Close();
+                //}
+
+                //AddBGPreview(op.FileName);
             }
         }
 
-        public void AddBGPreview(string path)
+        public void AddBGPreview(ImageSource source)
         {
-            currentPath = path;
+            currentImage = source.Clone();
             VisualBrush vb = new VisualBrush();
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
             ef.Radius = (int)GetBlurLv();
 
-            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            try
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.EndInit();
+            //FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            //try
+            //{
+            //    BitmapImage bitmap = new BitmapImage();
+            //    bitmap.BeginInit();
+            //    bitmap.StreamSource = stream;
+            //    bitmap.EndInit();
 
-                im.Source = bitmap;
-            }
-            catch
-            {
-                stream.Close();
-                throw;
-            }
+            //    im.Source = bitmap;
+            //}
+            //catch
+            //{
+            //    stream.Close();
+            //    throw;
+            //}
+            im.Source = source;
 
             im.Effect = ef;
             vb.Visual = im;
@@ -177,8 +211,7 @@ namespace PacChat
             vb.Viewbox = new Rect(0.05, 0.05, 0.9, 0.9);
             borderBG_Preview.Background = vb;
 
-            ChatPage.Instance.addBackgroundImage(path, (int)GetBlurLv());
-
+            ChatPage.Instance.addBackgroundImage(source, (int)GetBlurLv());
         }
 
         public int GetBlurLv()
@@ -188,9 +221,9 @@ namespace PacChat
 
         private void blurLv_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (currentPath != null)
+            if (currentImage != null)
             {
-                AddBGPreview(currentPath);
+                AddBGPreview(currentImage);
             }
         }
 

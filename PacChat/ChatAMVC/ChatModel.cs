@@ -49,13 +49,17 @@ namespace PacChat.ChatAMVC
         public List<DownloadProgressNoti> DownloadProgresses = new List<DownloadProgressNoti>();
         #endregion
 
-        #region OnSettingPage
+        #region OnSettingPage: UserProfile
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime BirthDay { get; set; }
         public int Gender { get; set; }
+        #endregion
+
+        #region OnSettingPage: UserProfile
+
         #endregion
     }
 }

@@ -10,6 +10,7 @@ using PacChat.MessageCore;
 using CNetwork.Utils;
 using System.Windows;
 using System.Windows.Media;
+using PacChat.Utils;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
@@ -75,10 +76,9 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
                 app.model.Conversations[ConversationID].ConversationName = ConversationName;
                 app.model.Conversations[ConversationID].Members = Members.ToList();
 
-
-                byte[] bytes = BitConverter.GetBytes(BubbleColor);
-                app.model.Conversations[ConversationID].Color = Color.FromArgb(bytes[3], bytes[2], bytes[1], bytes[0]);
+                app.model.Conversations[ConversationID].Color = ColorUtils.IntToColor(BubbleColor);
                 ChatPage.Instance.bubbleColor = app.model.Conversations[ConversationID].Color;
+                ChatPage.Instance.bubbleColorPicker.ColorPicker.Color = ColorUtils.IntToColor(BubbleColor);
 
                 //if (app.model.MediaWindows.ContainsKey(ConversationID)
                 //&& app.model.MediaWindows[ConversationID] != null)

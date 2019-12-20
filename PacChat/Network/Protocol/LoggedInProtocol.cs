@@ -47,8 +47,8 @@ namespace PacChat.Network.Protocol
             Inbound(0x19, new BuzzReceive());
             Outbound(0x19, new BuzzSend());
 
-            Inbound(0x50, new ChangeBubbleChatColor());
-            Outbound(0x50, new ChangeBubbleChatColor());
+            Inbound(0x50, new BubbleChatColorSetRequest());
+            Outbound(0x50, new BubbleChatColorSetRequest());
 
 
             // Notifications
@@ -79,6 +79,11 @@ namespace PacChat.Network.Protocol
 
             Inbound(0x32, new ModifyPasswordResult());
             Outbound(0x32, new ModifyPassword());
+
+            Outbound(0x33, new ChatThemeGetRequest());
+
+            Inbound(0x34, new ChatThemeSetRequest());
+            Outbound(0x34, new ChatThemeSetRequest());
 
             // Sticker
             Inbound(0x21, new GetBoughtStickerPacksResponse());

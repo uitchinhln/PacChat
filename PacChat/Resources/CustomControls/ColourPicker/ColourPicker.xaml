@@ -16,7 +16,7 @@
         <StackPanel Orientation="Vertical" Width="377">
             <StackPanel Orientation="Horizontal">
 
-                <materialDesign:ColorPicker x:Name="ColorPicker" Height="198" Width="250" Margin="5" Color="{Binding SelectedColor, Delay=25}" />
+                <materialDesign:ColorPicker x:Name="ColorPicker" Height="198" Width="250" Margin="5" />
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="117">
                     <Border x:Name="borColorPreview" Height="70" Margin="10">

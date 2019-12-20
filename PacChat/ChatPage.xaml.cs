@@ -45,6 +45,7 @@ namespace PacChat
         public ChatPage()
         {
             InitializeComponent();
+            //Console.WriteLine(ColorUtils.ColorToInt((Color)ColorConverter.ConvertFromString("#FF2C2C2C")));
             Instance = this;
             _button1Clicked = false;
             // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
@@ -62,10 +63,10 @@ namespace PacChat
                 return;
             }
 
-            ChangeBubbleChatColor packet = new ChangeBubbleChatColor()
+            BubbleChatColorSetRequest packet = new BubbleChatColorSetRequest()
             {
                 ConversationID = chatApplication.model.currentSelectedConversation,
-                BubbleColor = BitConverter.ToInt32(new byte[] { color.B, color.G, color.R, color.A }, 0)
+                BubbleColor = ColorUtils.ColorToInt(color)
             };
             ChatConnection.Instance.Send(packet);
 
@@ -690,30 +691,30 @@ namespace PacChat
             LoadMessages(app.model.currentSelectedConversation);
         }
 
-        public void addBackgroundImage(string path, int blur)
+        public void addBackgroundImage(ImageSource source, int blur)
         {
             VisualBrush vb = new VisualBrush();
             Image im = new Image();
             BlurEffect ef = new BlurEffect();
             ef.Radius = blur;
 
+            //FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
 
-            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            //try
+            //{
+            //    BitmapImage bitmap = new BitmapImage();
+            //    bitmap.BeginInit();
+            //    bitmap.StreamSource = stream;
+            //    bitmap.EndInit();
 
-            try
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.EndInit();
-
-                im.Source = bitmap;
-            }
-            catch
-            {
-                stream.Close();
-                throw;
-            }
+            //    im.Source = bitmap;
+            //}
+            //catch
+            //{
+            //    stream.Close();
+            //    throw;
+            //}
+            im.Source = source;
 
             im.Effect = ef;
 

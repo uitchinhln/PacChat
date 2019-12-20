@@ -69,6 +69,28 @@ namespace PacChatServer.IO.Entity
             }
         }
 
+        public bool UpdateTheme(ChatUser user)
+        {
+            lock (user)
+            {
+                bool result = false;
+                try
+                {
+                    Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                        var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
+                        var update = Builders<ChatUser>.Update.Set(p => p.ChatThemeSettings, user.ChatThemeSettings);
+                        collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
+                    });
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    PacChatServer.GetServer().Logger.Error(e);
+                }
+                return result;
+            }
+        }
+
         public List<String> SearchUserIDByEmail(string input, ChatUser user)
         {
             List<String> result = new List<String>();

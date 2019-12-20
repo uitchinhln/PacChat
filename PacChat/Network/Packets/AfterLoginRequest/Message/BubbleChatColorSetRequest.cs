@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChat.Resources.CustomControls;
+using PacChat.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 
 namespace PacChat.Network.Packets.AfterLoginRequest.Message
 {
-    public class ChangeBubbleChatColor : IPacket
+    public class BubbleChatColorSetRequest : IPacket
     {
         public String ConversationID { get; set; }
         public int BubbleColor { get; set; }
@@ -37,8 +38,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
             MainWindow.chatApplication.model.Conversations.TryGetValue(ConversationID, out var conversationBubble);
             if (conversationBubble == null) return;
 
-            byte[] bytes = BitConverter.GetBytes(BubbleColor);
-            conversationBubble.Color = Color.FromArgb(bytes[3], bytes[2], bytes[1], bytes[0]);
+            conversationBubble.Color = ColorUtils.IntToColor(BubbleColor);
 
             if (MainWindow.chatApplication.model.currentSelectedConversation == ConversationID)
             {
@@ -46,6 +46,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Message
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    ChatPage.Instance.bubbleColorPicker.ColorPicker.Color = conversationBubble.Color;
                     foreach (var item in ChatPage.Instance.spMessagesContainer.Children)
                     {
                         if (!(item is Bubble)) continue;

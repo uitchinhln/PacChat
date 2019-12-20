@@ -79,6 +79,11 @@ namespace PacChatServer.Network.Protocol
             Inbound(0x32, new ModifyPasswordRequest());
             Outbound(0x32, new ModifyPasswordResponse());
 
+            Inbound(0x33, new ChatThemeGetRequest());
+
+            Inbound(0x34, new ChatThemeSetRequest());
+            Outbound(0x34, new ChatThemeSetRequest());
+
             // Sticker
             Inbound(0x21, new GetBoughtStickerPacksRequest());
             Outbound(0x21, new GetBoughtStickerPacksResponse());

@@ -22,7 +22,7 @@ namespace PacChatServer.Entity
         public HashSet<ChatSession> sessions { get; set; } = new HashSet<ChatSession>();
 
         [BsonIgnore]
-        ChatUserStore saver = new ChatUserStore();
+        ChatUserStore store = new ChatUserStore();
 
         [BsonElement("FirstName")]
         public String FirstName { get; set; }
@@ -73,8 +73,8 @@ namespace PacChatServer.Entity
         [BsonElement("Notifications")]
         public List<string> Notifications { get; set; } = new List<string>();
 
-        [BsonElement("ChatInterfaceSettings")]
-        public ChatDecorate ChatInterfaceSettings { get; set; } = new ChatDecorate();
+        [BsonElement("ChatThemeSettings")]
+        public ChatTheme ChatThemeSettings { get; set; } = new ChatTheme();
 
         //Key is conversation id, value is the last time it have action
         [BsonIgnore]
@@ -194,7 +194,7 @@ namespace PacChatServer.Entity
 
         public override bool Save()
         {
-            bool result = saver.Save(this);
+            bool result = store.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
 
             //if (profile == null) return result;
@@ -209,6 +209,11 @@ namespace PacChatServer.Entity
             profile.LastLogoff = this.LastLogoff;
 
             return result;
+        }
+
+        public bool SaveChatTheme()
+        {
+            return store.UpdateRelations(this);
         }
     }
 }
