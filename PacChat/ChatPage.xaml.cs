@@ -455,6 +455,7 @@ namespace PacChat
                 {
                     _headBubbleChat = new BubbleChat();
                     _headBubbleChat.SetAva(msg.SenderID);
+                    _headBubbleChat.NickName.Foreground = iconColor.Foreground;
                     spMessagesContainer.Children.Insert(0, _headBubbleChat);
                 }
             }
@@ -464,6 +465,7 @@ namespace PacChat
                 {
                     _previousBubbleChat = new BubbleChat();
                     _previousBubbleChat.SetAva(msg.SenderID);
+                    _previousBubbleChat.NickName.Foreground = iconColor.Foreground;
                     spMessagesContainer.Children.Add(_previousBubbleChat);
                 }
             }
@@ -825,6 +827,12 @@ namespace PacChat
             iconSticker.Foreground = colorBrush;
             ChatTitle.Foreground = colorBrush;
             iconColor.Foreground = colorBrush;
+
+            foreach (var item in spMessagesContainer.Children)
+            {
+                if (!(item is BubbleChat)) continue;
+                (item as BubbleChat).NickName.Foreground = colorBrush;
+            }
 
             LastActive.Foreground = colorBrush.Clone();
             LastActive.Foreground.Opacity = 0.6;

@@ -15,7 +15,7 @@
 
         <DockPanel>
             <!--AVATAR pic -->
-            <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+            <local:AvatarDisplayer x:Name="Avatar" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,5,0,2"/>
 
             <!---Messages path -->
             <StackPanel VerticalAlignment="Top">

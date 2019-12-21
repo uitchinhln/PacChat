@@ -11,7 +11,19 @@ namespace PacChat.MessageCore.Message
 {
     public class TextMessage : AbstractMessage
     {
-        public string Message { get; set; }
+        private string _message = String.Empty;
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                while (_message.Contains(Environment.NewLine + Environment.NewLine) || _message.Contains("\n\n"))
+                {
+                    _message = _message.Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine).Replace("\n\n", "\n");
+                }
+            }
+        }
 
         public override void DecodeFromBuffer(IByteBuffer buffer)
         {

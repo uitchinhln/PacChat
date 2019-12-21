@@ -92,6 +92,8 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
                 settingPage.BGColorPicker.ColorPicker.Color = ColorUtils.IntToColor(BackgroundColor);
                 settingPage.iconColorPicker.ColorPicker.Color = ColorUtils.IntToColor(IconColor);
 
+                ChatPage.Instance.ChangeIconColor(ColorUtils.IntToColor(IconColor));
+
                 switch (UseType)
                 {
                     case ChatBackgroundType.Color:
