@@ -95,6 +95,9 @@ namespace PacChat
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            MediaPlayer.ImgCache.Clear();
+
+
             var app = MainWindow.chatApplication;
             if (app.model.MediaWindows.ContainsKey(ConversationID))
                 app.model.MediaWindows[ConversationID] = null;

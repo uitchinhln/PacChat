@@ -824,8 +824,9 @@ namespace PacChat
             iconBuzz.Foreground = colorBrush;
             iconSticker.Foreground = colorBrush;
             ChatTitle.Foreground = colorBrush;
-            LastActive.Foreground = colorBrush;
             iconColor.Foreground = colorBrush;
+
+            LastActive.Foreground = colorBrush.Clone();
             LastActive.Foreground.Opacity = 0.6;
         }
 

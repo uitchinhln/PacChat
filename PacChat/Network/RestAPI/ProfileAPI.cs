@@ -30,7 +30,7 @@ namespace PacChat.Network.RestAPI
         private static readonly String GetSelfAvatarURL = "http://{0}:{1}/api/profile/avatar";
         private static readonly String GetUserAvatarURL = "http://{0}:{1}/api/profile/avatar/{2}";
 
-        private static LRUCache<String, ImageSource> avatarCache = new LRUCache<String, ImageSource>(100, 10);
+        public static LRUCache<String, ImageSource> avatarCache = new LRUCache<String, ImageSource>(100, 10);
 
         public static async void AvatarUpload(String filePath, ResultHandler handler, ErrorHandler errorHandler)
         {

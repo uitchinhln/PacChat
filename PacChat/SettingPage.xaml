@@ -14,9 +14,9 @@
         <Grid>
             <DockPanel>
                 <StackPanel Width="128">
-                    <Button x:Name="GeneralTab" Uid="0" Content="Personal" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click"/>
-                    <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click"/>
-                    <Button x:Name="CustomTab" Uid="2" Content="Custom" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click"/>
+                    <Button x:Name="GeneralTab" Uid="0" Content="Personal" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="30, 0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0,32,0,0" Click="GeneralTab_Click" HorizontalContentAlignment="Left"/>
+                    <Button x:Name="PasswordTab" Uid="1" Content="Privacy" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="30, 0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="PasswordTab_Click" HorizontalContentAlignment="Left"/>
+                    <Button x:Name="CustomTab" Uid="2" Content="Theme" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="18" Padding="30, 0" IsTabStop="False" FontWeight="Normal" FontFamily="Segoe UI Light" Margin="0" Click="CustomTab_Click" HorizontalContentAlignment="Left"/>
                 </StackPanel>
 
                 <materialDesign:Transitioner x:Name="TabTrans" SelectedIndex="0">
@@ -28,16 +28,16 @@
                                 <elms:ProfileAvatar x:Name="SelfAvt" Margin="0,32,0,16" Loaded="ProfileAvatar_Loaded" Width="160" Height="192"/>
                                 <DockPanel Width="336">
                                     <TextBlock Margin="8" Foreground="LightSlateGray">
-                                Email:
+                                        Email:
                                     </TextBlock>
 
                                     <TextBlock x:Name="Email" Margin="8" Foreground="LightSlateGray" FontStyle="Italic" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                nlebachnlb@gmail.com
+                                        nlebachnlb@gmail.com
                                     </TextBlock>
                                 </DockPanel>
                                 <Grid Width="336">
                                     <TextBlock Margin="8" Foreground="LightSlateGray" FontSize="16" HorizontalAlignment="Left">
-                            Personal Information
+                                        Personal Information
                                     </TextBlock>
                                     <Button x:Name="EditBtn" Width="64" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Normal" Click="EditBtn_Click_1">
                                         Edit...
@@ -119,7 +119,7 @@
                                 <Label Content="Design Your Theme" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                 <!-- THEME -->
                                 <StackPanel Orientation="Vertical">
-                                    <Label Content="Theme" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
+                                    <Label Content="Icon Color" HorizontalAlignment="Left" FontSize="25" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF"/>
                                     <Border>
                                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0 " HorizontalAlignment="Center">
 
@@ -173,13 +173,10 @@
                                             </StackPanel>
 
                                             <Button x:Name="BG_Computer" Content="Choose from computer" FontSize="20" Margin="10" Height="50" FontFamily="Segoe UI Light" Click="BG_Computer_Click" />
-                                            <Slider x:Name="blurLv"
-                                          Minimum="0"
-                                          Maximum="100"
-                                          Style="{StaticResource MaterialDesignDiscreteSlider}"
-                                          ToolTip="Blur level"
-                                          Value="50"
-                                          Width="230" ValueChanged="blurLv_ValueChanged" />
+                                            <Slider x:Name="blurLv" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                                    ToolTip="Blur level"
+                                                    Value="50"
+                                                    Width="230" ValueChanged="blurLv_ValueChanged" />
                                         </StackPanel>
 
 
