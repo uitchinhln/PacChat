@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PacChat.Network.RestAPI
 {
@@ -115,6 +117,44 @@ namespace PacChat.Network.RestAPI
                     FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                     form.Add(new StreamContent(stream), "file", Path.GetFileName(filePath));
                 }
+
+                String address = ChatConnection.Instance.WebHost;
+                int port = ChatConnection.Instance.WebPort;
+                String url = String.Format(MediaUploadUrl, address, port, conversationID);
+
+                HttpResponseMessage response = await httpClient.PostAsync(url, form);
+                response.EnsureSuccessStatusCode();
+                httpClient.Dispose();
+
+                string sd = response.Content.ReadAsStringAsync().Result;
+
+                //Dic<FileName, FileID>
+                Dictionary<String, String> result = JsonConvert.DeserializeObject<Dictionary<String, String>>(sd);
+                handler(result);
+            }
+            catch (Exception e)
+            {
+                if (errorHandler != null) errorHandler(e);
+            }
+        }
+
+        public static async void UploadImageFromBitmap(String conversationID, BitmapSource image, ResultHandler handler, ErrorHandler errorHandler)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+
+                httpClient.DefaultRequestHeaders.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
+
+                MultipartFormDataContent form = new MultipartFormDataContent();
+
+                MemoryStream stream = new MemoryStream();
+
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(image));
+                enc.Save(stream);
+
+                form.Add(new StreamContent(stream), "file", "Clipboard.jpg");
 
                 String address = ChatConnection.Instance.WebHost;
                 int port = ChatConnection.Instance.WebPort;
