@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
              mc:Ignorable="d" 
             >
@@ -19,13 +20,9 @@
                     Background="White"
                     >
                     <Grid>
-                        <TextBlock x:Name="textBlock"
-                    FontSize="14"
-                    VerticalAlignment="Center"
-                    TextWrapping="Wrap"
-                    Text=""
-                    ToolTip="11:59"
-                    Padding="10" TextDecorations="{x:Null}"/>
+                        <TextBox x:Name="textBlock" FontSize="14" VerticalAlignment="Center" TextWrapping="Wrap" Text="" 
+                                 ToolTip="11:59" Padding="5,2,5,3" TextDecorations="{x:Null}" IsReadOnly="True" AcceptsReturn="True" 
+                                 BorderThickness="0" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" />
                         <Button MinWidth="0" Padding="0" x:Name="AttachmentLink" Margin="0" Height="Auto" 
                                 Background="#00000000" BorderBrush="{x:Null}" 
                                 Foreground="{x:Null}" Click="AttachmentLink_Click">

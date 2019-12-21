@@ -77,14 +77,20 @@ namespace PacChat
         {
             if (e.Key == Key.Return)
             {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    ChatInput.AppendText(Environment.NewLine);
+                    ChatInput.CaretIndex = ChatInput.Text.Length;
+                    return;
+                }
+
                 // Send message here
-                Console.WriteLine("Send message");
-                if (ChatInput.Text == "") return;
+                if (String.IsNullOrEmpty(ChatInput.Text)) return;
 
                 SendMessage(new TextMessage() { Message = ChatInput.Text });
 
                 // Clear textbox
-                ChatInput.Text = "";
+                ChatInput.Text = String.Empty;
             }
         }
 

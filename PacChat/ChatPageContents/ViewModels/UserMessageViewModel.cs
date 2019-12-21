@@ -12,7 +12,15 @@ namespace PacChat.ChatPageContents.ViewModels
 
         public string Name { get; set; }
 
-        public string IncomingMsg { get; set; }
+        private string _incomingMsg = String.Empty;
+        public string IncomingMsg
+        {
+            get => _incomingMsg;
+            set 
+            {
+                _incomingMsg = value.Replace(Environment.NewLine, " ").Replace("\n", " ");
+            }
+        }
         public bool IsOnline { get; set; }
     }
 }

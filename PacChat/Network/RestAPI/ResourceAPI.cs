@@ -33,13 +33,22 @@ namespace PacChat.Network.RestAPI
 
                 WebClient webClient = RestUtils.CreateWebClient();
 
-                Directory.CreateDirectory(savePath.Replace(Path.GetFileName(savePath), ""));
+                Directory.CreateDirectory(savePath.Replace(Path.GetFileName(savePath), "")); //Remove file name, create save path
+                Directory.CreateDirectory(TempUtil.DownloadPath); //Create temp folder
+                String temp = Path.Combine(TempUtil.DownloadPath, Guid.NewGuid().ToString()); //Create new temp file
 
-                webClient.DownloadFileAsync(uri, savePath);
+                webClient.DownloadFileAsync(uri, temp);
+                webClient.DownloadFileCompleted += (o, e) =>
+                {
+                    File.Move(temp, savePath);
+                    if (onDownloadComplete != null)
+                        onDownloadComplete(o, e);
+                };
+
+                //webClient.DownloadFileAsync(uri, savePath);
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
-                if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;
+
                 webClient.DownloadFileCompleted += (o, e) =>
                 {
                     RestUtils.Remove(webClient);

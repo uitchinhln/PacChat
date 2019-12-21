@@ -47,17 +47,11 @@
 
                         </DockPanel>
 
-                        <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
-                            <Border CornerRadius="4" Margin="3 3 3 4">
-                                <materialDesign:PopupBox  Padding="0" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,0,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
+                        <DockPanel DockPanel.Dock="Bottom" Margin="0,0,0,8">
+                            <Border CornerRadius="4" Margin="2, 4" VerticalAlignment="Bottom">
+                                <materialDesign:PopupBox Padding="0" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,0,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
                                     <materialDesign:PopupBox.ToggleContent>
-
-                                        <materialDesign:PackIcon x:Name="iconSticker"
-                                    Kind="Emoticon" 
-                                    Width="24"
-                                    Height="24"
-                                    Foreground="#FF2C2C2C"
-                            />
+                                        <materialDesign:PackIcon x:Name="iconSticker" Kind="Emoticon" Width="24" Height="24" Foreground="#FF2C2C2C" Margin="2" />
                                     </materialDesign:PopupBox.ToggleContent>
                                     <StackPanel Width="390" Height="325">
                                         <customControls:TabStickerContainner x:Name="spTabStickerContainner"/>
@@ -65,19 +59,19 @@
                                 </materialDesign:PopupBox>
                             </Border>
 
-                            <Border>
-                                <Button x:Name="btnAttachment" Padding="0" Margin="2,2,2,2" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnAttachment" Padding="0" Margin="0" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
                                     <materialDesign:PackIcon x:Name="iconAttach" Kind="Attachment" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
-                            <Border>
-                                <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnSendImage" Padding="0" Margin="0" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
                                     <materialDesign:PackIcon x:Name="iconImage" Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
-                            <Border Background="Transparent" CornerRadius="3" Margin="0">
+                            <Border Background="Transparent" CornerRadius="3" Margin="2, 4" VerticalAlignment="Bottom">
                                 <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" Padding="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
                                     <materialDesign:PopupBox.ToggleContent>
                                         <materialDesign:PackIcon x:Name="iconColor" Width="24" Height="24" Kind="ColorLens" Foreground="#FF2C2C2C"/>
@@ -86,23 +80,21 @@
                                 </materialDesign:PopupBox>
                             </Border>
 
-                            <Border>
-                                <Button x:Name="btnBuzz" Padding="0" Margin="2,2,2,2" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnBuzz_Click">
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnBuzz" Padding="0" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnBuzz_Click">
                                     <materialDesign:PackIcon x:Name="iconBuzz" Kind="WarningDecagram" Width="24" Height="24" Foreground="#FF2C2C2C"/>
                                 </Button>
                             </Border>
 
-                            <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
+                            <Button x:Name="btnSend" Margin="2, 4" Width="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
                                 <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="#FF2C2C2C"  Width="24" Height="Auto"/>
                             </Button>
-                            <Border CornerRadius="16"
-                    Background= "LightGray"
-                    Margin="10,4,0,5">
-
-                                <TextBox BorderThickness="0"
-                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                         VerticalScrollBarVisibility="Auto"
-                    materialDesign:HintAssist.Hint="Input message here..."  KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="10,0,25,0" TextWrapping="Wrap" Cursor="IBeam" FontSize="14" HorizontalContentAlignment="Stretch" CaretBrush="#FF1E145F" VerticalContentAlignment="Center"/>
+                            <Border CornerRadius="16" Background= "LightGray" Margin="10,4,0,5" MinHeight="31" VerticalAlignment="Bottom">
+                                <TextBox BorderThickness="0" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" VerticalScrollBarVisibility="Auto" 
+                                         materialDesign:HintAssist.Hint="Input message here..."
+                                         KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="10,0,25,0" TextWrapping="Wrap" 
+                                         Cursor="IBeam" FontSize="14" HorizontalContentAlignment="Stretch" CaretBrush="#FF1E145F" 
+                                         VerticalContentAlignment="Center" MaxHeight="82"/>
                             </Border>
 
                         </DockPanel>

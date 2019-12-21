@@ -76,17 +76,18 @@ namespace PacChat.Network.RestAPI
                 webClient.Headers.Add(ClientSession.HeaderToken, ChatConnection.Instance.Session.SessionID);
 
                 Directory.CreateDirectory(TempUtil.DownloadPath);
-                String temp = Path.Combine(TempUtil.DownloadPath, Rand.Next() + "---" + Rand.Next());
+                String temp = Path.Combine(TempUtil.DownloadPath, Guid.NewGuid().ToString());
 
                 webClient.DownloadFileAsync(uri, temp);
                 webClient.DownloadFileCompleted += (o, e) =>
                 {
                     File.Move(temp, RepairSavePath(savePath));
+                    if (onDownloadComplete != null)
+                        onDownloadComplete(o, e);
                 };
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
-                if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;
+
                 webClient.DownloadFileCompleted += (o, e) =>
                 {
                     RestUtils.Remove(webClient);
@@ -153,17 +154,18 @@ namespace PacChat.Network.RestAPI
                 WebClient webClient = RestUtils.CreateWebClient();
 
                 Directory.CreateDirectory(TempUtil.DownloadPath);
-                String temp = Path.Combine(TempUtil.DownloadPath, Rand.Next() + "---" + Rand.Next());
+                String temp = Path.Combine(TempUtil.DownloadPath, Guid.NewGuid().ToString());
 
                 webClient.DownloadFileAsync(uri, temp);
                 webClient.DownloadFileCompleted += (o, e) =>
                 {                    
                     File.Move(temp, RepairSavePath(savePath));
+                    if (onDownloadComplete != null)
+                        onDownloadComplete(o, e);
                 };
                 if (onProgressChange != null)
                     webClient.DownloadProgressChanged += onProgressChange;
-                if (onDownloadComplete != null)
-                    webClient.DownloadFileCompleted += onDownloadComplete;
+
                 webClient.DownloadFileCompleted += (o, e) =>
                 {
                     RestUtils.Remove(webClient);

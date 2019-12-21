@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -28,10 +29,14 @@ namespace PacChat.Windows.Login
             dpDoB.DisplayDateEnd = new DateTime(DateTime.UtcNow.Year - 13, 12, 31);
 
             LoginView loginView = DataContext as LoginView;
+
+            //Register close action
             if (loginView.CloseAction == null)
             {
                 loginView.CloseAction = new Action(() => this.Close());
             }
+
+            //Controller for change tab
             if (loginView.MoveToTab == null)
             {
                 loginView.MoveToTab = new Action<int>((index) =>
@@ -39,6 +44,8 @@ namespace PacChat.Windows.Login
                     MoveToTab(index);
                 });
             }
+
+            //Controller for clear register form
             if (loginView.ClearRegisterForm == null)
             {
                 loginView.ClearRegisterForm = new Action(() =>
@@ -49,6 +56,25 @@ namespace PacChat.Windows.Login
                     RegPassword.Password = String.Empty;
                     loginView.RegToUAgrement = false;
                 });
+            }
+
+            //Controller for clear login form
+            if (loginView.ClearLoginForm == null)
+            {
+                loginView.ClearLoginForm = new Action(() =>
+                {
+                    loginView.LgUserName = String.Empty;
+                    LgPassword.Password = String.Empty;
+                });
+            }
+
+            //Load saved account
+            if (AppConfig.Instance.SavedAccount.Count > 0)
+            {
+                KeyValuePair<string, string> data = AppConfig.Instance.SavedAccount.Last();
+                loginView.LgUserName = data.Key;
+                loginView.LgRemember = true;
+                LgPassword.Password = data.Value;
             }
         }
 

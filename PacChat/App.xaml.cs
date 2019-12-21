@@ -22,6 +22,7 @@ namespace PacChat
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            AppConfig.StartService();
             LoginWindow main = new LoginWindow();
             //MediaPlayerWindow main = new MediaPlayerWindow();
             //MainWindow main = new MainWindow();

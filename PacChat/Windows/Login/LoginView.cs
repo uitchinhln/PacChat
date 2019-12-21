@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,6 +45,7 @@ namespace PacChat.Windows.Login
 
         public Action CloseAction { get; set; }
         public Action ClearRegisterForm { get; set; }
+        public Action ClearLoginForm { get; set; }
         public Action<int> MoveToTab { get; set; }
 
         LoginModel loginModel;
@@ -99,6 +101,11 @@ namespace PacChat.Windows.Login
             DialogHost.CloseDialogCommand.Execute(null, null);
             if (code == 200)
             {
+                AppConfig.Instance.SavedAccount.Clear();
+                if (LgRemember && AppConfig.Instance.SavedAccount.TryAdd(LgUserName, lgPassword))
+                {
+                    AppConfig.Save();
+                }
                 EnterMainWindow();
             }
             else
@@ -162,6 +169,20 @@ namespace PacChat.Windows.Login
                 }
                 _ = await DialogHost.Show(dialog);
             }
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (!String.IsNullOrEmpty(propertyName) && propertyName.Equals("LgRemember", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!LgRemember)
+                {
+                    AppConfig.Instance.SavedAccount.TryRemove(LgUserName, out var removedPassword);
+                    AppConfig.Save();
+                    ClearLoginForm();
+                }
+            }
+            base.OnPropertyChanged(propertyName);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Force.DeepCloner;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -86,6 +87,46 @@ namespace PacChat.Utils
                     byte[] decryptedBytes = new byte[bytes.Length];
                     cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
                     return Encoding.Unicode.GetString(decryptedBytes);
+                }
+            }
+        }
+
+        public static byte[] AESEncrypt(byte[] source, String password)
+        {
+            byte[] bytes = (byte[]) source.DeepClone();
+            SymmetricAlgorithm crypt = Aes.Create();
+            HashAlgorithm hash = System.Security.Cryptography.MD5.Create();
+            crypt.Key = hash.ComputeHash(Encoding.Unicode.GetBytes(password));
+            crypt.IV = IV;
+
+            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            {
+                using (CryptoStream cryptoStream =
+                   new CryptoStream(memoryStream, crypt.CreateDecryptor(), CryptoStreamMode.Read))
+                {
+                    byte[] decryptedBytes = new byte[bytes.Length];
+                    cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
+                    return decryptedBytes;
+                }
+            }
+        }
+
+        public static byte[] AESDecrypt(byte[] source, String password)
+        {
+            byte[] bytes = (byte[])source.DeepClone();
+            SymmetricAlgorithm crypt = Aes.Create();
+            HashAlgorithm hash = System.Security.Cryptography.MD5.Create();
+            crypt.Key = hash.ComputeHash(Encoding.Unicode.GetBytes(password));
+            crypt.IV = IV;
+
+            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            {
+                using (CryptoStream cryptoStream =
+                   new CryptoStream(memoryStream, crypt.CreateDecryptor(), CryptoStreamMode.Read))
+                {
+                    byte[] decryptedBytes = new byte[bytes.Length];
+                    cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
+                    return decryptedBytes;
                 }
             }
         }
