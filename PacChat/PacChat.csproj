@@ -250,6 +250,7 @@
     <Compile Include="UIElements\ProfileAvatar.xaml.cs">
       <DependentUpon>ProfileAvatar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AppConfig.cs" />
     <Compile Include="Utils\ChatBackgroundType.cs" />
     <Compile Include="Utils\ColorUtils.cs" />
     <Compile Include="Utils\CountdownLatch.cs" />
