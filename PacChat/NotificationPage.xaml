@@ -10,7 +10,7 @@
     <Grid>
         <DockPanel>
             <Label Content="Notification" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Light" Foreground="#DDFFFFFF" DockPanel.Dock="Top"/>
-            <ScrollViewer DockPanel.Dock="Top">
+            <ScrollViewer DockPanel.Dock="Top" Margin="0 16 0 0">
                 <StackPanel x:Name="NotiListView">
                 </StackPanel>
             </ScrollViewer>

@@ -14,6 +14,11 @@ namespace PacChat.Network
     public class ClientSession : BasicSession
     {
         ProtocolProvider protocolProvider;
+
+        public String SessionID { get; private set; } = "~";
+
+        public static string HeaderToken { get; private set; } = "ChatVerifier";
+
         public ClientSession(IChannel channel, ProtocolProvider protocolProvider) : base(channel, protocolProvider.Test)
         {
             this.protocolProvider = protocolProvider;
@@ -24,8 +29,9 @@ namespace PacChat.Network
             base.Send(packet);
         }
 
-        public void LoggedIn()
+        public void LoggedIn(String token)
         {
+            SessionID = token;
             Protocol = protocolProvider.MainProtocol;
         }
     }

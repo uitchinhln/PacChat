@@ -13,6 +13,7 @@ namespace PacChatServer.Network.Packets.Login
     public class LoginResult : IPacket
     {
         public int StatusCode { get; set; }
+        public string Token { get; set; }
 
 
         public void Decode(IByteBuffer buffer)
@@ -23,6 +24,7 @@ namespace PacChatServer.Network.Packets.Login
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
             byteBuf.WriteInt(StatusCode);
+            ByteBufUtils.WriteUTF8(byteBuf, Token);
 
             return byteBuf;
         }

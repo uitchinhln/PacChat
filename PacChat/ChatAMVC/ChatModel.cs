@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using PacChat.MVC;
 using PacChat.Utils;
+using PacChat.MessageCore.Sticker;
 using PacChat.ChatPageContents.ViewModels;
 using static PacChat.Utils.UserUtils;
 using System.Windows.Controls;
+using PacChat.MessageCore.Message;
+using PacChat.Resources.CustomControls.Notifications;
 
 namespace PacChat.ChatAMVC
 {
@@ -16,6 +19,13 @@ namespace PacChat.ChatAMVC
     {
         public static List<string> FriendIDs { get; set; } = new List<string>();
         public static Dictionary<string, ShortProfile> FriendShortProfiles = new Dictionary<string, ShortProfile>();
+
+        #region for reconnect
+        public string Hashed;
+        #endregion
+
+        public string SelfID { get; set; }
+        public string currentMediaFileID { get; set; } = "";
  
         #region OnChatPage
         public string Title { get; set; } = "";
@@ -27,15 +37,29 @@ namespace PacChat.ChatAMVC
         public Dictionary<string, string> PrivateConversations { get; set; } = new Dictionary<string, string>();
         public Dictionary<string, UserControl> UserControls { get; set; } = new Dictionary<string, UserControl>();
         public Dictionary<string, bool> IsOnline { get; set; } = new Dictionary<string, bool>();
+
+        public Dictionary<int, StickerCategory> PaidSticker = new Dictionary<int, StickerCategory>();
+
+        // Key: conversation-id, Value: index of media message in Messages list in Conversations
+        public Dictionary<string, List<MediaPack>> MediaMessages { get; set; } = new Dictionary<string, List<MediaPack>>();
+        public Dictionary<string, MediaPlayerWindow> MediaWindows { get; set; } = new Dictionary<string, MediaPlayerWindow>();
         #endregion
 
-        #region OnSettingPage
+        #region OnDownloadManager
+        public List<DownloadProgressNoti> DownloadProgresses = new List<DownloadProgressNoti>();
+        #endregion
+
+        #region OnSettingPage: UserProfile
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime BirthDay { get; set; }
         public int Gender { get; set; }
+        #endregion
+
+        #region OnSettingPage: UserProfile
+
         #endregion
     }
 }

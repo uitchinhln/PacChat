@@ -47,6 +47,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
@@ -66,50 +67,91 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cache\Core\DataNode.cs" />
+    <Compile Include="Cache\Core\FIFOCache.cs" />
+    <Compile Include="Cache\Core\LFUCache.cs" />
+    <Compile Include="Cache\Core\LRUCache.cs" />
+    <Compile Include="ChatPageContents\ConversationControl.xaml.cs">
+      <DependentUpon>ConversationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChatPageContents\ProfileDisplayer.xaml.cs">
       <DependentUpon>ProfileDisplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DownloadWindow.xaml.cs">
+      <DependentUpon>DownloadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BuzzSend.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\BubbleChatColorSetRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversation.cs" />
     <Compile Include="GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MediaPlayerWindow.xaml.cs">
+      <DependentUpon>MediaPlayerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MessageCore\Conversation\AbstractConversation.cs" />
     <Compile Include="MessageCore\IConversation.cs" />
     <Compile Include="MessageCore\Message\AbstractMessage.cs" />
     <Compile Include="MessageCore\IMessage.cs" />
+    <Compile Include="MessageCore\Message\VideoMessage.cs" />
+    <Compile Include="MessageCore\Message\ImageMessage.cs" />
+    <Compile Include="MessageCore\Message\AttachmentMessage.cs" />
     <Compile Include="MessageCore\Message\StickerMessage.cs" />
     <Compile Include="MessageCore\Message\TextMessage.cs" />
     <Compile Include="MessageCore\Sticker\Sticker.cs" />
+    <Compile Include="MessageCore\Sticker\StickerCategory.cs" />
     <Compile Include="Network\ChatConnection.cs" />
     <Compile Include="Network\ClientSession.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetConversation.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetSelfID.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\GetSelfIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfoResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetShortInfo.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDs.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\GetFriendIDsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\ConversationFromIDResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromID.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromIDResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\ReceiveTextMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetConversationShortInfo.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetConversationShortInfoResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMediaFromConversationResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversation.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\GetMessageFromConversationResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\ReceiveMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversations.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\RecentConversationsResult.cs" />
-    <Compile Include="Network\Packets\AfterLoginRequest\Message\SendTextMessage.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Message\SendMessage.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserID.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Message\SingleConversationFrUserIDResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FinalizeAcceptedFriendRequestReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\GetNotifications.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Notification\GetNotificationsResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\ResponseFriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\FriendRequestResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOfflineReceive.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Notification\UserOnlineReceive.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ChatThemeGetRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ChatThemeSetRequest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetDisplayedProfileResult.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfile.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Profile\GetSelfProfileResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPassword.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\ModifyPasswordResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Profile\UpdateSelfProfile.cs" />
+    <Compile Include="Network\Packets\ReconnectResponse.cs" />
+    <Compile Include="Network\Packets\ReconnectResquest.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUser.cs" />
     <Compile Include="Network\Packets\AfterLoginRequest\Search\SearchUserResult.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\BuyStickerCategoryRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\BuyStickerCategoryResponse.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetBoughtStickerPacksResponse.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetNearestSickerRequest.cs" />
+    <Compile Include="Network\Packets\AfterLoginRequest\Sticker\GetNearestSickerResponse.cs" />
     <Compile Include="Network\Packets\Login\LoginData.cs" />
     <Compile Include="Network\Packets\Login\LoginResult.cs" />
     <Compile Include="Network\Packets\Ping\Ping4Send.cs" />
@@ -118,14 +160,32 @@
     <Compile Include="Network\Packets\Register\RegisterResult.cs" />
     <Compile Include="Network\Protocol\LoggedInProtocol.cs" />
     <Compile Include="Network\Protocol\PreLoginProtocol.cs" />
+    <Compile Include="Network\RestAPI\FileAPI.cs" />
+    <Compile Include="Network\RestAPI\ProfileAPI.cs" />
+    <Compile Include="Network\RestAPI\ResourceAPI.cs" />
+    <Compile Include="Network\RestAPI\StickerAPI.cs" />
+    <Compile Include="Network\RestAPI\StreamAPI.cs" />
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\AvatarDisplayer.xaml.cs">
+      <DependentUpon>AvatarDisplayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\BGSelectContainner.xaml.cs">
+      <DependentUpon>BGSelectContainner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\BubbleChat.xaml.cs">
       <DependentUpon>BubbleChat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\ColourPicker\ColorToBrushConverter.cs" />
+    <Compile Include="Resources\CustomControls\ColourPicker\ColourPicker.xaml.cs">
+      <DependentUpon>ColourPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\ColourPicker\ColourPickerNonePopup.xaml.cs">
+      <DependentUpon>ColourPickerNonePopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml.cs">
       <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
@@ -136,11 +196,26 @@
     <Compile Include="Resources\CustomControls\ImageContainner.xaml.cs">
       <DependentUpon>ImageContainner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\Media\MediaPlayer.xaml.cs">
+      <DependentUpon>MediaPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Media\PacPlayer.xaml.cs">
+      <DependentUpon>PacPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Media\ThumbnailButton.xaml.cs">
+      <DependentUpon>ThumbnailButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml.cs">
+      <DependentUpon>DownloadProgressNoti.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml.cs">
       <DependentUpon>FriendRequestAcceptedNoti.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Notifications\FriendRequestNoti.xaml.cs">
       <DependentUpon>FriendRequestNoti.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CustomControls\ProfileContext.xaml.cs">
+      <DependentUpon>ProfileContext.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\CustomControls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
@@ -157,6 +232,12 @@
     <Compile Include="Resources\CustomControls\TabStickerStore.xaml.cs">
       <DependentUpon>TabStickerStore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\CustomControls\ThumbnailBubble.xaml.cs">
+      <DependentUpon>ThumbnailBubble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FakeLoadingBubble.xaml.cs">
+      <DependentUpon>FakeLoadingBubble.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\StickerDialog.xaml.cs">
       <DependentUpon>StickerDialog.xaml</DependentUpon>
     </Compile>
@@ -169,10 +250,20 @@
     <Compile Include="UIElements\ProfileAvatar.xaml.cs">
       <DependentUpon>ProfileAvatar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AppConfig.cs" />
+    <Compile Include="Utils\ChatBackgroundType.cs" />
+    <Compile Include="Utils\ColorUtils.cs" />
     <Compile Include="Utils\CountdownLatch.cs" />
     <Compile Include="Utils\Genders.cs" />
     <Compile Include="Utils\HashUtils.cs" />
+    <Compile Include="Utils\MediaUtils.cs" />
+    <Compile Include="Utils\NotificationUtils.cs" />
     <Compile Include="Utils\Packets.cs" />
+    <Compile Include="Utils\ResourceUtil.cs" />
+    <Compile Include="Utils\RestUtils.cs" />
+    <Compile Include="Utils\SystemPlacesUtils.cs" />
+    <Compile Include="Utils\TempUtil.cs" />
+    <Compile Include="Utils\ThreadUtil.cs" />
     <Compile Include="Utils\UIElementUltils.cs" />
     <Compile Include="Utils\UserUtils.cs" />
     <Compile Include="Windows\AppHolder.xaml.cs">
@@ -200,6 +291,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ChatPageContents\ConversationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChatPageContents\MessageList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -213,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatPageContents\UserMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DownloadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,7 +371,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MediaPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NotificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\AvatarDisplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\BGSelectContainner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +394,14 @@
     <Page Include="Resources\CustomControls\BubbleChat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\ColourPicker\ColourPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\ColourPicker\ColourPickerNonePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\Dialogs\AnnouncementDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -296,11 +415,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\CustomControls\Media\MediaPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\Media\PacPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\Media\ThumbnailButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControls\Notifications\DownloadProgressNoti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestAcceptedNoti.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\CustomControls\Notifications\FriendRequestNoti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomControls\ProfileContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,9 +463,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\CustomControls\ThumbnailBubble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Dicts\Colours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\FakeLoadingBubble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StickerDialog.xaml">
       <SubType>Designer</SubType>
@@ -437,31 +584,13 @@
     <Resource Include="Resources\Drawable\icons8_filled_topic_30px.png" />
     <Resource Include="Resources\Drawable\icons8_my_topic_48px.png" />
     <Resource Include="Resources\Drawable\icons8_talk_male_64px_2.png" />
-    <Resource Include="Resources\Drawable\login-bg.jpg" />
-    <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
-    <Resource Include="Resources\icon_ava_32.png" />
     <Resource Include="Resources\Drawable\hinh3.png" />
-    <Resource Include="Resources\Drawable\sprite.png" />
-    <Resource Include="Resources\Drawable\sprite %282%29.png" />
-    <Resource Include="Resources\Drawable\sprite %281%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2810%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2811%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2812%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2813%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2814%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2815%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2816%29.png" />
-    <Resource Include="Resources\Drawable\sprite %2817%29.png" />
-    <Resource Include="Resources\Drawable\sprite %283%29.png" />
-    <Resource Include="Resources\Drawable\sprite %284%29.png" />
-    <Resource Include="Resources\Drawable\sprite %285%29.png" />
-    <Resource Include="Resources\Drawable\sprite %286%29.png" />
-    <Resource Include="Resources\Drawable\sprite %287%29.png" />
-    <Resource Include="Resources\Drawable\sprite %288%29.png" />
-    <Resource Include="Resources\Drawable\sprite %289%29.png" />
-    <Resource Include="Resources\Drawable\sprite_ic.png" />
-    <Resource Include="Resources\Drawable\tieuviem_tet.png" />
-    <Resource Include="Resources\Drawable\tieuviem_thumb.png" />
+    <Resource Include="Resources\Drawable\BG.jpg" />
+    <Resource Include="Resources\Drawable\Bach.jpg" />
+    <Resource Include="Resources\Drawable\Chinh.jpg" />
+    <Resource Include="Resources\Drawable\Long.jpg" />
+    <Resource Include="Resources\Drawable\LoginSlideImage.jpg" />
+    <Resource Include="Resources\Drawable\361994.png" />
     <Content Include="Resources\Lib\Animator.dll" />
     <Content Include="Resources\Lib\MaterialDesignColors.dll" />
     <Content Include="Resources\Lib\MaterialDesignThemes.Wpf.dll" />

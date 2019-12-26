@@ -69,7 +69,8 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
                 store.Save(new SingleConversation()
                 {
                     ID = resultID,
-                    Members = new HashSet<Guid>() { chatSession.Owner.ID, targetUser.ID }
+                    Members = new HashSet<Guid>() { chatSession.Owner.ID, targetUser.ID },
+                    ConversationName = "~"
                 });
 
                 chatSession.Owner.Save();

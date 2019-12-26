@@ -4,6 +4,7 @@ using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.Entity;
 using PacChatServer.IO.Message;
+using PacChatServer.MessageCore;
 using PacChatServer.MessageCore.Conversation;
 using PacChatServer.MessageCore.Message;
 using System;
@@ -17,12 +18,37 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
     public class SendMessageRequest : IPacket
     {
         public Guid ConversationID { get; set; }
-        public TextMessage Message { get; set; } = new TextMessage();
+        public int PreviewCode { get; set; }
+        public AbstractMessage Message { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             ConversationID = Guid.Parse(ByteBufUtils.ReadUTF8(buffer));
-            Message.Message = ByteBufUtils.ReadUTF8(buffer);
+            PreviewCode = buffer.ReadInt();
+
+            switch (PreviewCode)
+            {
+                case 1:
+                    Message = new AttachmentMessage();
+                    (Message as AttachmentMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 2:
+                    Message = new ImageMessage();
+                    (Message as ImageMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 3:
+                    Message = new StickerMessage();
+                    (Message as StickerMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 4:
+                    Message = new TextMessage();
+                    (Message as TextMessage).DecodeFromBuffer(buffer);
+                    break;
+                case 5:
+                    Message = new VideoMessage();
+                    (Message as VideoMessage).DecodeFromBuffer(buffer);
+                    break;
+            }
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -34,11 +60,11 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
         {
             ChatSession chatSession = session as ChatSession;
 
-            AbstractConversation conversation = new ConversationStore().Load(ConversationID);
+            AbstractConversation conversation = ConversationManager.GetConversation(ConversationID);
 
             if (conversation == null) return;
 
-            conversation.SendMessage(Message, ConversationID.ToString(), chatSession);
+            conversation.SendMessage(Message, chatSession);
 
             /*
             if (ChatUserManager.OnlineUsers.TryGetValue(Guid.Parse(ReceiverID), out user))

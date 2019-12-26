@@ -8,23 +8,37 @@
              >
 
 
-    <Grid Width="328" Height="224" Background="White" Margin="0" >
+    <Grid Width="355" Height="237" Background="White" Margin="0" >
 
         <Border HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top">
-            <Image x:Name="imgPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_tet.png"  Width="204" Height="204"/>
+            <Grid>
+                <ProgressBar x:Name="progressBarThumb" Width="80" Height="80"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="0"
+                                IsIndeterminate="True" 
+                                Foreground="Gray"/>
+                <Image x:Name="imgPreview" Width="204" Height="204" Margin="10"/>
+            </Grid>
 
         </Border>
 
         <Border HorizontalAlignment="Right" Margin="0" VerticalAlignment="Stretch">
             <StackPanel>
-                <Image x:Name="imgIconPreview" Source="D:\PacChat\PacChat\Resources\Drawable\tieuviem_thumb.png"  Width="124" Height="124"/>
+                <Grid Width="124" Height="124" Margin="10">
+                    <ProgressBar x:Name="progressBar" Width="60" Height="60"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="0"
+                                IsIndeterminate="True" 
+                                Foreground="Gray"/>
+                    <Image x:Name="imgIconPreview"   Width="124" Height="124" Margin="0"/>
+                </Grid>
 
-                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5 5 5 5">
-                    Tiêu Viêm - Huân Nhi Tết
+                <TextBlock x:Name="txtName" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" FontWeight="Bold" Width="124" Margin="5">
+                    
                 </TextBlock>
 
-                <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}">
-                    9000
+                <Button x:Name="btnDown" Width="90" Height="28" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnDown_Click">
+                    Free
                 </Button>
             </StackPanel>
 

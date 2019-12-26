@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using PacChat.Resources.CustomControls.Media;
 
 namespace PacChat.Resources.CustomControls
 {
@@ -21,14 +21,43 @@ namespace PacChat.Resources.CustomControls
         public BubbleChat()
         {
             InitializeComponent();
-            //textBlock.Text = "asdasdsad";
+            // textBlock.Text = "asdasdsad";
+            // SetAva("/PacChat/PacChat/Resources/Drawable/ava.jpg");
             NickName.Content = MainWindow.chatApplication.model.Title;
         }
-
 
         public void AddBubble(Bubble b)
         {
             spMessContainer.Children.Add(b);
+        }
+
+        public void InsertBubble(int index, Bubble b)
+        {
+            spMessContainer.Children.Insert(index, b);
+        }
+
+        public void AddMedia(ThumbnailBubble thumbnail)
+        {
+            spMessContainer.Children.Add(thumbnail);
+        }
+
+        public void InsertMedia(ThumbnailBubble thumbnail)
+        {
+            spMessContainer.Children.Insert(0, thumbnail);
+        }
+        
+        public void AddSticker(Sticker sticker)
+        {
+            spMessContainer.Children.Add(sticker);
+        }
+        public void InsertSticker(Sticker sticker)
+        {
+            spMessContainer.Children.Insert(0, sticker);
+        }
+
+        public void SetAva(string userID = null)
+        {
+            Avatar.UserID = userID;
         }
     }
 }

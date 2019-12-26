@@ -14,6 +14,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
 {
     public class GetDisplayedProfileResult : IPacket
     {
+        public string ID { get; set; }
         public string Name { get; set; }
         public string Town { get; set; } = "Default";
         public string DoB { get; set; }
@@ -21,6 +22,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
 
         public void Decode(IByteBuffer buffer)
         {
+            ID = ByteBufUtils.ReadUTF8(buffer);
             Name = ByteBufUtils.ReadUTF8(buffer);
             Email = ByteBufUtils.ReadUTF8(buffer);
             DoB = ByteBufUtils.ReadUTF8(buffer);
@@ -37,7 +39,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
             Console.WriteLine("Got profile");
             // Display profile of user
             Application.Current.Dispatcher.Invoke(() => 
-            MainWindow.Instance.OpenProfileDisplayer(
+            MainWindow.Instance.OpenProfileDisplayer(id:ID,
                 name: Name,
                 email: Email,
                 dob: DoB,

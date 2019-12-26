@@ -26,7 +26,7 @@
 - Bunifu framework: Hỗ trợ xây dựng giao diện
 - DotNetty: Hỗ trợ xây dựng socket server hiệu năng cao
 - Log4Net: Ghi log, xuất log và tracking
-- N9hNetworkLib by Chinh: Đơn giản hóa triển khai Network/API bằng các interface dựng sẵn
+- CNetwork by Chinh: Đơn giản hóa triển khai Network/API bằng các interface dựng sẵn
 - ...
 
 ## Tính năng ##

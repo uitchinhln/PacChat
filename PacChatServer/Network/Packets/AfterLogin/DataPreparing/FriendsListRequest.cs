@@ -2,6 +2,7 @@
 using CNetwork.Sessions;
 using DotNetty.Buffers;
 using PacChatServer.Entity.EntityProperty;
+using PacChatServer.IO.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
     {
         public void Decode(IByteBuffer buffer)
         {
-            
+
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -29,11 +30,15 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
             FriendsListResponse response = new FriendsListResponse();
 
             Relation rela;
-            foreach(KeyValuePair<Guid, Guid> pair in chatSession.Owner.Relationship)
+            foreach (KeyValuePair<Guid, Guid> pair in chatSession.Owner.Relationship)
             {
                 if ((rela = Relation.Get(pair.Value)) != null && rela.RelationType == Relation.Type.Friend)
                 {
-                    response.Friends.Add(pair.Key.ToString());
+                    bool isOnline = ChatUserManager.OnlineUsers.ContainsKey(pair.Key);
+                    if (isOnline)
+                        response.Friends.Insert(0, pair.Key.ToString());
+                    else
+                        response.Friends.Add(pair.Key.ToString());
                 }
             }
 

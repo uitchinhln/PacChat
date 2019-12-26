@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,16 +92,31 @@ namespace PacChat.ChatPageContents
             ListView.Children.Add(userControl);
         }
 
+        public void ClearRecentConversation()
+        {
+            RecentListView.Children.Clear();
+        }
+
+        public void AddConversationToRecent(string id, string name, long lastActive)
+        {
+            ConversationControl control = new ConversationControl();
+            control.SetInfo(id, name, lastActive);
+            if (lastActive == 0)
+                RecentListView.Children.Insert(0, control);
+            else
+                RecentListView.Children.Add(control);
+        }
+
         private void UserSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (UserSearchBox.Text.Length == 0)
+            if (String.IsNullOrEmpty(Regex.Replace(UserSearchBox.Text, "[^0-9a-zA-Z@.]+", "")))
             {
                 Packets.SendPacket<GetFriendIDs>();
                 return;
             }
 
             SearchUser packet = new SearchUser();
-            packet.Email = UserSearchBox.Text;
+            packet.Email = Regex.Replace(UserSearchBox.Text, "[^0-9a-zA-Z@.]+", "");
             _ = ChatConnection.Instance.Send(packet);
         }
     }

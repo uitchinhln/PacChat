@@ -3,13 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ad="clr-namespace:PacChat.Resources.CustomControls"
              xmlns:local="clr-namespace:PacChat.UIElements"
              mc:Ignorable="d" 
              d:DesignHeight="160" d:DesignWidth="128">
     <Grid>
         <StackPanel>
-            <Image Height="128" Source="/PacChat;component/Resources/Drawable/icons8_talk_male_64px_2.png"/>
-            <Label Content="Full name" Foreground="#DDFFFFFF" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="32"></Label>
+            <ad:AvatarDisplayer x:Name="AvtDisplayer" />
+            <Button x:Name="UpdateBtn" Background="{x:Null}" BorderBrush="{x:Null}" Height="26" Click="UpdateBtn_Click">
+                <TextBlock HorizontalAlignment="Center" Foreground="#FF9EB4CB" TextDecorations="{x:Null}" FontStyle="Italic" Margin="0">
+                Update Avatar
+                </TextBlock>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

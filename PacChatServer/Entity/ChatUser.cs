@@ -8,6 +8,7 @@ using PacChatServer.Network;
 using PacChatServer.Network.Packets.AfterLogin.Notification;
 using PacChatServer.Utils;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace PacChatServer.Entity
         public HashSet<ChatSession> sessions { get; set; } = new HashSet<ChatSession>();
 
         [BsonIgnore]
-        ChatUserStore saver = new ChatUserStore();
+        ChatUserStore store = new ChatUserStore();
 
         [BsonElement("FirstName")]
         public String FirstName { get; set; }
@@ -46,11 +47,11 @@ namespace PacChatServer.Entity
 
         //LastLogon is the time that last session logged in
         [BsonElement("LastLogon")]
-        public DateTime LastLogon { get; set; } = DateTime.Now;
+        public DateTime LastLogon { get; set; } = DateTime.UtcNow;
 
         //LastLogoff is the time that last session logged out
         [BsonElement("LastLogoff")]
-        public DateTime LastLogoff { get; set; } = DateTime.Now;
+        public DateTime LastLogoff { get; set; } = DateTime.UtcNow;
 
         //Key is id of user who have a reationship with this user, Value is id of relationship
         [BsonElement("Relationship"), BsonDictionaryOptions(DictionaryRepresentation.ArrayOfDocuments)]
@@ -58,17 +59,30 @@ namespace PacChatServer.Entity
 
         [BsonElement("Conversations")]
         public List<Guid> ConversationID { get; set; } = new List<Guid>();
-
-        //Key is conversation id, value is the last time it have action
-        [BsonIgnore]
-        public Dictionary<Guid, long> Conversations { get; private set; } = new Dictionary<Guid, long>();
         
         [BsonElement("NearestStickers")]
-        public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();        
+        public HashStack<int> NearestStickers { get; private set; } = new HashStack<int>();
+
+        [BsonElement("BoughtStickerPacks")]
+        public HashStack<int> BoughtStickerPacks { get; private set; } = new HashStack<int>();        
 
         //True if this user has been banned
         [BsonElement("Banned")]
         public bool Banned { get; set; } = false;
+
+        [BsonElement("Notifications")]
+        public List<string> Notifications { get; set; } = new List<string>();
+
+        [BsonElement("ChatThemeSettings")]
+        public ChatTheme ChatThemeSettings { get; set; } = new ChatTheme();
+
+        //Key is conversation id, value is the last time it have action
+        [BsonIgnore]
+        public ConcurrentDictionary<Guid, long> Conversations { get; private set; } = new ConcurrentDictionary<Guid, long>();
+
+        //Key is conversation id, value is the last time it have action
+        [BsonIgnore]
+        public ConcurrentDictionary<Guid, long> LastBuzz { get; private set; } = new ConcurrentDictionary<Guid, long>();
 
         public ChatUser()
         {
@@ -104,6 +118,11 @@ namespace PacChatServer.Entity
             }
         }
 
+        public void SendOnly(IPacket packet, ChatSession session)
+        {
+            session.Send(packet);
+        }
+
         public void Online()
         {
             UserOnline packet = new UserOnline();
@@ -120,7 +139,7 @@ namespace PacChatServer.Entity
 
         public void Offline()
         {
-            this.LastLogoff = DateTime.Now;
+            this.LastLogoff = DateTime.UtcNow;
             UserOffline packet = new UserOffline();
             packet.TargetID = this.ID;
 
@@ -133,7 +152,7 @@ namespace PacChatServer.Entity
             }
 
             this.Save();
-            PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out!", this.Email));
+            PacChatServer.GetServer().Logger.Info(String.Format("User {0} has logged out at {1}!", this.Email, this.LastLogoff.ToString()));
         }
 
         public void Kick()
@@ -175,8 +194,10 @@ namespace PacChatServer.Entity
 
         public override bool Save()
         {
-            bool result = saver.Save(this);
+            bool result = store.Save(this);
             ChatUserProfile profile = ProfileCache.Instance.GetUserProfile(this.ID);
+
+            //if (profile == null) return result;
 
             profile.Email = this.Email;
             profile.PassHashed = this.Password;
@@ -188,6 +209,11 @@ namespace PacChatServer.Entity
             profile.LastLogoff = this.LastLogoff;
 
             return result;
+        }
+
+        public bool SaveChatTheme()
+        {
+            return store.UpdateRelations(this);
         }
     }
 }

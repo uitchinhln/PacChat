@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using DotNetty.Buffers;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 using PacChatServer.Entity;
 using PacChatServer.MessageCore.Conversation;
@@ -49,6 +50,8 @@ namespace PacChatServer.MessageCore.Message
         /// 5: Video
         /// </summary>
         public abstract int GetPreviewCode();
+        public abstract IByteBuffer EncodeToBuffer(IByteBuffer buffer);
+        public abstract void DecodeFromBuffer(IByteBuffer buffer);
 
         public bool Showable(Guid id)
         {

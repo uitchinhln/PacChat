@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
              >
-    <Grid x:Name="sticker" MouseLeftButtonDown="sticker_MouseLeftButtonDown" >
-        
+    <Grid x:Name="sticker" MouseLeftButtonDown="sticker_MouseLeftButtonDown" Width="130" Height="130">
+        <ProgressBar x:Name="progressBar" Width="80" Height="80"
+             Style="{StaticResource MaterialDesignCircularProgressBar}"
+            Value="0"
+            IsIndeterminate="True" 
+            Foreground="Gray"/>
     </Grid>
 </UserControl>

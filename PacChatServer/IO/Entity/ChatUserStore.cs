@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using PacChatServer.Entity;
+using PacChatServer.Entity.EntityProperty;
 using PacChatServer.IO.Storage;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace PacChatServer.IO.Entity
                 {
                     Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
                         var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
-                        collection.ReplaceOneAsync(condition, user, new UpdateOptions() { IsUpsert = true });
+                        collection.ReplaceOne(condition, user, new UpdateOptions() { IsUpsert = true });
                     });
                     result = true;
                 }
@@ -68,22 +69,47 @@ namespace PacChatServer.IO.Entity
             }
         }
 
-        public List<String> SearchUserIDByEmail(string input)
+        public bool UpdateTheme(ChatUser user)
+        {
+            lock (user)
+            {
+                bool result = false;
+                try
+                {
+                    Mongo.Instance.Set<ChatUser>(Mongo.UserCollectionName, (collection) => {
+                        var condition = Builders<ChatUser>.Filter.Eq(p => p.ID, user.ID);
+                        var update = Builders<ChatUser>.Update.Set(p => p.ChatThemeSettings, user.ChatThemeSettings);
+                        collection.UpdateOneAsync(condition, update, new UpdateOptions() { IsUpsert = true });
+                    });
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    PacChatServer.GetServer().Logger.Error(e);
+                }
+                return result;
+            }
+        }
+
+        public List<String> SearchUserIDByEmail(string input, ChatUser user)
         {
             List<String> result = new List<String>();
 
             Mongo.Instance.Get<SearchIdByEmail>(Mongo.UserCollectionName, collection =>
             {
-                var condition = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input); 
+                var matchEmail = Builders<SearchIdByEmail>.Filter.Regex(p => p.Email, input);
+                //var ignoreBlocked = Builders<SearchIdByEmail>.Filter.Where(p => !RelationIgnore(user, p.ID, Relation.Type.Block));
 
                 var fields = Builders<SearchIdByEmail>.Projection
                      .Include(p => p.ID)
                      .Include(p => p.Email);
 
-                var objs = collection.Find(condition).Project<SearchIdByEmail>(fields).Limit(20).ToList();
+                var objs = collection.Find(matchEmail)
+                    .Project<SearchIdByEmail>(fields).Limit(31).ToList();
 
                 foreach (SearchIdByEmail r in objs)
                 {
+                    if (r.ID == user.ID) continue;
                     result.Add(r.ID.ToString());
                 }
                 return null;
@@ -91,7 +117,21 @@ namespace PacChatServer.IO.Entity
 
             return result;
         }
+
+        private bool RelationIgnore(ChatUser user, Guid targetID, params Relation.Type[] relationTypes)
+        {
+            //if (user == null || targetID == null) return false;
+
+            //if (user.Relationship.ContainsKey(targetID))
+            //{
+            //    Relation relation = Relation.Get(user.Relationship[targetID], true);
+            //    if (relation == null) return true;
+            //    return relationTypes.Contains(relation.RelationType) || relation.Source == user.ID;
+            //}
+            return true;
+        }
     }
+
 
     public class SearchIdByEmail
     {

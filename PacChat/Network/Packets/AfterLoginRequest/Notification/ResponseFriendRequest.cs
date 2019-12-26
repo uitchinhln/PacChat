@@ -14,6 +14,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
     {
         public string TargetID { get; set; }
         public bool Accepted { get; set; }
+        public int NotiPosition { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
@@ -24,6 +25,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Notification
         {
             ByteBufUtils.WriteUTF8(byteBuf, TargetID);
             byteBuf.WriteBoolean(Accepted);
+            byteBuf.WriteInt(NotiPosition);
             return byteBuf;
         }
 

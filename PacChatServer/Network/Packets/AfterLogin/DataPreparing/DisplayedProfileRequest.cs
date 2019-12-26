@@ -27,13 +27,13 @@ namespace PacChatServer.Network.Packets.AfterLogin.DataPreparing
 
         public void Handle(ISession session)
         {
-            Console.WriteLine("Request profile");
             ChatSession chatSession = session as ChatSession;
             ChatUser targetUser = ChatUserManager.LoadUser(TargetID);
 
             if (targetUser == null) return;
 
             DisplayedProfileResponse packet = new DisplayedProfileResponse();
+            packet.ID = targetUser.ID.ToString();
             packet.Name = targetUser.FirstName + " " + targetUser.LastName;
             packet.Email = targetUser.Email;
             packet.DoB = targetUser.DateOfBirth.ToString();

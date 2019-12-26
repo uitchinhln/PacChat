@@ -22,13 +22,16 @@ namespace PacChat.Resources.CustomControls.Notifications
     /// </summary>
     public partial class FriendRequestNoti : UserControl
     {
+        public int Position { get; set; }
+
         public FriendRequestNoti()
         {
             InitializeComponent();
         }
 
-        public void SetInfo(string id, string name)
+        public void SetInfo(int position, string id, string name)
         {
+            Position = position;
             ClickMask.Content = id;
             FriendName.Text = name;
         }
@@ -38,6 +41,7 @@ namespace PacChat.Resources.CustomControls.Notifications
             ResponseFriendRequest packet = new ResponseFriendRequest();
             packet.TargetID = ClickMask.Content.ToString();
             packet.Accepted = true;
+            packet.NotiPosition = Position;
             _ = ChatConnection.Instance.Send(packet);
             NotificationPage.Instance.RemoveNotiTag(this);
         }
@@ -47,6 +51,7 @@ namespace PacChat.Resources.CustomControls.Notifications
             ResponseFriendRequest packet = new ResponseFriendRequest();
             packet.TargetID = ClickMask.Content.ToString();
             packet.Accepted = false;
+            packet.NotiPosition = Position;
             _ = ChatConnection.Instance.Send(packet);
             NotificationPage.Instance.RemoveNotiTag(this);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,8 @@ namespace PacChat.Windows.Login
         private bool lgRemember;
         public bool LgRemember { get => lgRemember; set { lgRemember = value; OnPropertyChanged(); } }
 
+        private string lgPassword;
+
         public ICommand LoginCommand { get; set; }
 
         // Register Data
@@ -31,7 +34,7 @@ namespace PacChat.Windows.Login
         public string RegLastName { get => regLastName; set { regLastName = value; OnPropertyChanged(); } }
         private string regUserName;
         public string RegUserName { get => regUserName; set { regUserName = value; OnPropertyChanged(); } }
-        private DateTime regDoB = DateTime.Now.AddYears(-13);
+        private DateTime regDoB = DateTime.UtcNow.AddYears(-13);
         public DateTime RegDoB { get => regDoB; set { regDoB = value; OnPropertyChanged(); } }
         private Gender regGender;
         public Gender RegGender { get => regGender; set { regGender = value; OnPropertyChanged(); } }
@@ -41,6 +44,8 @@ namespace PacChat.Windows.Login
         public ICommand RegisterCommand { get; set; }
 
         public Action CloseAction { get; set; }
+        public Action ClearRegisterForm { get; set; }
+        public Action ClearLoginForm { get; set; }
         public Action<int> MoveToTab { get; set; }
 
         LoginModel loginModel;
@@ -79,6 +84,7 @@ namespace PacChat.Windows.Login
             // Then notify to controller
             DialogHost.Show(new WaitingDialog());
             app.controller.OnLogin(LgUserName, wnd.LgPassword.Password, LgRemember);
+            lgPassword = wnd.LgPassword.Password;
         }
 
         public void EnterMainWindow()
@@ -86,6 +92,7 @@ namespace PacChat.Windows.Login
             MainWindow main = new MainWindow();
             Application.Current.MainWindow = main;
             main.Show();
+            MainWindow.chatApplication.model.Hashed = HashUtils.MD5(lgPassword);
             CloseAction();
         }
 
@@ -94,6 +101,11 @@ namespace PacChat.Windows.Login
             DialogHost.CloseDialogCommand.Execute(null, null);
             if (code == 200)
             {
+                AppConfig.Instance.SavedAccount.Clear();
+                if (LgRemember && AppConfig.Instance.SavedAccount.TryAdd(LgUserName, lgPassword))
+                {
+                    AppConfig.Save();
+                }
                 EnterMainWindow();
             }
             else
@@ -140,6 +152,8 @@ namespace PacChat.Windows.Login
             {
                 _ = await DialogHost.Show(new AnnouncementDialog("Your account has been activated successfully", "You can now login."));
                 MoveToTab(0);
+                if (ClearRegisterForm != null)
+                    ClearRegisterForm();
             }
             else
             {
@@ -155,6 +169,20 @@ namespace PacChat.Windows.Login
                 }
                 _ = await DialogHost.Show(dialog);
             }
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (!String.IsNullOrEmpty(propertyName) && propertyName.Equals("LgRemember", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!LgRemember)
+                {
+                    AppConfig.Instance.SavedAccount.TryRemove(LgUserName, out var removedPassword);
+                    AppConfig.Save();
+                    ClearLoginForm();
+                }
+            }
+            base.OnPropertyChanged(propertyName);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CNetwork.Sessions;
+using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChat.MessageCore.Sticker;
 
@@ -11,31 +12,25 @@ namespace PacChat.MessageCore.Message
 {
     public class StickerMessage : AbstractMessage
     {
-        public Sticker.Sticker Sticker { get; set; }
+        public Sticker.Sticker Sticker { get; set; } = new Sticker.Sticker();
 
-        public override void Decode(IByteBuffer buffer)
+        public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            Sticker.ID = buffer.ReadInt();
+            Sticker.CategoryID = buffer.ReadInt();
         }
 
-        public override IByteBuffer Encode(IByteBuffer byteBuf)
+        public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            buffer.WriteInt(GetPreviewCode());
+            buffer.WriteInt(Sticker.ID);
+            buffer.WriteInt(Sticker.CategoryID);
+            return buffer;
         }
 
-        public override void Handle(ISession session)
+        public override int GetPreviewCode()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Reply()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SendTo(string receiverID)
-        {
-            throw new NotImplementedException();
+            return 3;
         }
     }
 }

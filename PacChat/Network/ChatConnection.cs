@@ -4,6 +4,7 @@ using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using PacChat.MVC;
+using PacChat.Network.Packets;
 using PacChat.Network.Pipeline;
 using PacChat.Network.Protocol;
 using System;
@@ -12,7 +13,9 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PacChat.Network
 {
@@ -25,8 +28,22 @@ namespace PacChat.Network
         protected IChannel Channel;
         protected ProtocolProvider protocolProvider;
 
+        public String Host { get; private set; } = String.Empty;
+        public int Port { get; private set; } = 1402;
+
+        public String WebHost { get; private set; } = String.Empty;
+        public int WebPort { get; private set; } = 1402;
+
+        private bool CanReconnect = false;
+
         private ChatConnection(ProtocolProvider protocolProvider)
         {
+            this.Host = "pacchat.hytalevn.com";
+            this.Port = 8080;
+
+            this.WebHost = "pacchat.hytalevn.com";
+            this.WebPort = 22;
+
             this.protocolProvider = protocolProvider;
             this.bootstrap = new Bootstrap();
             this.workerGroup = new MultithreadEventLoopGroup();
@@ -40,10 +57,8 @@ namespace PacChat.Network
 
         public async Task Bind()
         {
-            string ip = ConfigurationManager.AppSettings["ServerAddress"];
-            int port = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
-            IPAddress address = IPAddress.Parse(ip);
-            await Bind(new IPEndPoint(address, port));
+            IPAddress address = Dns.GetHostAddresses(Host)[0];
+            await Bind(new IPEndPoint(address, Port));
         }
 
         public async Task Bind(IPEndPoint address)
@@ -73,7 +88,17 @@ namespace PacChat.Network
         public void SessionInactivated(ISession session)
         {
             Console.WriteLine("Server has disconnected!!!");
-            AppManager.OnDisconnection(lostConnection:true);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AppManager.OnDisconnection(lostConnection: true);
+            });
+            if (CanReconnect)
+            {
+                ReconnectResquest packet = new ReconnectResquest();
+                packet.UserID = MainWindow.chatApplication.model.SelfID;
+                packet.Hash = MainWindow.chatApplication.model.Hashed;
+                Send(packet);
+            }
         }
 
         public void Shutdown()
@@ -97,7 +122,6 @@ namespace PacChat.Network
                 if (Session == null || !IsConnected())
                 {
                     await Bind();
-                    AppManager.OnReconnected();
                 }
                 if (Session == null || !IsConnected())
                 {
@@ -106,8 +130,28 @@ namespace PacChat.Network
                 Session.Send(packet);
             } catch 
             {
+                if (packet is ReconnectResquest && CanReconnect)
+                {
+                    new Task(() =>
+                    {
+                        Console.WriteLine("Reconnecting...");
+                        Thread.Sleep(3000);
+                        Send(packet);
+                    }).Start();
+                }
                 throw;
             }
+        }
+
+        public void OnResponse(int code)
+        {
+            if (code == 200)
+            {
+                CanReconnect = true;
+                Console.WriteLine("Reconnected!");
+            }
+            else
+                CanReconnect = false;
         }
 
         public static ChatConnection Instance

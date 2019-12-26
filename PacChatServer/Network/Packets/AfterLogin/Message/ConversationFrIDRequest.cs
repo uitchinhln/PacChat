@@ -3,6 +3,7 @@ using CNetwork.Sessions;
 using CNetwork.Utils;
 using DotNetty.Buffers;
 using PacChatServer.IO.Message;
+using PacChatServer.MessageCore.Conversation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,11 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             ChatSession chatSession = session as ChatSession;
 
             ConversationFrIDResponse packet = new ConversationFrIDResponse();
+            packet.ConversationID = ConversationID.ToString();
             var conversationStore = new ConversationStore().Load(ConversationID);
+
+            packet.LastActive = 0;
+            packet.ConversationName = "";
 
             if (conversationStore == null)
             {
@@ -39,20 +44,31 @@ namespace PacChatServer.Network.Packets.AfterLogin.Message
             else
             {
                 packet.StatusCode = 200;
+                conversationStore.UpdateLastActive(chatSession);
                 packet.LastActive = conversationStore.LastActive;
+
+                if (conversationStore is SingleConversation)
+                    packet.ConversationName = "~";
+                else
+                    packet.ConversationName = conversationStore.ConversationName;
 
                 foreach (var member in conversationStore.Members)
                 {
                     packet.Members.Add(member.ToString());
                 }
 
-                foreach (var message in conversationStore.MessagesID)
-                {
-                    packet.MessagesID.Add(message.ToString());
-                }
+                packet.LastMessID = conversationStore.MessagesID.Count - 1;
+                packet.LastMediaID = conversationStore.MediaID.Count - 1;
+                packet.LastAttachmentID = conversationStore.AttachmentID.Count - 1;
             }
 
-            session.Send(packet);
+            packet.BubbleColor = conversationStore.Color;
+
+            // Update later
+            packet.PreviewCode = -1;
+            packet.PreviewContent = "";
+
+            chatSession.Send(packet);
         }
     }
 }

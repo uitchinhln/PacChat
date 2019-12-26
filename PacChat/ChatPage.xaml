@@ -4,121 +4,109 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacChat"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:chatpage="clr-namespace:PacChat.ChatPageContents"
-             xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
-             mc:Ignorable="d" 
+             xmlns:ChatAMVC="clr-namespace:PacChat.ChatAMVC" 
+             xmlns:ViewModels="clr-namespace:PacChat.ChatPageContents.ViewModels" 
+             xmlns:customControls="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:cp="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
+             xmlns:CustomControls="clr-namespace:PacChat.Resources.CustomControls" x:Class="PacChat.ChatPage"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border CornerRadius="8" Background="White">
-        <DockPanel Margin="8">
-            <DockPanel.DataContext>
-                <ChatAMVC:ChatModel/>
-            </DockPanel.DataContext>
+    <Grid>
+        <Border x:Name="ChatBorder" CornerRadius="8" Background="White">
+            <materialDesign:Transitioner x:Name="Transitioner" SelectedIndex="1">
+                <materialDesign:TransitionerSlide>
+                    <DockPanel>
+                        <TextBlock Text="Join in Conversation" FontSize="48" FontFamily="Segoe UI Semibold" Foreground="#59000000" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        </TextBlock>
+                    </DockPanel>
+                </materialDesign:TransitionerSlide>
 
-            <DockPanel DockPanel.Dock="Top"
-                   Background="Transparent" 
-                   Height="Auto"
-                   >
+                <materialDesign:TransitionerSlide
+                OpeningEffect="{materialDesign:TransitionEffect ExpandIn}">
+                    <DockPanel Margin="8">
+                        <DockPanel.DataContext>
+                            <ChatAMVC:ChatModel/>
+                        </DockPanel.DataContext>
+                        
+                        <DockPanel DockPanel.Dock="Top" Background="Transparent"  Height="Auto">
+                            <customControls:AvatarDisplayer x:Name="Avatar" Margin="5,3,0,3" Width="35" Height="35" />
 
-                <Border Margin="5,3,0,3" Width="35" Height="35"
-                    CornerRadius="50"
-                    Background="LightBlue"
-                    >
-                    <materialDesign:PackIcon Kind="User"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Width="24"
-                                         Height="24"/>
-                </Border>
 
-                <StackPanel DockPanel.Dock="Right"
-                    Height="26" MinWidth="170"
-                    Margin="10,0,16,0" Orientation="Horizontal">
 
-                    <TextBox 
-                    Height="26" MinWidth="150"        
-                    x:Name="MsgSearchBox" VerticalAlignment="Center" 
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    materialDesign:HintAssist.Hint="Search messages">
-                    </TextBox>
-                    <materialDesign:PackIcon Kind="CommentSearchOutline" Width="20" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,2,2,0" Foreground="#FF747474" />
-                </StackPanel>
-                <!--<Border CornerRadius="16"
-                    Background= "LightGray"
-                    Margin="10,0,16,0"
-                    DockPanel.Dock="Right"
-                    Height="32">
-                <TextBox x:Name="MsgSearchBox" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" Width="130" Height="32" materialDesign:HintAssist.Hint="Search messages"
-                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                        BorderThickness="0"
-                        MinWidth="200"
-                        Margin="8 4 0 0">
-                </TextBox>
-            </Border>-->
-                <Label x:Name="ChatTitle" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
+                            <Label x:Name="ChatTitle" Margin="5,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Semibold" DockPanel.Dock="Top"/>
 
-                <Border>
-                    <TextBlock VerticalAlignment="Center"
+                            <Border>
+                                <TextBlock x:Name="LastActive" VerticalAlignment="Center"
                            Margin="5,0,0,0"
                            Foreground="Gray">
-                    Active 2 minutes ago
-                    </TextBlock>
-                </Border>
+                                Active 2 minutes ago
+                                </TextBlock>
+                            </Border>
 
-            </DockPanel>
+                        </DockPanel>
 
-            <DockPanel DockPanel.Dock="Bottom" Height="41" Margin="0,0,0,8">
-                <Border>
-                    <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,2,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False">
-                        <materialDesign:PopupBox.ToggleContent>
+                        <DockPanel DockPanel.Dock="Bottom" Margin="0,0,0,8">
+                            <Border CornerRadius="4" Margin="2, 4" VerticalAlignment="Bottom">
+                                <materialDesign:PopupBox Padding="0" PlacementMode="TopAndAlignLeftEdges" StaysOpen="True" Margin="0,0,0,0" VerticalContentAlignment="Center" FontWeight="Bold" IsTabStop="False" Width="32">
+                                    <materialDesign:PopupBox.ToggleContent>
+                                        <materialDesign:PackIcon x:Name="iconSticker" Kind="Emoticon" Width="24" Height="24" Foreground="#FF2C2C2C" Margin="2" />
+                                    </materialDesign:PopupBox.ToggleContent>
+                                    <StackPanel Width="390" Height="325">
+                                        <customControls:TabStickerContainner x:Name="spTabStickerContainner"/>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+                            </Border>
 
-                            <materialDesign:PackIcon
-                                    Kind="StickerEmoji" 
-                                    Width="32"
-                                    Height="32"
-                                    Foreground="#FF1E145F"
-                            />
-                        </materialDesign:PopupBox.ToggleContent>
-                        <StackPanel Width="390" Height="325" x:Name="spTabStickerContainner">
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnAttachment" Padding="0" Margin="0" Width="32" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAttachment_Click">
+                                    <materialDesign:PackIcon x:Name="iconAttach" Kind="Attachment" Width="24" Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FF2C2C2C"/>
+                                </Button>
+                            </Border>
 
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-                </Border>
-                <Border>
-                    <Button Padding="0" Margin="2,2,2,2" Click="Button_Click">
-                        <materialDesign:PackIcon Kind="ArrowLeft" Width="30" Height="30"/>
-                    </Button>
-                </Border>
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnSendImage" Padding="0" Margin="0" Click="btnSendImage_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="32">
+                                    <materialDesign:PackIcon x:Name="iconImage" Kind="Image" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                </Button>
+                            </Border>
 
-                <Border>
-                    <Button Padding="0" Margin="2,2,2,2" Click="Button_Click_1">
-                        <materialDesign:PackIcon Kind="ArrowRight" Width="30" Height="30"/>
-                    </Button>
-                </Border>
+                            <Border Background="Transparent" CornerRadius="3" Margin="2, 4" VerticalAlignment="Bottom">
+                                <materialDesign:PopupBox materialDesign:RippleAssist.Feedback="Transparent" PlacementMode="TopAndAlignCentres" StaysOpen="True" Margin="3" Padding="0" VerticalContentAlignment="Center"  FontWeight="Bold" IsTabStop="False">
+                                    <materialDesign:PopupBox.ToggleContent>
+                                        <materialDesign:PackIcon x:Name="iconColor" Width="24" Height="24" Kind="ColorLens" Foreground="#FF2C2C2C"/>
+                                    </materialDesign:PopupBox.ToggleContent>
+                                    <cp:ColourPicker x:Name="bubbleColorPicker"/>
+                                </materialDesign:PopupBox>
+                            </Border>
 
-                <Border>
-                    <Button x:Name="btnSendImage" Padding="0" Margin="2,2,2,2" Click="btnSendImage_Click">
-                        <materialDesign:PackIcon Kind="Image" Width="30" Height="30"/>
-                    </Button>
-                </Border>
+                            <Border VerticalAlignment="Bottom" Margin="2, 4">
+                                <Button x:Name="btnBuzz" Padding="0" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" Width="32" Click="btnBuzz_Click">
+                                    <materialDesign:PackIcon x:Name="iconBuzz" Kind="WarningDecagram" Width="24" Height="24" Foreground="#FF2C2C2C"/>
+                                </Button>
+                            </Border>
 
-                <Button x:Name="btnSend" Margin="0" Width="50" Background="Transparent" BorderBrush="Transparent" RenderTransformOrigin="-0.68,0.172" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
-                    <materialDesign:PackIcon Kind="Send" Foreground="#FF1E145F"  Width="24" Height="Auto"/>
-                </Button>
-                <Border CornerRadius="16"
-                    Background= "LightGray"
-                    Margin="10,4,0,5">
+                            <Button x:Name="btnSend" Margin="2, 4" Width="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="0" Click="BtnSend_Click">
+                                <materialDesign:PackIcon x:Name="iconSend" Kind="Send" Foreground="#FF2C2C2C"  Width="24" Height="Auto"/>
+                            </Button>
+                            <Border CornerRadius="16" Background= "LightGray" Margin="10,4,0,5" MinHeight="31" VerticalAlignment="Bottom">
+                                <TextBox BorderThickness="0" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" VerticalScrollBarVisibility="Auto" 
+                                         materialDesign:HintAssist.Hint="Input message here..."
+                                         KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="10,0,25,0" TextWrapping="Wrap" 
+                                         Cursor="IBeam" FontSize="14" HorizontalContentAlignment="Stretch" CaretBrush="#FF1E145F" 
+                                         VerticalContentAlignment="Center" MaxHeight="82"/>
+                            </Border>
 
-                    <TextBox BorderThickness="0"
-                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                         VerticalScrollBarVisibility="Auto"
-                    materialDesign:HintAssist.Hint="Input message here..."  KeyDown="ChatInput_KeyDown" x:Name="ChatInput" Margin="10,0,25,0" TextWrapping="Wrap" Cursor="IBeam" FontSize="14" HorizontalContentAlignment="Stretch" CaretBrush="#FF1E145F" VerticalContentAlignment="Center"/>
-                </Border>
-
-            </DockPanel>
-            <ScrollViewer x:Name="MessagesContainer" Margin="0" Padding="0,0,0,10" >
-                <StackPanel x:Name="spMessagesContainer"/>
-            </ScrollViewer>
-        </DockPanel>
-    </Border>
+                        </DockPanel>
+                        <ScrollViewer x:Name="MessagesContainer" Margin="0" Padding="0,0,0,10" ScrollChanged="MessagesContainer_ScrollChanged" >
+                            <StackPanel>
+                                <Button x:Name="LoadMessagesBtn" Width="128" Height="32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD000000" Click="LoadMessagesBtn_Click">See More...</Button>
+                                <StackPanel x:Name="spMessagesContainer"></StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </Border>
+    </Grid>
 </UserControl>

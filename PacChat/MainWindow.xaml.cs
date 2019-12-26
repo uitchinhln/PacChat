@@ -17,6 +17,14 @@ using PacChat.ChatAMVC;
 using PacChat.Network.Packets.AfterLoginRequest;
 using PacChat.Network;
 using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Sticker;
+using PacChat.Network.Packets.AfterLoginRequest.Notification;
+using PacChat.Network.Packets.AfterLoginRequest.Message;
+using PacChat.MessageCore.Sticker;
+using PacChat.Network.Packets.AfterLoginRequest.Profile;
+using PacChat.Network.RestAPI;
+using PacChat.Windows.Login;
+using System.ComponentModel;
 
 namespace PacChat
 {
@@ -25,12 +33,13 @@ namespace PacChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Button> _panelButtons = new List<Button>();
         public static MainWindow Instance { get; private set; }
         public static int CurrentWindowWidth { get; set; }
         public static int CurrentWindowHeight { get; set; }
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight{ get; set; }
+
+        public MediaPlayerWindow MediaPlayerWindow { get; set; }
 
         #region Chat_AMVC
         private ChatModel _chatModel;
@@ -67,22 +76,37 @@ namespace PacChat
             InitializeComponent();
             Instance = this;
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            System.Net.ServicePointManager.DefaultConnectionLimit = 100;
             InitAMVC();
 
             Packets.SendPacket<GetFriendIDs>();
+            Packets.SendPacket<GetNotifications>();
+            Packets.SendPacket<GetSelfID>();
+            Packets.SendPacket<GetSelfProfile>();
+            Packets.SendPacket<RecentConversations>();
+            Sticker.Load(() =>
+            {
+                Packets.SendPacket<GetBoughtStickerPacksRequest>();
+                Packets.SendPacket<GetNearestSickerRequest>();
+
+
+            });
 
             SetNotificationDotState(false);
 
-            /*
-            try
-            {
-                GetFriendIDs data = new GetFriendIDs();
-                _ = ChatConnection.Instance.Send(data);
-            } catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            */
+            SelfAvatar.ClickTrigger.Visibility = Visibility.Hidden;
+            SelfAvatar.ClickTrigger.IsEnabled = false;
+            SelfAvatar.IsOnline = true;
+            SelfAvatar.UpdateAllInstance();
+
+            ProfileContext.BtnSignOut.Click += BtnSignOut_Click;
+
+        }
+
+        private void BtnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppDomain.CurrentDomain.FriendlyName));
+            Environment.Exit(0);
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -146,9 +170,9 @@ namespace PacChat
             isMaximized = !isMaximized;
         }
 
-        public void OpenProfileDisplayer(string name, string email, string dob, string address)
+        public void OpenProfileDisplayer(string id, string name, string email, string dob, string address)
         {
-            ProfileDisplayer.Display(name, email, dob, address);
+            ProfileDisplayer.Display(id, name, email, dob, address);
             var sb = this.FindResource("left-side-panel-expand") as Storyboard;
             sb.Begin();
         }
@@ -167,6 +191,12 @@ namespace PacChat
         private void UserList_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            RestUtils.CancelAllTask();
+            base.OnClosing(e);
         }
     }
 }

@@ -17,8 +17,8 @@ namespace PacChatServer.Command
         private CommandManager()
         {
             this.server = PacChatServer.GetServer();
-            registeredCommands = new SortedDictionary<string, ICommandExecutor>();
-            defaultCommands = new SortedDictionary<string, ICommandExecutor>();
+            registeredCommands = new SortedDictionary<string, ICommandExecutor>(StringComparer.OrdinalIgnoreCase);
+            defaultCommands = new SortedDictionary<string, ICommandExecutor>(StringComparer.OrdinalIgnoreCase);
 
             RegisterAllDefaultCommands();
         }
@@ -33,7 +33,7 @@ namespace PacChatServer.Command
             try
             {
                 if (commandLabel == null) return;
-                commandLabel = commandLabel.Trim().ToUpper();
+                commandLabel = commandLabel.Trim();
 
                 if (commandLabel.Length == 0)
                 {
@@ -47,7 +47,7 @@ namespace PacChatServer.Command
                 }
                 if (registeredCommands.ContainsKey(commandLabel))
                 {
-                    Exception e = new Exception(String.Format("The command \"{0}\" already exists!!!", commandLabel.ToLower()));
+                    Exception e = new Exception(String.Format("The command \"{0}\" already exists!!!", commandLabel));
                     throw e;
                 }
                 registeredCommands.Add(commandLabel, executor);
@@ -67,11 +67,11 @@ namespace PacChatServer.Command
                 if (command.Length < 1) return;
 
                 String[] args = command.Split(' ');
-                String commandLabel = args[0].ToUpper();
+                String commandLabel = args[0];
 
                 if (!registeredCommands.ContainsKey(commandLabel) && !defaultCommands.ContainsKey(commandLabel))
                 {
-                    server.Logger.Error(String.Format("Command \"{0}\" is not exists!!!", commandLabel.ToLower()));
+                    server.Logger.Error(String.Format("Command \"{0}\" is not exists!!!", commandLabel));
                     return;
                 }
 
@@ -95,7 +95,7 @@ namespace PacChatServer.Command
 
         public void Unregister(string commandLabel)
         {
-            commandLabel = commandLabel.Trim().ToUpper();
+            commandLabel = commandLabel.Trim();
             if (registeredCommands.ContainsKey(commandLabel))
             {
                 registeredCommands.Remove(commandLabel);

@@ -10,7 +10,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         DataContext="{DynamicResource LoginVM}"
-        Title="Pac Chat Login" Height="516" Width="774" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Pac Chat Login" Height="516" Width="774" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/PacChat;component/Resources/Drawable/361994.png">
     <Window.Resources>
         <viewmodel:LoginView x:Key="LoginVM"></viewmodel:LoginView>
         <ObjectDataProvider x:Key="Genders" MethodName="GetValues"
@@ -83,7 +83,14 @@
                     </materialDesign:TransitionerSlide>
                 </materialDesign:Transitioner>
             </Grid>
-            <Image Source="/PacChat;component/Resources/Drawable/hinh3.png"></Image>
+            <Image x:Name="ImgBg" Source="/PacChat;component/Resources/Drawable/hinh3.png">
+                <Image.OpacityMask>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Black" Offset="0.763"/>
+                        <GradientStop Offset="1"/>
+                    </RadialGradientBrush>
+                </Image.OpacityMask>
+            </Image>
         </Grid>
     </materialDesign:DialogHost>
 </Window>

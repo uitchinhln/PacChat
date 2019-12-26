@@ -100,15 +100,15 @@ namespace PacChatServer.Entity.EntityProperty
             FriendRequest = 3
         }
 
-        public static Relation Get(Guid id) {
-            if (Cache.Contains(id))
+        public static Relation Get(Guid id, bool ignoreCache = false) {
+            if (Cache.Contains(id) && !ignoreCache)
             {
                 return Cache.Get(id);
             }
 
             Relation relation = new RelationStore().Load(id);
 
-            if (relation != null)
+            if (relation != null && !ignoreCache)
             {
                 Cache.AddReplace(id, relation);
             }

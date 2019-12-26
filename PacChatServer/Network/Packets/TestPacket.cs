@@ -27,7 +27,7 @@ namespace PacChatServer.Network.Packets
 
         public void Handle(ISession session)
         {
-            Console.WriteLine("Received: " + mess);
+            PacChatServer.GetServer().Logger.Debug("Received: " + mess);
         }
     }
 }

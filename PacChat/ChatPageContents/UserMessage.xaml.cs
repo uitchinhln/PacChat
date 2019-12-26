@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacChat.MessageCore.Message;
 using PacChat.Network;
 using PacChat.Network.Packets.AfterLoginRequest.Notification;
 using PacChat.Network.Packets.AfterLoginRequest.Profile;
@@ -29,11 +30,16 @@ namespace PacChat.ChatPageContents
         public UserMessage()
         {
             InitializeComponent();
+            UserMessage1.FontWeight = FontWeights.Normal;
+            IncomingMask.Visibility = Visibility.Hidden;
+            // SetAva(ResourceUtil.ChatPageBG);
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
             if (!IsFriend) return;
+            UserMessage1.FontWeight = FontWeights.Normal;
+            IncomingMask.Visibility = Visibility.Hidden;
             LoadDataToModel();
             MainWindow.chatApplication.controller.OnUserChanged(ClickMask.Content.ToString());
         }
@@ -48,6 +54,7 @@ namespace PacChat.ChatPageContents
             if (app.model.PrivateConversations.ContainsKey(ClickMask.Content.ToString()))
             {
                 app.model.currentSelectedConversation = app.model.PrivateConversations[ClickMask.Content.ToString()];
+                ChatPage.Instance.Avatar.UserID = ClickMask.Content.ToString();
             }
 
             // Switch code view to Controller in: ChatAMVC -> ChatController, in OnUserChangedEvent
@@ -60,11 +67,20 @@ namespace PacChat.ChatPageContents
             ClickMask.Content = Id;
             FriendRequestBtn.IsEnabled = !Friend;
             IsFriend = Friend;
+            SetAva(ClickMask.Content.ToString());
+
+            //if (IsFriend)
+            //    FriendRequestBtn.Content = "Unfriend";
+        }
+
+        public void SetAva(string userID = null) // sau nay se merge vao setInfo
+        {
+            Avatar.UserID = userID;
         }
 
         public void SetOnlineStatus(bool online)
         {
-            OnlineStatus.Visibility = online ? Visibility.Visible : Visibility.Hidden;
+            Avatar.IsOnline = online;
         }
 
         private void ClickMask_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -84,6 +100,30 @@ namespace PacChat.ChatPageContents
             FriendRequest packet = new FriendRequest();
             packet.TargetID = ClickMask.Content.ToString();
             _ = ChatConnection.Instance.Send(packet);
+        }
+
+        public void IncomingMessage(AbstractMessage message, bool seeing)
+        {
+            if (message is AttachmentMessage)
+            {
+                UserMessage1.Text = "Attachment";
+            }
+
+            if (message is TextMessage)
+            {
+                UserMessage1.Text = (message as TextMessage).Message;
+            }
+
+            if (message is StickerMessage)
+            {
+                UserMessage1.Text = "Sticker";
+            }
+
+            if (!seeing)
+            {
+                IncomingMask.Visibility = Visibility.Visible;
+                UserMessage1.FontWeight = FontWeights.Bold;
+            }
         }
     }
 }

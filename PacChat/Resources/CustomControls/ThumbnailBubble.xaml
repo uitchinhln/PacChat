@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.ThumbnailBubble"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="256" d:DesignWidth="320">
+    <Grid x:Name="BubbleBkg" Margin="0,8">
+        <ProgressBar x:Name="LoadingAhihi"
+          Style="{StaticResource MaterialDesignCircularProgressBar}"
+          Value="0"
+          IsIndeterminate="True" Height="96" Margin="20" Width="96" Background="{x:Null}" BorderBrush="{x:Null}"
+          Foreground="#FFB6B6B6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Border CornerRadius="16">
+            <Border CornerRadius="16" Margin="-1">
+                <Border.Background>
+                    <ImageBrush x:Name="MediaThumb" Stretch="Uniform"/>
+                </Border.Background>
+            </Border>
+        </Border>
+        <Button x:Name="ClickMask" Background="{x:Null}" Height="Auto" BorderBrush="{x:Null}" Foreground="#9F8D8D8D" Margin="8" Click="ClickMask_Click">
+            <materialDesign:PackIcon x:Name="PlayIcon" Kind="PlayCircle" Width="96" Height="96" Visibility="Hidden" />
+        </Button>
+    </Grid>
+</UserControl>

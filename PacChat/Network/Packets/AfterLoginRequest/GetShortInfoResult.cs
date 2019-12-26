@@ -29,15 +29,6 @@ namespace PacChat.Network.Packets.AfterLoginRequest
         public DateTime LastLogout { get; set; }
         public int Relationship { get; set; }
 
-        //private Dictionary<int, string> TranslatedPreviewCode = new Dictionary<int, string>()
-        //{
-        //    {0, "Hidden message" },
-        //    {1, "Attachment" },
-        //    {2, "You got an image message" },
-        //    {3, "You got a sticker message" },
-        //    {5, "Video"}
-        //};
-
         private readonly string[] TranslatedPreviewCode = new string[6]
         {
             "Hidden message",
@@ -79,8 +70,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest
                     Id = id,
                     Name = FirstName + " " + LastName,
                     IsOnline = IsOnline,
-                    //IncomingMsg = PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode]
-                    IncomingMsg = ""
+                    IncomingMsg = PreviewCode == -1 ? String.Empty : (PreviewCode == 4 ? LastMessage : TranslatedPreviewCode[PreviewCode])
                 }, Relationship == 2));
 
             if (Relationship == 2)

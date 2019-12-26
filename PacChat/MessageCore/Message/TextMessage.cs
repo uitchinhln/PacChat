@@ -11,36 +11,35 @@ namespace PacChat.MessageCore.Message
 {
     public class TextMessage : AbstractMessage
     {
-        public string Message { get; set; }
-
-        public override void Decode(IByteBuffer buffer)
+        private string _message = String.Empty;
+        public string Message
         {
-            throw new NotImplementedException();
+            get => _message;
+            set
+            {
+                _message = value;
+                while (_message.Contains(Environment.NewLine + Environment.NewLine) || _message.Contains("\n\n"))
+                {
+                    _message = _message.Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine).Replace("\n\n", "\n");
+                }
+            }
         }
 
-        public override IByteBuffer Encode(IByteBuffer byteBuf)
+        public override void DecodeFromBuffer(IByteBuffer buffer)
         {
-            ByteBufUtils.WriteUTF8(byteBuf, ReceiverID);
-            ByteBufUtils.WriteUTF8(byteBuf, Message);
-
-            return byteBuf;
+            Message = ByteBufUtils.ReadUTF8(buffer);
         }
 
-        public override void Handle(ISession session)
+        public override IByteBuffer EncodeToBuffer(IByteBuffer buffer)
         {
-            throw new NotImplementedException();
+            buffer.WriteInt(GetPreviewCode());
+            ByteBufUtils.WriteUTF8(buffer, Message);
+            return buffer;
         }
 
-        public override void Reply()
+        public override int GetPreviewCode()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void SendTo(string receiverID)
-        {
-            ReceiverID = receiverID;
-
-
+            return 4;
         }
     }
 }

@@ -9,11 +9,11 @@ namespace PacChatServer.Network
 {
     public class SessionRegistry
     {
-        ConcurrentDictionary<ChatSession, bool> sessions = new ConcurrentDictionary<ChatSession, bool>();
+        ConcurrentDictionary<Guid, ChatSession> sessions = new ConcurrentDictionary<Guid, ChatSession>();
 
         public void Pulse()
         {
-            foreach(ChatSession session in sessions.Keys)
+            foreach(ChatSession session in sessions.Values)
             {
                 //session.pulse();
             }
@@ -21,13 +21,18 @@ namespace PacChatServer.Network
 
         public void Add(ChatSession session)
         {
-            sessions.TryAdd(session, true);
+            sessions.TryAdd(session.SessionID, session);
         }
 
-        public void Remove(ChatSession session)
+        public void Remove(Guid id)
         {
-            bool a;
-            sessions.TryRemove(session, out a);
+            sessions.TryRemove(id, out var a);
+        }
+
+        public ChatSession Get(Guid id)
+        {
+            sessions.TryGetValue(id, out var result);
+            return result;
         }
     }
 }

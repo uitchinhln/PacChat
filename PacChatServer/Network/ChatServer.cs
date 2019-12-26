@@ -44,7 +44,7 @@ namespace PacChatServer.Network
         {
             ChatSession chatSession = session as ChatSession;
 
-            Server.SessionRegistry.Remove(chatSession);
+            Server.SessionRegistry.Remove(chatSession.SessionID);
 
             if (chatSession.Owner == null) return;
 

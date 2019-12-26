@@ -18,10 +18,12 @@ namespace PacChat.Network.Packets.Login
     public class LoginResult : IPacket
     {
         public int StatusCode { get; set; }
+        public string Token { get; set; }
 
         public void Decode(IByteBuffer buffer)
         {
             StatusCode = buffer.ReadInt();
+            Token = ByteBufUtils.ReadUTF8(buffer);
         }
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
@@ -35,9 +37,10 @@ namespace PacChat.Network.Packets.Login
             if (loginApp == null) return;
             if (StatusCode == 200)
             {
-                (session as ClientSession).LoggedIn();
+                (session as ClientSession).LoggedIn(Token);
             }
             Application.Current.Dispatcher.Invoke(() => loginApp.view.LoginResponse(StatusCode));
+            ChatConnection.Instance.OnResponse(StatusCode);
         }
     }
 }

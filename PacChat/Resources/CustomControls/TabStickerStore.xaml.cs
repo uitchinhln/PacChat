@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using PacChat.MessageCore.Sticker;
+using PacChat.Network.RestAPI;
+using PacChat.Utils;
+using PacChat.Network.Packets.AfterLoginRequest.Sticker;
+using PacChat.Network;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,23 +26,40 @@ namespace PacChat.Resources.CustomControls
     public partial class TabStickerStore : UserControl
     {
         public int ID { get; set; }
-        
+        public StickerCategory Cate { get; set; }
 
 
-        public TabStickerStore()
+        public TabStickerStore(StickerCategory cate)
         {
             InitializeComponent();
-
+            Cate = cate;
+            loadStore();
         }
 
         private void loadStore() //load thumbnail of sticker
         {
+            progressBar.Visibility = Visibility.Visible;
+            progressBarThumb.Visibility = Visibility.Visible;
+
+
+            StickerAPI.DownloadImage(Cate.ThumbImg, (thumbImage) =>
+            {
+                progressBar.Visibility = Visibility.Hidden;
+                imgPreview.Source = thumbImage;
+
+            });
+            StickerAPI.DownloadImage(Cate.IconPreview, (iconPreviewImage) =>
+            {
+                progressBarThumb.Visibility = Visibility.Hidden;
+                imgIconPreview.Source = iconPreviewImage;
+            });
+            txtName.Text = Cate.Name;
 
         }
 
-        private void downSticker()
+        private void btnDown_Click(object sender, RoutedEventArgs e)
         {
-
+            ChatConnection.Instance.Send(new BuyStickerCategoryRequest() { CateID = Cate.ID });
         }
     }
 }

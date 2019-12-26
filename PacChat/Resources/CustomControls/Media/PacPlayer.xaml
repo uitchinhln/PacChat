@@ -1,0 +1,38 @@
+﻿<UserControl x:Name="userControl" x:Class="PacChat.Resources.CustomControls.Media.PacPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls.Media"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <MediaElement x:Name="VideoFull" MediaOpened="OnMediaOpened" />
+        <DockPanel x:Name="dockPanel" MaxWidth="{Binding ActualWidth, ElementName=VideoFull, Mode=OneWay}" 
+                               MaxHeight="{Binding ActualHeight, ElementName=VideoFull, Mode=OneWay}" MouseEnter="ShowControl" MouseLeave="HideControl">
+            <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Background="#99B4B4B4">
+                <materialDesign:PopupBox StaysOpen="True" Margin="0,0,5,0" VerticalContentAlignment="Center" 
+                                         FontWeight="Bold" IsTabStop="False" DockPanel.Dock="Right"
+                                         PlacementMode="TopAndAlignCentres" Background="#99B4B4B4" HorizontalAlignment="Right" Width="24" >
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon x:Name="VolumeIcon" Kind="VolumeMedium" Foreground="White" />
+                    </materialDesign:PopupBox.ToggleContent>
+                    <Slider Orientation="Vertical" Minimum="0" Maximum="100" Height="100" Value="{Binding Volume, ElementName=userControl}" Margin="0,5,0,0" IsMoveToPointEnabled="True" IsTabStop="False" />
+                </materialDesign:PopupBox>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Padding="0" Width="24" Margin="5,0,0,0" Click="PlayBtnClick">
+                    <materialDesign:PackIcon x:Name="PlayPauseIcon" Kind="Play" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Button>
+                <Label x:Name="lbTime" VerticalAlignment="Center" Content="00:00" Foreground="Black" />
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Padding="0" Width="24" Click="Play1Click" DockPanel.Dock="Right" Foreground="#DDFFFFFF">
+                    <materialDesign:PackIcon x:Name="Play1Icon" Kind="Replay" Foreground="#DDC5C5C5" />
+                </Button>
+                <Slider x:Name="SeekBar" Orientation="Horizontal" Maximum="50" Value="0" SmallChange="0.01"
+                        VerticalAlignment="Center" Foreground="White" Margin="5,0,5,0"
+                        IsMoveToPointEnabled="True" ValueChanged="OnSeeking" 
+                        Thumb.DragStarted="SeekBar_DragStarted" Thumb.DragCompleted="SeekBar_DragCompleted"/>
+            </DockPanel>
+            <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="PlayBtnClick" Height="Auto" IsTabStop="False" Focusable="False"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

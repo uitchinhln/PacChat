@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="PacChat.Resources.CustomControls.ColourPicker.ColourPickerNonePopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PacChat.Resources.CustomControls.ColourPicker"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Background="#2C2C2C">
+
+        <StackPanel Orientation="Vertical" Width="377">
+            <StackPanel Orientation="Horizontal">
+
+                <materialDesign:ColorPicker x:Name="ColorPicker" Height="198" Width="250" Margin="5"/>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="117">
+                    <Border x:Name="borColorPreview" Height="70" Margin="10">
+                        <Rectangle Fill="{Binding Color, ElementName=ColorPicker, Converter={StaticResource ColorToBrushConverter}}" />
+                    </Border>
+
+                    <TextBox Width="105" Foreground="White" BorderBrush="White" FontSize="20" Margin="5 0 5 5" Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Button x:Name="btnAccept" Content="Accept" Margin="10 15 10 10" 
+                            Style="{StaticResource MaterialDesignRaisedButton}"/>
+
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Border>
+</UserControl>

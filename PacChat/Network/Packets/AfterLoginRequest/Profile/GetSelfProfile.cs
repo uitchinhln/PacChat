@@ -22,7 +22,7 @@ namespace PacChat.Network.Packets.AfterLoginRequest.Profile
 
         public IByteBuffer Encode(IByteBuffer byteBuf)
         {
-            throw new NotImplementedException();
+            return byteBuf;
         }
 
         public void Handle(ISession session)

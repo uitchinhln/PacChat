@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacChat.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -25,13 +26,17 @@ namespace PacChat.Windows.Login
         {
             InitializeComponent();
 
-            dpDoB.DisplayDateEnd = new DateTime(DateTime.Now.Year - 13, 12, 31);
+            dpDoB.DisplayDateEnd = new DateTime(DateTime.UtcNow.Year - 13, 12, 31);
 
             LoginView loginView = DataContext as LoginView;
+
+            //Register close action
             if (loginView.CloseAction == null)
             {
                 loginView.CloseAction = new Action(() => this.Close());
             }
+
+            //Controller for change tab
             if (loginView.MoveToTab == null)
             {
                 loginView.MoveToTab = new Action<int>((index) =>
@@ -40,7 +45,37 @@ namespace PacChat.Windows.Login
                 });
             }
 
-            //this.HideScriptErrors(this.wbBanner, true);
+            //Controller for clear register form
+            if (loginView.ClearRegisterForm == null)
+            {
+                loginView.ClearRegisterForm = new Action(() =>
+                {
+                    loginView.RegFirstName = String.Empty;
+                    loginView.RegLastName = String.Empty;
+                    loginView.RegUserName = String.Empty;
+                    RegPassword.Password = String.Empty;
+                    loginView.RegToUAgrement = false;
+                });
+            }
+
+            //Controller for clear login form
+            if (loginView.ClearLoginForm == null)
+            {
+                loginView.ClearLoginForm = new Action(() =>
+                {
+                    loginView.LgUserName = String.Empty;
+                    LgPassword.Password = String.Empty;
+                });
+            }
+
+            //Load saved account
+            if (AppConfig.Instance.SavedAccount.Count > 0)
+            {
+                KeyValuePair<string, string> data = AppConfig.Instance.SavedAccount.Last();
+                loginView.LgUserName = data.Key;
+                loginView.LgRemember = true;
+                LgPassword.Password = data.Value;
+            }
         }
 
         private void FormDrag(object sender, MouseEventArgs e)
@@ -54,9 +89,20 @@ namespace PacChat.Windows.Login
             }
         }
 
+        public void CloseAllExcldueThis()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow || window is MediaPlayerWindow)
+                {
+                    window.Close();
+                }
+            }
+        }
+
         private void CloseApp(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Environment.Exit(Environment.ExitCode);
         }
 
         private void TabClick(object sender, RoutedEventArgs e)
@@ -73,24 +119,6 @@ namespace PacChat.Windows.Login
             {
                 trnsEr.SelectedIndex = index;
             }
-        }
-
-        private void Banner_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            if (!(e.Uri.ToString().Equals("https://cs15083a2f24621x4ad7x9d4.z23.web.core.windows.net/", StringComparison.InvariantCultureIgnoreCase)))
-            {               
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-                e.Cancel = true;
-            }
-        }
-
-        public void HideScriptErrors(WebBrowser wb, bool Hide)
-        {
-            FieldInfo fiComWebBrowser = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (fiComWebBrowser == null) return;
-            object objComWebBrowser = fiComWebBrowser.GetValue(wb);
-            if (objComWebBrowser == null) return;
-            objComWebBrowser.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, objComWebBrowser, new object[] { Hide });
         }
     }
 }
